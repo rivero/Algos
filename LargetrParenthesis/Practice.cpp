@@ -10,6 +10,8 @@
 #include <assert.h>
 #include <cstdlib>
 #include <ctime>
+#include <unordered_map>
+#include <utility>
 
 using namespace std;
 
@@ -141,6 +143,85 @@ struct Solution
 		}
 		cout << endl;
 	}
+
+	struct Something
+	{
+		void operator()(int x)
+		{
+			cout << x << endl;
+		}
+	};
+	void lambda_expression()
+	{
+		// [cc](p){fd}
+		// cc = capture clause
+		// p = parameters
+		// fd = function definition
+		int d = 3;
+		vector<int> v{2, 3, 7, 14, 23};
+		Something something;
+		for_each(v.begin(), v.end(), something);
+		for_each(v.begin(), v.end(), [&](int x) { cout << "lambda " << x * d << endl; d += 1; });
+	}
+
+	/*
+	Given a non-empty array oof integers, return the k most frequent elements
+
+	Example 1:
+	k = 2
+	Input = [1,1,1,2,2,3]
+	output [1, 2]
+
+	Example 2
+	k = 1
+	Input = [1]
+	output [1]
+
+	if nums = [1,1,2,2,3,3] k cannot be 2 because there are not k unique numbers
+	in this example, the only valid k is 3
+
+	*/
+	template <typename T>
+	void Naive1(T& c) //c = collection
+	{
+		unordered_map<int, int> counts;
+		for (auto const& elem : c)
+		{
+			counts[elem]++;
+		}
+		for (auto elem: counts)
+		{
+			cout << elem.first << " = " << elem.second << endl;
+		}
+		size_t k = 2;
+		priority_queue < pair<int, int> > minHeap;
+		cout << endl;
+
+		for (auto elem: counts)
+		{
+			auto val = elem.first;
+			auto key = elem.second;
+			auto curPair = std::make_pair(key, val);
+			minHeap.push(curPair);
+			//if (minHeap.size() > k)
+			//{
+			//	minHeap.pop();
+			//}
+			cout << curPair.first << " = " << curPair.second << endl;
+		}
+
+		cout << "priority queue looks like this: " << endl;
+
+		vector<int> res;
+		for (; !minHeap.empty() && res.size() < k; minHeap.pop())
+		{
+			auto p = minHeap.top();
+			cout << p.first << " = " << p.second << endl;;
+			res.push_back(p.second);
+		}
+		cout << endl;
+		printv(res);
+	}
 };
 
 int main()
@@ -157,16 +238,16 @@ int main()
 		sol.FindParenthesis("(           {}");
 		sol.FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
 	}
-	if(true)
+	if(false)
 	{
 		vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroesV1(vec) << endl;
+		cout << sol.move_zeroes(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
 	}
 
-	if (true)
+	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
 		sol.printv(vec);
@@ -174,7 +255,7 @@ int main()
 		sol.printv(vec);
 		cout << endl;
 	}
-	if (true)
+	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
 		sol.printv(vec);
@@ -182,7 +263,7 @@ int main()
 		sol.printv(vec);
 		cout << endl;
 	}
-	if (true)
+	if (false)
 	{
 		vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
 		sol.printv(vec);
@@ -190,7 +271,7 @@ int main()
 		sol.printv(vec);
 		cout << endl;
 	}
-	if (true)
+	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		sol.printv(vec);
@@ -198,7 +279,7 @@ int main()
 		sol.printv(vec);
 		cout << endl;
 	}
-	if (true)
+	if (false)
 	{
 		vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
 		sol.printv(vec);
@@ -206,13 +287,21 @@ int main()
 		sol.printv(vec);
 		cout << endl;
 	}
-	if (true)
+	if (false)
 	{
 		vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
 		sol.printv(vec);
 		cout << sol.move_zeroes(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
+	}
+	{
+		sol.lambda_expression();
+	}
+	if (true)
+	{
+		vector<int> vec{ 1,1,1,2,2,3, 7, 7, 7 };
+		sol.Naive1(vec);
 	}
 }
     
