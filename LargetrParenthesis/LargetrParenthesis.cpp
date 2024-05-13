@@ -71,6 +71,7 @@ int main()
 	FindParenthesis("(((((((}");
 	FindParenthesis("([]]){{}((}}");
 	FindParenthesis("(           )}");
+	FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
 }
     
 
