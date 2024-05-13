@@ -67,38 +67,51 @@ struct Solution
 	}
 	// move all zeroes to the right side
 
-	// Soluition 1
-	// using two pointers. move left pointer forward and right pointer backwards. 
+	// Solution 1
+	// using pointer move left pointer forward . 
 	// if a zero is detected at the left swap it with the right element.
 	// the number of zeroes whould be returned
 	template <typename T>
-	size_t move_zeroesV1(T& c) // Collection
+	size_t move_zeroes(T& c) // Collection
 	{
-		size_t l{}, r{c.size() - 1};
+		size_t l{};
+		auto r{ c.size() - 1 }; 
+		size_t counter{};
+
 		while (l < r)
 		{
 			if (c[l] == 0)
 			{
-				swap(c[l++], c[r]);
+				if ( c[r] != 0)
+				{
+					swap(c[l++], c[r--]);
+					counter++;
+				}
 			}
 			else
 				l++;
-			if (c[r] != 0)
+
+			if (l < r && c[r] != 0)
 			{
-				swap(c[r--], c[l]);
+				if (c[l] == 0)
+				{
+					swap(c[l++], c[r--]);
+					counter++;
+				}
 			}
 			else
 				r--;
 		}
-		return l;
+		return counter;
 	}
 
-	// Solution 2
+
+	// Solution 2 NAIVE
 	// start from the beginning, check if we have a zero.
 	// find the first non zero to its right
 	//if found swap it.
 	template <typename T>
-	size_t move_zeroesV2(T& c) // Collection
+	size_t move_zeroes_Naive(T& c) // Collection
 	{
 		size_t counter{};
 		for (size_t i = 0; i < c.size(); i++)
@@ -112,6 +125,7 @@ struct Solution
 					{
 						swap(c[i], c[j]);
 						counter++;
+						break;
 					}
 				}
 			}
@@ -132,62 +146,71 @@ struct Solution
 int main()
 {
 	Solution sol;
-	sol.FindParenthesis("");
-	sol.FindParenthesis("(){}[]");
-	sol.FindParenthesis("(}");
-	sol.FindParenthesis("(((((((}");
-	sol.FindParenthesis("([]]){{}((}}");
-	sol.FindParenthesis("(           )}");
-	sol.FindParenthesis("(           {}");
-	sol.FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
-
+	if (false)
+	{
+		sol.FindParenthesis("");
+		sol.FindParenthesis("(){}[]");
+		sol.FindParenthesis("(}");
+		sol.FindParenthesis("(((((((}");
+		sol.FindParenthesis("([]]){{}((}}");
+		sol.FindParenthesis("(           )}");
+		sol.FindParenthesis("(           {}");
+		sol.FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
+	}
+	if(true)
 	{
 		vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroesV2(vec) << endl;
+		cout << sol.move_zeroesV1(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
 	}
 
+	if (true)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroesV2(vec) << endl;
+		cout << sol.move_zeroes(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
 	}
+	if (true)
 	{
-		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+		vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroesV2(vec) << endl;
+		cout << sol.move_zeroes(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
 	}
+	if (true)
 	{
-		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroesV1(vec) << endl;
-		sol.printv(vec);
-		cout << endl;
-	}
-	{
-		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		sol.printv(vec);
-		cout << sol.move_zeroesV1(vec) << endl;
+		cout << sol.move_zeroes(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
 	}
+	if (true)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroesV2(vec) << endl;
+		cout << sol.move_zeroes(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
 	}
+	if (true)
 	{
-		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
 		sol.printv(vec);
-		cout << sol.move_zeroesV2(vec) << endl;
+		cout << sol.move_zeroes(vec) << endl;
+		sol.printv(vec);
+		cout << endl;
+	}
+	if (true)
+	{
+		vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
+		sol.printv(vec);
+		cout << sol.move_zeroes(vec) << endl;
 		sol.printv(vec);
 		cout << endl;
 	}
