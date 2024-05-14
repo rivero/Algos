@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <unordered_map>
+#include <map>
 #include <utility>
 
 using namespace std;
@@ -165,7 +166,7 @@ struct Solution
 	}
 
 	/*
-	Given a non-empty array oof integers, return the k most frequent elements
+	Given a non-empty array of integers, return the k most frequent elements
 
 	Example 1:
 	k = 2
@@ -182,44 +183,50 @@ struct Solution
 
 	*/
 	template <typename T>
-	void Naive1(T& c) //c = collection
+	void TopKElements(T& c, size_t k = 2) //c = collection
 	{
-		unordered_map<int, int> counts;
+		cout << "\n\ninput vector" << endl;
+		printv(c);
+		cout << endl;
+
+		map<int, int> counts;
+		// O(n)
 		for (auto const& elem : c)
 		{
 			counts[elem]++;
 		}
+		cout << "map vector elements vs occurrences" << endl;
 		for (auto elem: counts)
 		{
 			cout << elem.first << " = " << elem.second << endl;
 		}
-		size_t k = 2;
-		priority_queue < pair<int, int> > minHeap;
 		cout << endl;
 
+		priority_queue < pair<int, int> > minHeap;
+
+		cout << "Adding to priority_queue" << endl;
+		// O(m)
 		for (auto elem: counts)
 		{
-			auto val = elem.first;
 			auto key = elem.second;
+			auto val = elem.first;
 			auto curPair = std::make_pair(key, val);
 			minHeap.push(curPair);
-			//if (minHeap.size() > k)
-			//{
-			//	minHeap.pop();
-			//}
-			cout << curPair.first << " = " << curPair.second << endl;
 		}
 
-		cout << "priority queue looks like this: " << endl;
+		cout << "...priority queue looks like this: " << endl;
 
 		vector<int> res;
-		for (; !minHeap.empty() && res.size() < k; minHeap.pop())
+		for (; !minHeap.empty() ; minHeap.pop())
 		{
 			auto p = minHeap.top();
-			cout << p.first << " = " << p.second << endl;;
-			res.push_back(p.second);
+			cout << p.first << " = " << p.second << endl;
+			if (res.size() < k)
+			{
+				res.push_back(p.second);
+			}
 		}
-		cout << endl;
+		cout << "\nresult" << endl;
 		printv(res);
 	}
 };
@@ -301,7 +308,7 @@ int main()
 	if (true)
 	{
 		vector<int> vec{ 1,1,1,2,2,3, 7, 7, 7 };
-		sol.Naive1(vec);
+		sol.TopKElements(vec);
 	}
 }
     
