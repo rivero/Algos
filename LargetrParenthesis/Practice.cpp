@@ -144,6 +144,15 @@ struct Solution
 		}
 		cout << endl;
 	}
+	template <typename T>
+	void printm(const map<T, T>& counts) const
+	{
+		for (auto elem : counts)
+		{
+			cout << elem.first << " = " << elem.second << endl;
+		}
+		cout << endl;
+	}
 
 	struct Something
 	{
@@ -185,26 +194,22 @@ struct Solution
 	template <typename T>
 	void TopKElements(T& c, size_t k = 2) //c = collection
 	{
-		cout << "\n\ninput vector" << endl;
+		cout << "\n\ninput vector (k [most frequent elements]= "<< k << ")" << endl;
 		printv(c);
-		cout << endl;
 
+		cout << "\nCreating map to count occurrences: <elements, occurrences>" << endl;
 		map<int, int> counts;
 		// O(n)
 		for (auto const& elem : c)
 		{
 			counts[elem]++;
 		}
-		cout << "map vector elements vs occurrences" << endl;
-		for (auto elem: counts)
-		{
-			cout << elem.first << " = " << elem.second << endl;
-		}
-		cout << endl;
+		printm(counts);
 
+		cout << "\nAdding the generated pairs to priority_queue< pair<int, int> >, "
+			"note that the pairs are sorted by the priority_queue by <first>"
+			", then <second>" << endl;
 		priority_queue < pair<int, int> > minHeap;
-
-		cout << "Adding to priority_queue" << endl;
 		// O(m)
 		for (auto elem: counts)
 		{
@@ -214,7 +219,7 @@ struct Solution
 			minHeap.push(curPair);
 		}
 
-		cout << "...priority queue looks like this: " << endl;
+		cout << "...priority queue looks like this: (note the sorted pairs) " << endl;
 
 		vector<int> res;
 		for (; !minHeap.empty() ; minHeap.pop())
@@ -223,11 +228,141 @@ struct Solution
 			cout << p.first << " = " << p.second << endl;
 			if (res.size() < k)
 			{
+				cout << "adding to res vector: " << p.second << endl;
 				res.push_back(p.second);
 			}
 		}
-		cout << "\nresult" << endl;
+		cout << "\nresult (Display the first k (" << k << ") elements" << endl;
 		printv(res);
+	}
+
+
+	/*
+	*	You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, 
+		and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+		Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+		The final sorted array should not be returned by the function, but instead be stored 
+		inside the array nums1. 
+		
+		To accommodate this, nums1 has a length of m + n, 
+		
+		where the first m elements denote the elements that should be merged, and the last n elements 
+		are set to 0 and should be ignored. nums2 has a length of n.
+
+		Example 1:
+
+		Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+		Output: [1,2,2,3,5,6]
+		Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+		The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+		Example 2:
+
+		Input: nums1 = [1], m = 1, nums2 = [], n = 0
+		Output: [1]
+		Explanation: The arrays we are merging are [1] and [].
+		The result of the merge is [1].
+		Example 3:
+
+		Input: nums1 = [0], m = 0, nums2 = [1], n = 1
+		Output: [1]
+		Explanation: The arrays we are merging are [] and [1].
+		The result of the merge is [1].
+		Note that because m = 0, there are no elements in nums1. The 0 is only there to 
+		ensure the merge result can fit in nums1.
+
+		Constraints:
+
+		nums1.length == m + n
+		nums2.length == n
+		0 <= m, n <= 200
+		1 <= m + n <= 200
+		-109 <= nums1[i], nums2[j] <= 109
+
+		Solution
+		1. Iterate on nums2
+		2. look in nums1 for the first element that is larger than nums2[i]
+		3. If found shift nums1 and insert element there
+		4. if not found append it at the end
+
+		Ref: https://leetcode.com/problems/merge-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150
+
+	*/
+	void merge2(vector<int>& nums1, int m, vector<int>& nums2, int n)
+	{
+		for (size_t i = 0; i < nums2.size(); i++)
+		{
+			nums1[m++] = nums2[i];
+		}
+		sort(nums1.begin(), nums1.end());
+	}
+	void merge(vector<int>& nums1, int m, vector<int>& nums2, int n)
+	{
+		for_each(nums2.begin(), nums2.end(), [&](int x) { nums1[m++] = x; });
+		sort(nums1.begin(), nums1.end());
+	}
+
+	/*
+	Given the root node of a binary search tree and two integers low and high, 
+	return the sum of values of all nodes with a value in the inclusive range [low, high].
+
+	Example 1
+	Input: root = [10,5,15,3,7,null,18], low = 7, high = 15
+	Output: 32
+	Explanation: Nodes 7, 10, and 15 are in the range [7, 15]. 7 + 10 + 15 = 32.
+
+				  10
+			5			15
+		3		7	null	18
+
+ Definition for a binary tree node.
+	*/
+	struct TreeNode
+	{
+		int val{};
+		TreeNode* left{ nullptr };
+		TreeNode* right{ nullptr };
+		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+
+	};
+	int res{};
+
+	int rangeSumBST(TreeNode* root, int low, int high) 
+	{
+		preorder(root, low, high);
+		return res;
+	
+	}
+
+	void preorder(TreeNode* root, int low, int high)
+	{
+		if (root)
+		{
+			cout << "visiting " << root->val << endl;
+			auto inRange = root->val >= low && root->val <= high;
+			if (inRange)
+			{
+				res += root->val;
+				rangeSumBST(root->left, low, high);
+				rangeSumBST(root->right, low, high);
+			}
+		}
+	}
+
+	int doRangeSumBST()
+	{
+		auto root = new TreeNode(10);
+
+		root->left = new TreeNode(5);
+		root->left->left = new TreeNode(3);
+		root->left->right = new TreeNode(7);
+
+		root->right = new TreeNode(15);
+		root->right->right = new TreeNode(18);
+
+		return rangeSumBST(root, 7, 15);
 	}
 };
 
@@ -302,13 +437,34 @@ int main()
 		sol.printv(vec);
 		cout << endl;
 	}
+	if (false)
 	{
 		sol.lambda_expression();
 	}
+	if (false)
+	{
+		{
+			vector<int> vec{ 1,1,1,2,2,3, 7, 7, 7 };
+			sol.TopKElements(vec);
+
+		}
+		{
+			vector<int> vec{ 1,1,2,2,3,3 };
+			sol.TopKElements(vec, 3);
+
+		}
+	}
+	if (false)
+	{
+		vector<int> nums1{ 1,2,3,0,0,0 };
+		vector<int> nums2{ 2,5,6 };
+
+		sol.merge(nums1, 3, nums2, 3);
+		sol.printv(nums1);
+	}
 	if (true)
 	{
-		vector<int> vec{ 1,1,1,2,2,3, 7, 7, 7 };
-		sol.TopKElements(vec);
+		cout << sol.doRangeSumBST();
 	}
 }
     
