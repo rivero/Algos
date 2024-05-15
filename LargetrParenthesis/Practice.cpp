@@ -327,12 +327,12 @@ struct Solution
 		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 
 	};
-	int res{};
+	int sum{};
 
 	int rangeSumBST(TreeNode* root, int low, int high) 
 	{
 		preorder(root, low, high);
-		return res;
+		return sum;
 	
 	}
 
@@ -340,14 +340,10 @@ struct Solution
 	{
 		if (root)
 		{
-			cout << "visiting " << root->val << endl;
-			auto inRange = root->val >= low && root->val <= high;
-			if (inRange)
-			{
-				res += root->val;
-				rangeSumBST(root->left, low, high);
-				rangeSumBST(root->right, low, high);
-			}
+			if (root->val >= low && root->val <= high)
+				sum += root->val;
+			preorder(root->left, low, high);
+			preorder(root->right, low, high);
 		}
 	}
 
