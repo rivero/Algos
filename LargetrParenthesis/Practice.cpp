@@ -346,7 +346,6 @@ struct Solution
 			preorder(root->right, low, high);
 		}
 	}
-
 	int doRangeSumBST()
 	{
 		auto root = new TreeNode(10);
@@ -359,6 +358,107 @@ struct Solution
 		root->right->right = new TreeNode(18);
 
 		return rangeSumBST(root, 7, 15);
+	}
+
+	/*
+	Given two string arrays word1 and word2, return true if the two arrays represent the same string,
+	and false otherwise.
+
+	A string is represented by an array if the array elements concatenated in order forms the string.
+
+
+
+	Example 1:
+
+	Input: word1 = ["ab", "c"], word2 = ["a", "bc"]
+	Output: true
+	Explanation:
+	word1 represents string "ab" + "c" -> "abc"
+	word2 represents string "a" + "bc" -> "abc"
+	The strings are the same, so return true.
+	Example 2:
+
+	Input: word1 = ["a", "cb"], word2 = ["ab", "c"]
+	Output: false
+	Example 3:
+
+	Input: word1  = ["abc", "d", "defg"], word2 = ["abcddefg"]
+	Output: true
+
+
+	Constraints:
+
+	1 <= word1.length, word2.length <= 103
+	1 <= word1[i].length, word2[i].length <= 103
+	1 <= sum(word1[i].length), sum(word2[i].length) <= 103
+	word1[i] and word2[i] consist of lowercase letters.
+	*/
+	bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) 
+	{
+		string s1, s2;
+		for_each(word1.begin(), word1.end(), [&](string& s) { s1 += s; });
+		for_each(word2.begin(), word2.end(), [&](string& s) { s2 += s; });
+		return s1 == s2;
+	}
+	/*
+		2956. Find Common Elements Between Two Arrays
+		Easy
+		Topics
+		Companies
+		Hint
+		You are given two 0-indexed integer arrays nums1 and nums2 of sizes n and m, respectively.
+
+		Consider calculating the following values:
+
+		The number of indices i such that 0 <= i < n and nums1[i] occurs at least once in nums2.
+		The number of indices i such that 0 <= i < m and nums2[i] occurs at least once in nums1.
+		Return an integer array answer of size 2 containing the two values in the above order.
+
+		Example 1:
+
+		Input: nums1 = [4,3,2,3,1], nums2 = [2,2,5,2,3,6]
+		Output: [3,4]
+		Explanation: We calculate the values as follows:
+		- The elements at indices 1, 2, and 3 in nums1 occur at least once in nums2. 
+			So the first value is 3.
+		- The elements at indices 0, 1, 3, and 4 in nums2 occur at least once in nums1. 
+			So the second value is 4.
+		
+		Example 2:
+
+		Input: nums1 = [3,4,2,3], nums2 = [1,5]
+		Output: [0,0]
+		Explanation: There are no common elements between the two arrays, so the two values will be 0.
+
+
+		Constraints:
+
+		n == nums1.length
+		m == nums2.length
+		1 <= n, m <= 100
+		1 <= nums1[i], nums2[i] <= 100
+*/
+	vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) 
+	{
+		vector<int> res{0,0};
+		size_t firstCounter{}, secondCounter{};
+
+		for (size_t i = 0; i < nums1.size(); i++)
+		{
+			if (find(nums2.begin(), nums2.end(), nums1[i]) != nums2.end())
+			{
+				res[0]++;
+			}
+		}
+		for (size_t i = 0; i < nums2.size(); i++)
+		{
+			if (find(nums1.begin(), nums1.end(), nums2[i]) != nums1.end())
+			{
+				res[1]++;
+			}
+		}
+
+		return res;
 	}
 };
 
@@ -458,9 +558,20 @@ int main()
 		sol.merge(nums1, 3, nums2, 3);
 		sol.printv(nums1);
 	}
-	if (true)
+	if (false)
 	{
 		cout << sol.doRangeSumBST();
+	}
+	if (false)
+	{
+		vector<string> v1{ "ab", "c" }, v2{ "a", "bc" };
+		cout << (sol.arrayStringsAreEqual(v1, v2) ? " True" : "false");
+	}
+	if (true)
+	{
+		vector<int> v1{ 4,3,2,3,1 }, v2{ 2,2,5,2,3,6 };
+		auto res = sol.findIntersectionValues(v1, v2);
+		sol.printv(res);
 	}
 }
     
