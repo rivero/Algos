@@ -13,9 +13,28 @@
 #include <unordered_map>
 #include <map>
 #include <utility>
-
+#include <chrono>
+#include <iomanip>
 using namespace std;
 
+struct timeit
+{
+	chrono::duration<double> m_dur{};
+	chrono::steady_clock::time_point m_tp1;
+	chrono::steady_clock::time_point m_tp2;
+	timeit()
+	{
+		m_tp1 = chrono::high_resolution_clock::now();
+	}
+	~timeit()
+	{
+		m_tp2 = chrono::high_resolution_clock::now();
+		m_dur = m_tp2 - m_tp1;
+		cout << "duration seconds: " <<  fixed << setprecision(12)<< m_dur.count() << "\n";
+	}
+
+
+};
 struct Solution
 {
 	// find the longest valid parenthesis
@@ -66,7 +85,7 @@ struct Solution
 
 		int masimum = max(longestSquare, max(longestRound, longestCurly));
 
-		cout << "Max length: " << masimum << endl;
+		cout << "Max length: " << masimum << "\n";
 	}
 	// move all zeroes to the right side
 
@@ -142,23 +161,23 @@ struct Solution
 		{
 			cout << elem << " ";
 		}
-		cout << endl;
+		cout << "\n";
 	}
 	template <typename T>
 	void printm(const map<T, T>& counts) const
 	{
 		for (auto elem : counts)
 		{
-			cout << elem.first << " = " << elem.second << endl;
+			cout << elem.first << " = " << elem.second << "\n";
 		}
-		cout << endl;
+		cout << "\n";
 	}
 
 	struct Something
 	{
 		void operator()(int x)
 		{
-			cout << x << endl;
+			cout << x << "\n";
 		}
 	};
 	void lambda_expression()
@@ -171,7 +190,7 @@ struct Solution
 		vector<int> v{2, 3, 7, 14, 23};
 		Something something;
 		for_each(v.begin(), v.end(), something);
-		for_each(v.begin(), v.end(), [&](int x) { cout << "lambda " << x * d << endl; d += 1; });
+		for_each(v.begin(), v.end(), [&](int x) { cout << "lambda " << x * d << "\n"; d += 1; });
 	}
 
 	/*
@@ -194,10 +213,10 @@ struct Solution
 	template <typename T>
 	void TopKElements(T& c, size_t k = 2) //c = collection
 	{
-		cout << "\n\ninput vector (k [most frequent elements]= "<< k << ")" << endl;
+		cout << "\n\ninput vector (k [most frequent elements]= "<< k << ")" << "\n";
 		printv(c);
 
-		cout << "\nCreating map to count occurrences: <elements, occurrences>" << endl;
+		cout << "\nCreating map to count occurrences: <elements, occurrences>" << "\n";
 		map<int, int> counts;
 		// O(n)
 		for (auto const& elem : c)
@@ -208,7 +227,7 @@ struct Solution
 
 		cout << "\nAdding the generated pairs to priority_queue< pair<int, int> >, "
 			"note that the pairs are sorted by the priority_queue by <first>"
-			", then <second>" << endl;
+			", then <second>" << "\n";
 		priority_queue < pair<int, int> > minHeap;
 		// O(m)
 		for (auto elem: counts)
@@ -219,20 +238,20 @@ struct Solution
 			minHeap.push(curPair);
 		}
 
-		cout << "...priority queue looks like this: (note the sorted pairs) " << endl;
+		cout << "...priority queue looks like this: (note the sorted pairs) " << "\n";
 
 		vector<int> res;
 		for (; !minHeap.empty() ; minHeap.pop())
 		{
 			auto p = minHeap.top();
-			cout << p.first << " = " << p.second << endl;
+			cout << p.first << " = " << p.second << "\n";
 			if (res.size() < k)
 			{
-				cout << "adding to res vector: " << p.second << endl;
+				cout << "adding to res vector: " << p.second << "\n";
 				res.push_back(p.second);
 			}
 		}
-		cout << "\nresult (Display the first k (" << k << ") elements" << endl;
+		cout << "\nresult (Display the first k (" << k << ") elements" << "\n";
 		printv(res);
 	}
 
@@ -441,27 +460,101 @@ struct Solution
 	vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) 
 	{
 		vector<int> res{0,0};
-		size_t firstCounter{}, secondCounter{};
+		for_each(nums1.begin(), nums1.end(), [&](int x) 
+			{
+				if (find(nums2.begin(), nums2.end(), x) != nums2.end())
+				{
+					res[0]++;
+				}
 
-		for (size_t i = 0; i < nums1.size(); i++)
-		{
-			if (find(nums2.begin(), nums2.end(), nums1[i]) != nums2.end())
+			});
+
+		for_each(nums2.begin(), nums2.end(), [&](int x)
 			{
-				res[0]++;
-			}
-		}
-		for (size_t i = 0; i < nums2.size(); i++)
-		{
-			if (find(nums1.begin(), nums1.end(), nums2[i]) != nums1.end())
-			{
-				res[1]++;
-			}
-		}
+				if (find(nums1.begin(), nums1.end(), x) != nums1.end())
+				{
+					res[1]++;
+				}
+
+			});
 
 		return res;
 	}
 };
 
+struct ReverseLinkedList : public timeit
+{
+	struct ListNode 
+	{
+		int val{};
+		ListNode* next{nullptr};
+		ListNode() : val(0), next(nullptr) {}
+		ListNode(int x) : val(x), next(nullptr) {}
+		ListNode(int x, ListNode* next) : val(x), next(next) {}
+	};
+
+	ListNode* reverseList(ListNode* head) 
+	{
+		ListNode* prev {nullptr};
+		ListNode* curr = head;
+		ListNode* forward{ nullptr };
+		while (curr) 
+		{
+			forward = curr->next;
+
+			curr->next = prev;
+			prev = curr;
+			
+			curr = forward;
+			
+		}
+		return prev;
+	}
+
+	ListNode* reverseListPrint(ListNode* head)
+	{
+		ListNode* prev{ nullptr };
+		ListNode* curr = head;
+		while (curr)
+		{
+			cout << " curr " << curr->val << " ";
+
+			ListNode* forward = curr->next;
+			if (forward)
+			{
+				cout << " forward " << forward->val << " ";
+			}
+
+
+			curr->next = prev;
+			prev = curr;
+
+			cout << " prev " << prev->val << " ";
+			if (curr->next)
+			{
+				cout << "curr->next " << curr->next->val;
+			}
+
+			curr = forward;
+
+			if (curr)
+			{
+				cout << " after curr = forward : curr " << curr->val;
+			}
+			cout << "\n";
+		}
+		return prev;
+	}
+	void printList(ListNode* head)
+	{
+		if (head)
+		{
+			cout << head->val << " ";
+			printList(head->next);
+		}
+
+	}
+};
 int main()
 {
 	Solution sol;
@@ -480,58 +573,58 @@ int main()
 	{
 		vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroes(vec) << endl;
+		cout << sol.move_zeroes(vec) << "\n";
 		sol.printv(vec);
-		cout << endl;
+		cout << "\n";
 	}
 
 	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroes(vec) << endl;
+		cout << sol.move_zeroes(vec) << "\n";
 		sol.printv(vec);
-		cout << endl;
+		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroes(vec) << endl;
+		cout << sol.move_zeroes(vec) << "\n";
 		sol.printv(vec);
-		cout << endl;
+		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroes(vec) << endl;
+		cout << sol.move_zeroes(vec) << "\n";
 		sol.printv(vec);
-		cout << endl;
+		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		sol.printv(vec);
-		cout << sol.move_zeroes(vec) << endl;
+		cout << sol.move_zeroes(vec) << "\n";
 		sol.printv(vec);
-		cout << endl;
+		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
 		sol.printv(vec);
-		cout << sol.move_zeroes(vec) << endl;
+		cout << sol.move_zeroes(vec) << "\n";
 		sol.printv(vec);
-		cout << endl;
+		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
 		sol.printv(vec);
-		cout << sol.move_zeroes(vec) << endl;
+		cout << sol.move_zeroes(vec) << "\n";
 		sol.printv(vec);
-		cout << endl;
+		cout << "\n";
 	}
 	if (false)
 	{
@@ -567,22 +660,26 @@ int main()
 		vector<string> v1{ "ab", "c" }, v2{ "a", "bc" };
 		cout << (sol.arrayStringsAreEqual(v1, v2) ? " True" : "false");
 	}
-	if (true)
+	if (false)
 	{
+		timeit t;
 		vector<int> v1{ 4,3,2,3,1 }, v2{ 2,2,5,2,3,6 };
 		auto res = sol.findIntersectionValues(v1, v2);
 		sol.printv(res);
 	}
+	if (true)
+	{
+		auto head = new ReverseLinkedList::ListNode(1);
+		head->next = new ReverseLinkedList::ListNode(2);
+		head->next->next = new ReverseLinkedList::ListNode(3);
+		head->next->next->next = new ReverseLinkedList::ListNode(4);
+		head->next->next->next->next = new ReverseLinkedList::ListNode(5);
+		ReverseLinkedList r;
+		r.printList(head);
+		cout << "\n";
+		auto newHead = r.reverseList(head);
+		r.printList(newHead);
+		cout << "\n";
+	}
 }
     
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
