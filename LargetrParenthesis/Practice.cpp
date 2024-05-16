@@ -685,12 +685,165 @@ struct ValidAnagram : public timeit
 			r2[c2 - 'a']++;
 		}
 
-		for (int i = 0; i < r1.size(); i++) 
+		for (size_t i = 0; i < r1.size(); i++) 
 		{
 			if (r1[i] != r2[i])
 				return false;
 		}
 		return true;
+	}
+};
+/*
+Given an integer x, return true if x is a palindrome , and false otherwise.
+
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+Example 2:
+
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+Example 3:
+
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+
+
+Constraints:
+
+-231 <= x <= 231 - 1
+
+
+Follow up: Could you solve it without converting the integer to a string?
+*/
+struct PalindromeNumber : public timeit
+{
+	bool isPalindrome(int num) 
+	{
+		if (num < 0)
+		{
+			return false;
+		}
+
+		int n = num;
+		unsigned int rev = 0;
+		unsigned int dig;
+		while (num > 0)
+		{
+			dig = num % 10;
+			rev = rev * 10 + dig;
+			num = num / 10;
+		}
+		return n == rev;
+	}
+};
+/*
+408. Valid Word Abbreviation
+A string can be abbreviated by replacing any number of non-adjacent, non-empty substrings 
+with their lengths. 
+The lengths should not have leading zeros.
+
+For example, a string such as "substitution" could be abbreviated as (but not limited to):
+"s10n" ("s ubstitutio n")
+"sub4u4" ("sub stit u tion")
+"12" ("substitution")
+"su3i1u2on" ("su bst i t u ti on")
+"substitution" (no substrings replaced)
+
+The following are not valid abbreviations:
+"s55n" ("s ubsti tutio n", the replaced substrings are adjacent)
+"s010n" (has leading zeros)
+"s0ubstitution" (replaces an empty substring)
+
+Given a string word and an abbreviation abbr, return whether the string matches 
+the given abbreviation.
+
+A substring is a contiguous non-empty sequence of characters within a string.
+
+Example 1:
+Input: word = "internationalization", abbr = "i12iz4n"
+Output: true
+Explanation: The word "internationalization" can be abbreviated as 
+"i12iz4n" ("i nternational iz atio n").
+
+Example 2:
+Input: word = "apple", abbr = "a2e"
+Output: false
+Explanation: The word "apple" cannot be abbreviated as "a2e".
+
+Constraints:
+1 <= word.length <= 20
+word consists of only lowercase English letters.
+1 <= abbr.length <= 10
+abbr consists of lowercase English letters and digits.
+All the integers in abbr will fit in a 32-bit integer.
+
+Solution
+
+Get length of the string.
+find the numbers and where they are in the string.
+iterate add the lenghts of the string + the numbers and make sure they match the length of the string.
+
+*/
+struct ValidWordAbbreviation : public timeit 
+{
+	bool validWordAbbreviation(string word, string abbr) 
+	{
+		vector<string> str;
+		string tmpNum;
+		for_each(abbr.begin(), abbr.end(), [&](auto c)
+			{
+				if (isdigit(c))
+				{
+					tmpNum += c;
+				} 
+				else
+				{
+					if (!tmpNum.empty())
+					{
+						str.push_back(tmpNum);
+						tmpNum.clear();
+					}
+					string x;
+					x.push_back(c);
+					str.push_back(x);
+				}
+			});
+		if (!tmpNum.empty())
+		{
+			str.push_back(tmpNum);
+			tmpNum.clear();
+		}
+		bool valid{true};
+		size_t counter{};
+		string lastString;
+		for (size_t i = 0; i < str.size(); i++)
+		{
+			if (isdigit(str[i][0]))
+			{
+				if (str[i][0] == '0' || str[i] == lastString)
+				{
+					valid = false;
+					break;
+				}
+				counter += stol(str[i]);
+			}
+			else
+			{
+				counter += str[i].size();
+			}
+
+			lastString = str[i];
+		}
+		if (valid)
+		{
+			valid = word.size() == counter;
+		}
+		return valid;
 	}
 };
 int main()
@@ -832,12 +985,56 @@ int main()
 		assert(val == 6);
 		cout << val << "\n";
 	}
-	if (true)
+	if (false)
 	{
 		ValidAnagram v;
 		auto val = v.isAnagram("anagram","nagaram");
 		assert(val);
 		val = v.isAnagram("rat", "car");
+		assert(!val);
+	}
+	if (false)
+	{
+		PalindromeNumber p;
+		auto val = p.isPalindrome(121);
+		assert(val);
+		val = p.isPalindrome(-121);
+		assert(!val);
+		val = p.isPalindrome(10);
+		assert(!val);
+		val = p.isPalindrome(1234567899);
+		assert(!val);
+		
+	}
+	if (true)
+	{
+		ValidWordAbbreviation v;
+		auto val = v.validWordAbbreviation("substitution", "s10n");
+		cout << "substitution : s10n : valid " << val << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "sub4u4");
+		cout << "substitution : sub4u4 : valid " << val << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "12");
+		cout << "substitution : 12 : valid " << val << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "su3i1u2on");
+		cout << "substitution : su3i1u2on : valid " << val << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "s55n");
+		cout << "substitution : s55n : valid " << val << "\n";
+		assert(!val);
+
+		val = v.validWordAbbreviation("substitution", "s010n");
+		cout << "substitution : s010n : valid " << val << "\n";
+		assert(!val);
+
+		val = v.validWordAbbreviation("substitution", "s0ubstitution");
+		cout << "substitution : s0ubstitution : valid " << val << "\n";
 		assert(!val);
 	}
 }
