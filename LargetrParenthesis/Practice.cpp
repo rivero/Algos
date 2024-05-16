@@ -867,10 +867,9 @@ Result: if the characters from the right and the left are the same return true
 
 struct ValidPalindrome : public timeit
 {
-	bool validPalindrome(string s) 
-	{
-		int i = 0;
-		int j = s.length() - 1;
+	bool validPalindrome(string s) {
+		size_t i = 0;
+		size_t j = s.length() - 1;
 
 		while (i < j)
 		{
@@ -890,12 +889,7 @@ struct ValidPalindrome : public timeit
 	{
 		while (i < j)
 		{
-			if (s[i] == s[j])
-			{
-				i++;
-				j--;
-			}
-			else 
+			if (s[i++] != s[j--])
 				return false;
 		}
 
@@ -1127,6 +1121,11 @@ int main()
 		assert(val);
 
 		tst = "mecdcfm";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
+		assert(!val);
+
+		tst = "abc";
 		val = v.validPalindrome(tst);
 		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
 		assert(!val);
