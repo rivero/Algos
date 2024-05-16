@@ -826,6 +826,82 @@ struct ValidWordAbbreviation : public timeit
 		return wordIdx == word.length() && abbrIdx == abbr.length();
 	}
 };
+/*
+680. Valid Palindrome II
+Easy
+Topics
+Companies
+Given a string s, return true if the s can be palindrome after deleting at most 
+one character from it.
+
+
+Example 1:
+
+Input: s = "aba"
+Output: true
+Example 2:
+
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+Example 3:
+
+Input: s = "abc"
+Output: false
+
+
+Constraints:
+
+1 <= s.length <= 105
+s consists of lowercase English letters.
+
+Solution
+
+Using two pointers, iterate them to meet in the middle
+if there is one character not matching the other ignore this problem once.
+continue iterating
+
+Result: if the characters from the right and the left are the same return true
+
+*/
+
+struct ValidPalindrome : public timeit
+{
+	bool validPalindrome(string s) 
+	{
+		int i = 0;
+		int j = s.length() - 1;
+
+		while (i < j)
+		{
+			if (s[i] == s[j])
+			{
+				i++;
+				j--;
+			}
+			else 
+				return isPalindrome(s, i + 1, j) || isPalindrome(s, i, j - 1);
+		}
+
+		return true;
+	}
+
+	bool isPalindrome(string s, int i, int j)
+	{
+		while (i < j)
+		{
+			if (s[i] == s[j])
+			{
+				i++;
+				j--;
+			}
+			else 
+				return false;
+		}
+
+		return true;
+	}
+};
 int main()
 {
 	Solution sol;
@@ -986,7 +1062,7 @@ int main()
 		assert(!val);
 		
 	}
-	if (true)
+	if (false)
 	{
 		ValidWordAbbreviation v;
 		auto val = v.validWordAbbreviation("substitution", "s10n");
@@ -1019,6 +1095,40 @@ int main()
 
 		val = v.validWordAbbreviation("word", "3e");
 		cout << "word : 3e : valid " << val << "\n";
+		assert(!val);
+	}
+	if (true)
+	{
+		ValidPalindrome v;
+		auto val = v.validPalindrome("aba");
+		cout << " Valid palindrome (1 char removed) [aba]: " << val << "\n";
+		assert(val);
+	
+		val = v.validPalindrome("abac");
+		cout << " Valid palindrome (1 char removed) [abac]: " << val << "\n";
+		assert(val);
+
+		val = v.validPalindrome("medem");
+		cout << " Valid palindrome (1 char removed) [medem]: " << val << "\n";
+		assert(val);
+
+		val = v.validPalindrome("medecm");
+		cout << " Valid palindrome (1 char removed) [medecm]: " << val << "\n";
+		assert(val);
+
+		string tst = "mecdecm";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
+		assert(!val);
+	
+		tst = "mecdcem";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
+		assert(val);
+
+		tst = "mecdcfm";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
 		assert(!val);
 	}
 }
