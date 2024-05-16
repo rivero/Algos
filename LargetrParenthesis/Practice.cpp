@@ -873,13 +873,11 @@ struct ValidPalindrome : public timeit
 
 		while (i < j)
 		{
-			if (s[i] == s[j])
+			if (s[i++] == s[j--])
 			{
-				i++;
-				j--;
 			}
 			else 
-				return isPalindrome(s, i + 1, j) || isPalindrome(s, i, j - 1);
+				return isPalindrome(s, i, j) || isPalindrome(s, i, j);
 		}
 
 		return true;
@@ -896,9 +894,65 @@ struct ValidPalindrome : public timeit
 		return true;
 	}
 };
+/*
+Given a stream of integers and a window size, calculate the moving average of 
+all integers in the sliding window.
+
+Implement the MovingAverage class:
+
+MovingAverage(int size) Initializes the object with the size of the window size.
+double next(int val) Returns the moving average of the last size values of the stream.
+
+
+Example 1:
+
+Input
+["MovingAverage", "next", "next", "next", "next"]
+[[3], [1], [10], [3], [5]]
+Output
+[null, 1.0, 5.5, 4.66667, 6.0]
+
+Explanation
+MovingAverage movingAverage = new MovingAverage(3);
+movingAverage.next(1); // return 1.0 = 1 / 1
+movingAverage.next(10); // return 5.5 = (1 + 10) / 2
+movingAverage.next(3); // return 4.66667 = (1 + 10 + 3) / 3
+movingAverage.next(5); // return 6.0 = (10 + 3 + 5) / 3
+
+
+Constraints:
+
+1 <= size <= 1000
+-105 <= val <= 105
+At most 104 calls will be made to next.
+*/
+struct MovingAverage : public timeit
+{
+	queue<int> m_numbers;
+	size_t m_windowSize{};
+	double sum{};
+	MovingAverage(int size) : m_windowSize(size)
+	{
+	}
+
+	double next(int val) 
+	{
+		if (m_numbers.size() + 1 > m_windowSize)
+		{
+			sum -= m_numbers.front();
+			m_numbers.pop();
+		}
+		m_numbers.push(val);
+		sum += val;
+		
+		return sum/m_numbers.size();
+	}
+};
+
 int main()
 {
 	Solution sol;
+#pragma region Tests
 	if (false)
 	{
 		sol.FindParenthesis("");
@@ -1091,7 +1145,7 @@ int main()
 		cout << "word : 3e : valid " << val << "\n";
 		assert(!val);
 	}
-	if (true)
+	if (false)
 	{
 		ValidPalindrome v;
 		auto val = v.validPalindrome("aba");
@@ -1129,6 +1183,15 @@ int main()
 		val = v.validPalindrome(tst);
 		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
 		assert(!val);
+	}
+#pragma endregion
+	if (true)
+	{
+		MovingAverage movingAverage(3);
+		cout << fixed << setprecision(12) <<movingAverage.next(1) << "\n"; // return 1.0 = 1 / 1
+		cout << fixed << setprecision(12) <<movingAverage.next(10)<< "\n"; // return 5.5 = (1 + 10) / 2
+		cout << fixed << setprecision(12) <<movingAverage.next(3) << "\n"; // return 4.66667 = (1 + 10 + 3) / 3
+		cout << fixed << setprecision(12) <<movingAverage.next(5) << "\n"; // return 6.0 = (10 + 3 + 5) / 3
 	}
 }
     
