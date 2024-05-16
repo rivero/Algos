@@ -15,6 +15,9 @@
 #include <utility>
 #include <chrono>
 #include <iomanip>
+#include <set>
+#include <unordered_set>
+#include <stack>
 using namespace std;
 
 struct timeit
@@ -482,6 +485,19 @@ struct Solution
 	}
 };
 
+/*
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+
+Input: head = [1,2]
+Output: [2,1]
+
+Input: head = []
+Output: []
+ 
+ */
 struct ReverseLinkedList : public timeit
 {
 	struct ListNode 
@@ -498,17 +514,20 @@ struct ReverseLinkedList : public timeit
 		ListNode* prev {nullptr};
 		ListNode* curr = head;
 		ListNode* forward{ nullptr };
-		while (curr) 
-		{
-			forward = curr->next;
-
-			curr->next = prev;
-			prev = curr;
-			
-			curr = forward;
-			
-		}
+		reverse(curr, forward, prev);
 		return prev;
+	}
+
+	void reverse(ListNode*& curr, ListNode*& forward, ListNode*& prev)
+	{
+		if (!curr)
+			return;
+
+		forward = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = forward;
+		reverse(curr, forward, prev);
 	}
 
 	ListNode* reverseListPrint(ListNode* head)
@@ -554,6 +573,66 @@ struct ReverseLinkedList : public timeit
 		}
 
 	}
+};
+/*
+58. Length of Last Word
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+A word is a maximal substring s consisting of non-space characters only.
+
+Example 1:
+
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+Example 2:
+
+Input: s = "   fly me   to   the moon  "
+Output: 4
+Explanation: The last word is "moon" with length 4.
+Example 3:
+
+Input: s = "luffy is still joyboy"
+Output: 6
+Explanation: The last word is "joyboy" with length 6.
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of only English letters and spaces ' '.
+There will be at least one word in s.
+*/
+struct LenghtOfLastWord : public timeit
+{
+	int lengthOfLastWord(string s)
+	{
+
+		stack<int> myset;
+		string tmp;
+		for_each(s.begin(), s.end(), [&](auto c) 
+			{
+				if (c != ' ')
+				{
+					tmp += c;
+				}
+				else
+				{
+					if (tmp.size() > 0)
+					{
+						myset.push(tmp.size());
+						tmp.clear();
+					}
+				}
+			});
+
+		if (tmp.size() > 0)
+		{
+			myset.push(tmp.size());
+			tmp.clear();
+		}
+		return myset.top();
+	}
+
 };
 int main()
 {
@@ -667,7 +746,7 @@ int main()
 		auto res = sol.findIntersectionValues(v1, v2);
 		sol.printv(res);
 	}
-	if (true)
+	if (false)
 	{
 		auto head = new ReverseLinkedList::ListNode(1);
 		head->next = new ReverseLinkedList::ListNode(2);
@@ -680,6 +759,19 @@ int main()
 		auto newHead = r.reverseList(head);
 		r.printList(newHead);
 		cout << "\n";
+	}
+	if (true)
+	{
+		LenghtOfLastWord l;
+		auto val = l.lengthOfLastWord("   fly me   to   the moon  ");
+		assert(val == 4);
+		cout <<  val <<  "\n";
+		val = l.lengthOfLastWord("Hello World");
+		assert(val == 5);
+		cout << val << "\n";
+		val = l.lengthOfLastWord("luffy is still joyboy");
+		assert(val == 6);
+		cout << val << "\n";
 	}
 }
     
