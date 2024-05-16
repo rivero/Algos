@@ -793,57 +793,37 @@ struct ValidWordAbbreviation : public timeit
 {
 	bool validWordAbbreviation(string word, string abbr) 
 	{
-		vector<string> str;
-		string tmpNum;
-		for_each(abbr.begin(), abbr.end(), [&](auto c)
-			{
-				if (isdigit(c))
-				{
-					tmpNum += c;
-				} 
-				else
-				{
-					if (!tmpNum.empty())
-					{
-						str.push_back(tmpNum);
-						tmpNum.clear();
-					}
-					string x;
-					x.push_back(c);
-					str.push_back(x);
-				}
-			});
-		if (!tmpNum.empty())
+		size_t wordIdx = 0;
+		size_t abbrIdx = 0;
+
+		while (abbrIdx < abbr.length() && wordIdx < word.length()) 
 		{
-			str.push_back(tmpNum);
-			tmpNum.clear();
-		}
-		bool valid{true};
-		size_t counter{};
-		string lastString;
-		for (size_t i = 0; i < str.size(); i++)
-		{
-			if (isdigit(str[i][0]))
+			size_t num = 0;
+			bool start{};
+			while (isdigit(abbr[abbrIdx])) 
 			{
-				if (str[i][0] == '0' || str[i] == lastString)
-				{
-					valid = false;
-					break;
-				}
-				counter += stol(str[i]);
-			}
-			else
-			{
-				counter += str[i].size();
+				if (!start && abbr[abbrIdx] == '0') 
+					return false; // starts with '0'
+				
+				start = true;
+				num = num * 10 + abbr[abbrIdx] - '0'; // convert to number
+				abbrIdx++;
 			}
 
-			lastString = str[i];
+			if (num == 0) 
+			{
+				if (word[wordIdx] != abbr[abbrIdx]) 
+					return false; // no number and they are no equal.
+				wordIdx++;
+				abbrIdx++;
+			}
+			else 
+			{
+				wordIdx += num;
+			}
 		}
-		if (valid)
-		{
-			valid = word.size() == counter;
-		}
-		return valid;
+
+		return wordIdx == word.length() && abbrIdx == abbr.length();
 	}
 };
 int main()
@@ -1035,6 +1015,10 @@ int main()
 
 		val = v.validWordAbbreviation("substitution", "s0ubstitution");
 		cout << "substitution : s0ubstitution : valid " << val << "\n";
+		assert(!val);
+
+		val = v.validWordAbbreviation("word", "3e");
+		cout << "word : 3e : valid " << val << "\n";
 		assert(!val);
 	}
 }
