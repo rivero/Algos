@@ -38,6 +38,16 @@ struct timeit
 
 
 };
+template <typename T>
+void printv(const T& v)
+{
+	for (const auto& elem : v)
+	{
+		cout << elem << " ";
+	}
+	cout << "\n";
+}
+
 struct Solution
 {
 	// find the longest valid parenthesis
@@ -156,15 +166,6 @@ struct Solution
 			}
 		}
 		return counter;
-	}
-	template <typename T>
-	void printv(const T& v) const
-	{
-		for (const auto& elem: v)
-		{
-			cout << elem << " ";
-		}
-		cout << "\n";
 	}
 	template <typename T>
 	void printm(const map<T, T>& counts) const
@@ -948,6 +949,79 @@ struct MovingAverage : public timeit
 		return sum/m_numbers.size();
 	}
 };
+/**
+ * 
+ 543. Diameter of Binary Tree
+
+ Given the root of a binary tree, return the length of the diameter of the tree.
+
+The diameter of a binary tree is the length of the longest path between any two nodes in a tree. 
+This path may or may not pass through the root.
+
+The length of a path between two nodes is represented by the number of edges between them.
+
+
+
+Example 1:
+			  1
+		2			3
+	4		5
+Input: root = [1,2,3,4,5]
+Output: 3
+Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
+
+Example 2:
+Input: root = [1,2]
+Output: 1
+ * 
+  This algorithm does the following
+  - Recursively reaches the bottom
+  - as it goes back in the tree, it increments by one the counter which is the height.
+  - It adds the values of the left and right leaves
+  - the maximum distance is given by the max of the previous and new accumulated
+  
+  */
+struct BinayTreeDiameter : public timeit 
+{
+	struct TreeNode {
+		int val{};
+		TreeNode* left{nullptr};
+		TreeNode* right{ nullptr };
+		TreeNode() = default;
+		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+	};
+	int diameterOfBinaryTree(TreeNode* root) 
+	{
+		int diameter = 0;
+		helper("root",root, diameter);
+		return diameter;
+	}
+private:
+	int helper(const char* const txt, TreeNode* node, int& diameter) 
+	{
+		// terminate
+		if (!node)
+			return 0;
+
+		// enumerate
+		int left = helper("left", node->left, diameter);
+		int right = helper("right",node->right, diameter);
+
+		// update the diameter
+		diameter = max(diameter, left + right);
+
+		//cout << txt << " (" << node->val << ")";
+		//cout << "\tdiameter: " << diameter;
+		//cout << " left: " << left;
+		//cout << " right: " << right;
+		//cout << "\n";
+
+		// return the distance between the farest leaf and the current `node`
+		return 1 + max(left, right);
+	}
+};
+
 
 int main()
 {
@@ -967,58 +1041,58 @@ int main()
 	if(false)
 	{
 		vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
-		sol.printv(vec);
+		printv(vec);
 		cout << sol.move_zeroes(vec) << "\n";
-		sol.printv(vec);
+		printv(vec);
 		cout << "\n";
 	}
 
 	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-		sol.printv(vec);
+		printv(vec);
 		cout << sol.move_zeroes(vec) << "\n";
-		sol.printv(vec);
+		printv(vec);
 		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-		sol.printv(vec);
+		printv(vec);
 		cout << sol.move_zeroes(vec) << "\n";
-		sol.printv(vec);
+		printv(vec);
 		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
-		sol.printv(vec);
+		printv(vec);
 		cout << sol.move_zeroes(vec) << "\n";
-		sol.printv(vec);
+		printv(vec);
 		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		sol.printv(vec);
+		printv(vec);
 		cout << sol.move_zeroes(vec) << "\n";
-		sol.printv(vec);
+		printv(vec);
 		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
-		sol.printv(vec);
+		printv(vec);
 		cout << sol.move_zeroes(vec) << "\n";
-		sol.printv(vec);
+		printv(vec);
 		cout << "\n";
 	}
 	if (false)
 	{
 		vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
-		sol.printv(vec);
+		printv(vec);
 		cout << sol.move_zeroes(vec) << "\n";
-		sol.printv(vec);
+		printv(vec);
 		cout << "\n";
 	}
 	if (false)
@@ -1044,7 +1118,7 @@ int main()
 		vector<int> nums2{ 2,5,6 };
 
 		sol.merge(nums1, 3, nums2, 3);
-		sol.printv(nums1);
+		printv(nums1);
 	}
 	if (false)
 	{
@@ -1060,7 +1134,7 @@ int main()
 		timeit t;
 		vector<int> v1{ 4,3,2,3,1 }, v2{ 2,2,5,2,3,6 };
 		auto res = sol.findIntersectionValues(v1, v2);
-		sol.printv(res);
+		printv(res);
 	}
 	if (false)
 	{
@@ -1184,14 +1258,40 @@ int main()
 		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
 		assert(!val);
 	}
-#pragma endregion
-	if (true)
+	if (false)
 	{
 		MovingAverage movingAverage(3);
 		cout << fixed << setprecision(12) <<movingAverage.next(1) << "\n"; // return 1.0 = 1 / 1
 		cout << fixed << setprecision(12) <<movingAverage.next(10)<< "\n"; // return 5.5 = (1 + 10) / 2
 		cout << fixed << setprecision(12) <<movingAverage.next(3) << "\n"; // return 4.66667 = (1 + 10 + 3) / 3
 		cout << fixed << setprecision(12) <<movingAverage.next(5) << "\n"; // return 6.0 = (10 + 3 + 5) / 3
+	}
+#pragma endregion
+	if (true)
+	{
+		if (true)
+		{
+			BinayTreeDiameter b;
+			auto root = new BinayTreeDiameter::TreeNode(1);
+			root->left = new BinayTreeDiameter::TreeNode(2);
+			root->right = new BinayTreeDiameter::TreeNode(3);
+			root->left->left = new BinayTreeDiameter::TreeNode(4);
+			root->left->right = new BinayTreeDiameter::TreeNode(5);
+			int val = b.diameterOfBinaryTree(root);
+			assert(val == 3);
+			cout << "result: " <<val << "\n";
+
+		}
+		if (true)
+		{
+			BinayTreeDiameter b;
+			auto root = new BinayTreeDiameter::TreeNode(1);
+			root->left = new BinayTreeDiameter::TreeNode(2);
+			int val = b.diameterOfBinaryTree(root);
+			assert(val == 1);
+			cout << "result: " << val << "\n";
+
+		}
 	}
 }
     
