@@ -1087,16 +1087,11 @@ struct Toeplitz : public timeit
 	{
 		size_t numRows = matrix.size() - 1;
 		size_t numCols = matrix[0].size() - 1;
-		vector<vector<int>> diagonals;
-		vector<int> vec;
 		set<int> myset;
 		
 		int row = numRows;
 		int col = 0;
 
-		vec.push_back(matrix[numRows][col++]);
-		diagonals.push_back(vec);
-		vec.clear();
 		int rowOffset{ -1 };
 		while (row > -1 && col <= numCols)
 		{
@@ -1110,12 +1105,9 @@ struct Toeplitz : public timeit
 				{
 					return false;
 				}
-				vec.push_back(matrix[row][col]);
 				row += rowOffset;
 				col--;
 			}
-			diagonals.push_back(vec);
-			vec.clear();
 			col = ++lastCol;
 			row = lastRow;
 			if (col > numCols && row > 0)
@@ -1128,10 +1120,97 @@ struct Toeplitz : public timeit
 		return true;
 	}
 };
+/*
+1249. Minimum Remove to Make Valid Parentheses
+
+Given a string s of '(' , ')' and lowercase English characters.
+
+Your task is to remove the minimum number of parentheses ( '(' or ')', in any positions ) 
+so that the resulting parentheses string is valid and return any valid string.
+
+Formally, a parentheses string is valid if and only if:
+
+It is the empty string, contains only lowercase characters, or
+It can be written as AB (A concatenated with B), where A and B are valid strings, or
+It can be written as (A), where A is a valid string.
+
+
+Example 1:
+
+Input: s = "lee(t(c)o)de)"
+Output: "lee(t(c)o)de"
+Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
+Example 2:
+
+Input: s = "a)b(c)d"
+Output: "ab(c)d"
+Example 3:
+
+Input: s = "))(("
+Output: ""
+Explanation: An empty string is also valid.
+
+
+Constraints:
+
+1 <= s.length <= 105
+s[i] is either '(' , ')', or lowercase English letter.
+
+0. Use queue of indexes
+1. scan the string
+2. when an open parenthesis is push index
+3. when close parenthesis is found pop index
+4. if queue is empty and find close parenthesis store index in vector5. 
+5. Store rest of indexes in queue in vector
+6. Create new string with valid indexes (not in vector)
+
+
+*/
+
+struct MinRemoveValidParenthesis : public timeit
+{
+	string minRemoveToMakeValid(string s) 
+	{
+		queue<int> q;
+		vector<int> v;
+		for (size_t i = 0; i < s.size(); i++)
+		{
+			if (s[i] == '(')
+			{
+				q.push(i);
+			}
+			else if (s[i] == ')')
+			{
+				if (q.size() > 0)
+				{
+					q.pop();
+				}
+				else
+					v.push_back(i);
+			}
+		}
+		while (!q.empty())
+		{
+			v.push_back(q.front());
+			q.pop();
+		}
+		string res;
+		for (size_t i = 0; i < s.size(); i++)
+		{
+			auto found = find(v.begin(), v.end(), i) != v.end();
+			if (!found)
+			{
+				res += s[i]; 
+			}
+		}
+		return res;
+	}
+};
+
 int main()
 {
-	Solution sol;
 #pragma region Tests
+	Solution sol;
 	if (false)
 	{
 		sol.FindParenthesis("");
@@ -1397,8 +1476,7 @@ int main()
 
 		}
 	}
-#pragma endregion
-	if (true)
+	if (false)
 	{
 		{
 			Toeplitz t;
@@ -1472,6 +1550,25 @@ int main()
 			}
 			bool val = t.isToeplitzMatrix(matrix);
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
+		}
+	}
+#pragma endregion
+	if (true)
+	{
+		{
+			MinRemoveValidParenthesis v;
+			cout << v.minRemoveToMakeValid("lee(t(c)o)de)") << "\n";
+
+		}
+		{
+			MinRemoveValidParenthesis v;
+			cout << v.minRemoveToMakeValid("a)b(c)d") << "\n";
+
+		}
+		{
+			MinRemoveValidParenthesis v;
+			cout << v.minRemoveToMakeValid("))((") << "\n";
+
 		}
 	}
 }
