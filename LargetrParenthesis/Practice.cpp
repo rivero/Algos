@@ -1096,7 +1096,6 @@ struct Toeplitz : public timeit
 
 		vec.push_back(matrix[numRows][col++]);
 		diagonals.push_back(vec);
-		printv(vec);
 		vec.clear();
 		int rowOffset{ -1 };
 		while (row > -1 && col <= numCols)
@@ -1116,7 +1115,6 @@ struct Toeplitz : public timeit
 				col--;
 			}
 			diagonals.push_back(vec);
-			printv(vec);
 			vec.clear();
 			col = ++lastCol;
 			row = lastRow;
@@ -1410,6 +1408,10 @@ int main()
 				{5, 1, 2, 3},
 				{9, 5, 1, 2}
 			};
+			for (auto elem: matrix)
+			{
+				printv(elem);
+			}
 			bool val = t.isToeplitzMatrix(matrix);
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
@@ -1421,6 +1423,10 @@ int main()
 				{5, 1, 2},
 				{9, 5, 1}
 			};
+			for (auto elem : matrix)
+			{
+				printv(elem);
+			}
 			bool val = t.isToeplitzMatrix(matrix);
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
@@ -1432,6 +1438,10 @@ int main()
 				{5, 1},
 				{9, 5}
 			};
+			for (auto elem : matrix)
+			{
+				printv(elem);
+			}
 			bool val = t.isToeplitzMatrix(matrix);
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
@@ -1442,6 +1452,10 @@ int main()
 				{1, 2},
 				{5, 1}
 			};
+			for (auto elem : matrix)
+			{
+				printv(elem);
+			}
 			bool val = t.isToeplitzMatrix(matrix);
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
@@ -1452,6 +1466,10 @@ int main()
 				{1, 2},
 				{2, 2}
 			};
+			for (auto elem : matrix)
+			{
+				printv(elem);
+			}
 			bool val = t.isToeplitzMatrix(matrix);
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
