@@ -1089,6 +1089,7 @@ struct Toeplitz : public timeit
 		size_t numCols = matrix[0].size() - 1;
 		vector<vector<int>> diagonals;
 		vector<int> vec;
+		set<int> myset;
 		
 		int row = numRows;
 		int col = 0;
@@ -1102,8 +1103,14 @@ struct Toeplitz : public timeit
 		{
 			auto lastCol = col;
 			auto lastRow = row;
+			myset.clear();
 			while (col >= 0 && row >= 0)
 			{
+				myset.insert(matrix[row][col]);
+				if (myset.size() > 1)
+				{
+					return false;
+				}
 				vec.push_back(matrix[row][col]);
 				row += rowOffset;
 				col--;
@@ -1120,7 +1127,7 @@ struct Toeplitz : public timeit
 			}
 		}
 
-		return {};
+		return true;
 	}
 };
 int main()
@@ -1403,7 +1410,8 @@ int main()
 				{5, 1, 2, 3},
 				{9, 5, 1, 2}
 			};
-			t.isToeplitzMatrix(matrix);
+			bool val = t.isToeplitzMatrix(matrix);
+			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
 		{
 			Toeplitz t;
@@ -1413,7 +1421,8 @@ int main()
 				{5, 1, 2},
 				{9, 5, 1}
 			};
-			t.isToeplitzMatrix(matrix);
+			bool val = t.isToeplitzMatrix(matrix);
+			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
 		{
 			Toeplitz t;
@@ -1423,7 +1432,8 @@ int main()
 				{5, 1},
 				{9, 5}
 			};
-			t.isToeplitzMatrix(matrix);
+			bool val = t.isToeplitzMatrix(matrix);
+			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
 		{
 			Toeplitz t;
@@ -1432,7 +1442,18 @@ int main()
 				{1, 2},
 				{5, 1}
 			};
-			t.isToeplitzMatrix(matrix);
+			bool val = t.isToeplitzMatrix(matrix);
+			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
+		}
+		{
+			Toeplitz t;
+			vector<vector<int>> matrix
+			{
+				{1, 2},
+				{2, 2}
+			};
+			bool val = t.isToeplitzMatrix(matrix);
+			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
 	}
 }
