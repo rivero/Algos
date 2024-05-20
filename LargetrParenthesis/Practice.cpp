@@ -39,13 +39,16 @@ struct timeit
 
 };
 template <typename T>
-void printv(const T& v)
+void printv(const T& v, bool newLine = true)
 {
 	for (const auto& elem : v)
 	{
 		cout << elem << " ";
 	}
-	cout << "\n";
+	if (newLine)
+	{
+		cout << "\n";
+	}
 }
 
 struct Solution
@@ -1085,14 +1088,11 @@ struct Toeplitz : public timeit
 {
 	bool isToeplitzMatrix(vector<vector<int>>& matrix) 
 	{
-		size_t numRows = matrix.size() - 1;
-		size_t numCols = matrix[0].size() - 1;
+		int numCols = matrix[0].size() - 1;		
+		int row = matrix.size() - 1;
 		set<int> myset;
-		
-		int row = numRows;
 		int col = 0;
 
-		int rowOffset{ -1 };
 		while (row > -1 && col <= numCols)
 		{
 			auto lastCol = col;
@@ -1105,7 +1105,7 @@ struct Toeplitz : public timeit
 				{
 					return false;
 				}
-				row += rowOffset;
+				row--;
 				col--;
 			}
 			col = ++lastCol;
@@ -1166,7 +1166,6 @@ s[i] is either '(' , ')', or lowercase English letter.
 
 
 */
-
 struct MinRemoveValidParenthesis : public timeit
 {
 	string minRemoveToMakeValid(string s) 
@@ -1206,7 +1205,163 @@ struct MinRemoveValidParenthesis : public timeit
 		return res;
 	}
 };
+/*
+314. Binary Tree Vertical Order Traversal
 
+Given the root of a binary tree, return the vertical order traversal of its nodes' values. 
+(i.e., from top to bottom, column by column).
+
+If two nodes are in the same row and column, the order should be from left to right.
+
+Example 1:
+
+			3
+	9			20
+			15		7
+
+Input: root = [3,9,20,null,null,15,7]
+Output: [[9],[3,15],[20],[7]]
+
+Example 2:
+		3
+	9			8
+4		01			7
+
+Input: root = [3,9,8,4,0,1,7]
+Output: [[4],[9],[3,0,1],[8],[7]]
+
+Example 3:
+		3
+	9			8
+4		01			7
+
+	5			2
+Input: root = [3,9,8,4,0,1,7,null,null,null,2,5]
+Output: [[4],[9,5],[3,0,1],[8,2],[7]]
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
+*/
+/*
+* 314. Binary tree Vertical order transversal
+* 
+Given the root of a binary tree, return the vertical order traversal of its nodes' values. 
+(i.e., from top to bottom, column by column).
+
+If two nodes are in the same row and column, the order should be from left to right.
+
+
+
+Example 1:
+Input: root = [3,9,20,null,null,15,7]
+Output: [[9],[3,15],[20],[7]]
+
+	3
+9		20
+	 15   7
+
+Example 2:
+Input: root = [3,9,8,4,0,1,7]
+Output: [[4],[9],[3,0,1],[8],[7]]
+		3
+	9		8
+4	   0 1   7
+
+Example 3:
+Input: root = [3,9,8,4,0,1,7,null,null,null,2,5]
+Output: [[4],[9,5],[3,0,1],[8,2],[7]]
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
+*/
+
+struct BinaryTreeVerticalOrderTransversal : protected timeit
+{
+	struct TreeNode
+	{
+		int val{};
+		TreeNode* left{ nullptr };
+		TreeNode* right{ nullptr };
+		TreeNode() : val(0), left(nullptr), right(nullptr) {}
+		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+
+	};
+
+	map<int, vector<int> > m_map;
+	int m_level{};
+	void order(queue< const TreeNode* >& Q, int base)
+	{
+		if (Q.empty())
+		{
+			return;
+		}		
+		auto current = Q.front();
+		Q.pop();
+		m_map[base].push_back(current->val);
+			
+		auto lc = base - 1;
+		auto rc = base + 1;
+				
+		if (current->left)
+		{
+			Q.push(current->left);
+			order(Q, lc);
+		}
+		if (current->right)
+		{
+			Q.push(current->right);
+			order(Q, rc);
+		}
+	}
+	vector<vector<int>> verticalOrder2(TreeNode* root)
+	{
+		if (root == nullptr)
+			return {};
+
+		queue< const TreeNode* > Q;
+		Q.push(root);
+		order(Q, 0);
+		for (const auto& [idx, vec]: m_map)
+		{
+			cout << idx << ": [";
+			printv(vec, false);
+			cout << "]";
+		}
+		return {};
+	}
+	vector<vector<int>> verticalOrder(TreeNode* root)
+	{
+
+		if (root == nullptr)
+			return {};
+
+		queue< const TreeNode* > Q;
+		Q.push(root);
+		while (!Q.empty())
+		{
+
+
+
+			auto current = Q.front();
+			cout << current->val << " ";
+			if (current->left)
+				Q.push(current->left);
+			if (current->right)
+				Q.push(current->right);
+			Q.pop();
+		}
+		vector<vector<int>> res;
+
+		return res;
+	}
+};
 int main()
 {
 #pragma region Tests
@@ -1552,8 +1707,7 @@ int main()
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
 	}
-#pragma endregion
-	if (true)
+	if (false)
 	{
 		{
 			MinRemoveValidParenthesis v;
@@ -1571,5 +1725,122 @@ int main()
 
 		}
 	}
+#pragma endregion
+	if (true)
+	{
+		if(false)
+		{
+			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
+
+			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
+			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(20);
+
+			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(15);
+			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
+
+			BinaryTreeVerticalOrderTransversal b;
+			auto res = b.verticalOrder(root);
+
+			for (auto elem : res)
+			{
+				cout << "[";
+				printv(elem, false);
+				cout << "],";
+			}
+			cout << "\n";
+
+		}
+		if (false)
+		{
+			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
+
+			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
+			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(8);
+
+			root->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(4);
+			root->left->right = new BinaryTreeVerticalOrderTransversal::TreeNode(0);
+
+			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(1);
+			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
+
+			BinaryTreeVerticalOrderTransversal b;
+			auto res = b.verticalOrder(root);
+
+			for (auto elem : res)
+			{
+				cout << "[";
+				printv(elem, false);
+				cout << "],";
+			}
+			cout << "\n";
+
+		}
+		if (false)
+		{
+			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
+
+			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
+			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(8);
+
+			root->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(4);
+			root->left->right = new BinaryTreeVerticalOrderTransversal::TreeNode(0);
+
+			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(1);
+			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
+
+			root->left->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(5);
+			root->left->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(2);
+
+			BinaryTreeVerticalOrderTransversal b;
+			auto res = b.verticalOrder(root);
+
+			for (auto elem : res)
+			{
+				cout << "[";
+				printv(elem, false);
+				cout << "],";
+			}
+			cout << "\n";
+
+		}
+		if (true)
+		{
+			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
+
+			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
+			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(8);
+
+			root->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(4);
+			root->left->right = new BinaryTreeVerticalOrderTransversal::TreeNode(0);
+
+			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(1);
+			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
+
+			root->left->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(2);
+			root->right->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(5);
+
+			BinaryTreeVerticalOrderTransversal b;
+			auto res = b.verticalOrder(root);
+
+			for (auto elem : res)
+			{
+				cout << "[";
+				printv(elem, false);
+				cout << "],";
+			}
+			cout << "\n";
+
+			res = b.verticalOrder2(root);
+
+			for (auto elem : res)
+			{
+				cout << "[";
+				printv(elem, false);
+				cout << "],";
+			}
+			cout << "\n";
+		}
+	}
 }
+
     
