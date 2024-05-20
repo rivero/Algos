@@ -1328,38 +1328,91 @@ struct BinaryTreeVerticalOrderTransversal : protected timeit
 		queue< const TreeNode* > Q;
 		Q.push(root);
 		order(Q, 0);
+
+		vector<vector<int>> res;
 		for (const auto& [idx, vec]: m_map)
 		{
-			cout << idx << ": [";
-			printv(vec, false);
-			cout << "]";
+			res.push_back(vec);
 		}
-		return {};
+		return res;
 	}
+
+	queue<pair<TreeNode*, int>> qu;
+	map<int, vector<int>> verticalLevels;
+
+	void order2()
+	{
+		if (qu.empty()) return;
+
+		for (int i = 0; i < qu.size(); i++)
+		{
+			auto curr = qu.front(); qu.pop();
+			TreeNode* currNode = curr.first;
+			int level = curr.second;
+
+			verticalLevels[level].push_back(currNode->val);
+
+			if (currNode->left)
+			{
+				qu.push({ currNode->left, level - 1 });
+			}
+			if (currNode->right)
+			{
+				qu.push({ currNode->right, level + 1 });
+			}
+		}
+		order2();
+	}
+
 	vector<vector<int>> verticalOrder(TreeNode* root)
 	{
+		vector<vector<int>> ans;
+		if (!root) return ans;
+		qu.push({ root, 0 });
+		order2();
 
-		if (root == nullptr)
-			return {};
-
-		queue< const TreeNode* > Q;
-		Q.push(root);
-		while (!Q.empty())
+		for (const auto& entry : verticalLevels)
 		{
-
-
-
-			auto current = Q.front();
-			cout << current->val << " ";
-			if (current->left)
-				Q.push(current->left);
-			if (current->right)
-				Q.push(current->right);
-			Q.pop();
+			ans.push_back(entry.second);
 		}
-		vector<vector<int>> res;
 
-		return res;
+		return ans;
+	}
+
+	vector<vector<int>> verticalOrder3(TreeNode* root)
+	{
+		vector<vector<int>> ans;
+		if (!root) return ans;
+		qu.push({ root, 0 });
+		while (!qu.empty()) 
+		{
+			int size = qu.size();
+
+			for (int i = 0; i < size; i++) 
+			{
+				auto curr = qu.front(); qu.pop();
+				TreeNode* currNode = curr.first;
+				int level = curr.second;
+
+				verticalLevels[level].push_back(currNode->val);
+
+				if (currNode->left) 
+				{
+					qu.push({ currNode->left, level - 1 });
+				}
+				if (currNode->right) 
+				{
+					qu.push({ currNode->right, level + 1 });
+				}
+			}
+		}
+
+		for (const auto& entry : verticalLevels) 
+		{
+			ans.push_back(entry.second);
+		}
+
+		return ans;
 	}
 };
 int main()
@@ -1830,15 +1883,15 @@ int main()
 			}
 			cout << "\n";
 
-			res = b.verticalOrder2(root);
+			//res = b.verticalOrder2(root);
 
-			for (auto elem : res)
-			{
-				cout << "[";
-				printv(elem, false);
-				cout << "],";
-			}
-			cout << "\n";
+			//for (auto elem : res)
+			//{
+			//	cout << "[";
+			//	printv(elem, false);
+			//	cout << "],";
+			//}
+			//cout << "\n";
 		}
 	}
 }
