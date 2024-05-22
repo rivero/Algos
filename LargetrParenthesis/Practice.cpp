@@ -1716,13 +1716,28 @@ namespace minWindowSubstring
 	{
 		if (true)
 		{
+			array<string, 2> myarr{ "aabdccdbcacd", "aad" }; // aabd
+			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
+		}
+		if (true)
+		{
+			array<string, 2> myarr{ "vvavereveaevafefaef", "vvev" }; // vvave
+			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
+		}
+		if (true)
+		{
+			array<string, 2> myarr{ "aaffhkksemckelloe", "fhea" }; // aksfaje
+			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
+		}
+		if (true)
+		{
 			array<string, 2> myarr{ "ahffaksfajeeubsne", "jefaa" }; // aksfaje
-			cout << MinWindowSubstring(&myarr[0], 2);
+			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
 		}
 		if (false)
 		{
 			array<string, 2> myarr{ "bacffa", "aff" };
-			cout << MinWindowSubstring(&myarr[0], 2);
+			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
 		}
 	}
 
