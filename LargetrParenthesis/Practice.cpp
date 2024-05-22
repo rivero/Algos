@@ -18,6 +18,8 @@
 #include <set>
 #include <unordered_set>
 #include <stack>
+#include <array>
+
 using namespace std;
 
 struct timeit
@@ -33,7 +35,7 @@ struct timeit
 	{
 		m_tp2 = chrono::high_resolution_clock::now();
 		m_dur = m_tp2 - m_tp1;
-		cout << "duration seconds: " <<  fixed << setprecision(12)<< m_dur.count() << "\n";
+		std::cout << "duration seconds: " <<  fixed << setprecision(12)<< m_dur.count() << "\n";
 	}
 
 
@@ -49,6 +51,26 @@ void printv(const T& v, bool newLine = true)
 	{
 		cout << "\n";
 	}
+}
+
+template <typename T>
+void printm(const map<T, T>& counts)
+{
+	for (auto elem : counts)
+	{
+		cout << elem.first << " = " << elem.second << "\n";
+	}
+	cout << "\n";
+}
+
+template <typename T, typename U>
+void printm(const map<T, U>& counts)
+{
+	for (auto elem : counts)
+	{
+		cout << elem.first << " = " << elem.second << "\n";
+	}
+	cout << "\n";
 }
 
 struct Solution
@@ -169,15 +191,6 @@ struct Solution
 			}
 		}
 		return counter;
-	}
-	template <typename T>
-	void printm(const map<T, T>& counts) const
-	{
-		for (auto elem : counts)
-		{
-			cout << elem.first << " = " << elem.second << "\n";
-		}
-		cout << "\n";
 	}
 
 	struct Something
@@ -1344,7 +1357,7 @@ struct BinaryTreeVerticalOrderTransversal : protected timeit
 	{
 		if (qu.empty()) return;
 
-		for (int i = 0; i < qu.size(); i++)
+		for (size_t i = 0; i < qu.size(); i++)
 		{
 			auto curr = qu.front(); qu.pop();
 			TreeNode* currNode = curr.first;
@@ -1415,6 +1428,307 @@ struct BinaryTreeVerticalOrderTransversal : protected timeit
 		return ans;
 	}
 };
+/*
+339 Nested List Weight Sum
+
+You are given a nested list of integers nestedList. 
+Each element is either an integer or a list whose elements may also be integers or other lists.
+
+The depth of an integer is the number of lists that it is inside of. 
+For example, the nested list [1,[2,2],[[3],2],1] has each integer's value set to its depth.
+
+Return the sum of each integer in nestedList multiplied by its depth.
+
+
+
+Example 1:
+
+Input: nestedList = [[1,1],2,[1,1]]
+depth			       2   1   2
+Output: 10
+Explanation: Four 1's at depth 2, one 2 at depth 1. 1*2 + 1*2 + 2*1 + 1*2 + 1*2 = 10.
+Example 2:
+
+
+Input: nestedList = [1,[4,[6]]]
+depth                1  2  3
+Output: 27
+Explanation: One 1 at depth 1, one 4 at depth 2, and one 6 at depth 3. 1*1 + 4*2 + 6*3 = 27.
+Example 3:
+
+Input: nestedList = [0]
+Output: 0
+
+
+Constraints:
+
+1 <= nestedList.length <= 50
+The values of the integers in the nested list is in the range [-100, 100].
+The maximum depth of any integer is less than or equal to 50.
+
+*/
+
+class NestedInteger
+{
+	int m_val{ INT_MAX };
+	vector < NestedInteger > m_vec;
+public:
+	// Constructor initializes an empty nested list.
+	NestedInteger() = default;
+
+	// Constructor initializes a single integer.
+	NestedInteger(int value) : m_val(value) {};
+
+	// Return true if this NestedInteger holds a single integer, rather than a nested list.
+	bool isInteger() const { return m_val == INT_MAX; };
+
+	// Return the single integer that this NestedInteger holds, if it holds a single integer
+	// The result is undefined if this NestedInteger holds a nested list
+	int getInteger() const { return m_val; }
+
+	// Set this NestedInteger to hold a single integer.
+	void setInteger(int value) { m_val = value; };
+
+	// Set this NestedInteger to hold a nested list and adds a nested integer to it.
+	void add(const NestedInteger& ni) { m_vec.push_back(ni); };
+
+	// Return the nested list that this NestedInteger holds, if it holds a nested list
+	// The result is undefined if this NestedInteger holds a single integer
+	const vector<NestedInteger>& getList() const
+	{
+		return m_vec;
+	}
+
+};
+
+struct NestedListWeightSum : protected timeit
+{
+
+	int depthSum(vector<NestedInteger>& nestedList, int depth = 1)
+	{
+		int sum{};
+		for (auto& elem : nestedList)
+		{
+			if (elem.isInteger())
+			{
+				sum += elem.getInteger() * depth;
+			}
+			else
+			{
+				//sum += depthSum(elem.getList(), depth + 1);
+			}
+		}
+		return sum;
+	}
+};
+
+/*
+1650. Lowest Common Ancestor of a Binary Tree III
+
+Given two nodes of a binary tree p and q, return their lowest common ancestor (LCA).
+
+Each node will have a reference to its parent node. The definition for Node is below:
+
+class Node {
+	public int val;
+	public Node left;
+	public Node right;
+	public Node parent;
+}
+According to the definition of LCA on Wikipedia: 
+"The lowest common ancestor of two nodes p and q in a tree T 
+is the lowest node that has both p and q as descendants 
+(where we allow a node to be a descendant of itself)."
+
+Example 1:
+
+			3
+		  /	  \
+		 5     1
+		/ \   / \
+	   6   2 0   8
+		  / \
+		 7   4
+
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+Output: 3
+Explanation: The LCA of nodes 5 and 1 is 3.
+Example 2:
+
+
+			3
+		  /	  \
+		 5     1
+        / \   / \
+	   6   2 0   8
+	      / \
+		 7   4
+
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+Output: 5
+Explanation: The LCA of nodes 5 and 4 is 5 since a node can be a descendant of itself 
+according to the LCA definition.
+
+Example 3:
+
+Input: root = [1,2], p = 1, q = 2
+Output: 1
+
+
+Constraints:
+
+The number of nodes in the tree is in the range [2, 105].
+-109 <= Node.val <= 109
+All Node.val are unique.
+p != q
+p and q exist in the tree.
+*/
+namespace LowestCommon
+{
+	class Node {
+	public:
+		int val{};
+		Node* left{nullptr};
+		Node* right{nullptr};
+		Node* parent{nullptr};
+	};
+	class Solution : protected timeit 
+	{
+		vector<int> m_path_p;
+		vector<int> m_path_q;
+		int m_val{};
+
+		void searchNode(Node* node, vector<int>& path)
+		{
+			if (!node)
+			{
+				return;
+			}
+			path.push_back(node->val);
+			if (node->val == m_val)
+			{
+				return;
+			}
+			else
+			{
+				path.push_back(node->parent->val);
+				searchNode(node->left, path);
+				searchNode(node->right, path);
+			}
+		}
+	public:
+		Node* lowestCommonAncestor(Node* p, Node* q) 
+		{
+			return {};
+		}
+	};
+}
+
+namespace minWindowSubstring
+{
+
+	string MinWindowSubstring(string strArr[], int arrLength)
+	{
+		string res;
+		// code goes here
+		string main = strArr[0];
+		string sub = strArr[1];
+
+		using ocmap = map<char, size_t>;
+
+		ocmap KMap;
+		for (size_t i = 0; i < sub.size(); i++)
+		{
+			KMap[sub[i]]++;
+		}
+
+		size_t left{}, right{sub.size()};
+
+		ocmap NKMap;
+		
+		//cout << " Looking for " << sub << " (" << sub.size() 
+			//<< ") within " << main << " (" << main.size() << ")\n";
+
+		while ((left < right) && (right <= main.size()))
+		{
+			auto windowlen = right - left;
+			auto tmp = main.substr(left, right - left);
+			//cout << " right " << right << " left " << left 
+			//	<< " windowlen = " << windowlen
+			//	<< " tmp " << tmp
+			//	<< "\n";
+			// create map of characters in tmp
+			// make sure that you only add to the map the
+			// characters in common with sub
+
+			//cout << "Kmap\n";
+			//printm(KMap);
+
+			NKMap.clear();
+			for (auto elem: tmp)
+			{
+				auto Kel = KMap.count(elem) > 0 ?  KMap[elem] : 0;
+				if (Kel > 0)
+				{
+					auto NKel = NKMap.count(elem) > 0 ? NKMap[elem] : 0;
+					if (NKel != Kel)
+					{
+						NKMap[elem]++;
+						//printm(NKMap);
+						if (KMap == NKMap)
+						{
+							break;
+						}
+					}
+				}
+			}
+			//cout << "NKmap\n";
+			//printm(NKMap);
+
+			if (KMap != NKMap)
+			{
+				// Not a valid window
+				if (right + 1 <= main.size())
+				{
+					right++;
+				}
+				else
+					left++;
+				continue;
+			}
+			// Valid window
+//			cout << "Valid window\n";
+			res = main.substr(left, windowlen);
+			if (windowlen == sub.size())
+			{
+				break;
+			}
+			else
+			{
+				left++;
+			}
+
+		}
+		return res;
+	}
+
+	void process()
+	{
+		if (true)
+		{
+			array<string, 2> myarr{ "ahffaksfajeeubsne", "jefaa" }; // aksfaje
+			cout << MinWindowSubstring(&myarr[0], 2);
+		}
+		if (false)
+		{
+			array<string, 2> myarr{ "bacffa", "aff" };
+			cout << MinWindowSubstring(&myarr[0], 2);
+		}
+	}
+
+}
+
+
 int main()
 {
 #pragma region Tests
@@ -1778,8 +2092,7 @@ int main()
 
 		}
 	}
-#pragma endregion
-	if (true)
+	if (false)
 	{
 		if(false)
 		{
@@ -1894,6 +2207,28 @@ int main()
 			//cout << "\n";
 		}
 	}
+
+	if (false)
+	{
+		NestedInteger n1(1);
+
+		NestedListWeightSum n;
+		 
+	}
+#pragma endregion
+	if (true)
+	{
+		minWindowSubstring::process();
+	}
 }
 
-    
+
+//"the color re(d))()(()"
+//
+//"the color re)("
+//
+//"the color re(d))()(()" should be 0 no matching
+//
+//"(c(oder)) b(yte)" = 1
+//
+//"(coder)(byte))" = 0
