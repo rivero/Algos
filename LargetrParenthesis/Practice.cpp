@@ -1652,14 +1652,11 @@ namespace minWindowSubstring
 		while ((left < right) && (right <= main.size()))
 		{
 			auto windowlen = right - left;
-			auto tmp = main.substr(left, right - left);
+			auto tmp = main.substr(left, windowlen);
 			//cout << " right " << right << " left " << left 
 			//	<< " windowlen = " << windowlen
 			//	<< " tmp " << tmp
 			//	<< "\n";
-			// create map of characters in tmp
-			// make sure that you only add to the map the
-			// characters in common with sub
 
 			//cout << "Kmap\n";
 			//printm(KMap);
@@ -1667,9 +1664,12 @@ namespace minWindowSubstring
 			NKMap.clear();
 			for (auto elem: tmp)
 			{
+				// create map of characters in tmp
 				auto Kel = KMap.count(elem) > 0 ?  KMap[elem] : 0;
 				if (Kel > 0)
 				{
+					// make sure that you only add to the map the
+					// characters in common with sub
 					auto NKel = NKMap.count(elem) > 0 ? NKMap[elem] : 0;
 					if (NKel != Kel)
 					{
@@ -1689,17 +1689,18 @@ namespace minWindowSubstring
 			{
 				// Not a valid window
 				if (right + 1 <= main.size())
-				{
 					right++;
-				}
 				else
 					left++;
 				continue;
 			}
 			// Valid window
-//			cout << "Valid window\n";
-			res = main.substr(left, windowlen);
-			if (windowlen == sub.size())
+			//cout << "Valid window [" << tmp << "]\n";
+			if (res.empty() || tmp.size() <= res.size())
+			{
+				res = tmp;
+			}
+			if (res.size() == sub.size())
 			{
 				break;
 			}
@@ -1726,7 +1727,7 @@ namespace minWindowSubstring
 		}
 		if (true)
 		{
-			array<string, 2> myarr{ "aaffhkksemckelloe", "fhea" }; // aksfaje
+			array<string, 2> myarr{ "aaffhkksemckelloe", "fhea" }; // affhkkse
 			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
 		}
 		if (true)
@@ -1734,7 +1735,7 @@ namespace minWindowSubstring
 			array<string, 2> myarr{ "ahffaksfajeeubsne", "jefaa" }; // aksfaje
 			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
 		}
-		if (false)
+		if (true)
 		{
 			array<string, 2> myarr{ "bacffa", "aff" };
 			cout << MinWindowSubstring(&myarr[0], 2) << "\n";
