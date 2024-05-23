@@ -1860,7 +1860,32 @@ move 5 to thje right
 
 
 */
-	int ArrayChallenge(int arr[], int arrLength) {
+
+	int rotateIndexRight(int arrLength, int curIndex, int spaces)
+	{
+		return (curIndex + spaces) % arrLength;
+	}
+	int rotateIndexLeft(int arrLength, int curIndex, int spaces)
+	{
+		spaces = curIndex - abs(spaces);
+		if (spaces > -1)
+		{
+			return spaces;
+		}
+		else
+		{
+			auto x = abs(spaces) % arrLength;
+			bool isMul = x == 0;
+			if (isMul)
+			{
+				return curIndex;
+			}
+			return arrLength - x;
+		}
+	}
+
+	int ArrayChallenge(int arr[], int arrLength) 
+	{
 
 		// code goes here  
 		// 1. Determine the largest element in the array.
@@ -1929,6 +1954,74 @@ move 5 to thje right
 
 
 		return c < cl ? c : cl;
+
+	}
+
+	void testRight(int v[], size_t s)
+	{
+		auto currIndex = 0;
+		auto spaces = 1;
+		int index = rotateIndexRight(s, currIndex, spaces);
+		cout << " cur value " << v[currIndex] << " after rotating right - spaces: "
+			<< spaces << " value at index " << index << ": " << v[index] << "\n";
+
+		auto n{ 12 };
+		cout << " Rotating " << n << " times:\n";
+		while (n-- > 0)
+		{
+			currIndex = index;
+			index = rotateIndexRight(s, currIndex, spaces);
+			cout << "curr index: [" << currIndex << "] value: " << v[currIndex] << "\tnew index ["
+				<< index << "] value: " << v[index] << "\n";
+
+		}
+		n = 12;
+		currIndex = 0;
+		cout << "From: " << currIndex << " RIGHT Rotating " << n << " spaces:\n";
+		index = rotateIndexRight(s, currIndex, n);
+		cout << "curr index: [" << currIndex << "] value: " << v[currIndex] << "\tnew index ["
+			<< index << "] value: " << v[index] << "\n";
+
+	}
+	void testLeft(int v[], size_t s)
+	{
+		auto currIndex = 0;
+		auto spaces = 1;
+		int index = rotateIndexLeft(s, currIndex, spaces);
+		cout << " cur value " << v[currIndex] << " after rotating left - spaces: "
+			<< spaces << " value at index " << index << ": " << v[index] << "\n";
+
+		auto n{ 6 };
+		cout << " Rotating " << n << " times:\n";
+		while (n-- > 0)
+		{
+			currIndex = index;
+			index = rotateIndexLeft(s, currIndex, spaces);
+			cout << "curr index: [" << currIndex << "] value: " << v[currIndex] << "\tnew index ["
+				<< index << "] value: " << v[index] << "\n";
+
+		}
+
+		n = 10;
+		int max = 3;
+		while (max-- > 0)
+		{
+			currIndex = 0;
+			cout << "From: " << currIndex << " LEFT Rotating " << n << " spaces:\n";
+			index = rotateIndexLeft(s, currIndex, n);
+			cout << "curr index: [" << currIndex << "] value: " << v[currIndex] << "\tnew index ["
+				<< index << "] value: " << v[index] << "\n";
+			n += max;
+		}
+	}
+
+	void test()
+	{
+		int v[] = { 7, 8, 9, 10, 11 };
+		auto sizeV = sizeof(v) / sizeof(v[0]);
+		printv(v);
+		//testRight(v, sizeV);
+		testLeft(v, sizeV);
 
 	}
 
@@ -2421,9 +2514,13 @@ int main()
 		 
 	}
 #pragma endregion
-	if (true)
+	if (false)
 	{
 		minWindowSubstring::process();
+	}
+	if (true)
+	{
+		Auros::test();
 	}
 }
 
