@@ -1742,8 +1742,197 @@ namespace minWindowSubstring
 		}
 	}
 
+}/*
+ 
+ 2 3 5 6 1
+ 0 1 2 3 4 
+
+ Max = 6
+
+ 
+ */
+
+namespace QuestionMarks
+{
+	/*
+Questions Marks
+Have the function QuestionsMarks(str) take the str string parameter, 
+which will contain single digit numbers, letters, and question marks, 
+and check if there are exactly 3 question marks between every pair of 
+two numbers that add up to 10. 
+
+If so, then your program should return the string true, 
+otherwise it should return the string false. 
+If there aren't any two numbers that add up to 10 in the string, then 
+your program should return false as well.
+
+For example: if str is "arrb6???4xxbl5???eee5" then your program should return true 
+because there are exactly 3 question marks between 6 and 4, and 3 question marks 
+between 5 and 5 at the end of the string.
+
+Examples
+Input: "aa6?9"
+Output: false
+
+Input: "acc?7??sss?3rr1??????5" (7??sss?3)
+Output: true
+
+*/
+
+	string QuestionsMarks(string str) {
+
+		int qmc{};
+		int first_number{}, second_number{};
+		for (auto elem : str)
+		{
+			if (isdigit(elem))
+			{
+				if (qmc == 0)
+				{
+					first_number = elem - '0';
+				}
+				if (qmc == 3)
+				{
+					qmc = 0;
+					if (first_number != 0)
+					{
+						second_number = elem - '0';
+						auto total = second_number + first_number;
+						if (total == 10)
+							return "true";
+					}
+				}
+			}
+			else if (elem == '?')
+			{
+				if (first_number != 0)
+					qmc++;
+			}
+		}
+		return "false";
+
+	}
+
 }
 
+namespace Auros
+{
+	/*
+
+Array Challenge
+
+Have the function ArrayChallenge(arr) take the array of numbers stored in arr and first determine the largest element in the array,
+and then determine whether or not you can reach that same element within the array by moving left or right continuously according
+to whatever integer is in the current spot.
+
+If you can reach the same spot within the array, then your program should output the least amount of jumps it took.
+
+For example: if the input is [2, 3, 5, 6, 1] you'll start at the spot where 6 is and if you jump 6 spaces to the right
+while looping around the array you end up at the last element where the 1 is.
+Then from here you jump 1 space to the left and you're back where you started,
+so your program should output 2.
+
+If it's impossible to end up back at the largest element in the array your program should output -1.
+The largest element in the array will never equal the number of elements in the array.
+
+The largest element will be unique.
+
+Examples
+Input: {1,2,3,4,2}
+Output: 3
+
+Input: {1,7,1,1,1,1}
+Output: 2
+
+[2, 3, 5, 6, 1]
+
+LArgest = 6
+move 6 to the right: 1, 2, 3, 5, 6, 1
+
+found 1
+
+Move 1 to the right: found 2
+move 2 to the right: 3, 5
+found 5
+
+move 5 to thje right
+6 1 2 3 4 found 4
+
+
+*/
+	int ArrayChallenge(int arr[], int arrLength) {
+
+		// code goes here  
+		// 1. Determine the largest element in the array.
+
+		// 2. Move left or right same found number. How many times does it take to 
+		// get to the same spot?
+		// Example: 
+		//  largest is N. 
+		//  Jump N spaces left or right. 
+		//  Reach number M. Jump M spaces left or right.
+		// store the number of jumps to reach to the same spot.
+		//  in the example this number is 2.
+		// Q what is the max number we ccan do before declaring failure? 
+		//   if failure return -1
+
+		int largest = -1;
+		int i = 0;
+		int idx{};
+		for (; i < arrLength; i++)
+		{
+			if (largest < arr[i])
+			{
+				largest = arr[i];
+				idx = i;
+			}
+		}
+		//cout << idx << " largest: " << largest << "\n";
+
+		auto loops = arrLength;
+		auto myidx = idx;
+		int c{};
+		int val1{}, nextIdx{};
+		while (loops-- > 0)
+		{
+			c++;
+			val1 = arr[myidx];
+			myidx = (myidx + val1) % arrLength;
+			cout << myidx << " " << loops << "\n";
+			if (arr[myidx] == largest)
+				break;
+
+		}
+		cout << c << "\n";
+
+		myidx = idx;
+		int cl{};
+		val1 = 0;
+		loops = arrLength;
+		while (loops-- > 0)
+		{
+			cl++;
+			val1 = arr[myidx];
+			if (myidx - val1 < 0)
+			{
+				myidx = (myidx + val1) % arrLength;
+			}
+			else
+				myidx -= val1;
+
+			cout << myidx << " " << loops << "\n";
+			if (arr[myidx] == largest)
+				break;
+
+		}
+		cout << cl << "\n";
+
+
+		return c < cl ? c : cl;
+
+	}
+
+}
 
 int main()
 {
