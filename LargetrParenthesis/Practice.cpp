@@ -1830,26 +1830,13 @@ namespace Auros
 	}
 	int rotateLeft(int arrLength, int curIndex, int spaces)
 	{
-		auto newspaces = curIndex - abs(spaces);
-		if (newspaces > -1)
+		auto x = abs(spaces) % arrLength;
+		if (curIndex - x < 0)
 		{
-			return newspaces;
+			auto dif = abs(curIndex - x);
+			return arrLength - dif;
 		}
-		else
-		{
-			auto x = abs(spaces) % arrLength;
-			bool isMul = x == 0;
-			if (isMul)
-			{
-				return curIndex;
-			}
-			if (curIndex - x < 0)
-			{
-				auto dif = abs(curIndex - x);
-				return arrLength - dif;
-			}
-			return curIndex - x;
-		}
+		return curIndex - x;
 	}
 	void testRight(int v[], size_t s)
 	{
