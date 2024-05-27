@@ -2490,9 +2490,9 @@ int main()
 	{
 		minWindowSubstring::process();
 	}
-	if (true)
-		Auros::test();
 	if (false)
+		Auros::test();
+	if (true)
 	{
 		vector<int> vec{ 1, 2, 3, 4, 2 };
 		cout << "\n\nChallenge:\n";
