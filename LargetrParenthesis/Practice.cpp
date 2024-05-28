@@ -23,17 +23,20 @@
 using namespace std;
 
 template <typename T>
-void printv(const T& v, bool newLine = true)
+void printv(const T& v, bool newLine = true, bool printIndex = false)
 {
 	for (const auto& elem : v)
 	{
 		cout << elem << "\t";
 	}
-	cout << "\n";
-	size_t c{};
-	for (const auto& elem : v)
+	if (printIndex)
 	{
-		cout << "[" << c++ << "]\t";
+		cout << "\n";
+		size_t c{};
+		for (const auto& elem : v)
+		{
+			cout << "[" << c++ << "]\t";
+		}
 	}
 
 	if (newLine)
@@ -81,93 +84,110 @@ void printm(const map<T, U>& counts)
 #include "MinWindowSubstring.h"
 #include "QuestionMarks.h"
 #include "Auros.h"
+#include "TopKElements.h"
+#include "FindParenthesis.h"
+#include "mergearrays.h"
+#include "movezero.h"
+#include "sumtreenodes.h"
+#include "arrayStringsAreEqual.h"
+#include "findinter.h"
+
+struct tests
+{
+	string m_tests;
+	tests(const string& str) : m_tests(str) {}
+	bool contains(const string& tst)
+	{
+		return string::npos != m_tests.find(tst);
+	}
+
+};
 
 int main()
 {
+	tests t("FindParenthesis move_zeroes");
 #pragma region Tests
-	Solution sol;
+	if (t.contains("FindParenthesis"))
+	{
+		cout << "FindParenthesis\n";
+		par::FindParenthesis("");
+		par::FindParenthesis("(){}[]");
+		par::FindParenthesis("(}");
+		par::FindParenthesis("(((((((}");
+		par::FindParenthesis("([]]){{}((}}");
+		par::FindParenthesis("(           )}");
+		par::FindParenthesis("(           {}");
+		par::FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
+	}
+	if (t.contains("move_zeroes"))
+	{
+		cout << "move_zeroes\n";
+		{
+			vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
+			printv(vec);
+			cout << movezero::move_zeroes(vec) << "\n";
+			printv(vec);
+			cout << "\n";
+		}
+		{
+			vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+			printv(vec);
+			cout << movezero::move_zeroes(vec) << "\n";
+			printv(vec);
+			cout << "\n";
+		}
+		{
+			vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+			printv(vec);
+			cout << movezero::move_zeroes(vec) << "\n";
+			printv(vec);
+			cout << "\n";
+		}
+		{
+			vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
+			printv(vec);
+			cout << movezero::move_zeroes(vec) << "\n";
+			printv(vec);
+			cout << "\n";
+		}
+		{
+			vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+			printv(vec);
+			cout << movezero::move_zeroes(vec) << "\n";
+			printv(vec);
+			cout << "\n";
+		}
+		{
+			vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
+			printv(vec);
+			cout << movezero::move_zeroes(vec) << "\n";
+			printv(vec);
+			cout << "\n";
+		}
+		{
+			vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
+			printv(vec);
+			cout << movezero::move_zeroes(vec) << "\n";
+			printv(vec);
+			cout << "\n";
+		}
+	}
 	if (false)
 	{
-		sol.FindParenthesis("");
-		sol.FindParenthesis("(){}[]");
-		sol.FindParenthesis("(}");
-		sol.FindParenthesis("(((((((}");
-		sol.FindParenthesis("([]]){{}((}}");
-		sol.FindParenthesis("(           )}");
-		sol.FindParenthesis("(           {}");
-		sol.FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
-	}
-	if(false)
-	{
-		vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
-		printv(vec);
-		cout << sol.move_zeroes(vec) << "\n";
-		printv(vec);
-		cout << "\n";
-	}
+		Solution sol;
 
-	if (false)
-	{
-		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-		printv(vec);
-		cout << sol.move_zeroes(vec) << "\n";
-		printv(vec);
-		cout << "\n";
-	}
-	if (false)
-	{
-		vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-		printv(vec);
-		cout << sol.move_zeroes(vec) << "\n";
-		printv(vec);
-		cout << "\n";
-	}
-	if (false)
-	{
-		vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
-		printv(vec);
-		cout << sol.move_zeroes(vec) << "\n";
-		printv(vec);
-		cout << "\n";
-	}
-	if (false)
-	{
-		vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		printv(vec);
-		cout << sol.move_zeroes(vec) << "\n";
-		printv(vec);
-		cout << "\n";
-	}
-	if (false)
-	{
-		vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
-		printv(vec);
-		cout << sol.move_zeroes(vec) << "\n";
-		printv(vec);
-		cout << "\n";
-	}
-	if (false)
-	{
-		vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
-		printv(vec);
-		cout << sol.move_zeroes(vec) << "\n";
-		printv(vec);
-		cout << "\n";
-	}
-	if (false)
-	{
 		sol.lambda_expression();
 	}
 	if (false)
 	{
 		{
 			vector<int> vec{ 1,1,1,2,2,3, 7, 7, 7 };
-			sol.TopKElements(vec);
+			topk::TopKElements(vec);
 
 		}
 		{
 			vector<int> vec{ 1,1,2,2,3,3 };
-			sol.TopKElements(vec, 3);
+			topk::TopKElements(vec, 3);
 
 		}
 	}
@@ -176,23 +196,23 @@ int main()
 		vector<int> nums1{ 1,2,3,0,0,0 };
 		vector<int> nums2{ 2,5,6 };
 
-		sol.merge(nums1, 3, nums2, 3);
+		mergearrays::merge(nums1, 3, nums2, 3);
 		printv(nums1);
 	}
 	if (false)
 	{
-		cout << sol.doRangeSumBST();
+		cout << sumtreenodes::doRangeSumBST();
 	}
 	if (false)
 	{
 		vector<string> v1{ "ab", "c" }, v2{ "a", "bc" };
-		cout << (sol.arrayStringsAreEqual(v1, v2) ? " True" : "false");
+		cout << (arraystringsequal::arrayStringsAreEqual(v1, v2) ? " True" : "false");
 	}
 	if (false)
 	{
 		timeit t;
 		vector<int> v1{ 4,3,2,3,1 }, v2{ 2,2,5,2,3,6 };
-		auto res = sol.findIntersectionValues(v1, v2);
+		auto res = findinter::findIntersectionValues(v1, v2);
 		printv(res);
 	}
 	if (false)
@@ -327,7 +347,6 @@ int main()
 	}
 	if (false)
 	{
-		if (true)
 		{
 			BinayTreeDiameter b;
 			auto root = new BinayTreeDiameter::TreeNode(1);
@@ -340,7 +359,6 @@ int main()
 			cout << "result: " <<val << "\n";
 
 		}
-		if (true)
 		{
 			BinayTreeDiameter b;
 			auto root = new BinayTreeDiameter::TreeNode(1);
@@ -575,7 +593,7 @@ int main()
 	}
 	if (false)
 		Auros::test();
-	if (true)
+	if (false)
 	{
 		vector<int> vec{ 1, 2, 3, 4, 2 };
 		cout << "\n\nChallenge:\n";

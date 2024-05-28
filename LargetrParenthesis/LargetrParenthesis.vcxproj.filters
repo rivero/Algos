@@ -77,5 +77,26 @@
     <ClInclude Include="Auros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TopKElements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FindParenthesis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mergearrays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="movezero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sumtreenodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="arrayStringsAreEqual.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="findinter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
