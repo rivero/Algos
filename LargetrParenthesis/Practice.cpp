@@ -91,6 +91,7 @@ void printm(const map<T, U>& counts)
 #include "sumtreenodes.h"
 #include "arrayStringsAreEqual.h"
 #include "findinter.h"
+#include "SparseVector.h"
 
 struct tests
 {
@@ -105,7 +106,7 @@ struct tests
 
 int main()
 {
-	tests t("LowestCommon");
+	tests t("LowestCommon SparseVector");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -683,6 +684,10 @@ int main()
 	if (t.contains("LowestCommon"))
 	{
 		LowestCommon::process();
+	}
+	if (t.contains("SparseVector"))
+	{
+		sparsevec::process();
 	}
 
 }

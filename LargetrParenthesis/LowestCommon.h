@@ -77,48 +77,21 @@ namespace LowestCommon
 		Node* right{ nullptr };
 		Node* parent{ nullptr };
 	};
-	class Solution : protected timeit
-	{
-		set<int> m_path_p;
-		set<int> m_path_q;
-		set<int> result;
-		int m_val{};
-
-		void searchNode(Node* node, set<int>& path)
-		{
-			if (!node)
-			{
-				return;
-			}
-			path.insert(node->val);
-			if (node->val == m_val)
-			{
-				return;
-			}
-			else
-			{
-				path.insert(node->parent->val);
-				searchNode(node->left, path);
-				searchNode(node->right, path);
-			}
-		}
+	//It is just a variation of Intersection of LinkedList!
+	class Solution {
 	public:
-		Node* lowestCommonAncestor(Node* p, Node* q)
+		Node* lowestCommonAncestor(Node* p, Node* q) 
 		{
-			searchNode(p, m_path_p);
-			searchNode(q, m_path_q);
-			set_intersection(m_path_q.begin(), m_path_q.end()
-				, m_path_p.begin(), m_path_p.end()
-				, inserter(result, result.begin())
-			);
-			for (auto elem : result)
+			Node* a = p;
+			Node* b = q;
+			while (a != b) 
 			{
-				cout << elem << "\n";
+				a = a == nullptr ? q : a->parent;
+				b = b == nullptr ? p : b->parent;
 			}
-			return {};
+			return a;
 		}
-	};
-	void process()
+	};	void process()
 	{
 		Solution sol;
 		auto root = new Node(3);
@@ -132,5 +105,11 @@ namespace LowestCommon
 		root->right->right = new Node(8, root->right);
 
 		auto res = sol.lowestCommonAncestor(root->left, root->right);
+
+		cout << res->val << "\n";
+
+		res = sol.lowestCommonAncestor(root->left, root->left->right->right);
+		cout << res->val << "\n";
+
 	}
 }

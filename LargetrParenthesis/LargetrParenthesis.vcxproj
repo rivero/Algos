@@ -166,6 +166,7 @@
     <ClInclude Include="QuestionMarks.h" />
     <ClInclude Include="ReverseLinkedList.h" />
     <ClInclude Include="Solution.h" />
+    <ClInclude Include="SparseVector.h" />
     <ClInclude Include="sumtreenodes.h" />
     <ClInclude Include="timeit.h" />
     <ClInclude Include="Toeplitz.h" />
