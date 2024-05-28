@@ -58,6 +58,7 @@ The number of nodes in the tree is in the range [2, 105].
 -109 <= Node.val <= 109
 All Node.val are unique.
 p != q
+
 p and q exist in the tree.
 */
 namespace LowestCommon
@@ -65,30 +66,38 @@ namespace LowestCommon
 	class Node {
 	public:
 		int val{};
+		Node(int v, Node* par = nullptr) : val(v), parent(par) 
+		{
+			if (!parent)
+			{
+				parent = this;
+			}
+		}
 		Node* left{ nullptr };
 		Node* right{ nullptr };
 		Node* parent{ nullptr };
 	};
 	class Solution : protected timeit
 	{
-		vector<int> m_path_p;
-		vector<int> m_path_q;
+		set<int> m_path_p;
+		set<int> m_path_q;
+		set<int> result;
 		int m_val{};
 
-		void searchNode(Node* node, vector<int>& path)
+		void searchNode(Node* node, set<int>& path)
 		{
 			if (!node)
 			{
 				return;
 			}
-			path.push_back(node->val);
+			path.insert(node->val);
 			if (node->val == m_val)
 			{
 				return;
 			}
 			else
 			{
-				path.push_back(node->parent->val);
+				path.insert(node->parent->val);
 				searchNode(node->left, path);
 				searchNode(node->right, path);
 			}
@@ -96,7 +105,32 @@ namespace LowestCommon
 	public:
 		Node* lowestCommonAncestor(Node* p, Node* q)
 		{
+			searchNode(p, m_path_p);
+			searchNode(q, m_path_q);
+			set_intersection(m_path_q.begin(), m_path_q.end()
+				, m_path_p.begin(), m_path_p.end()
+				, inserter(result, result.begin())
+			);
+			for (auto elem : result)
+			{
+				cout << elem << "\n";
+			}
 			return {};
 		}
 	};
+	void process()
+	{
+		Solution sol;
+		auto root = new Node(3);
+		root->left = new Node(5, root);
+		root->right = new Node(1, root);
+		root->left->left = new Node(6, root->left);
+		root->left->right = new Node(2, root->left);
+		root->left->right->left = new Node(7, root->left->right);
+		root->left->right->right = new Node(4, root->left->right);
+		root->right->left = new Node(0, root->right);
+		root->right->right = new Node(8, root->right);
+
+		auto res = sol.lowestCommonAncestor(root->left, root->right);
+	}
 }

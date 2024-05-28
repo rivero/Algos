@@ -105,19 +105,11 @@ struct tests
 
 int main()
 {
-	tests t("FindParenthesis move_zeroes");
+	tests t("LowestCommon");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
-		cout << "FindParenthesis\n";
-		par::FindParenthesis("");
-		par::FindParenthesis("(){}[]");
-		par::FindParenthesis("(}");
-		par::FindParenthesis("(((((((}");
-		par::FindParenthesis("([]]){{}((}}");
-		par::FindParenthesis("(           )}");
-		par::FindParenthesis("(           {}");
-		par::FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
+		par::test();
 	}
 	if (t.contains("move_zeroes"))
 	{
@@ -687,6 +679,10 @@ int main()
 		Nooby n;
 		n.know_algos();
 		n.struct_bindings();
+	}
+	if (t.contains("LowestCommon"))
+	{
+		LowestCommon::process();
 	}
 
 }

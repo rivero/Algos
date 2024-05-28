@@ -4,6 +4,7 @@ namespace par
 	// find the longest valid parenthesis
 	void FindParenthesis(const string& s)
 	{
+		cout << "\"" << s << "\"\n";
 		int initialSquare{ INT_MAX }
 			, initialCurly{ INT_MAX }
 			, initialRound{ INT_MAX }
@@ -49,8 +50,22 @@ namespace par
 
 		int masimum = max(longestSquare, max(longestRound, longestCurly));
 
-		cout << "Max length: " << masimum << "\n";
+		cout << "Max length: " << masimum << "\n\n";
 	}
 	// move all zeroes to the right side
+
+	void test()
+	{
+		cout << "FindParenthesis\n";
+		par::FindParenthesis("");
+		par::FindParenthesis("(){}[]");
+		par::FindParenthesis("(}");
+		par::FindParenthesis("(((((((}");
+		par::FindParenthesis("([]]){{}((}}");
+		par::FindParenthesis("(           )}");
+		par::FindParenthesis("(           {}");
+		par::FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
+
+	}
 
 }
