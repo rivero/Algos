@@ -101,5 +101,8 @@
     <ClInclude Include="SparseVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RandomPickWithWeight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -164,6 +164,7 @@
     <ClInclude Include="NestedListWeightSum.h" />
     <ClInclude Include="PalindromeNumber.h" />
     <ClInclude Include="QuestionMarks.h" />
+    <ClInclude Include="RandomPickWithWeight.h" />
     <ClInclude Include="ReverseLinkedList.h" />
     <ClInclude Include="Solution.h" />
     <ClInclude Include="SparseVector.h" />
