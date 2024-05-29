@@ -149,11 +149,14 @@
   <ItemGroup>
     <ClInclude Include="arrayStringsAreEqual.h" />
     <ClInclude Include="Auros.h" />
+    <ClInclude Include="BasicCalculator.h" />
     <ClInclude Include="BinarySearch.h" />
     <ClInclude Include="BinaryTreeDiameter.h" />
     <ClInclude Include="BinaryTreeVerticalOrderTransversal.h" />
+    <ClInclude Include="BuildingsWithAnOceanView.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />
+    <ClInclude Include="KthLargestElement.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LowestCommon.h" />
     <ClInclude Include="mergearrays.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="QuestionMarks.h" />
     <ClInclude Include="RandomPickWithWeight.h" />
     <ClInclude Include="ReverseLinkedList.h" />
+    <ClInclude Include="SimplifyPath.h" />
     <ClInclude Include="Solution.h" />
     <ClInclude Include="SparseVector.h" />
     <ClInclude Include="sumtreenodes.h" />

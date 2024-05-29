@@ -104,5 +104,17 @@
     <ClInclude Include="RandomPickWithWeight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BasicCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingsWithAnOceanView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KthLargestElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplifyPath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

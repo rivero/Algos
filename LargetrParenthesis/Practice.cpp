@@ -19,7 +19,7 @@
 #include <unordered_set>
 #include <stack>
 #include <array>
-
+#include <cctype>
 using namespace std;
 
 template <typename T>
@@ -93,7 +93,10 @@ void printm(const map<T, U>& counts)
 #include "findinter.h"
 #include "SparseVector.h"
 #include "RandomPickWithWeight.h"
-
+#include "BasicCalculator.h"
+#include "BuildingsWithAnOceanView.h"
+#include "KthLargestElement.h"
+#include "SimplifyPath.h"
 struct tests
 {
 	string m_tests;
@@ -107,7 +110,7 @@ struct tests
 
 int main()
 {
-	tests t("randompickweight");
+	tests t("SimplifyPath");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -694,7 +697,22 @@ int main()
 	{
 		randompickweight::process();
 	}
-
+	if (t.contains("BasicCalculator"))
+	{
+		basiccalc::process();
+	}
+	if (t.contains("buildingsoceanview"))
+	{
+		buildingsoceanview::process();
+	}
+	if (t.contains("KthLargestElement"))
+	{
+		KthLargestElement::process();
+	}
+	if (t.contains("SimplifyPath"))
+	{
+		SimplifyPath::process();
+	}
 }
 
 
