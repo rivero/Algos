@@ -153,6 +153,7 @@
     <ClInclude Include="BinarySearch.h" />
     <ClInclude Include="BinaryTreeDiameter.h" />
     <ClInclude Include="BinaryTreeVerticalOrderTransversal.h" />
+    <ClInclude Include="BTreeToDLink.h" />
     <ClInclude Include="BuildingsWithAnOceanView.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />

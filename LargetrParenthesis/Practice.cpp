@@ -97,6 +97,7 @@ void printm(const map<T, U>& counts)
 #include "BuildingsWithAnOceanView.h"
 #include "KthLargestElement.h"
 #include "SimplifyPath.h"
+#include "BTreeToDLink.h"
 struct tests
 {
 	string m_tests;
@@ -110,7 +111,7 @@ struct tests
 
 int main()
 {
-	tests t("SimplifyPath");
+	tests t("BTreeToDLink");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -583,7 +584,6 @@ int main()
 		NestedListWeightSum n;
 		 
 	}
-#pragma endregion
 	if (false)
 	{
 		minWindowSubstring::process();
@@ -712,6 +712,11 @@ int main()
 	if (t.contains("SimplifyPath"))
 	{
 		SimplifyPath::process();
+	}
+#pragma endregion
+	if (t.contains("BTreeToDLink"))
+	{
+		BTreeToDLink::process();
 	}
 }
 

@@ -116,5 +116,8 @@
     <ClInclude Include="SimplifyPath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BTreeToDLink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
