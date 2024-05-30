@@ -27,48 +27,56 @@ namespace NumberOfIslands
 
 	class Solution
 	{
-		void mark_current_island(vector< vector<char> >& grid, int i, int j)
+		int m_rows{}, m_cols{};
+		vector< vector<char> > m_matrix;
+
+		void mark_current_island(int i, int j)
 		{
-			if (i < 0 || i >= m_rows || j < 0 || j >= m_cols || grid[i][j] != '1')
+			if (i < 0 || i >= m_rows || j < 0 || j >= m_cols || m_matrix[i][j] != '1')
 			{
 				return;
 			}
-			grid[i][j] = '2';
-			mark_current_island(grid, i + 1, j); // DOWN
-			mark_current_island(grid, i, j + 1); // RIGHT
-			mark_current_island(grid, i -1 , j); // TOP
-			mark_current_island(grid, i, j - 1); // LEFT
+			m_matrix[i][j] = '2';
+			mark_current_island(i + 1, j); // DOWN
+			mark_current_island(i, j + 1); // RIGHT
+			mark_current_island(i -1 , j); // TOP
+			mark_current_island(i, j - 1); // LEFT
 		}
-		int m_rows{}, m_cols{};
-	public:
-		void print(const vector<vector<char>>& matrix) const
+
+		void print() const
 		{
 			cout << "\n";
-			for (auto elem : matrix)
+			for (auto elem : m_matrix)
 			{
 				printv(elem);
 			}
 			cout << "\n";
 		}
+
+	public:
 		int numberOfIslands(vector< vector<char> >& grid)
 		{
-			m_rows = grid.size();
+			m_matrix = grid;
+			
+			print();
+
+			m_rows = m_matrix.size();
 			if (m_rows == 0)
 			{
 				return 0;
 			}
 
-			m_cols = grid[0].size();
+			m_cols = m_matrix[0].size();
 			int no_of_islands{};
 			for (int i = 0; i < m_rows; i++)
 			{
 				for (int j = 0; j < m_cols; j++)
 				{
-					if (grid[i][j] == '1')
+					if (m_matrix[i][j] == '1')
 					{
-						mark_current_island(grid, i, j);
+						mark_current_island(i, j);
 						no_of_islands++;
-						print(grid);
+						print();
 					}
 				}
 			}
@@ -87,7 +95,6 @@ namespace NumberOfIslands
 			{'0','0','0','1','1',}
 		};
 		Solution sol;
-		sol.print(matrix);
 		cout << sol.numberOfIslands(matrix) << "\n";
 	}
 }
