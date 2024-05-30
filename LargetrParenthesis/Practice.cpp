@@ -100,6 +100,7 @@ void printm(const map<T, U>& counts)
 #include "BTreeToDLink.h"
 #include "NumberOfIslands.h"
 #include "MinimumAddParenthesisValid.h"
+#include "LowestCommonAncestorBT.h"
 
 struct tests
 {
@@ -114,7 +115,7 @@ struct tests
 
 int main()
 {
-	tests t("MinimumAddParenthesisValid");
+	tests t("LowestCommonAncestorBT");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -728,6 +729,10 @@ int main()
 	if (t.contains("MinimumAddParenthesisValid"))
 	{
 		MinimumAddParenthesisValid::process();
+	}
+	if (t.contains("LowestCommonAncestorBT"))
+	{
+		LowestCommonAncestorBT::process();
 	}
 }
 

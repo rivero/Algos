@@ -91,7 +91,8 @@ namespace LowestCommon
 			}
 			return a;
 		}
-	};	void process()
+	};	
+	void process()
 	{
 		Solution sol;
 		auto root = new Node(3);

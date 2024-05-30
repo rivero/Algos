@@ -160,6 +160,7 @@
     <ClInclude Include="KthLargestElement.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LowestCommon.h" />
+    <ClInclude Include="LowestCommonAncestorBT.h" />
     <ClInclude Include="mergearrays.h" />
     <ClInclude Include="MinimumAddParenthesisValid.h" />
     <ClInclude Include="MinRemoveValidParenthesis.h" />

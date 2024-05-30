@@ -125,5 +125,8 @@
     <ClInclude Include="MinimumAddParenthesisValid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LowestCommonAncestorBT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
