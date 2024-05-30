@@ -116,7 +116,7 @@ namespace BTreeToDLink
                 return {};
             }
 			
-            //print();
+            print();
 			
             auto curIt = m_set.begin();
 			auto nextit = m_set.begin();

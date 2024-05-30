@@ -98,6 +98,7 @@ void printm(const map<T, U>& counts)
 #include "KthLargestElement.h"
 #include "SimplifyPath.h"
 #include "BTreeToDLink.h"
+#include "NumberOfIslands.h"
 struct tests
 {
 	string m_tests;
@@ -111,7 +112,7 @@ struct tests
 
 int main()
 {
-	tests t("BTreeToDLink");
+	tests t("NumberOfIslands");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -717,6 +718,10 @@ int main()
 	if (t.contains("BTreeToDLink"))
 	{
 		BTreeToDLink::process();
+	}
+	if (t.contains("NumberOfIslands"))
+	{
+		NumberOfIslands::process();
 	}
 }
 
