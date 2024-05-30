@@ -128,5 +128,8 @@
     <ClInclude Include="LowestCommonAncestorBT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RecursiveRabbitInterview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

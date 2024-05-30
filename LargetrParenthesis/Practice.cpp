@@ -101,6 +101,7 @@ void printm(const map<T, U>& counts)
 #include "NumberOfIslands.h"
 #include "MinimumAddParenthesisValid.h"
 #include "LowestCommonAncestorBT.h"
+#include "RecursiveRabbitInterview.h"
 
 struct tests
 {
@@ -115,7 +116,7 @@ struct tests
 
 int main()
 {
-	tests t("LowestCommonAncestorBT");
+	tests t("RecursiveRabbitInterview");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -733,6 +734,10 @@ int main()
 	if (t.contains("LowestCommonAncestorBT"))
 	{
 		LowestCommonAncestorBT::process();
+	}
+	if (t.contains("RecursiveRabbitInterview"))
+	{
+		RecursiveRabbitInterview::process();
 	}
 }
 

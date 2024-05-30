@@ -172,6 +172,7 @@
     <ClInclude Include="PalindromeNumber.h" />
     <ClInclude Include="QuestionMarks.h" />
     <ClInclude Include="RandomPickWithWeight.h" />
+    <ClInclude Include="RecursiveRabbitInterview.h" />
     <ClInclude Include="ReverseLinkedList.h" />
     <ClInclude Include="SimplifyPath.h" />
     <ClInclude Include="Solution.h" />
