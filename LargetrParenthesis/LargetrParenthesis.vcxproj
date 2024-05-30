@@ -161,6 +161,7 @@
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LowestCommon.h" />
     <ClInclude Include="mergearrays.h" />
+    <ClInclude Include="MinimumAddParenthesisValid.h" />
     <ClInclude Include="MinRemoveValidParenthesis.h" />
     <ClInclude Include="MinWindowSubstring.h" />
     <ClInclude Include="movezero.h" />

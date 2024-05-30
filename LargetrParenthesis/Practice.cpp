@@ -99,6 +99,8 @@ void printm(const map<T, U>& counts)
 #include "SimplifyPath.h"
 #include "BTreeToDLink.h"
 #include "NumberOfIslands.h"
+#include "MinimumAddParenthesisValid.h"
+
 struct tests
 {
 	string m_tests;
@@ -112,7 +114,7 @@ struct tests
 
 int main()
 {
-	tests t("NumberOfIslands");
+	tests t("MinimumAddParenthesisValid");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -722,6 +724,10 @@ int main()
 	if (t.contains("NumberOfIslands"))
 	{
 		NumberOfIslands::process();
+	}
+	if (t.contains("MinimumAddParenthesisValid"))
+	{
+		MinimumAddParenthesisValid::process();
 	}
 }
 

@@ -122,5 +122,8 @@
     <ClInclude Include="NumberOfIslands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MinimumAddParenthesisValid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
