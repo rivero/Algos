@@ -140,5 +140,8 @@
     <ClInclude Include="MinimumAdjacentSwapsToMakleValidArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AnalyzeUserWebsiteVisit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -105,7 +105,7 @@ void printm(const map<T, U>& counts)
 #include "LongestIncreasingSubsequenceNLogN.h"
 #include "IncreasingTripleSequence.h"
 #include "MinimumAdjacentSwapsToMakleValidArray.h"
-
+#include "AnalyzeUserWebsiteVisit.h"
 struct tests
 {
 	string m_tests;
@@ -119,7 +119,7 @@ struct tests
 
 int main()
 {
-	tests t("MinimumAdjacentSwapsToMakleValidArray");
+	tests t("AnalyzeUserWebsiteVisit");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -753,6 +753,10 @@ int main()
 	if (t.contains("MinimumAdjacentSwapsToMakleValidArray"))
 	{
 		MinimumAdjacentSwapsToMakleValidArray::process();
+	}
+	if (t.contains("AnalyzeUserWebsiteVisit"))
+	{
+		AnalyzeUserWebsiteVisit::process();
 	}
 }
 
