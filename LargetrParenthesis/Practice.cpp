@@ -103,6 +103,7 @@ void printm(const map<T, U>& counts)
 #include "LowestCommonAncestorBT.h"
 #include "RecursiveRabbitInterview.h"
 #include "LongestIncreasingSubsequenceNLogN.h"
+#include "IncreasingTripleSequence.h"
 
 struct tests
 {
@@ -117,7 +118,7 @@ struct tests
 
 int main()
 {
-	tests t("LongestIncreasingSubsequenceNLogN");
+	tests t("IncreasingTripleSequence");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -739,10 +740,14 @@ int main()
 	{
 		RecursiveRabbitInterview::process();
 	}
-#pragma endregion
 	if (t.contains("LongestIncreasingSubsequenceNLogN"))
 	{
 		LongestIncreasingSubsequenceNLogN::process();
+	}
+#pragma endregion
+	if (t.contains("IncreasingTripleSequence"))
+	{
+		IncreasingTripleSequence::process();
 	}
 }
 

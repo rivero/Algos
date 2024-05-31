@@ -28,6 +28,7 @@ namespace LongestIncreasingSubsequenceNLogN
 	void process()
 	{
 		Solution sol;
-		cout << sol.LengthOfLIS({8,10,9,4,2,6,3,5,9,5}) << "\n";
+		cout << sol.LengthOfLIS({ 8,10,9,4,2,6,3,5,9,5 }) << "\n\n\n";
+		cout << sol.LengthOfLIS({ 5,4,5,7,6,9 }) << "\n";
 	}
 }

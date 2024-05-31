@@ -157,6 +157,7 @@
     <ClInclude Include="BuildingsWithAnOceanView.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />
+    <ClInclude Include="IncreasingTripleSequence.h" />
     <ClInclude Include="KthLargestElement.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />
