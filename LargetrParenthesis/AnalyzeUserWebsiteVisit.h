@@ -107,9 +107,9 @@ namespace AnalyzeUserWebsiteVisit
 	class Solution
 	{
 		set<size_t> m_visited;
-		map<string, strrow> m;
+		map<string, strmatrix> m_map;
 
-		void createMap(vector<string>& username, vector<string> website)
+		void create_users_matrix_map(vector<string>& username, vector<string> website)
 		{
 			strrow workingrow;
 			string name = username[0];
@@ -117,13 +117,13 @@ namespace AnalyzeUserWebsiteVisit
 			{
 				if (username[i] != name)
 				{
-					m[name] = workingrow;
+					m_map[name] = allSequences(workingrow);
 					name = username[i];
 					workingrow.clear();
 				}
 				workingrow.push_back(website[i]);
 			}
-			m[name] = workingrow;
+			m_map[name] = allSequences(workingrow);
 		}
 
 	public:
@@ -161,9 +161,29 @@ namespace AnalyzeUserWebsiteVisit
 		vector<string> mostVisitedPattern(vector<string> username, 
 			vector<int> timestamp, vector<string> website) 
 		{
-			createMap(username, website);
+			create_users_matrix_map(username, website);
+			map<strrow, size_t> m;
 
-			return {};
+			for (auto& [name, matrix]: m_map)
+			{
+				for (auto row: matrix)
+				{
+					m[row]++;
+				}
+			}
+			strrow res;
+			size_t s = 0;
+			for (auto [row, theSize] : m)
+			{
+				if (s < theSize)
+				{
+					res = row;
+					s = theSize;
+				}
+			}
+
+
+			return res;
 		}
 
 
@@ -172,10 +192,22 @@ namespace AnalyzeUserWebsiteVisit
 	void process()
 	{
 		Solution sol;
-		auto res = sol.allSequences({"home", "carts", "maps", "home"});
-		for (auto elem: res)
 		{
-			printv(elem);
+			auto res = sol.allSequences({ "home", "carts", "maps", "home" });
+			for (auto elem : res)
+			{
+				printv(elem);
+			}
+			cout << "\n\n";
+
+		}
+		{
+			auto res = sol.allSequences({ "home", "carts", "maps" });
+			for (auto elem : res)
+			{
+				printv(elem);
+			}
+			cout << "\n\n";
 		}
 
 		strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
@@ -183,6 +215,10 @@ namespace AnalyzeUserWebsiteVisit
 		strrow website{ "home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career" };
 
 		auto r = sol.mostVisitedPattern(username, timestamp, website);
+		printv(r);
 
+		/*
+		Expected ["y","y","loedo"]
+		*/
 	}
 }
