@@ -104,6 +104,7 @@ void printm(const map<T, U>& counts)
 #include "RecursiveRabbitInterview.h"
 #include "LongestIncreasingSubsequenceNLogN.h"
 #include "IncreasingTripleSequence.h"
+#include "MinimumAdjacentSwapsToMakleValidArray.h"
 
 struct tests
 {
@@ -118,7 +119,7 @@ struct tests
 
 int main()
 {
-	tests t("IncreasingTripleSequence");
+	tests t("MinimumAdjacentSwapsToMakleValidArray");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -744,10 +745,14 @@ int main()
 	{
 		LongestIncreasingSubsequenceNLogN::process();
 	}
-#pragma endregion
 	if (t.contains("IncreasingTripleSequence"))
 	{
 		IncreasingTripleSequence::process();
+	}
+#pragma endregion
+	if (t.contains("MinimumAdjacentSwapsToMakleValidArray"))
+	{
+		MinimumAdjacentSwapsToMakleValidArray::process();
 	}
 }
 

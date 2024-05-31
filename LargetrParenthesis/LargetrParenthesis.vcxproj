@@ -165,6 +165,7 @@
     <ClInclude Include="LowestCommonAncestorBT.h" />
     <ClInclude Include="mergearrays.h" />
     <ClInclude Include="MinimumAddParenthesisValid.h" />
+    <ClInclude Include="MinimumAdjacentSwapsToMakleValidArray.h" />
     <ClInclude Include="MinRemoveValidParenthesis.h" />
     <ClInclude Include="MinWindowSubstring.h" />
     <ClInclude Include="movezero.h" />
