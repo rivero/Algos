@@ -126,6 +126,27 @@ namespace AnalyzeUserWebsiteVisit
 			m_map[name] = allSequences(workingrow);
 		}
 
+		void organizeWebsitesByTimestamp(vector<int>& timestamp, vector<string>& website)
+		{
+			using wsts = pair<int, string>;
+			set<wsts> myset;
+			for (int i = 0; i < timestamp.size(); i++)
+			{
+				auto kk = make_pair(timestamp[i], website[i]);
+				myset.insert(kk);
+			}
+			website.clear();
+			// now with the websites organized by timestamp return them
+			for (auto& elem : myset)
+			{
+				website.push_back(elem.second);
+			}
+		}
+		void reset()
+		{
+			m_visited.clear();
+			m_map.clear();
+		}
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
 		{
@@ -158,9 +179,13 @@ namespace AnalyzeUserWebsiteVisit
 			}
 			return result;
 		}
+
+		
 		vector<string> mostVisitedPattern(vector<string> username, 
 			vector<int> timestamp, vector<string> website) 
 		{
+			reset();
+			organizeWebsitesByTimestamp(timestamp, website);
 			create_users_matrix_map(username, website);
 			map<strrow, size_t> m;
 
@@ -209,16 +234,61 @@ namespace AnalyzeUserWebsiteVisit
 			}
 			cout << "\n\n";
 		}
+		{
+			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
+			vector<int> timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+			strrow website{ "home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career" };
 
-		strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
-		vector<int> timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-		strrow website{ "home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career" };
+			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			printv(r);
+		}
+		{
+			auto res = sol.allSequences({ "y","loedo","y" });
+			for (auto elem : res)
+			{
+				printv(elem);
+			}
+			cout << "\n\n";
 
-		auto r = sol.mostVisitedPattern(username, timestamp, website);
-		printv(r);
+		}
+		{
+			/*
+			*
+			*
+			* username =
+	["dowg","dowg","dowg"]
+	timestamp =
+	[158931262,562600350,148438945]
+	website = ["y","loedo","y"]
 
-		/*
-		Expected ["y","y","loedo"]
-		*/
+
+			Expected ["y","y","loedo"]
+			*/
+			strrow username{ "dowg","dowg","dowg" };
+			vector<int> timestamp{ 158931262,562600350,148438945 };
+			strrow website{ "y","loedo","y" };
+
+			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			printv(r);
+
+		}
+		{
+			/*
+			username =
+			["zkiikgv","zkiikgv","zkiikgv","zkiikgv"]
+			timestamp =
+			[436363475,710406388,386655081,797150921]
+			website =
+
+			Expected:
+			["oz","mryxsjc","wlarkzzqht"]
+			*/
+			strrow username{ "zkiikgv","zkiikgv","zkiikgv","zkiikgv" };
+			vector<int> timestamp{ 436363475,710406388,386655081,797150921 };
+			strrow website{ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" };
+
+			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			printv(r);
+		}
 	}
 }
