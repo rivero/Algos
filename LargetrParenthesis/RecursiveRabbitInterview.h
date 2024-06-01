@@ -80,21 +80,21 @@ lo:1 hi:6.5
 
 namespace RecursiveRabbitInterview
 {
-	struct Node {
+	struct TreeNode {
 		int val;
-		Node* left;
-		Node* right;
-		Node() : val(0), left(nullptr), right(nullptr) {}
-		Node(int x) : val(x), left(nullptr), right(nullptr) {}
-		Node(int x, Node* left, Node* right) : val(x), left(left), right(right) {}
+		TreeNode* left;
+		TreeNode* right;
+		TreeNode() : val(0), left(nullptr), right(nullptr) {}
+		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 
 	};
 
 	class Solution
 	{
-		Node* m_lastValid{ nullptr };
+		TreeNode* m_lastValid{ nullptr };
 		int m_low{}, m_high{};
-		void process(Node* node)
+		void process(TreeNode* node)
 		{
 			if (!node)
 				return;
@@ -137,7 +137,7 @@ namespace RecursiveRabbitInterview
 
 
 	public:
-		void preorder(Node* node)
+		void preorder(TreeNode* node)
 		{
 			if (!node)
 			{
@@ -148,7 +148,7 @@ namespace RecursiveRabbitInterview
 			preorder(node->right);
 		}
 
-		Node* trimBST(Node* root, int low, int high)
+		TreeNode* trimBST(TreeNode* root, int low, int high)
 		{
 			if (!root)
 				return nullptr;
@@ -166,12 +166,12 @@ namespace RecursiveRabbitInterview
   //   2           1
   // 1
 
-		auto root = new Node(3);
-		root->left = new Node(0);
-		root->right = new Node(4);
+		auto root = new TreeNode(3);
+		root->left = new TreeNode(0);
+		root->right = new TreeNode(4);
 
-		root->left->right = new Node(2);
-		root->left->right->left = new Node(1);
+		root->left->right = new TreeNode(2);
+		root->left->right->left = new TreeNode(1);
 
 		int low{ 1 }, high{ 3 };
 		sol.preorder(root);
