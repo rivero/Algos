@@ -123,10 +123,11 @@ namespace AnalyzeUserWebsiteVisit
 	class Solution
 	{
 		set<size_t> m_visited;
-		map<string, strmatrix> m_map;
 		strrow m_username;
 		vector<int> m_timestamp;
 		strrow m_website;
+		map<strrow, int> m_resultMap;
+
 		struct Visits
 		{
 			set<wsts> m_set;
@@ -142,23 +143,6 @@ namespace AnalyzeUserWebsiteVisit
 		};
 		map<string, Visits > m_usersTsWsMap;
 
-		void create_users_matrix_map()
-		{
-			strrow workingrow;
-			string name = m_username[0];
-			for (size_t i = 0; i < m_username.size(); i++)
-			{
-				if (m_username[i] != name)
-				{
-					m_map[name] = allSequences(workingrow);
-					name = m_username[i];
-					workingrow.clear();
-				}
-				workingrow.push_back(m_website[i]);
-			}
-			m_map[name] = allSequences(workingrow);
-		}
-
 		void organize_data()
 		{
 			for (size_t i = 0; i < m_username.size(); i++)
@@ -168,30 +152,33 @@ namespace AnalyzeUserWebsiteVisit
 				m_usersTsWsMap[m_username[i]].m_set.insert(kk);
 			}
 			// Organize rows in map
-			for (auto& el: m_usersTsWsMap)
+			for (auto& [name, visits]: m_usersTsWsMap)
 			{
-				el.second.process_row();
+				visits.process_row();
 
 #ifdef PRINTV
-				printv(el.second.m_workingRow);
-#endif
-				el.second.m_matrixOfSequences = allSequences(el.second.m_workingRow);
-			}
-#ifdef PRINTV
-			for (auto& elem : m_usersTsWsMap)
-			{
-				cout << elem.first << "\n";
-				auto s = elem.second.m_set;
+				cout << name << "\n";
+				auto s = visits.m_set;
 				help::printSet(s);
-			}
+				printv(visits.m_workingRow);
 #endif
+				visits.m_matrixOfSequences = allSequences(visits.m_workingRow);
+				for (auto& row: visits.m_matrixOfSequences)
+				{
+					m_resultMap[row]++;
+#ifdef PRINTV
+					printm(m_resultMap);
+#endif
+				}
+			}
 		}
 
 
 		void reset()
 		{
 			m_visited.clear();
-			m_map.clear();
+			m_usersTsWsMap.clear();
+			m_resultMap.clear();
 		}
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
