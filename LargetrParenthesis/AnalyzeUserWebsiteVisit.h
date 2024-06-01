@@ -99,49 +99,95 @@ Solution
 */
 
 
+
 namespace AnalyzeUserWebsiteVisit
 {
+	struct help
+	{
+		static void printSet(auto s)
+		{
+			for (auto el : s)
+			{
+				cout << el.first << ":" << el.second << "\n";
+			}
+			cout << "\n";
+		}
+
+	};
+
+#define PRINTV
 	using strrow = vector <string >;
 	using strmatrix = vector < strrow >;
+	using wsts = pair<int, string>;
 
 	class Solution
 	{
 		set<size_t> m_visited;
 		map<string, strmatrix> m_map;
+		strrow m_username;
+		vector<int> m_timestamp;
+		strrow m_website;
+		struct Visits
+		{
+			set<wsts> m_set;
+			strmatrix m_matrixOfSequences;
+			strrow m_workingRow;
+			void process_row()
+			{
+				for (auto el: m_set)
+				{
+					m_workingRow.push_back(el.second);
+				}
+			}
+		};
+		map<string, Visits > m_usersTsWsMap;
 
-		void create_users_matrix_map(vector<string>& username, vector<string> website)
+		void create_users_matrix_map()
 		{
 			strrow workingrow;
-			string name = username[0];
-			for (size_t i = 0; i < username.size(); i++)
+			string name = m_username[0];
+			for (size_t i = 0; i < m_username.size(); i++)
 			{
-				if (username[i] != name)
+				if (m_username[i] != name)
 				{
 					m_map[name] = allSequences(workingrow);
-					name = username[i];
+					name = m_username[i];
 					workingrow.clear();
 				}
-				workingrow.push_back(website[i]);
+				workingrow.push_back(m_website[i]);
 			}
 			m_map[name] = allSequences(workingrow);
 		}
 
-		void organizeWebsitesByTimestamp(vector<int>& timestamp, vector<string>& website)
+		void organize_data()
 		{
-			using wsts = pair<int, string>;
-			set<wsts> myset;
-			for (int i = 0; i < timestamp.size(); i++)
+			for (size_t i = 0; i < m_username.size(); i++)
 			{
-				auto kk = make_pair(timestamp[i], website[i]);
-				myset.insert(kk);
+				auto kk = make_pair(m_timestamp[i], m_website[i]);
+
+				m_usersTsWsMap[m_username[i]].m_set.insert(kk);
 			}
-			website.clear();
-			// now with the websites organized by timestamp return them
-			for (auto& elem : myset)
+			// Organize rows in map
+			for (auto& el: m_usersTsWsMap)
 			{
-				website.push_back(elem.second);
+				el.second.process_row();
+
+#ifdef PRINTV
+				printv(el.second.m_workingRow);
+#endif
+				el.second.m_matrixOfSequences = allSequences(el.second.m_workingRow);
 			}
+#ifdef PRINTV
+			for (auto& elem : m_usersTsWsMap)
+			{
+				cout << elem.first << "\n";
+				auto s = elem.second.m_set;
+				help::printSet(s);
+			}
+#endif
 		}
+
+
 		void reset()
 		{
 			m_visited.clear();
@@ -181,12 +227,16 @@ namespace AnalyzeUserWebsiteVisit
 		}
 
 		
-		vector<string> mostVisitedPattern(vector<string> username, 
-			vector<int> timestamp, vector<string> website) 
+		vector<string> mostVisitedPattern(strrow username,
+			vector<int> timestamp, strrow website)
 		{
 			reset();
-			organizeWebsitesByTimestamp(timestamp, website);
-			create_users_matrix_map(username, website);
+			m_username = username;
+			m_timestamp = timestamp;
+			m_website = website;
+
+			organize_data();
+			//create_users_matrix_map();
 			map<strrow, size_t> m;
 
 			for (auto& [name, matrix]: m_map)
@@ -217,6 +267,8 @@ namespace AnalyzeUserWebsiteVisit
 	void process()
 	{
 		Solution sol;
+#pragma region KK
+#if 0
 		{
 			auto res = sol.allSequences({ "home", "carts", "maps", "home" });
 			for (auto elem : res)
@@ -272,13 +324,15 @@ namespace AnalyzeUserWebsiteVisit
 			printv(r);
 
 		}
+#endif
+#pragma endregion
 		{
 			/*
 			username =
 			["zkiikgv","zkiikgv","zkiikgv","zkiikgv"]
 			timestamp =
 			[436363475,710406388,386655081,797150921]
-			website =
+			website = ["wnaaxbfhxp","mryxsjc","oz","wlarkzzqht"]
 
 			Expected:
 			["oz","mryxsjc","wlarkzzqht"]
