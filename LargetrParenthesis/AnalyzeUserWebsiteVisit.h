@@ -99,6 +99,7 @@ Solution
 */
 
 #define PRINTV
+#define TEST_SEQUENCES
 
 
 namespace AnalyzeUserWebsiteVisit
@@ -210,6 +211,10 @@ namespace AnalyzeUserWebsiteVisit
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
 		{
+#ifdef TEST_SEQUENCES
+			cout << "Sequence:\n";
+			printv(sequence);
+#endif
 			strrow workingRow;
 			strmatrix result;
 			auto sequenceSize = sequence.size();
@@ -237,13 +242,14 @@ namespace AnalyzeUserWebsiteVisit
 				workingRow.clear();
 
 			}
-#ifdef PRINTV0
+#ifdef TEST_SEQUENCES
+			cout << "Sequences in sets of " << setSize << ":\n";
 			for (auto& elem : result)
 			{
 				printv(elem);
 			}
 			cout << "\n\n";
-#endif // PRINTV
+#endif // TEST_SEQUENCES
 			return result;
 		}
 
@@ -289,13 +295,10 @@ namespace AnalyzeUserWebsiteVisit
 			sol.allSequences({ "home", "carts", "maps" });
 		}
 		{
-			auto res = sol.allSequences({ "y","loedo","y" });
-			for (auto elem : res)
-			{
-				printv(elem);
-			}
-			cout << "\n\n";
-
+			sol.allSequences({ "y","loedo","y" });
+		}
+		{
+			sol.allSequences({ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" });
 		}
 #endif
 #ifdef TEST_PROCESS
