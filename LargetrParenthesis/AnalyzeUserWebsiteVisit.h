@@ -145,29 +145,49 @@ namespace AnalyzeUserWebsiteVisit
 
 		void organize_data()
 		{
+			// Organize the data by user, timestamp, website
 			for (size_t i = 0; i < m_username.size(); i++)
 			{
-				auto kk = make_pair(m_timestamp[i], m_website[i]);
+				auto time_web = make_pair(m_timestamp[i], m_website[i]);
 
-				m_usersTsWsMap[m_username[i]].m_set.insert(kk);
+				m_usersTsWsMap[m_username[i]].m_set.insert(time_web);
 			}
-			// Organize rows in map
+			
 			for (auto& [name, visits]: m_usersTsWsMap)
 			{
+				// Get the websites visits ordered by timestamp
 				visits.process_row();
 
 #ifdef PRINTV
-				cout << name << "\n";
-				auto s = visits.m_set;
-				help::printSet(s);
+				cout << "\n\nUsername: [" << name << "]\n";
 				printv(visits.m_workingRow);
+				auto s = visits.m_set;
+				cout << "Visits organized by timestamp:\n";
+				help::printSet(s);
+				cout << "Visits counter:\n";
 #endif
+				// get the matrix of sequences of visits
+				/*
+				* visits ordered by timestamp
+				* home carst maps home
+				* sequences in sets of three (function is parametrized):
+				* home carts maps
+				* home carts	   home
+				*	   carts maps  home
+				* 
+				* so we have three sequences of size 3 ordered by timestamp
+				*/
+
+				// Finally we count the visits for this user - it 
+				// will get accumulated when we count for all users.
 				visits.m_matrixOfSequences = allSequences(visits.m_workingRow);
 				for (auto& row: visits.m_matrixOfSequences)
 				{
 					m_resultMap[row]++;
 #ifdef PRINTV
-					printm(m_resultMap);
+
+					printv(row, false);
+					cout << " counter: " << m_resultMap[row] << "\n";
 #endif
 				}
 			}
@@ -179,6 +199,11 @@ namespace AnalyzeUserWebsiteVisit
 			m_visited.clear();
 			m_usersTsWsMap.clear();
 			m_resultMap.clear();
+
+			m_username.clear();
+			m_timestamp.clear();
+			m_website.clear();
+
 		}
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
@@ -210,6 +235,13 @@ namespace AnalyzeUserWebsiteVisit
 				workingRow.clear();
 
 			}
+#ifdef PRINTV0
+			for (auto& elem : result)
+			{
+				printv(elem);
+			}
+			cout << "\n\n";
+#endif // PRINTV
 			return result;
 		}
 
@@ -223,29 +255,19 @@ namespace AnalyzeUserWebsiteVisit
 			m_website = website;
 
 			organize_data();
-			//create_users_matrix_map();
-			map<strrow, size_t> m;
 
-			for (auto& [name, matrix]: m_map)
+			// at this point we have all the visits counted: we make a 
+			// priority queue of the pairs
+			priority_queue< pair< int, strrow> > q;
+			for (auto& [row, counter]: m_resultMap)
 			{
-				for (auto row: matrix)
-				{
-					m[row]++;
-				}
-			}
-			strrow res;
-			size_t s = 0;
-			for (auto [row, theSize] : m)
-			{
-				if (s < theSize)
-				{
-					res = row;
-					s = theSize;
-				}
-			}
 
-
-			return res;
+				q.push({counter, row});
+			}
+			// finally we assign the top to our result
+			auto res = q.top();
+			// return the result
+			return res.second;
 		}
 
 
@@ -254,25 +276,14 @@ namespace AnalyzeUserWebsiteVisit
 	void process()
 	{
 		Solution sol;
-#pragma region KK
 #if 0
 		{
-			auto res = sol.allSequences({ "home", "carts", "maps", "home" });
-			for (auto elem : res)
-			{
-				printv(elem);
-			}
-			cout << "\n\n";
-
+			sol.allSequences({ "home", "carts", "maps", "home" });
 		}
 		{
-			auto res = sol.allSequences({ "home", "carts", "maps" });
-			for (auto elem : res)
-			{
-				printv(elem);
-			}
-			cout << "\n\n";
+			sol.allSequences({ "home", "carts", "maps" });
 		}
+#endif
 		{
 			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
 			vector<int> timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -311,8 +322,6 @@ namespace AnalyzeUserWebsiteVisit
 			printv(r);
 
 		}
-#endif
-#pragma endregion
 		{
 			/*
 			username =
