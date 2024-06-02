@@ -98,8 +98,9 @@ Solution
 - Compare the all the users's sequences against everyone else
 */
 
-#define PRINTV
-#define TEST_SEQUENCES
+//#define PRINTV
+//#define TEST_SEQUENCES
+#define TEST_PROCESS
 
 
 namespace AnalyzeUserWebsiteVisit
@@ -125,7 +126,7 @@ namespace AnalyzeUserWebsiteVisit
 	class Solution
 	{
 
-		set<size_t> m_visited;
+		set<int> m_toAvoid;
 		strrow m_username;
 		vector<int> m_timestamp;
 		strrow m_website;
@@ -199,7 +200,7 @@ namespace AnalyzeUserWebsiteVisit
 
 		void reset()
 		{
-			m_visited.clear();
+			m_toAvoid.clear();
 			m_usersTsWsMap.clear();
 			m_resultMap.clear();
 
@@ -208,40 +209,82 @@ namespace AnalyzeUserWebsiteVisit
 			m_website.clear();
 
 		}
+		void restOne()
+		{
+			set<int> tmp;
+			for (int elem: m_toAvoid)
+			{
+				int x = elem;
+				tmp.insert(--x);
+			}
+			m_toAvoid = tmp;
+		}
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
 		{
 #ifdef TEST_SEQUENCES
-			cout << "Sequence:\n";
+			cout << "Sequence; Sets of " << setSize << ":\n";
 			printv(sequence);
 #endif
 			strrow workingRow;
 			strmatrix result;
 			auto sequenceSize = sequence.size();
-			size_t i = 0;
-			size_t col{};
-			auto found = [&](int i) { return m_visited.end() != m_visited.find(i); };
+			auto found = [&](int i) { return m_toAvoid.end() != m_toAvoid.find(i); };
+				
+			/*
+			The idea is to add to the workingRow setSize number of elements.
+			We initialize a indexToAvoid equal to the indexes in sequence.size() to avoid:
+			 Example
+			 1 2 3 4 5 Set size = 2 to avoid has to have 3,4,5
+			 = 5 - 2 = 3: from 3 on to avoid
 
-			while (sequenceSize - i >= setSize)
+			Example: SetSize = 3
+
+			home carts maps home
+			  0    1    2    3
+
+			  it1:
+			  0 1 2 (indexToAvoid = 3) indexToAvoid-- = 2
+			  it2:
+			  0 1 3 (indexToAvoid = 2) indexToAvoid-- = 1
+			  it3:
+			  0 2 3 (indexToAvoid = 1) indexToAvoid-- = 0
+			  it4:
+			  1 2 3 (indexToAvoid = 0) indexToAvoid-- = -1 
+			*/
+
+			m_toAvoid.clear();
+			if (sequenceSize > setSize)
 			{
-				for (;workingRow.size() < setSize; i++)
+				auto toAvoid = sequenceSize - (sequenceSize - setSize);
+				for (int i = toAvoid; i < sequenceSize; i++)
 				{
-					if (found(i))
-						continue;
-					workingRow.push_back(sequence[i]);
+					m_toAvoid.insert(i);
+				}
+			}
+			bool proceed{ m_toAvoid.size() > 0 };
+			do 
+			{
+				for (int i = 0; i < sequenceSize; i++)
+				{
+					if (found(i)) continue;
+					if (workingRow.size() < setSize)
+					{
+						workingRow.push_back(sequence[i]);
+					}
+					else
+						break;
 				}
 				result.push_back(workingRow);
-				m_visited.insert(i-1);
-				if (found(sequenceSize-1))
-				{
-					i = ++col;
-					m_visited.clear();
-				}
-				else
-					i = 0;
+				restOne();
 				workingRow.clear();
+				if (proceed)
+				{
+					proceed = *m_toAvoid.begin() > -1;
+				}
 
-			}
+			} while ( proceed );
+
 #ifdef TEST_SEQUENCES
 			cout << "Sequences in sets of " << setSize << ":\n";
 			for (auto& elem : result)
