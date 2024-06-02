@@ -98,6 +98,7 @@ Solution
 - Compare the all the users's sequences against everyone else
 */
 
+#define PRINTV
 
 
 namespace AnalyzeUserWebsiteVisit
@@ -115,13 +116,14 @@ namespace AnalyzeUserWebsiteVisit
 
 	};
 
-#define PRINTV
+
 	using strrow = vector <string >;
 	using strmatrix = vector < strrow >;
 	using wsts = pair<int, string>;
 
 	class Solution
 	{
+
 		set<size_t> m_visited;
 		strrow m_username;
 		vector<int> m_timestamp;
@@ -159,7 +161,7 @@ namespace AnalyzeUserWebsiteVisit
 				visits.process_row();
 
 #ifdef PRINTV
-				cout << "\n\nUsername: [" << name << "]\n";
+				cout << "\n\nUsername: [" << name << "]\nSites visited:\t\n";
 				printv(visits.m_workingRow);
 				auto s = visits.m_set;
 				cout << "Visits organized by timestamp:\n";
@@ -246,7 +248,7 @@ namespace AnalyzeUserWebsiteVisit
 		}
 
 		
-		vector<string> mostVisitedPattern(strrow username,
+		strrow mostVisitedPattern(strrow username,
 			vector<int> timestamp, strrow website)
 		{
 			reset();
@@ -256,18 +258,21 @@ namespace AnalyzeUserWebsiteVisit
 
 			organize_data();
 
-			// at this point we have all the visits counted: we make a 
-			// priority queue of the pairs
-			priority_queue< pair< int, strrow> > q;
+			// at this point we have all the visits counted: we find the largest
+			strrow res;
+			int lastCounter = -INT_MAX;
 			for (auto& [row, counter]: m_resultMap)
 			{
-
-				q.push({counter, row});
+				if (counter > lastCounter)
+				{
+					lastCounter = counter;
+					res = row;
+				}
+				
 			}
 			// finally we assign the top to our result
-			auto res = q.top();
 			// return the result
-			return res.second;
+			return res;
 		}
 
 
@@ -276,21 +281,12 @@ namespace AnalyzeUserWebsiteVisit
 	void process()
 	{
 		Solution sol;
-#if 0
+#ifdef TEST_SEQUENCES
 		{
 			sol.allSequences({ "home", "carts", "maps", "home" });
 		}
 		{
 			sol.allSequences({ "home", "carts", "maps" });
-		}
-#endif
-		{
-			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
-			vector<int> timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-			strrow website{ "home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career" };
-
-			auto r = sol.mostVisitedPattern(username, timestamp, website);
-			printv(r);
 		}
 		{
 			auto res = sol.allSequences({ "y","loedo","y" });
@@ -301,16 +297,24 @@ namespace AnalyzeUserWebsiteVisit
 			cout << "\n\n";
 
 		}
+#endif
+#ifdef TEST_PROCESS
+		{
+			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
+			vector<int> timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+			strrow website{ "home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career" };
+
+			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			cout << "\n\nResult: \n";
+			printv(r);
+		}
 		{
 			/*
-			*
-			*
 			* username =
 	["dowg","dowg","dowg"]
 	timestamp =
 	[158931262,562600350,148438945]
 	website = ["y","loedo","y"]
-
 
 			Expected ["y","y","loedo"]
 			*/
@@ -319,6 +323,7 @@ namespace AnalyzeUserWebsiteVisit
 			strrow website{ "y","loedo","y" };
 
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			cout << "\n\nResult: \n";
 			printv(r);
 
 		}
@@ -338,7 +343,9 @@ namespace AnalyzeUserWebsiteVisit
 			strrow website{ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" };
 
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			cout << "\n\nResult: \n";
 			printv(r);
 		}
+#endif
 	}
 }
