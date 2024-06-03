@@ -62,5 +62,4 @@ namespace findinter
 
 		return res;
 	}
-
 }

@@ -79,7 +79,6 @@ path is a valid absolute Unix path.
             {
                 dir.push_back(T);
             }
-            string ans = "";
             for (int i = 0; i < dir.size(); i++) 
             {
                 if (dir[i] == "..") 
@@ -97,12 +96,13 @@ path is a valid absolute Unix path.
                         ans_vec.push_back(dir[i]);
                 }
             }
-            for (int i = 0; i < ans_vec.size(); i++) 
+			string ans;
+            for (int i = 0; i < ans_vec.size(); i++)
             {
                 // join all the remaining dir with '/'.
                 ans += "/" + ans_vec[i];
             }
-            // incase we don't have anything present in ans_dir then we'll simply return root directory.
+            // in case we don't have anything present in ans_dir then we'll simply return root directory.
             if (ans == "") 
                 ans = "/";
             return ans;

@@ -125,10 +125,9 @@ namespace AnalyzeUserWebsiteVisit
 
 	class Solution
 	{
-
-		set<int> m_toAvoid;
 		strrow m_username;
 		vector<int> m_timestamp;
+		vector<int> m_toAvoid;
 		strrow m_website;
 		map<strrow, int> m_resultMap;
 
@@ -200,24 +199,13 @@ namespace AnalyzeUserWebsiteVisit
 
 		void reset()
 		{
-			m_toAvoid.clear();
 			m_usersTsWsMap.clear();
 			m_resultMap.clear();
-
+			m_toAvoid.clear();
 			m_username.clear();
 			m_timestamp.clear();
 			m_website.clear();
 
-		}
-		void restOne()
-		{
-			set<int> tmp;
-			for (int elem: m_toAvoid)
-			{
-				int x = elem;
-				tmp.insert(--x);
-			}
-			m_toAvoid = tmp;
 		}
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
@@ -229,60 +217,76 @@ namespace AnalyzeUserWebsiteVisit
 			strrow workingRow;
 			strmatrix result;
 			auto sequenceSize = sequence.size();
-			auto found = [&](int i) { return m_toAvoid.end() != m_toAvoid.find(i); };
-				
+			auto found = [&](int x) 
+			{ 
+				auto it = find(m_toAvoid.begin(), m_toAvoid.end(), x);
+				return it != m_toAvoid.end()  ; 
+			};
 			/*
-			The idea is to add to the workingRow setSize number of elements.
-			We initialize a indexToAvoid equal to the indexes in sequence.size() to avoid:
-			 Example
-			 1 2 3 4 5 Set size = 2 to avoid has to have 3,4,5
-			 = 5 - 2 = 3: from 3 on to avoid
+			keep decreasing the size of the sequence by advancing from the left.
+			we will use two loops to keep advancing
+			we break the inner loop when we meet the proper set size.
 
-			Example: SetSize = 3
+			["ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit"]
+			0 1 2
+			0 1   3
+			0 1     4
+			0 1       5
+			0 1         6
+			0 1           7
+			0 1             8
+			  1 2 3
+			  1 2   4
+			  1 2     5
+			  1 2		6
+			  1 2		  7
+			  1 2			8
+				2 3 4
+				2 3	  5
+				2 3		6
+				2 3		  7
+				2 3			8
+				  3 4 5
+				  3 4	6
+				  3 4	  7
+				  3 4		8
+				    4 5 6
+					4 5   7
+					4 5		8
+					  5 6 7
+					  5 6   8
+					    6 7 8
 
-			home carts maps home
-			  0    1    2    3
-
-			  it1:
-			  0 1 2 (indexToAvoid = 3) indexToAvoid-- = 2
-			  it2:
-			  0 1 3 (indexToAvoid = 2) indexToAvoid-- = 1
-			  it3:
-			  0 2 3 (indexToAvoid = 1) indexToAvoid-- = 0
-			  it4:
-			  1 2 3 (indexToAvoid = 0) indexToAvoid-- = -1 
 			*/
 
-			m_toAvoid.clear();
-			if (sequenceSize > setSize)
+			int right = setSize;
+			auto lastRight = right;
+			for (int i = 0; i < sequenceSize && right <= sequenceSize; i++)
 			{
-				for (int i = setSize; i < sequenceSize; i++)
+				for (int j = i; j < sequenceSize; j++)
 				{
-					m_toAvoid.insert(i);
-				}
-			}
-			bool proceed{ m_toAvoid.size() > 0 };
-			do 
-			{
-				for (int i = 0; i < sequenceSize; i++)
-				{
-					if (found(i)) continue;
 					if (workingRow.size() < setSize)
 					{
-						workingRow.push_back(sequence[i]);
+						if (found(j)) continue;
+						workingRow.push_back(sequence[j]);
+						if (workingRow.size() == setSize)
+						{
+							m_toAvoid.push_back(j);
+							result.push_back(workingRow);
+							j = i - 1;
+							workingRow.clear();
+							if (++right > sequenceSize)
+							{
+								m_toAvoid.clear();
+								break;
+							}
+						}
 					}
-					else
-						break;
-				}
-				result.push_back(workingRow);
-				restOne();
-				workingRow.clear();
-				if (proceed)
-				{
-					proceed = *m_toAvoid.begin() > -1;
-				}
 
-			} while ( proceed );
+				}
+				right = ++lastRight;
+
+			}
 
 #ifdef TEST_SEQUENCES
 			cout << "Sequences in sets of " << setSize << ":\n";
@@ -330,6 +334,9 @@ namespace AnalyzeUserWebsiteVisit
 	{
 		Solution sol;
 #ifdef TEST_SEQUENCES
+		{
+			sol.allSequences({ "0","1","2","3","4","5","6","7","8" });
+		}
 		{
 			sol.allSequences({ "home", "carts", "maps", "home" });
 		}
