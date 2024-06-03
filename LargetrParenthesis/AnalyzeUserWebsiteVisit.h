@@ -98,9 +98,9 @@ Solution
 - Compare the all the users's sequences against everyone else
 */
 
-//#define PRINTV
-//#define TEST_SEQUENCES
-#define TEST_PROCESS
+#define PRINTV
+#define TEST_SEQUENCES
+//#define TEST_PROCESS
 
 
 namespace AnalyzeUserWebsiteVisit
@@ -256,8 +256,7 @@ namespace AnalyzeUserWebsiteVisit
 			m_toAvoid.clear();
 			if (sequenceSize > setSize)
 			{
-				auto toAvoid = sequenceSize - (sequenceSize - setSize);
-				for (int i = toAvoid; i < sequenceSize; i++)
+				for (int i = setSize; i < sequenceSize; i++)
 				{
 					m_toAvoid.insert(i);
 				}
@@ -343,6 +342,9 @@ namespace AnalyzeUserWebsiteVisit
 		{
 			sol.allSequences({ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" });
 		}
+		{
+			sol.allSequences({ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" });
+		}
 #endif
 #ifdef TEST_PROCESS
 		{
@@ -391,6 +393,22 @@ namespace AnalyzeUserWebsiteVisit
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
 			cout << "\n\nResult: \n";
 			printv(r);
+		}
+		{
+			/*
+			username =	["ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit"]
+			timestamp =	[246561774,336877562,613255786,581611682,67005296,164162280,644105652,998777950,962088025]
+			website = ["kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn"]
+			Expected: ["kzx","txvn","bsmy"]
+			*/
+			strrow username{ "ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit" };
+			vector<int> timestamp{ 246561774,336877562,613255786,581611682,67005296,164162280,644105652,998777950,962088025 };
+			strrow website{ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" };
+
+			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			cout << "\n\nResult: \n";
+			printv(r);
+
 		}
 #endif
 	}
