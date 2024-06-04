@@ -279,6 +279,16 @@ namespace AnalyzeUserWebsiteVisit
 			// at this point we have all the visits counted: we find the largest
 			strrow res;
 			int lastCounter = -INT_MAX;
+#ifdef PRINTV
+			for (auto& [vec, counter]: m_resultMap)
+			{
+				for (auto& el: vec)
+				{
+					cout << el << ",";
+				}
+				cout << " counter " << counter << "\n";
+			}
+#endif
 			for (auto& [row, counter]: m_resultMap)
 			{
 				if (counter > lastCounter)
@@ -324,9 +334,13 @@ namespace AnalyzeUserWebsiteVisit
 		{
 			sol.allSequences({ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" });
 		}
-		if (true)
+		if (false)
 		{
 			sol.allSequences({ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" });
+		}
+		if (true)
+		{
+			sol.allSequences({ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" })
 		}
 #endif
 #ifdef TEST_PROCESS
@@ -354,7 +368,7 @@ namespace AnalyzeUserWebsiteVisit
 			printv(r);
 
 		}
-		if (true)
+		if (false)
 		{
 			/*
 			Expected:
@@ -381,6 +395,20 @@ namespace AnalyzeUserWebsiteVisit
 			cout << "\n\nResult: \n";
 			printv(r);
 
+		}
+		if (true)
+		{
+			/*
+			Expected:
+			["kzx","txvn","bsmy"]
+			*/
+			strrow username{ "ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit" };
+			t_vecInt timestamp{ 246561774,336877562,613255786,581611682,67005296,164162280,644105652,998777950,962088025 };
+			strrow website{ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" };
+
+			auto r = sol.mostVisitedPattern(username, timestamp, website);
+			cout << "\n\nResult: \n";
+			printv(r);
 		}
 #endif
 	}
