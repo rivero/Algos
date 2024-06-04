@@ -99,8 +99,9 @@ Solution
 */
 
 #define PRINTV
-//#define TEST_SEQUENCES
-#define TEST_PROCESS
+#define TEST_SEQUENCES
+//#define TEST_PROCESS
+#define DISPLAY_SEQUENCES
 
 
 namespace AnalyzeUserWebsiteVisit
@@ -167,7 +168,6 @@ namespace AnalyzeUserWebsiteVisit
 				auto s = visits.m_set;
 				cout << "Visits organized by timestamp:\n";
 				help::printSet(s);
-				cout << "Visits counter:\n";
 #endif
 				// get the matrix of sequences of visits
 				/*
@@ -218,45 +218,18 @@ namespace AnalyzeUserWebsiteVisit
 				auto it = find(m_toAvoid.begin(), m_toAvoid.end(), x);
 				return it != m_toAvoid.end()  ; 
 			};
-#ifdef TEST_SEQUENCES
+#ifdef DISPLAY_SEQUENCES
 			cout << "Sequence with a size of ["<< sequenceSize << "]:\n--------------------------------------------\n";
 			printv(sequence);
 			cout << "--------------------------------------------\n";
 #endif
 			/*
-			keep decreasing the size of the sequence by advancing from the left.
-			we will use two loops to keep advancing
-			we break the inner loop when we meet the proper set size.
-
-			["ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit"]
+			0 1 2 3
+			
 			0 1 2
-			0 1   3
-			0 1     4
-			0 1       5
-			0 1         6
-			0 1           7
-			0 1             8
-			  1 2 3
-			  1 2   4
-			  1 2     5
-			  1 2		6
-			  1 2		  7
-			  1 2			8
-				2 3 4
-				2 3	  5
-				2 3		6
-				2 3		  7
-				2 3			8
-				  3 4 5
-				  3 4	6
-				  3 4	  7
-				  3 4		8
-				    4 5 6
-					4 5   7
-					4 5		8
-					  5 6 7
-					  5 6   8
-					    6 7 8
+			0 1 3
+			0 2 3
+			1 2 3
 
 			*/
 
@@ -289,14 +262,14 @@ namespace AnalyzeUserWebsiteVisit
 
 			}
 
-#ifdef TEST_SEQUENCES
+#ifdef DISPLAY_SEQUENCES
 			cout << "Organized in sets of [" << setSize << "]:\n--------------------------------------------\n";
 			for (auto& elem : result)
 			{
 				printv(elem);
 			}
 			cout << "--------------------------------------------\n\n";
-#endif // TEST_SEQUENCES
+#endif // DISPLAY_SEQUENCES
 			return result;
 		}
 
@@ -335,26 +308,37 @@ namespace AnalyzeUserWebsiteVisit
 	{
 		Solution sol;
 #ifdef TEST_SEQUENCES
+		if (false)
 		{
 			sol.allSequences({ "0","1","2","3","4","5","6","7","8" });
 		}
+		if (false)
 		{
 			sol.allSequences({ "home", "carts", "maps", "home" });
 		}
+		if (false)
 		{
 			sol.allSequences({ "home", "carts", "maps" });
 		}
+		if (false)
 		{
 			sol.allSequences({ "y","loedo","y" });
 		}
+		if (false)
 		{
 			sol.allSequences({ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" });
 		}
+		if (true)
+		{
+			sol.allSequences({ "0","1","2","3" });
+		}
+		if (false)
 		{
 			sol.allSequences({ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" });
 		}
 #endif
 #ifdef TEST_PROCESS
+		if(false)
 		{
 			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
 			vector<int> timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -364,14 +348,9 @@ namespace AnalyzeUserWebsiteVisit
 			cout << "\n\nResult: \n";
 			printv(r);
 		}
+		if (false)
 		{
 			/*
-			* username =
-	["dowg","dowg","dowg"]
-	timestamp =
-	[158931262,562600350,148438945]
-	website = ["y","loedo","y"]
-
 			Expected ["y","y","loedo"]
 			*/
 			strrow username{ "dowg","dowg","dowg" };
@@ -383,14 +362,9 @@ namespace AnalyzeUserWebsiteVisit
 			printv(r);
 
 		}
+		if (true)
 		{
 			/*
-			username =
-			["zkiikgv","zkiikgv","zkiikgv","zkiikgv"]
-			timestamp =
-			[436363475,710406388,386655081,797150921]
-			website = ["wnaaxbfhxp","mryxsjc","oz","wlarkzzqht"]
-
 			Expected:
 			["oz","mryxsjc","wlarkzzqht"]
 			*/
@@ -402,6 +376,7 @@ namespace AnalyzeUserWebsiteVisit
 			cout << "\n\nResult: \n";
 			printv(r);
 		}
+		if (false)
 		{
 			/*
 			Expected: ["kzx","txvn","bsmy"]
