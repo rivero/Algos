@@ -310,7 +310,7 @@ namespace AnalyzeUserWebsiteVisit
 					{
 						smallest = row;
 					}
-					if (row > smallest)
+					if (row < smallest)
 					{
 						smallest = row;
 						res = row;
