@@ -99,8 +99,8 @@ Solution
 */
 
 #define PRINTV
-#define TEST_SEQUENCES
-//#define TEST_PROCESS
+//#define TEST_SEQUENCES
+#define TEST_PROCESS
 
 
 namespace AnalyzeUserWebsiteVisit
@@ -210,10 +210,6 @@ namespace AnalyzeUserWebsiteVisit
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
 		{
-#ifdef TEST_SEQUENCES
-			cout << "Sequence; Sets of " << setSize << ":\n";
-			printv(sequence);
-#endif
 			strrow workingRow;
 			strmatrix result;
 			auto sequenceSize = sequence.size();
@@ -222,6 +218,11 @@ namespace AnalyzeUserWebsiteVisit
 				auto it = find(m_toAvoid.begin(), m_toAvoid.end(), x);
 				return it != m_toAvoid.end()  ; 
 			};
+#ifdef TEST_SEQUENCES
+			cout << "Sequence with a size of ["<< sequenceSize << "]:\n--------------------------------------------\n";
+			printv(sequence);
+			cout << "--------------------------------------------\n";
+#endif
 			/*
 			keep decreasing the size of the sequence by advancing from the left.
 			we will use two loops to keep advancing
@@ -289,12 +290,12 @@ namespace AnalyzeUserWebsiteVisit
 			}
 
 #ifdef TEST_SEQUENCES
-			cout << "Sequences in sets of " << setSize << ":\n";
+			cout << "Organized in sets of [" << setSize << "]:\n--------------------------------------------\n";
 			for (auto& elem : result)
 			{
 				printv(elem);
 			}
-			cout << "\n\n";
+			cout << "--------------------------------------------\n\n";
 #endif // TEST_SEQUENCES
 			return result;
 		}
@@ -403,9 +404,6 @@ namespace AnalyzeUserWebsiteVisit
 		}
 		{
 			/*
-			username =	["ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit"]
-			timestamp =	[246561774,336877562,613255786,581611682,67005296,164162280,644105652,998777950,962088025]
-			website = ["kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn"]
 			Expected: ["kzx","txvn","bsmy"]
 			*/
 			strrow username{ "ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit" };
