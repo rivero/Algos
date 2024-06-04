@@ -99,8 +99,8 @@ Solution
 */
 
 #define PRINTV
-#define TEST_SEQUENCES
-//#define TEST_PROCESS
+//#define TEST_SEQUENCES
+#define TEST_PROCESS
 #define DISPLAY_SEQUENCES
 
 
@@ -123,14 +123,39 @@ namespace AnalyzeUserWebsiteVisit
 	using strrow = vector <string >;
 	using strmatrix = vector < strrow >;
 	using wsts = pair<int, string>;
+	using t_vecInt = vector<int>;
+	using intmatrix = vector< t_vecInt >;
 
 	class Solution
 	{
 		strrow m_username;
-		vector<int> m_timestamp;
-		vector<int> m_toAvoid;
+		t_vecInt m_timestamp;
 		strrow m_website;
 		map<strrow, int> m_resultMap;
+
+		// Returns a matrix of combined indexes.
+		// From http://rosettacode.org/wiki/Combinations#C.2B.2B
+		intmatrix comb(int N, int K)
+		{
+
+			std::string bitmask(K, 1); // K leading 1's
+			bitmask.resize(N, 0); // N-K trailing 0's
+
+			t_vecInt row;
+			intmatrix result;
+			// Print integers and permute bitmask
+			do {
+				for (int i = 0; i < N; ++i) 
+				{
+					if (bitmask[i])
+						row.push_back(i);
+				}
+
+				result.push_back(row);
+				row.clear();
+			} while (std::prev_permutation(bitmask.begin(), bitmask.end()));
+			return result;
+		}
 
 		struct Visits
 		{
@@ -201,7 +226,6 @@ namespace AnalyzeUserWebsiteVisit
 		{
 			m_usersTsWsMap.clear();
 			m_resultMap.clear();
-			m_toAvoid.clear();
 			m_username.clear();
 			m_timestamp.clear();
 			m_website.clear();
@@ -210,60 +234,28 @@ namespace AnalyzeUserWebsiteVisit
 	public:
 		strmatrix allSequences(strrow sequence, size_t setSize = 3)
 		{
-			strrow workingRow;
-			strmatrix result;
 			auto sequenceSize = sequence.size();
-			auto found = [&](int x) 
-			{ 
-				auto it = find(m_toAvoid.begin(), m_toAvoid.end(), x);
-				return it != m_toAvoid.end()  ; 
-			};
 #ifdef DISPLAY_SEQUENCES
 			cout << "Sequence with a size of ["<< sequenceSize << "]:\n--------------------------------------------\n";
 			printv(sequence);
 			cout << "--------------------------------------------\n";
 #endif
-			/*
-			0 1 2 3
-			
-			0 1 2
-			0 1 3
-			0 2 3
-			1 2 3
-
-			*/
-
-			int right = setSize;
-			auto lastRight = right;
-			for (int i = 0; i < sequenceSize && right <= sequenceSize; i++)
+			auto mymatrix = comb(sequenceSize, setSize);
+			auto rowSize = mymatrix.size();
+			auto colSize = mymatrix[0].size();
+			strmatrix result;
+			for (int i = 0; i < rowSize; i++)
 			{
-				for (int j = i; j < sequenceSize; j++)
+				strrow workingRow;
+				for (int j = 0; j < colSize; j++)
 				{
-					if (workingRow.size() < setSize)
-					{
-						if (found(j)) continue;
-						workingRow.push_back(sequence[j]);
-						if (workingRow.size() == setSize)
-						{
-							m_toAvoid.push_back(j);
-							result.push_back(workingRow);
-							j = i - 1;
-							workingRow.clear();
-							if (++right > sequenceSize)
-							{
-								m_toAvoid.clear();
-								break;
-							}
-						}
-					}
-
+					auto matrixElement = mymatrix[i][j];
+					workingRow.push_back(sequence[matrixElement]);
 				}
-				right = ++lastRight;
-
+				result.push_back(workingRow);
 			}
-
 #ifdef DISPLAY_SEQUENCES
-			cout << "Organized in sets of [" << setSize << "]:\n--------------------------------------------\n";
+			cout << "Organized in sets of [" << setSize << "] number of rows: ["<< rowSize <<"]:\n--------------------------------------------\n";
 			for (auto& elem : result)
 			{
 				printv(elem);
@@ -310,13 +302,17 @@ namespace AnalyzeUserWebsiteVisit
 #ifdef TEST_SEQUENCES
 		if (false)
 		{
-			sol.allSequences({ "0","1","2","3","4","5","6","7","8" });
+			sol.allSequences({ "0","1","2","3" });
 		}
 		if (false)
 		{
+			sol.allSequences({ "0","1","2","3","4","5","6","7","8" });
+		}
+		if (true)
+		{
 			sol.allSequences({ "home", "carts", "maps", "home" });
 		}
-		if (false)
+		if (true)
 		{
 			sol.allSequences({ "home", "carts", "maps" });
 		}
@@ -324,15 +320,11 @@ namespace AnalyzeUserWebsiteVisit
 		{
 			sol.allSequences({ "y","loedo","y" });
 		}
-		if (false)
+		if (true)
 		{
 			sol.allSequences({ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" });
 		}
 		if (true)
-		{
-			sol.allSequences({ "0","1","2","3" });
-		}
-		if (false)
 		{
 			sol.allSequences({ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" });
 		}
@@ -341,7 +333,7 @@ namespace AnalyzeUserWebsiteVisit
 		if(false)
 		{
 			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
-			vector<int> timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+			t_vecInt timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 			strrow website{ "home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career" };
 
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
@@ -354,7 +346,7 @@ namespace AnalyzeUserWebsiteVisit
 			Expected ["y","y","loedo"]
 			*/
 			strrow username{ "dowg","dowg","dowg" };
-			vector<int> timestamp{ 158931262,562600350,148438945 };
+			t_vecInt timestamp{ 158931262,562600350,148438945 };
 			strrow website{ "y","loedo","y" };
 
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
@@ -369,7 +361,7 @@ namespace AnalyzeUserWebsiteVisit
 			["oz","mryxsjc","wlarkzzqht"]
 			*/
 			strrow username{ "zkiikgv","zkiikgv","zkiikgv","zkiikgv" };
-			vector<int> timestamp{ 436363475,710406388,386655081,797150921 };
+			t_vecInt timestamp{ 436363475,710406388,386655081,797150921 };
 			strrow website{ "wnaaxbfhxp","mryxsjc","oz","wlarkzzqht" };
 
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
@@ -382,7 +374,7 @@ namespace AnalyzeUserWebsiteVisit
 			Expected: ["kzx","txvn","bsmy"]
 			*/
 			strrow username{ "ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit" };
-			vector<int> timestamp{ 246561774,336877562,613255786,581611682,67005296,164162280,644105652,998777950,962088025 };
+			t_vecInt timestamp{ 246561774,336877562,613255786,581611682,67005296,164162280,644105652,998777950,962088025 };
 			strrow website{ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" };
 
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
