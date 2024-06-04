@@ -277,8 +277,6 @@ namespace AnalyzeUserWebsiteVisit
 			organize_data();
 
 			// at this point we have all the visits counted: we find the largest
-			strrow res;
-			int lastCounter = -INT_MAX;
 #ifdef PRINTV
 			for (auto& [vec, counter]: m_resultMap)
 			{
@@ -289,14 +287,38 @@ namespace AnalyzeUserWebsiteVisit
 				cout << " counter " << counter << "\n";
 			}
 #endif
+			strrow res;
+			int lastCounter = -INT_MAX;
+			set<int> detectCounters;
 			for (auto& [row, counter]: m_resultMap)
 			{
+				detectCounters.insert(counter);
 				if (counter > lastCounter)
 				{
 					lastCounter = counter;
 					res = row;
 				}
 				
+			}
+			if (detectCounters.size() == 1)
+			{
+				// all have the same counter. Initiate lexicographical comparison
+				strrow smallest;
+				for (auto& [row, counter] : m_resultMap)
+				{
+					if (smallest.size() == 0)
+					{
+						smallest = row;
+					}
+					if (row > smallest)
+					{
+						smallest = row;
+						res = row;
+					}
+
+				}
+
+
 			}
 			// finally we assign the top to our result
 			// return the result
