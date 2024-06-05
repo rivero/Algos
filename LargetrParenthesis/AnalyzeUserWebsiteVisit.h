@@ -98,6 +98,75 @@ Solution
 - Compare the all the users's sequences against everyone else
 */
 
+
+namespace SOLUTION
+{
+	class Solution {
+	public:
+		vector<string> mostVisitedPattern(vector<string>& username, vector<int>& timestamp, vector<string>& website) 
+		{
+			map<string, vector<pair<int, string>>> mp;
+			set<string> web;
+			int n = username.size();
+
+			for (int i = 0; i < n; i++)
+			{
+				mp[username[i]].push_back({ timestamp[i],website[i] });
+				web.insert(website[i]);
+			}
+
+			for (auto& it : mp)
+			{
+				sort(it.second.begin(), it.second.end());
+			}
+
+			vector<string> ans;
+			int maxCount = 0;
+			for (auto& u : web)
+			{
+				for (auto& v : web)
+				{
+					for (auto& w : web)
+					{
+						int currentCount = 0;
+						for (auto& it : mp)
+						{
+							auto& sites = it.second;
+							int current = 0;
+
+							for (auto& [_, site] : sites)
+							{
+								if (current == 0 && u == site)
+								{
+									current++;
+								}
+								else if (current == 1 && v == site)
+								{
+									current++;
+								}
+								else if (current == 2 && w == site)
+								{
+									current++;
+									currentCount++;
+									break;
+								}
+							}
+
+						}
+						if (maxCount < currentCount)
+						{
+							ans = { u,v,w };
+							maxCount = currentCount;
+						}
+					}
+				}
+			}
+			return ans;
+
+		}
+	};
+}
+
 #define PRINTV
 //#define TEST_SEQUENCES
 #define TEST_PROCESS

@@ -143,5 +143,8 @@
     <ClInclude Include="AnalyzeUserWebsiteVisit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SumRootToLeaf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

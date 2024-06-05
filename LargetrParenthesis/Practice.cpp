@@ -106,6 +106,7 @@ void printm(const map<T, U>& counts)
 #include "IncreasingTripleSequence.h"
 #include "MinimumAdjacentSwapsToMakleValidArray.h"
 #include "AnalyzeUserWebsiteVisit.h"
+#include "SumRootToLeaf.h"
 struct tests
 {
 	string m_tests;
@@ -119,7 +120,7 @@ struct tests
 
 int main()
 {
-	tests t("AnalyzeUserWebsiteVisit");
+	tests t("SumRootToLeaf");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -757,6 +758,10 @@ int main()
 	if (t.contains("AnalyzeUserWebsiteVisit"))
 	{
 		AnalyzeUserWebsiteVisit::process();
+	}
+	if (t.contains("SumRootToLeaf"))
+	{
+		SumRootToLeaf::process();
 	}
 }
 
