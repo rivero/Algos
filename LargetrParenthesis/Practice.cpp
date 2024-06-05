@@ -107,6 +107,7 @@ void printm(const map<T, U>& counts)
 #include "MinimumAdjacentSwapsToMakleValidArray.h"
 #include "AnalyzeUserWebsiteVisit.h"
 #include "SumRootToLeaf.h"
+#include "CustomSortString.h"
 struct tests
 {
 	string m_tests;
@@ -120,7 +121,7 @@ struct tests
 
 int main()
 {
-	tests t("SumRootToLeaf");
+	tests t("CustomSortString");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -762,6 +763,10 @@ int main()
 	if (t.contains("SumRootToLeaf"))
 	{
 		SumRootToLeaf::process();
+	}
+	if (t.contains("CustomSortString"))
+	{
+		CustomSortString::process();
 	}
 }
 

@@ -156,6 +156,7 @@
     <ClInclude Include="BinaryTreeVerticalOrderTransversal.h" />
     <ClInclude Include="BTreeToDLink.h" />
     <ClInclude Include="BuildingsWithAnOceanView.h" />
+    <ClInclude Include="CustomSortString.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />
     <ClInclude Include="IncreasingTripleSequence.h" />
