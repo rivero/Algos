@@ -178,6 +178,7 @@
     <ClInclude Include="NestedListWeightSum.h" />
     <ClInclude Include="NumberOfIslands.h" />
     <ClInclude Include="PalindromeNumber.h" />
+    <ClInclude Include="pow.h" />
     <ClInclude Include="QuestionMarks.h" />
     <ClInclude Include="RandomPickWithWeight.h" />
     <ClInclude Include="RecursiveRabbitInterview.h" />

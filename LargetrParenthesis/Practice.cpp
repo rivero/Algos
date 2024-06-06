@@ -20,6 +20,7 @@
 #include <stack>
 #include <array>
 #include <cctype>
+#include <cmath>
 using namespace std;
 
 template <typename T>
@@ -111,6 +112,7 @@ void printm(const map<T, U>& counts)
 #include "InsertSortedCircularList.h"
 #include "IntervalListIntersections.h"
 #include "KClosestPointsToTheOrigin.h"
+#include "pow.h"
 struct tests
 {
 	string m_tests;
@@ -124,7 +126,7 @@ struct tests
 
 int main()
 {
-	tests t("KClosestPointsToTheOrigin");
+	tests t("mypow");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -782,6 +784,10 @@ int main()
 	if (t.contains("KClosestPointsToTheOrigin"))
 	{
 		KClosestPointsToTheOrigin::process();
+	}
+	if (t.contains("mypow"))
+	{
+		mypow::process();
 	}
 }
 
