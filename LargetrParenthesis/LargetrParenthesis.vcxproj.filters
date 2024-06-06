@@ -149,5 +149,14 @@
     <ClInclude Include="CustomSortString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InsertSortedCircularList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IntervalListIntersections.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KClosestPointsToTheOrigin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

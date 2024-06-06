@@ -160,6 +160,9 @@
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />
     <ClInclude Include="IncreasingTripleSequence.h" />
+    <ClInclude Include="InsertSortedCircularList.h" />
+    <ClInclude Include="IntervalListIntersections.h" />
+    <ClInclude Include="KClosestPointsToTheOrigin.h" />
     <ClInclude Include="KthLargestElement.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />

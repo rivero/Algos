@@ -108,6 +108,9 @@ void printm(const map<T, U>& counts)
 #include "AnalyzeUserWebsiteVisit.h"
 #include "SumRootToLeaf.h"
 #include "CustomSortString.h"
+#include "InsertSortedCircularList.h"
+#include "IntervalListIntersections.h"
+#include "KClosestPointsToTheOrigin.h"
 struct tests
 {
 	string m_tests;
@@ -121,7 +124,7 @@ struct tests
 
 int main()
 {
-	tests t("CustomSortString");
+	tests t("KClosestPointsToTheOrigin");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -767,6 +770,18 @@ int main()
 	if (t.contains("CustomSortString"))
 	{
 		CustomSortString::process();
+	}
+	if (t.contains("InsertSortedCircularList"))
+	{
+		InsertSortedCircularList::process();
+	}
+	if (t.contains("IntervalListIntersections"))
+	{
+		IntervalListIntersections::process();
+	}
+	if (t.contains("KClosestPointsToTheOrigin"))
+	{
+		KClosestPointsToTheOrigin::process();
 	}
 }
 
