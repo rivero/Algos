@@ -113,6 +113,7 @@ void printm(const map<T, U>& counts)
 #include "IntervalListIntersections.h"
 #include "KClosestPointsToTheOrigin.h"
 #include "pow.h"
+#include "GroupShiftedStrings.h"
 struct tests
 {
 	string m_tests;
@@ -126,7 +127,7 @@ struct tests
 
 int main()
 {
-	tests t("mypow");
+	tests t("GroupShiftedStrings");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -788,6 +789,10 @@ int main()
 	if (t.contains("mypow"))
 	{
 		mypow::process();
+	}
+	if (t.contains("GroupShiftedStrings"))
+	{
+		GroupShiftedStrings::process();
 	}
 }
 

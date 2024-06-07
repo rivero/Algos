@@ -159,6 +159,7 @@
     <ClInclude Include="CustomSortString.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />
+    <ClInclude Include="GroupShiftedStrings.h" />
     <ClInclude Include="IncreasingTripleSequence.h" />
     <ClInclude Include="InsertSortedCircularList.h" />
     <ClInclude Include="IntervalListIntersections.h" />
