@@ -30,17 +30,17 @@ namespace NumberOfIslands
 		int m_rows{}, m_cols{};
 		vector< vector<char> > m_matrix;
 
-		void mark_current_island(int i, int j)
+		void search_for_more_land(int i, int j)
 		{
 			if (i < 0 || i >= m_rows || j < 0 || j >= m_cols || m_matrix[i][j] != '1')
 			{
 				return;
 			}
 			m_matrix[i][j] = '2';
-			mark_current_island(i + 1, j); // DOWN
-			mark_current_island(i, j + 1); // RIGHT
-			mark_current_island(i -1 , j); // TOP
-			mark_current_island(i, j - 1); // LEFT
+			search_for_more_land(i + 1, j); // DOWN
+			search_for_more_land(i, j + 1); // RIGHT
+			search_for_more_land(i -1 , j); // TOP
+			search_for_more_land(i, j - 1); // LEFT
 		}
 
 		void print() const
@@ -57,14 +57,12 @@ namespace NumberOfIslands
 		int numberOfIslands(vector< vector<char> >& grid)
 		{
 			m_matrix = grid;
-			
-			print();
-
 			m_rows = m_matrix.size();
 			if (m_rows == 0)
 			{
 				return 0;
 			}
+			print();
 
 			m_cols = m_matrix[0].size();
 			int no_of_islands{};
@@ -74,7 +72,7 @@ namespace NumberOfIslands
 				{
 					if (m_matrix[i][j] == '1')
 					{
-						mark_current_island(i, j);
+						search_for_more_land(i, j);
 						no_of_islands++;
 						print();
 					}
