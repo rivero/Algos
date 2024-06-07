@@ -164,5 +164,8 @@
     <ClInclude Include="GroupShiftedStrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LargeIsland.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

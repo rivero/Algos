@@ -165,6 +165,7 @@
     <ClInclude Include="IntervalListIntersections.h" />
     <ClInclude Include="KClosestPointsToTheOrigin.h" />
     <ClInclude Include="KthLargestElement.h" />
+    <ClInclude Include="LargeIsland.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />
     <ClInclude Include="LowestCommon.h" />

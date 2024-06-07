@@ -114,6 +114,7 @@ void printm(const map<T, U>& counts)
 #include "KClosestPointsToTheOrigin.h"
 #include "pow.h"
 #include "GroupShiftedStrings.h"
+#include "LargeIsland.h"
 struct tests
 {
 	string m_tests;
@@ -127,7 +128,7 @@ struct tests
 
 int main()
 {
-	tests t("NumberOfIslands");
+	tests t("NumberOfIslands LargeIsland");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -793,6 +794,10 @@ int main()
 	if (t.contains("GroupShiftedStrings"))
 	{
 		GroupShiftedStrings::process();
+	}
+	if (t.contains("LargeIsland"))
+	{
+		LargeIsland::process();
 	}
 }
 
