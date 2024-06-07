@@ -44,21 +44,23 @@ namespace LargeIsland
 	*/
 	class Solution
 	{
-		int m_rows{}, m_cols{};
+		int m_rows{}, m_cols{}, m_max{INT_MIN};
 		vector< vector<int> > m_matrix;
 		size_t m_island_id{ 2 };
+		map<int, int> m_IdAreaMap;
 
-		void search_for_more_land(int i, int j)
+		int landSize(int row, int col)
 		{
-			if (i < 0 || i >= m_rows || j < 0 || j >= m_cols || m_matrix[i][j] != 1)
+			if (row < 0 || row >= m_rows || col < 0 || col >= m_cols || m_matrix[row][col] != 1)
 			{
-				return;
+				return 0;
 			}
-			m_matrix[i][j] = m_island_id;
-			search_for_more_land(i + 1, j); // DOWN
-			search_for_more_land(i, j + 1); // RIGHT
-			search_for_more_land(i - 1, j); // TOP
-			search_for_more_land(i, j - 1); // LEFT
+			m_matrix[row][col] = m_island_id;
+			auto down = landSize(row + 1, col); // DOWN
+			auto right = landSize(row, col + 1); // RIGHT
+			auto up = landSize(row - 1, col); // UP
+			auto left = landSize(row, col - 1); // LEFT
+			return down + up + left + right + 1;
 		}
 
 		void print() const
@@ -69,6 +71,14 @@ namespace LargeIsland
 				printv(elem);
 			}
 			cout << "\n";
+		}
+
+		void get_areas(int row, int col)
+		{
+			auto size = landSize(row, col);
+			m_max = max(m_max, size);
+			m_IdAreaMap[m_island_id++] = size;
+			print();
 		}
 
 	public:
@@ -83,23 +93,39 @@ namespace LargeIsland
 			print();
 
 			m_cols = m_matrix[0].size();
-			int no_of_islands{};
-			m_island_id = 2;
-			for (int i = 0; i < m_rows; i++)
+			for (int row = 0; row < m_rows; row++)
 			{
-				for (int j = 0; j < m_cols; j++)
+				for (int col = 0; col < m_cols; col++)
 				{
-					if (m_matrix[i][j] == 1)
+					if (m_matrix[row][col] == 1)
 					{
-						search_for_more_land(i, j);
-						no_of_islands++;
-						m_island_id++;
-						print();
+						get_areas(row, col);
 					}
 				}
 			}
-			return no_of_islands;
+			//now we need to iterate the grid to find 0s and then move up and down.
+			// we will find area ids. We get the in our set of island ids.
+			vector <vector<int> > directions{ {0,1},{0,-1},{1,0},{-1,0}, };// up, down, right, left
+			for (int row = 0; row < m_rows; row++)
+			{
+				for (int col = 0; col < m_cols; col++)
+				{
+					if (m_matrix[row][col] == 0)
+					{
+						set<int> island_ids; // here we obtain a set of unique island ids thanks to the sorting and unique set capabilities
+						for (auto& direction : directions)
+						{
+							auto x = direction[0] + row;
+							auto y = direction[1] + col;
+						}
+					}
+				}
+			}
+
+			return m_max;
 		}
+
+
 	};
 
 

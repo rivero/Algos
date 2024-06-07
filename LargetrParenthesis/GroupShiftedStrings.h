@@ -73,7 +73,75 @@ namespace GroupShiftedStrings
 	So if s[i] - s[i - 1] is negative, we need to add 26 to it to make it positive and give the correct result. 
 	BTW, taking the suggestion of @StefanPochmann, we change the difference from numbers to lower-case alphabets 
 	using 'a' + diff.
-	*/
+
+	My Solution
+
+		abc ->encoding ->   vector {1, 1} => map key
+		bcd ->              vector {1, 1}
+		acef ->             vector {2, 2, 1}
+
+		["a","z", "abc","bcd","acef","xyz","az","ba"]
+
+		vector<int> encode (string str)
+		{
+		  vector <int> res;
+		  // edge case str.len == 1
+		  if (str.size() == 1)
+		  {
+			res.push_back(0);
+			return res;
+		  }
+		a
+		  for (int i = 1; i < str.size(); i++)
+		  {
+			auto dist = str[i] - str[i-1];
+			res.push_back(dist);
+		  }
+		  return res;
+		}
+
+		vector< vector<string> >process(vector<string> strings)
+		{
+		  map< vector<int>, vector<string> > m;
+		  for(auto s: strings)
+		  {
+			auto enc = encode(s);
+			m[enc].push_back(s);
+		  }
+		  vector <  vector<string> > res;
+		  for (auto [envec, strvec]: m)
+		  {
+			res.push_back(strvec);
+		  }
+		  return res;
+		}
+
+
+		Input: strings = ["abc","bcd","acef"]
+
+		Time complexity is O(n * m) where n is the length of the string vector and m is the lenght of the longest string in the vector.
+
+		feedback:
+			1. read and understand the question very well and ask clarification from your interviewer.
+			2. Dry run.
+			3. Communication O(), you need to explain what is n / m or any other variable.
+			4. you still taking too much time for any problem, , more practice is required. 6 months.
+
+			1. Read the question / ask clarifying questions.
+			2. Think about the edge cases.
+			3. Think about the solutions.different run time complexities
+			4. Coding
+			5. Verification / dry run
+			6. Run edge cases.
+			7. Tell your interviewer that it is ready.
+
+
+				HW:
+			1. Again practicing more.
+			2. Practice system design.
+			3. Behavioral : LP 16, you need to make stories for all the 16 LP.
+*/
+
 	class Solution 
 	{
 		string shift(const string& s)
