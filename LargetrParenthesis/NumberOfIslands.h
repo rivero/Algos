@@ -29,6 +29,7 @@ namespace NumberOfIslands
 	{
 		int m_rows{}, m_cols{};
 		vector< vector<char> > m_matrix;
+		size_t m_island_id{ 2 };
 
 		void search_for_more_land(int i, int j)
 		{
@@ -36,7 +37,7 @@ namespace NumberOfIslands
 			{
 				return;
 			}
-			m_matrix[i][j] = '2';
+			m_matrix[i][j] = '0' + m_island_id;
 			search_for_more_land(i + 1, j); // DOWN
 			search_for_more_land(i, j + 1); // RIGHT
 			search_for_more_land(i -1 , j); // TOP
@@ -74,6 +75,7 @@ namespace NumberOfIslands
 					{
 						search_for_more_land(i, j);
 						no_of_islands++;
+						m_island_id++;
 						print();
 					}
 				}
