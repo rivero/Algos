@@ -100,7 +100,7 @@ namespace GroupShiftedStrings
 		  return res;
 		}
 
-		vector< vector<string> >process(vector<string> strings)
+		vector< vector<string> >groupStrings(vector<string> strings)
 		{
 		  map< vector<int>, vector<string> > m;
 		  for(auto s: strings)
@@ -164,15 +164,15 @@ namespace GroupShiftedStrings
 			unordered_map<string, vector<string> > mp;
 			for (string s : strings)
 			{
-				cout << "encoding " << s << "\n";
+				//cout << "encoding " << s << "\n";
 				mp[shift(s)].push_back(s);
 			}
 
-			for (auto& [str, vec]: mp)
-			{
-				cout << "str [" << str << "]\nvec:\n";
-				printv(vec);
-			}
+			//for (auto& [str, vec]: mp)
+			//{
+			//	cout << "str [" << str << "]\nvec:\n";
+			//	printv(vec);
+			//}
 
 			vector<vector<string> > groups;
 
@@ -183,17 +183,88 @@ namespace GroupShiftedStrings
 			return groups;
 		}
 
-	};	void process()
+	};		
+
+	class SolutionJ
 	{
-		Solution sol;
-		vector<string> strings
+		/*
+		My Solution
+
+		abc ->encoding ->   vector {1, 1} => map key
+		bcd ->              vector {1, 1}
+		acef ->             vector {2, 2, 1}
+		*/
+		vector<int> encode(string str)
 		{
-			"abc","bcd","acef","xyz","az","ba","a","z"
-		};
-		auto res = sol.groupStrings(strings);
-		for (auto& elem: res)
+			vector <int> res;
+			// edge case 1: empty string
+			if (str.empty())
+			{
+				return res;
+			}
+			// edge case 2: str.len == 1
+			if (str.size() == 1)
+			{
+				res.push_back(0);
+				return res;
+			}
+
+			for (int i = 1; i < str.size(); i++)
+			{
+				auto dist = str[i] - str[i - 1];
+				if (dist < 0)
+					dist += 26;
+
+				res.push_back(dist);
+			}
+			return res;
+		}
+	public:
+		vector< vector<string> >groupStrings(vector<string> strings)
 		{
-			printv(elem);
+			map< vector<int>, vector<string> > m;
+			for (auto s : strings)
+			{
+				auto enc = encode(s);
+				m[enc].push_back(s);
+			}
+			vector <  vector<string> > res;
+			for (auto [envec, strvec] : m)
+			{
+				res.push_back(strvec);
+			}
+			return res;
+		}
+
+	};
+	
+	void process()
+	{
+		{
+			Solution sol;
+			vector<string> strings
+			{
+				"abc","bcd","acef","xyz","az","ba","a","z"
+			};
+			auto res = sol.groupStrings(strings);
+			for (auto& elem : res)
+			{
+				printv(elem);
+			}
+
+		}
+		{
+			SolutionJ sol;
+			vector<string> strings
+			{
+				"abc","bcd","acef","xyz","az","ba","a","z"
+			};
+			auto res = sol.groupStrings(strings);
+			for (auto& elem : res)
+			{
+				printv(elem);
+			}
+
 		}
 	}
 }
