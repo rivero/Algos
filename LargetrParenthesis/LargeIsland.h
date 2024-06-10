@@ -44,27 +44,9 @@ namespace LargeIsland
 	*/
 #define PRINTV
 
-	class Solution
+
+	struct SolutionBase
 	{
-		vector <vector<int> > m_directions{ {0,1},{0,-1},{1,0},{-1,0}, };// up, down, right, left
-		int m_rows{}, m_cols{}, m_max{INT_MIN};
-		vector< vector<int> > m_matrix;
-		size_t m_island_id{ 2 };
-		map<int, int> m_IdAreaMap;
-
-		int landSize(int row, int col)
-		{
-			if (row < 0 || row >= m_rows || col < 0 || col >= m_cols || m_matrix[row][col] != 1)
-				return 0;
-			
-			m_matrix[row][col] = m_island_id;
-			auto down = landSize(row + 1, col); // DOWN
-			auto right = landSize(row, col + 1); // RIGHT
-			auto up = landSize(row - 1, col); // UP
-			auto left = landSize(row, col - 1); // LEFT
-			return down + up + left + right + 1; // return 1 because we need to at least add this cell since it is == 1
-		}
-
 		void print() const
 		{
 #ifdef PRINTV
@@ -76,6 +58,30 @@ namespace LargeIsland
 			cout << "\n";
 #endif
 		}
+		vector <vector<int> > m_directions{ {0,1},{0,-1},{1,0},{-1,0}, };// up, down, right, left
+		int m_rows{}, m_cols{}, m_max{ 0 };
+		vector< vector<int> > m_matrix;
+		size_t m_island_id{ 2 };
+		map<int, int> m_IdAreaMap;
+
+		int landSize(int row, int col)
+		{
+			if (row < 0 || row >= m_rows || col < 0 || col >= m_cols || m_matrix[row][col] != 1)
+				return 0;
+
+			m_matrix[row][col] = m_island_id;
+			auto down = landSize(row + 1, col); // DOWN
+			auto right = landSize(row, col + 1); // RIGHT
+			auto up = landSize(row - 1, col); // UP
+			auto left = landSize(row, col - 1); // LEFT
+			return down + up + left + right + 1; // return 1 because we need to at least add this cell since it is == 1
+		}
+	};
+
+	class Solution : private SolutionBase
+	{
+
+
 
 		void get_areas(int row, int col)
 		{
@@ -108,19 +114,38 @@ namespace LargeIsland
 			return true;
 		}
 
+		bool get_max_size()
+		{
+			m_rows = m_matrix.size();
+			if (m_rows == 0)
+			{
+				return false;
+			}
+			print();
+
+			m_cols = m_matrix[0].size();
+			for (int row = 0; row < m_rows; row++)
+			{
+				for (int col = 0; col < m_cols; col++)
+				{
+					if (m_matrix[row][col] == 1)
+					{
+						auto size = landSize(row, col);
+						m_max = max(m_max, size);
+					}
+				}
+			}
+			return true;
+		}
+
 	public:
 		int maxAreaOfIsland(vector<vector<int>>& grid) 
 		{
 			m_matrix = grid;
-			auto res = get_all_areas();
+			auto res = get_max_size();
 			if (!res)
 			{
 				return 0;
-			}
-			m_max = INT_MIN;
-			for (auto& [is1landId, size]: m_IdAreaMap)
-			{
-				m_max = max(m_max, size);
 			}
 			return m_max;
 		}
@@ -185,6 +210,22 @@ namespace LargeIsland
 					{1,1,0,0,0,},
 					{0,0,1,0,0,},
 					{0,0,0,1,1,}
+				};
+				Solution sol;
+				cout << sol.maxAreaOfIsland(matrix) << "\n";
+			}
+			{
+				// find largest island 2
+				vector<vector<int>> matrix
+				{
+					{0,0,1,0,0,0,0,1,0,0,0,0,0},
+					{0,0,0,0,0,0,0,1,1,1,0,0,0},
+					{0,1,1,0,1,0,0,0,0,0,0,0,0},
+					{0,1,0,0,1,1,0,0,1,0,1,0,0},
+					{0,1,0,0,1,1,0,0,1,1,1,0,0},
+					{0,0,0,0,0,0,0,0,0,0,1,0,0},
+					{0,0,0,0,0,0,0,1,1,1,0,0,0},
+					{0,0,0,0,0,0,0,1,1,0,0,0,0}
 				};
 				Solution sol;
 				cout << sol.maxAreaOfIsland(matrix) << "\n";
