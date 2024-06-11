@@ -194,6 +194,7 @@
     <ClInclude Include="Toeplitz.h" />
     <ClInclude Include="TopKElements.h" />
     <ClInclude Include="ValidAnagram.h" />
+    <ClInclude Include="ValidNumber.h" />
     <ClInclude Include="ValidPalindrome.h" />
     <ClInclude Include="ValidWordAbbreviation.h" />
   </ItemGroup>

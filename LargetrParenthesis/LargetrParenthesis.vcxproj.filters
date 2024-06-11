@@ -167,5 +167,8 @@
     <ClInclude Include="LargeIsland.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ValidNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

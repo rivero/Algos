@@ -115,6 +115,7 @@ void printm(const map<T, U>& counts)
 #include "pow.h"
 #include "GroupShiftedStrings.h"
 #include "LargeIsland.h"
+#include "ValidNumber.h"
 struct tests
 {
 	string m_tests;
@@ -128,7 +129,7 @@ struct tests
 
 int main()
 {
-	tests t("LargeIsland");
+	tests t("ValidNumber");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -798,6 +799,10 @@ int main()
 	if (t.contains("LargeIsland"))
 	{
 		LargeIsland::process();
+	}
+	if (t.contains("ValidNumber"))
+	{
+		ValidNumber::process();
 	}
 }
 

@@ -206,6 +206,7 @@ namespace LargeIsland
 	{
 		if (true)
 		{
+			cout << "find largest island\n";
 			{
 				// find largest island
 				vector<vector<int>> matrix
@@ -237,6 +238,8 @@ namespace LargeIsland
 		}
 		if(true)
 		{
+			cout << "find largest if we change from 0 to 1\n";
+
 			// find largest if we change from 0 to 1
 			vector<vector<int>> matrix
 			{
