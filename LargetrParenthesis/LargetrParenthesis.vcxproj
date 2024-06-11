@@ -185,6 +185,7 @@
     <ClInclude Include="RandomPickWithWeight.h" />
     <ClInclude Include="RecursiveRabbitInterview.h" />
     <ClInclude Include="ReverseLinkedList.h" />
+    <ClInclude Include="ShortestPathBinaryMatrix.h" />
     <ClInclude Include="SimplifyPath.h" />
     <ClInclude Include="Solution.h" />
     <ClInclude Include="SparseVector.h" />

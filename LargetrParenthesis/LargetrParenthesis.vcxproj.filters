@@ -170,5 +170,8 @@
     <ClInclude Include="ValidNumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShortestPathBinaryMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

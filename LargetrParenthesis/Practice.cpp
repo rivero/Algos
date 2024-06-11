@@ -116,6 +116,7 @@ void printm(const map<T, U>& counts)
 #include "GroupShiftedStrings.h"
 #include "LargeIsland.h"
 #include "ValidNumber.h"
+#include "ShortestPathBinaryMatrix.h"
 struct tests
 {
 	string m_tests;
@@ -129,7 +130,7 @@ struct tests
 
 int main()
 {
-	tests t("ValidNumber");
+	tests t("ShortestPathBinaryMatrix");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -803,6 +804,10 @@ int main()
 	if (t.contains("ValidNumber"))
 	{
 		ValidNumber::process();
+	}
+	if (t.contains("ShortestPathBinaryMatrix"))
+	{
+		ShortestPathBinaryMatrix::process();
 	}
 }
 
