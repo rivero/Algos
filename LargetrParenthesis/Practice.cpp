@@ -760,7 +760,6 @@ int main()
 	{
 		IncreasingTripleSequence::process();
 	}
-#pragma endregion
 	if (t.contains("MinimumAdjacentSwapsToMakleValidArray"))
 	{
 		MinimumAdjacentSwapsToMakleValidArray::process();
@@ -805,6 +804,7 @@ int main()
 	{
 		ValidNumber::process();
 	}
+#pragma endregion
 	if (t.contains("ShortestPathBinaryMatrix"))
 	{
 		ShortestPathBinaryMatrix::process();
