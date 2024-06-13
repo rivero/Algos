@@ -37,6 +37,10 @@ namespace NumberOfIslands
 	n == grid[i].length
 	1 <= m, n <= 300
 	grid[i][j] is '0' or '1'.
+
+	Time complexity: O(n^2) or O(r*c)
+	Space complexity: O(r * c) because the recursion ; if not couting recursion is O(1)
+
 	*/
 #define PRINTV
 

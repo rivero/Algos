@@ -1,6 +1,7 @@
 #pragma once
 /**
  *
+ * https://leetcode.com/problems/diameter-of-binary-tree
  543. Diameter of Binary Tree
 
  Given the root of a binary tree, return the length of the diameter of the tree.
@@ -31,43 +32,73 @@ Output: 1
   - the maximum distance is given by the max of the previous and new accumulated
 
   */
-struct BinayTreeDiameter : public timeit
+
+namespace BinayTreeDiameter
 {
-	struct TreeNode {
-		int val{};
-		TreeNode* left{ nullptr };
-		TreeNode* right{ nullptr };
-		TreeNode() = default;
-		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+	struct BinayTreeDiameter : public timeit
+	{
+		struct TreeNode {
+			int val{};
+			TreeNode* left{ nullptr };
+			TreeNode* right{ nullptr };
+			TreeNode() = default;
+			TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+			TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+		};
+		int diameterOfBinaryTree(TreeNode* root)
+		{
+			int diameter = 0;
+			helper("root", root, diameter);
+			return diameter;
+		}
+	private:
+		int helper(const char* const txt, TreeNode* node, int& diameter)
+		{
+			// terminate
+			if (!node)
+				return 0;
+
+			// enumerate
+			int left = helper("left", node->left, diameter);
+			int right = helper("right", node->right, diameter);
+
+			// update the diameter
+			diameter = max(diameter, left + right);
+
+			//cout << txt << " (" << node->val << ")";
+			//cout << "\tdiameter: " << diameter;
+			//cout << " left: " << left;
+			//cout << " right: " << right;
+			//cout << "\n";
+
+			// return the distance between the farest leaf and the current `node`
+			return 1 + max(left, right);
+		}
 	};
-	int diameterOfBinaryTree(TreeNode* root)
+
+	void process()
 	{
-		int diameter = 0;
-		helper("root", root, diameter);
-		return diameter;
+		{
+			BinayTreeDiameter b;
+			auto root = new BinayTreeDiameter::TreeNode(1);
+			root->left = new BinayTreeDiameter::TreeNode(2);
+			root->right = new BinayTreeDiameter::TreeNode(3);
+			root->left->left = new BinayTreeDiameter::TreeNode(4);
+			root->left->right = new BinayTreeDiameter::TreeNode(5);
+			int val = b.diameterOfBinaryTree(root);
+			assert(val == 3);
+			cout << "result: " << val << "\n";
+
+		}
+		{
+			BinayTreeDiameter b;
+			auto root = new BinayTreeDiameter::TreeNode(1);
+			root->left = new BinayTreeDiameter::TreeNode(2);
+			int val = b.diameterOfBinaryTree(root);
+			assert(val == 1);
+			cout << "result: " << val << "\n";
+
+		}
+
 	}
-private:
-	int helper(const char* const txt, TreeNode* node, int& diameter)
-	{
-		// terminate
-		if (!node)
-			return 0;
-
-		// enumerate
-		int left = helper("left", node->left, diameter);
-		int right = helper("right", node->right, diameter);
-
-		// update the diameter
-		diameter = max(diameter, left + right);
-
-		//cout << txt << " (" << node->val << ")";
-		//cout << "\tdiameter: " << diameter;
-		//cout << " left: " << left;
-		//cout << " right: " << right;
-		//cout << "\n";
-
-		// return the distance between the farest leaf and the current `node`
-		return 1 + max(left, right);
-	}
-};
+}

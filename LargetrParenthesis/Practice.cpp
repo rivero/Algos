@@ -130,7 +130,7 @@ struct tests
 
 int main()
 {
-	tests t("ShortestPathBinaryMatrix");
+	tests t("BinayTreeDiameter");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -362,29 +362,9 @@ int main()
 		cout << fixed << setprecision(12) <<movingAverage.next(3) << "\n"; // return 4.66667 = (1 + 10 + 3) / 3
 		cout << fixed << setprecision(12) <<movingAverage.next(5) << "\n"; // return 6.0 = (10 + 3 + 5) / 3
 	}
-	if (false)
+	if (t.contains("BinayTreeDiameter"))
 	{
-		{
-			BinayTreeDiameter b;
-			auto root = new BinayTreeDiameter::TreeNode(1);
-			root->left = new BinayTreeDiameter::TreeNode(2);
-			root->right = new BinayTreeDiameter::TreeNode(3);
-			root->left->left = new BinayTreeDiameter::TreeNode(4);
-			root->left->right = new BinayTreeDiameter::TreeNode(5);
-			int val = b.diameterOfBinaryTree(root);
-			assert(val == 3);
-			cout << "result: " <<val << "\n";
-
-		}
-		{
-			BinayTreeDiameter b;
-			auto root = new BinayTreeDiameter::TreeNode(1);
-			root->left = new BinayTreeDiameter::TreeNode(2);
-			int val = b.diameterOfBinaryTree(root);
-			assert(val == 1);
-			cout << "result: " << val << "\n";
-
-		}
+		BinayTreeDiameter::process();
 	}
 	if (false)
 	{
