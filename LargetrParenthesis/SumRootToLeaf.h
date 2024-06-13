@@ -57,7 +57,21 @@ The number of nodes in the tree is in the range [1, 1000].
 0 <= Node.val <= 9
 The depth of the tree will not exceed 10.
 	
+	Solution
+
+	multiply the val by 10 each recursion and add the results
+
+	example
+		4
+	   / \
+	  9	  0
+
+	root (4) : 10 * 0 + val = 0 + 4 = 4
+	left (9) : 10 * 4 + 9 = 40 + 9 = 49
+	right (0): 10 * 4 + 0 = 40 + 0 = 40
 	
+	Time complexity: O(n) where n is the number of elements in the tree
+	Space complexity: O(n) where n is the hight of the tree because the recursion.
 	*/
 
 
@@ -93,7 +107,16 @@ The depth of the tree will not exceed 10.
 			auto root = new TreeNode(1);
 			root->left = new TreeNode(2);
 			root->right = new TreeNode(3);
-			cout << sol.sumNumbers(root);
+			cout << sol.sumNumbers(root) << "\n";
+		}
+		{
+			Solution sol;
+			auto root = new TreeNode(4);
+			root->left = new TreeNode(9);
+			root->right = new TreeNode(0);
+			root->left->left = new TreeNode(5);
+			root->left->right = new TreeNode(1);
+			cout << sol.sumNumbers(root) << "\n";
 		}
 
 	}

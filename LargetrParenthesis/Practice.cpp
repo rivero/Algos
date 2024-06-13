@@ -130,7 +130,7 @@ struct tests
 
 int main()
 {
-	tests t("BinayTreeDiameter");
+	tests t("SumRootToLeaf");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
