@@ -163,6 +163,7 @@
     <ClInclude Include="IncreasingTripleSequence.h" />
     <ClInclude Include="InsertSortedCircularList.h" />
     <ClInclude Include="IntervalListIntersections.h" />
+    <ClInclude Include="IslandPerimeter.h" />
     <ClInclude Include="KClosestPointsToTheOrigin.h" />
     <ClInclude Include="KthLargestElement.h" />
     <ClInclude Include="LargeIsland.h" />

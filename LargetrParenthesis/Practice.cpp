@@ -117,6 +117,7 @@ void printm(const map<T, U>& counts)
 #include "LargeIsland.h"
 #include "ValidNumber.h"
 #include "ShortestPathBinaryMatrix.h"
+#include "IslandPerimeter.h"
 struct tests
 {
 	string m_tests;
@@ -130,7 +131,7 @@ struct tests
 
 int main()
 {
-	tests t("SumRootToLeaf");
+	tests t("IslandPerimeter");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -788,6 +789,10 @@ int main()
 	if (t.contains("ShortestPathBinaryMatrix"))
 	{
 		ShortestPathBinaryMatrix::process();
+	}
+	if (t.contains("IslandPerimeter"))
+	{
+		IslandPerimeter::process();
 	}
 }
 
