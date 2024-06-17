@@ -55,39 +55,48 @@ namespace AllNodesInDistanceKInBinaryTree
 	    TreeNode *right;
 	    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 	};
-	
-	class Solution 
-	{
-	public:
-		int m_n;
-		void convertBinaryTreeToUndirectedGraph(TreeNode* root, TreeNode* parent, unordered_map<TreeNode*, vector<TreeNode*>>& graph) {
-			if (!root) 
-			{
-				return;
-			}
+#define PRINTV
 
-			if (parent) 
-			{
-				m_n++;
-				graph[root].push_back(parent);
-				graph[parent].push_back(root);
-			}
-
-			convertBinaryTreeToUndirectedGraph(root->left, root, graph);
-			convertBinaryTreeToUndirectedGraph(root->right, root, graph);
+	void convertBinaryTreeToUndirectedGraph(TreeNode* root, TreeNode* parent, unordered_map<TreeNode*, vector<TreeNode*>>& graph) {
+		if (!root)
+		{
+			return;
 		}
 
-		vector<int> distanceK(TreeNode* root, TreeNode* target, int k) 
+		if (parent)
 		{
-			vector<int> result;
-			if (!root || !target) 
-			{
-				return result;
-			}
+			graph[root].push_back(parent);
+			graph[parent].push_back(root);
+		}
 
+		convertBinaryTreeToUndirectedGraph(root->left, root, graph);
+		convertBinaryTreeToUndirectedGraph(root->right, root, graph);
+	}
+	class SolutionCOPIED
+	{
+	public:
+
+		vector<int> distanceK(TreeNode* root, TreeNode* target, int k)
+		{			
+			if (k == 0)
+				return {target->val};
+
+			if (!root || !target)
+				return {};
+			
 			unordered_map<TreeNode*, vector<TreeNode*>> graph;
 			convertBinaryTreeToUndirectedGraph(root, nullptr, graph);
-
+#ifdef PRINTV
+			for (auto& [key, val ]: graph)
+			{
+				cout << key->val << ":\t";
+				for (auto& el: val)
+				{
+					cout << el->val << " ";
+				}
+				cout << "\n";
+			}
+#endif
 			queue<TreeNode*> q;
 			unordered_set<TreeNode*> visited;
 			map<TreeNode*, int> distance;
@@ -96,26 +105,96 @@ namespace AllNodesInDistanceKInBinaryTree
 			visited.insert(target);
 			distance[target] = 0;
 
-			while (!q.empty()) 
+			vector<int> result;
+			while (!q.empty())
 			{
-				TreeNode* root = q.front();
+				auto node = q.front();
 				q.pop();
-				if (distance[root] == k) 
+				if (distance[node] == k)
 				{
-					result.push_back(root->val);
+					result.push_back(node->val);
 				}
-				for (TreeNode* edge : graph[root]) 
+				for (auto edge : graph[node])
 				{
-					if ( !visited.contains(edge) ) 
+					if (!visited.contains(edge))
 					{
 						visited.insert(edge);
-						distance[edge] = distance[root] + 1;
+						distance[edge] = distance[node] + 1;
 						q.push(edge);
 					}
 				}
 			}
 
 			return result;
+		}
+	};
+
+
+	class Solution 
+	{
+	public:
+		vector<int> distanceK(TreeNode* root, TreeNode* target, int k) 
+		{
+			if (k == 0)
+			{
+				return { target->val };
+			}
+
+			unordered_map<TreeNode*, vector<TreeNode*> > graph;
+			queue<TreeNode*> q;
+
+			q.push(root);
+
+			while (q.size() > 0)
+			{
+				auto node = q.front();
+				q.pop();
+
+				if (node->left)
+				{
+					graph[node].push_back(node->left);
+					graph[node->left].push_back(node);
+					q.push(node->left);
+				}
+				if (node->right)
+				{
+					graph[node].push_back(node->right);
+					graph[node->right].push_back(node);
+					q.push(node->right);
+				}
+			}
+			vector<int> res;
+			set<TreeNode*> visited{ target };
+			struct elem
+			{
+				TreeNode* node;
+				int distance;
+			};
+			queue<elem> q2;
+			q2.push({ target, 0 });
+
+			while (q2.size() > 0)
+			{
+				elem el = q2.front();
+				q2.pop();
+
+				if (el.distance == k)
+				{
+					res.push_back(el.node->val);
+				}
+				else
+				{
+					for (auto& edge: graph[el.node])
+					{
+						if (!visited.contains(edge))
+						{
+							visited.insert(edge);
+							q2.push({ edge, el.distance + 1 });
+						}
+					}
+				}
+			}
+			return res;
 		}
 	};
 
@@ -133,7 +212,7 @@ namespace AllNodesInDistanceKInBinaryTree
 		root->right->left = new TreeNode(0);
 		root->right->right = new TreeNode(8);
 
-		Solution sol;
+		SolutionCOPIED sol;
 		auto res = sol.distanceK(root, root->left, 2);
 		printv(res);
 
