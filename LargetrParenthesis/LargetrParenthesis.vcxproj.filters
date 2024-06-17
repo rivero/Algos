@@ -176,5 +176,8 @@
     <ClInclude Include="IslandPerimeter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AllNodesInDistanceKInBinaryTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

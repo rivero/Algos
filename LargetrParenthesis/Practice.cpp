@@ -118,6 +118,7 @@ void printm(const map<T, U>& counts)
 #include "ValidNumber.h"
 #include "ShortestPathBinaryMatrix.h"
 #include "IslandPerimeter.h"
+#include "AllNodesInDistanceKInBinaryTree.h"
 struct tests
 {
 	string m_tests;
@@ -131,7 +132,7 @@ struct tests
 
 int main()
 {
-	tests t("IslandPerimeter");
+	tests t("AllNodesInDistanceKInBinaryTree");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -793,6 +794,10 @@ int main()
 	if (t.contains("IslandPerimeter"))
 	{
 		IslandPerimeter::process();
+	}
+	if (t.contains("AllNodesInDistanceKInBinaryTree"))
+	{
+		AllNodesInDistanceKInBinaryTree::process();
 	}
 }
 
