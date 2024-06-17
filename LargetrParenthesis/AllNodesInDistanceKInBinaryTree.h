@@ -59,68 +59,63 @@ namespace AllNodesInDistanceKInBinaryTree
 	class Solution 
 	{
 	public:
+		int m_n;
+		void convertBinaryTreeToUndirectedGraph(TreeNode* root, TreeNode* parent, unordered_map<TreeNode*, vector<TreeNode*>>& graph) {
+			if (!root) 
+			{
+				return;
+			}
+
+			if (parent) 
+			{
+				m_n++;
+				graph[root].push_back(parent);
+				graph[parent].push_back(root);
+			}
+
+			convertBinaryTreeToUndirectedGraph(root->left, root, graph);
+			convertBinaryTreeToUndirectedGraph(root->right, root, graph);
+		}
+
 		vector<int> distanceK(TreeNode* root, TreeNode* target, int k) 
 		{
-			if (k == 0)
+			vector<int> result;
+			if (!root || !target) 
 			{
-				return { target->val };
+				return result;
 			}
 
-			map<TreeNode*, vector<TreeNode*> > graph;
+			unordered_map<TreeNode*, vector<TreeNode*>> graph;
+			convertBinaryTreeToUndirectedGraph(root, nullptr, graph);
+
 			queue<TreeNode*> q;
+			unordered_set<TreeNode*> visited;
+			map<TreeNode*, int> distance;
 
-			q.push(root);
+			q.push(target);
+			visited.insert(target);
+			distance[target] = 0;
 
-			while (q.size() > 0)
+			while (!q.empty()) 
 			{
-				auto node = q.front();
+				TreeNode* root = q.front();
 				q.pop();
-
-				if (node->left)
+				if (distance[root] == k) 
 				{
-					graph[node].push_back(node->left);
-					graph[node->left].push_back(node);
-					q.push(node->left);
+					result.push_back(root->val);
 				}
-				if (node->right)
+				for (TreeNode* edge : graph[root]) 
 				{
-					graph[node].push_back(node->right);
-					graph[node->right].push_back(node);
-					q.push(node->right);
-				}
-			}
-			vector<int> res;
-			set<TreeNode*> visited;
-			struct elem
-			{
-				TreeNode* node;
-				int distance;
-			};
-			queue<elem> q2;
-			q2.push({ target, 0 });
-
-			while (q2.size() > 0)
-			{
-				auto el = q2.front();
-				q2.pop();
-
-				if (el.distance == k)
-				{
-					res.push_back(el.node->val);
-				}
-				else
-				{
-					for (auto& [treeNode, vec]: graph)
+					if ( !visited.contains(edge) ) 
 					{
-						if (!visited.contains(treeNode))
-						{
-							visited.insert(treeNode);
-							q2.push({ treeNode, el.distance + 1 });
-						}
+						visited.insert(edge);
+						distance[edge] = distance[root] + 1;
+						q.push(edge);
 					}
 				}
 			}
-			return res;
+
+			return result;
 		}
 	};
 
