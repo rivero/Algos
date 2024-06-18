@@ -179,5 +179,11 @@
     <ClInclude Include="AllNodesInDistanceKInBinaryTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CopyListwWithRandomPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoneGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

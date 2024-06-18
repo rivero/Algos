@@ -119,6 +119,8 @@ void printm(const map<T, U>& counts)
 #include "ShortestPathBinaryMatrix.h"
 #include "IslandPerimeter.h"
 #include "AllNodesInDistanceKInBinaryTree.h"
+#include "CopyListwWithRandomPointer.h"
+#include "CLoneGraph.h"
 struct tests
 {
 	string m_tests;
@@ -132,7 +134,7 @@ struct tests
 
 int main()
 {
-	tests t("AllNodesInDistanceKInBinaryTree");
+	tests t("CloneGraph");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -798,6 +800,14 @@ int main()
 	if (t.contains("AllNodesInDistanceKInBinaryTree"))
 	{
 		AllNodesInDistanceKInBinaryTree::process();
+	}
+	if (t.contains("CopyListwWithRandomPointer"))
+	{
+		CopyListwWithRandomPointer::process();
+	}
+	if (t.contains("CloneGraph"))
+	{
+		CloneGraph::process();
 	}
 }
 
