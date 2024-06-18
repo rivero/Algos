@@ -185,5 +185,11 @@
     <ClInclude Include="CLoneGraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PopulatingNextRightPointersEachNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubarraySumEqualsK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

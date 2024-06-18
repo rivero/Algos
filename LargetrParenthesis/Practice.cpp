@@ -121,6 +121,7 @@ void printm(const map<T, U>& counts)
 #include "AllNodesInDistanceKInBinaryTree.h"
 #include "CopyListwWithRandomPointer.h"
 #include "CLoneGraph.h"
+#include "SubarraySumEqualsK.h"
 struct tests
 {
 	string m_tests;
@@ -134,7 +135,7 @@ struct tests
 
 int main()
 {
-	tests t("CloneGraph");
+	tests t("SubarraySumEqualsK");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -808,6 +809,10 @@ int main()
 	if (t.contains("CloneGraph"))
 	{
 		CloneGraph::process();
+	}
+	if (t.contains("SubarraySumEqualsK"))
+	{
+		SubarraySumEqualsK::process();
 	}
 }
 
