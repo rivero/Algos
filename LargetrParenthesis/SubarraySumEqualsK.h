@@ -29,12 +29,12 @@ namespace SubarraySumEqualsK
 	-107 <= k <=
 
 
-	Solution
-	https://leetcode.com/problems/subarray-sum-equals-k/solutions/1760146/c-easy-solution-prefix-sum-map-easy-understanding-hashmap
 	*/
 	class Solution {
 	public:
 		//PLEASE UPVOTE IF YOU LIKE MY SOLUTION  :)
+		// 	https://leetcode.com/problems/subarray-sum-equals-k/solutions/1760146/c-easy-solution-prefix-sum-map-easy-understanding-hashmap
+
 		int subarraySum(vector<int> nums, int k) 
 		{
 			unordered_map<int, int> mp;
@@ -57,12 +57,35 @@ namespace SubarraySumEqualsK
 		}
 	};
 
+
+	class SolutionBruteForce 
+	{
+		// https://leetcode.com/problems/subarray-sum-equals-k/solutions/5281215/best-approach/
+	public:
+		int subarraySum(vector<int>& nums, int k) 
+		{
+			int count = 0;
+			int n = nums.size();
+			for (int i = 0; i < n; i++) 
+			{
+				int sum = 0;
+				for (int j = i; j < n; j++) 
+				{
+					sum = sum + nums[j];
+					if (sum == k)
+						count++;
+				}
+			}
+			return count;
+		}
+	};
 	void process()
 	{
 		{
 			Solution sol;
 			cout << sol.subarraySum({ 1,1,1 }, 2) << "\n";
 			cout << sol.subarraySum({ 1,2,3 }, 3) << "\n";
+			cout << sol.subarraySum({ 1,-1,0 }, 0) << "\n";
 		}
 
 	}
