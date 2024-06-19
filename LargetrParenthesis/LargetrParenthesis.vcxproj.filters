@@ -197,5 +197,8 @@
     <ClInclude Include="BinaryTreeRightSideView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClosesetBinarySearchTreeValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

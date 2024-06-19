@@ -159,6 +159,7 @@
     <ClInclude Include="BTreeToDLink.h" />
     <ClInclude Include="BuildingsWithAnOceanView.h" />
     <ClInclude Include="CLoneGraph.h" />
+    <ClInclude Include="ClosesetBinarySearchTreeValue.h" />
     <ClInclude Include="CopyListwWithRandomPointer.h" />
     <ClInclude Include="CustomSortString.h" />
     <ClInclude Include="findinter.h" />

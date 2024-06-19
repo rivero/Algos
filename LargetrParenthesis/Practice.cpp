@@ -21,6 +21,7 @@
 #include <array>
 #include <cctype>
 #include <cmath>
+#include <limits>
 using namespace std;
 
 template <typename T>
@@ -124,6 +125,7 @@ void printm(const map<T, U>& counts)
 #include "SubarraySumEqualsK.h"
 #include "FindPeakElement.h"
 #include "BinaryTreeRightSideView.h"
+#include "ClosesetBinarySearchTreeValue.h"
 struct tests
 {
 	string m_tests;
@@ -137,7 +139,7 @@ struct tests
 
 int main()
 {
-	tests t("BinaryTreeRightSideView");
+	tests t("ClosesetBinarySearchTreeValue");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -823,6 +825,10 @@ int main()
 	if (t.contains("BinaryTreeRightSideView"))
 	{
 		BinaryTreeRightSideView::process();
+	}
+	if (t.contains("ClosesetBinarySearchTreeValue"))
+	{
+		ClosesetBinarySearchTreeValue::process();
 	}
 }
 
