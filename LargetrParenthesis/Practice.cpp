@@ -122,6 +122,8 @@ void printm(const map<T, U>& counts)
 #include "CopyListwWithRandomPointer.h"
 #include "CLoneGraph.h"
 #include "SubarraySumEqualsK.h"
+#include "FindPeakElement.h"
+#include "BinaryTreeRightSideView.h"
 struct tests
 {
 	string m_tests;
@@ -135,7 +137,7 @@ struct tests
 
 int main()
 {
-	tests t("SubarraySumEqualsK");
+	tests t("BinaryTreeRightSideView");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -813,6 +815,14 @@ int main()
 	if (t.contains("SubarraySumEqualsK"))
 	{
 		SubarraySumEqualsK::process();
+	}
+	if (t.contains("FindPeakElement"))
+	{
+		FindPeakElement::process();
+	}
+	if (t.contains("BinaryTreeRightSideView"))
+	{
+		BinaryTreeRightSideView::process();
 	}
 }
 

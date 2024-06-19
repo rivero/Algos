@@ -191,5 +191,11 @@
     <ClInclude Include="SubarraySumEqualsK.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FindPeakElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryTreeRightSideView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

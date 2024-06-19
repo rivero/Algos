@@ -154,6 +154,7 @@
     <ClInclude Include="BasicCalculator.h" />
     <ClInclude Include="BinarySearch.h" />
     <ClInclude Include="BinaryTreeDiameter.h" />
+    <ClInclude Include="BinaryTreeRightSideView.h" />
     <ClInclude Include="BinaryTreeVerticalOrderTransversal.h" />
     <ClInclude Include="BTreeToDLink.h" />
     <ClInclude Include="BuildingsWithAnOceanView.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="CustomSortString.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />
+    <ClInclude Include="FindPeakElement.h" />
     <ClInclude Include="GroupShiftedStrings.h" />
     <ClInclude Include="IncreasingTripleSequence.h" />
     <ClInclude Include="InsertSortedCircularList.h" />
