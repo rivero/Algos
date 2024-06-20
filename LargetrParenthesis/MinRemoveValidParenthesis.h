@@ -1,5 +1,6 @@
 #pragma once
 /*
+* https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/description/
 1249. Minimum Remove to Make Valid Parentheses
 
 Given a string s of '(' , ')' and lowercase English characters.
@@ -45,42 +46,66 @@ s[i] is either '(' , ')', or lowercase English letter.
 
 
 */
-struct MinRemoveValidParenthesis : public timeit
+namespace MinRemoveValidParenthesis
 {
-	string minRemoveToMakeValid(string s)
+	struct Solution : public timeit
 	{
-		queue<int> q;
-		vector<int> v;
-		for (size_t i = 0; i < s.size(); i++)
+		string minRemoveToMakeValid(string s)
 		{
-			if (s[i] == '(')
+			queue<int> q;
+			vector<int> v;
+			for (size_t i = 0; i < s.size(); i++)
 			{
-				q.push(i);
-			}
-			else if (s[i] == ')')
-			{
-				if (q.size() > 0)
+				if (s[i] == '(')
 				{
-					q.pop();
+					q.push(i);
 				}
-				else
-					v.push_back(i);
+				else if (s[i] == ')')
+				{
+					if (q.size() > 0)
+					{
+						q.pop();
+					}
+					else
+						v.push_back(i);
+				}
 			}
-		}
-		while (!q.empty())
-		{
-			v.push_back(q.front());
-			q.pop();
-		}
-		string res;
-		for (size_t i = 0; i < s.size(); i++)
-		{
-			auto found = find(v.begin(), v.end(), i) != v.end();
-			if (!found)
+			while (!q.empty())
 			{
-				res += s[i];
+				v.push_back(q.front());
+				q.pop();
 			}
+			string res;
+			for (size_t i = 0; i < s.size(); i++)
+			{
+				auto found = find(v.begin(), v.end(), i) != v.end();
+				if (!found)
+				{
+					res += s[i];
+				}
+			}
+			return res;
 		}
-		return res;
+	};
+
+	void process()
+	{
+		{
+			Solution v;
+			cout << v.minRemoveToMakeValid("lee(t(c)o)de)") << "\n";
+
+		}
+		{
+			Solution v;
+			cout << v.minRemoveToMakeValid("a)b(c)d") << "\n";
+
+		}
+		{
+			Solution v;
+			cout << v.minRemoveToMakeValid("))((") << "\n";
+
+		}
+
 	}
-};
+
+}

@@ -67,6 +67,7 @@ void printm(const map<T, U>& counts)
 	cout << "\n";
 }
 
+#pragma region INCLUDES
 #include "timeit.h"
 #include "BinarySearch.h"
 #include "Solution.h"
@@ -126,6 +127,8 @@ void printm(const map<T, U>& counts)
 #include "FindPeakElement.h"
 #include "BinaryTreeRightSideView.h"
 #include "ClosesetBinarySearchTreeValue.h"
+
+#pragma endgerion INCLUDES
 struct tests
 {
 	string m_tests;
@@ -139,7 +142,7 @@ struct tests
 
 int main()
 {
-	tests t("ValidWordAbbreviation");
+	tests t("NestedListWeightSum");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -420,35 +423,18 @@ int main()
 			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
 		}
 	}
-	if (false)
+	if (t.contains("MinRemoveValidParenthesis"))
 	{
-		{
-			MinRemoveValidParenthesis v;
-			cout << v.minRemoveToMakeValid("lee(t(c)o)de)") << "\n";
-
-		}
-		{
-			MinRemoveValidParenthesis v;
-			cout << v.minRemoveToMakeValid("a)b(c)d") << "\n";
-
-		}
-		{
-			MinRemoveValidParenthesis v;
-			cout << v.minRemoveToMakeValid("))((") << "\n";
-
-		}
+		MinRemoveValidParenthesis::process();
 	}
 	if (t.contains("BinaryTreeVerticalOrderTransversal"))
 	{
 		BinaryTreeVerticalOrderTransversal::process();
 	}
 
-	if (false)
+	if (t.contains("NestedListWeightSum"))
 	{
-		NestedInteger n1(1);
-
-		NestedListWeightSum n;
-		 
+		NestedListWeightSum::process();
 	}
 	if (false)
 	{
