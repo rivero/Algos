@@ -139,7 +139,7 @@ struct tests
 
 int main()
 {
-	tests t("ClosesetBinarySearchTreeValue");
+	tests t("BinaryTreeVerticalOrderTransversal");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -469,120 +469,9 @@ int main()
 
 		}
 	}
-	if (false)
+	if (t.contains("BinaryTreeVerticalOrderTransversal"))
 	{
-		if(false)
-		{
-			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
-
-			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
-			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(20);
-
-			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(15);
-			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
-
-			BinaryTreeVerticalOrderTransversal b;
-			auto res = b.verticalOrder(root);
-
-			for (auto elem : res)
-			{
-				cout << "[";
-				printv(elem, false);
-				cout << "],";
-			}
-			cout << "\n";
-
-		}
-		if (false)
-		{
-			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
-
-			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
-			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(8);
-
-			root->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(4);
-			root->left->right = new BinaryTreeVerticalOrderTransversal::TreeNode(0);
-
-			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(1);
-			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
-
-			BinaryTreeVerticalOrderTransversal b;
-			auto res = b.verticalOrder(root);
-
-			for (auto elem : res)
-			{
-				cout << "[";
-				printv(elem, false);
-				cout << "],";
-			}
-			cout << "\n";
-
-		}
-		if (false)
-		{
-			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
-
-			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
-			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(8);
-
-			root->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(4);
-			root->left->right = new BinaryTreeVerticalOrderTransversal::TreeNode(0);
-
-			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(1);
-			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
-
-			root->left->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(5);
-			root->left->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(2);
-
-			BinaryTreeVerticalOrderTransversal b;
-			auto res = b.verticalOrder(root);
-
-			for (auto elem : res)
-			{
-				cout << "[";
-				printv(elem, false);
-				cout << "],";
-			}
-			cout << "\n";
-
-		}
-		if (true)
-		{
-			auto root = new BinaryTreeVerticalOrderTransversal::TreeNode(3);
-
-			root->left = new BinaryTreeVerticalOrderTransversal::TreeNode(9);
-			root->right = new BinaryTreeVerticalOrderTransversal::TreeNode(8);
-
-			root->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(4);
-			root->left->right = new BinaryTreeVerticalOrderTransversal::TreeNode(0);
-
-			root->right->left = new BinaryTreeVerticalOrderTransversal::TreeNode(1);
-			root->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(7);
-
-			root->left->right->right = new BinaryTreeVerticalOrderTransversal::TreeNode(2);
-			root->right->left->left = new BinaryTreeVerticalOrderTransversal::TreeNode(5);
-
-			BinaryTreeVerticalOrderTransversal b;
-			auto res = b.verticalOrder(root);
-
-			for (auto elem : res)
-			{
-				cout << "[";
-				printv(elem, false);
-				cout << "],";
-			}
-			cout << "\n";
-
-			//res = b.verticalOrder2(root);
-
-			//for (auto elem : res)
-			//{
-			//	cout << "[";
-			//	printv(elem, false);
-			//	cout << "],";
-			//}
-			//cout << "\n";
-		}
+		BinaryTreeVerticalOrderTransversal::process();
 	}
 
 	if (false)
