@@ -46,9 +46,9 @@ namespace NumberOfClosedIslands
 	T: O(n*m)
 	 */
 
-	class Solution 
+	class Solution
 	{
-		enum 
+		enum
 		{
 			Land
 			, Water
@@ -56,7 +56,7 @@ namespace NumberOfClosedIslands
 		};
 		vector<vector<int>> m_grid;
 		int m_rows{}, m_cols{};
-		int search_land(int row, int col )
+		int search_land(int row, int col)
 		{
 			if (row < 0 || row == m_rows || col < 0 || col == m_cols)
 			{
@@ -72,11 +72,11 @@ namespace NumberOfClosedIslands
 			auto resDn = search_land(row + 1, col); // DOWN
 			auto resLf = search_land(row, col - 1); // LEFT
 			auto resRt = search_land(row, col + 1); // RIGHT
-			return min(resUp,min(resDn, min(resLf, resRt)));
+			return min(resUp, min(resDn, min(resLf, resRt)));
 
 		}
 	public:
-		int closedIsland(vector<vector<int>>& grid) 
+		int closedIsland(vector<vector<int>>& grid)
 		{
 			if (grid.size() == 0)
 			{
@@ -86,9 +86,9 @@ namespace NumberOfClosedIslands
 			m_rows = grid.size();
 			m_cols = grid[0].size();
 			int counter{};
-			for (int row = 0; row < m_rows; row++)
+			for (int row = 1; row < m_rows - 1; row++)
 			{
-				for (int col = 0; col < m_cols; col++)
+				for (int col = 1; col < m_cols - 1; col++)
 				{
 					if (m_grid[row][col] == Land)
 					{
