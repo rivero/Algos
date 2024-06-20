@@ -139,7 +139,7 @@ struct tests
 
 int main()
 {
-	tests t("BinaryTreeVerticalOrderTransversal");
+	tests t("ValidWordAbbreviation");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -289,40 +289,9 @@ int main()
 		assert(!val);
 		
 	}
-	if (false)
+	if (t.contains("ValidWordAbbreviation"))
 	{
-		ValidWordAbbreviation v;
-		auto val = v.validWordAbbreviation("substitution", "s10n");
-		cout << "substitution : s10n : valid " << val << "\n";
-		assert(val);
-
-		val = v.validWordAbbreviation("substitution", "sub4u4");
-		cout << "substitution : sub4u4 : valid " << val << "\n";
-		assert(val);
-
-		val = v.validWordAbbreviation("substitution", "12");
-		cout << "substitution : 12 : valid " << val << "\n";
-		assert(val);
-
-		val = v.validWordAbbreviation("substitution", "su3i1u2on");
-		cout << "substitution : su3i1u2on : valid " << val << "\n";
-		assert(val);
-
-		val = v.validWordAbbreviation("substitution", "s55n");
-		cout << "substitution : s55n : valid " << val << "\n";
-		assert(!val);
-
-		val = v.validWordAbbreviation("substitution", "s010n");
-		cout << "substitution : s010n : valid " << val << "\n";
-		assert(!val);
-
-		val = v.validWordAbbreviation("substitution", "s0ubstitution");
-		cout << "substitution : s0ubstitution : valid " << val << "\n";
-		assert(!val);
-
-		val = v.validWordAbbreviation("word", "3e");
-		cout << "word : 3e : valid " << val << "\n";
-		assert(!val);
+		ValidWordAbbreviation::process();
 	}
 	if (false)
 	{

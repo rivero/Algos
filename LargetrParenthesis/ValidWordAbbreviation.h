@@ -1,5 +1,7 @@
 #pragma once
 /*
+* https://leetcode.com/problems/valid-word-abbreviation/description/
+* 
 408. Valid Word Abbreviation
 A string can be abbreviated by replacing any number of non-adjacent, non-empty substrings
 with their lengths.
@@ -47,40 +49,80 @@ find the numbers and where they are in the string.
 iterate add the lenghts of the string + the numbers and make sure they match the length of the string.
 
 */
-struct ValidWordAbbreviation : public timeit
+namespace ValidWordAbbreviation
 {
-	bool validWordAbbreviation(string word, string abbr)
+	struct ValidWordAbbreviation : public timeit
 	{
-		size_t wordIdx = 0;
-		size_t abbrIdx = 0;
-
-		while (abbrIdx < abbr.length() && wordIdx < word.length())
+		bool validWordAbbreviation(string word, string abbr)
 		{
-			size_t num = 0;
-			bool start{};
-			while (isdigit(abbr[abbrIdx]))
-			{
-				if (!start && abbr[abbrIdx] == '0')
-					return false; // starts with '0'
+			size_t wordIdx = 0;
+			size_t abbrIdx = 0;
 
-				start = true;
-				num = num * 10 + abbr[abbrIdx] - '0'; // convert to number
-				abbrIdx++;
+			while (abbrIdx < abbr.length() && wordIdx < word.length())
+			{
+				size_t num = 0;
+				bool start{};
+				while (isdigit(abbr[abbrIdx]))
+				{
+					if (!start && abbr[abbrIdx] == '0')
+						return false; // starts with '0'
+
+					start = true;
+					num = num * 10 + abbr[abbrIdx] - '0'; // convert to number
+					abbrIdx++;
+				}
+
+				if (num == 0)
+				{
+					if (word[wordIdx] != abbr[abbrIdx])
+						return false; // no number and they are no equal.
+					wordIdx++;
+					abbrIdx++;
+				}
+				else
+				{
+					wordIdx += num;
+				}
 			}
 
-			if (num == 0)
-			{
-				if (word[wordIdx] != abbr[abbrIdx])
-					return false; // no number and they are no equal.
-				wordIdx++;
-				abbrIdx++;
-			}
-			else
-			{
-				wordIdx += num;
-			}
+			return wordIdx == word.length() && abbrIdx == abbr.length();
 		}
+	};
 
-		return wordIdx == word.length() && abbrIdx == abbr.length();
+	void process()
+	{
+		ValidWordAbbreviation v;
+		auto val = v.validWordAbbreviation("substitution", "s10n");
+		cout << "substitution : s10n : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "sub4u4");
+		cout << "substitution : sub4u4 : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "12");
+		cout << "substitution : 12 : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "su3i1u2on");
+		cout << "substitution : su3i1u2on : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(val);
+
+		val = v.validWordAbbreviation("substitution", "s55n");
+		cout << "substitution : s55n : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(!val);
+
+		val = v.validWordAbbreviation("substitution", "s010n");
+		cout << "substitution : s010n : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(!val);
+
+		val = v.validWordAbbreviation("substitution", "s0ubstitution");
+		cout << "substitution : s0ubstitution : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(!val);
+
+		val = v.validWordAbbreviation("word", "3e");
+		cout << "word : 3e : " << (val ? "VALID": "-invalid-") << "\n";
+		assert(!val);
+
 	}
-};
+}
