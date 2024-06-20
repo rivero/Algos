@@ -127,6 +127,7 @@ void printm(const map<T, U>& counts)
 #include "FindPeakElement.h"
 #include "BinaryTreeRightSideView.h"
 #include "ClosesetBinarySearchTreeValue.h"
+#include "NumberOfClosedIslands.h"
 
 #pragma endgerion INCLUDES
 struct tests
@@ -142,7 +143,7 @@ struct tests
 
 int main()
 {
-	tests t("NestedListWeightSum");
+	tests t("NumberOfClosedIslands");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -673,6 +674,10 @@ int main()
 	if (t.contains("ClosesetBinarySearchTreeValue"))
 	{
 		ClosesetBinarySearchTreeValue::process();
+	}
+	if (t.contains("NumberOfClosedIslands"))
+	{
+		NumberOfClosedIslands::process();
 	}
 }
 
