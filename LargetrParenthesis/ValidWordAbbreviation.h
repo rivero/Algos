@@ -61,13 +61,13 @@ namespace ValidWordAbbreviation
 			while (abbrIdx < abbr.length() && wordIdx < word.length())
 			{
 				size_t num = 0;
-				bool start{};
+				bool startedWithDigit{};
 				while (isdigit(abbr[abbrIdx]))
 				{
-					if (!start && abbr[abbrIdx] == '0')
-						return false; // starts with '0'
+					if (!startedWithDigit && abbr[abbrIdx] == '0')
+						return false; // cannot start with '0'
 
-					start = true;
+					startedWithDigit = true;
 					num = num * 10 + abbr[abbrIdx] - '0'; // convert to number
 					abbrIdx++;
 				}
@@ -91,6 +91,8 @@ namespace ValidWordAbbreviation
 
 	void process()
 	{
+		cout << "ValidWordAbbreviation\n";
+
 		ValidWordAbbreviation v;
 		auto val = v.validWordAbbreviation("substitution", "s10n");
 		cout << "substitution : s10n : " << (val ? "VALID": "-invalid-") << "\n";
