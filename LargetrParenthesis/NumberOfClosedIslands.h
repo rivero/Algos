@@ -102,6 +102,7 @@ namespace NumberOfClosedIslands
 
 	void process()
 	{
+		cout << "NumberOfClosedIslands\n";
 		vector<vector<int>> grid
 		{
 			{1,1,1,1,1,1,1,0},

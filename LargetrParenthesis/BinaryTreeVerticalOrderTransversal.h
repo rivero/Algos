@@ -91,11 +91,15 @@ namespace BinaryTreeVerticalOrderTransversal
 
 	};
 
-	struct Solution : protected timeit
+	struct SolutionMembers
 	{
+		queue<pair<TreeNode*, int>> qu;
+		map<int, vector<int>> verticalLevels;
 
+	};
+	struct SolutionOld : protected SolutionMembers, private timeit
+	{
 		map<int, vector<int> > m_map;
-		int m_level{};
 		void order(queue< const TreeNode* >& Q, int base)
 		{
 			if (Q.empty())
@@ -137,9 +141,44 @@ namespace BinaryTreeVerticalOrderTransversal
 			return res;
 		}
 
-		queue<pair<TreeNode*, int>> qu;
-		map<int, vector<int>> verticalLevels;
+		vector<vector<int>> verticalOrder3(TreeNode* root)
+		{
+			vector<vector<int>> ans;
+			if (!root) return ans;
+			qu.push({ root, 0 });
+			while (!qu.empty())
+			{
+				int size = qu.size();
 
+				for (int i = 0; i < size; i++)
+				{
+					auto curr = qu.front(); qu.pop();
+					TreeNode* currNode = curr.first;
+					int level = curr.second;
+
+					verticalLevels[level].push_back(currNode->val);
+
+					if (currNode->left)
+					{
+						qu.push({ currNode->left, level - 1 });
+					}
+					if (currNode->right)
+					{
+						qu.push({ currNode->right, level + 1 });
+					}
+				}
+			}
+
+			for (const auto& entry : verticalLevels)
+			{
+				ans.push_back(entry.second);
+			}
+
+			return ans;
+		}
+	};
+	struct Solution : protected SolutionMembers, private timeit
+	{
 		void createLevels()
 		{
 			if (qu.empty()) 
@@ -189,45 +228,11 @@ namespace BinaryTreeVerticalOrderTransversal
 			return ans;
 		}
 
-		vector<vector<int>> verticalOrder3(TreeNode* root)
-		{
-			vector<vector<int>> ans;
-			if (!root) return ans;
-			qu.push({ root, 0 });
-			while (!qu.empty())
-			{
-				int size = qu.size();
-
-				for (int i = 0; i < size; i++)
-				{
-					auto curr = qu.front(); qu.pop();
-					TreeNode* currNode = curr.first;
-					int level = curr.second;
-
-					verticalLevels[level].push_back(currNode->val);
-
-					if (currNode->left)
-					{
-						qu.push({ currNode->left, level - 1 });
-					}
-					if (currNode->right)
-					{
-						qu.push({ currNode->right, level + 1 });
-					}
-				}
-			}
-
-			for (const auto& entry : verticalLevels)
-			{
-				ans.push_back(entry.second);
-			}
-
-			return ans;
-		}
 	};
 
 	void process()
 	{
+		cout << "BinaryTreeVerticalOrderTransversal\n";
 		if (false)
 		{
 			auto root = new TreeNode(3);
