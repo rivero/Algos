@@ -143,7 +143,7 @@ struct tests
 
 int main()
 {
-	tests t("NumberOfClosedIslands BinaryTreeVerticalOrderTransversal ValidWordAbbreviation LowestCommon");
+	tests t("NumberOfClosedIslands BinaryTreeVerticalOrderTransversal ValidWordAbbreviation LowestCommon ValidPalindrome");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -297,44 +297,9 @@ int main()
 	{
 		ValidWordAbbreviation::process();
 	}
-	if (false)
+	if (t.contains("ValidPalindrome"))
 	{
-		ValidPalindrome v;
-		auto val = v.validPalindrome("aba");
-		cout << " Valid palindrome (1 char removed) [aba]: " << val << "\n";
-		assert(val);
-	
-		val = v.validPalindrome("abac");
-		cout << " Valid palindrome (1 char removed) [abac]: " << val << "\n";
-		assert(val);
-
-		val = v.validPalindrome("medem");
-		cout << " Valid palindrome (1 char removed) [medem]: " << val << "\n";
-		assert(val);
-
-		val = v.validPalindrome("medecm");
-		cout << " Valid palindrome (1 char removed) [medecm]: " << val << "\n";
-		assert(val);
-
-		string tst = "mecdecm";
-		val = v.validPalindrome(tst);
-		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
-		assert(!val);
-	
-		tst = "mecdcem";
-		val = v.validPalindrome(tst);
-		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
-		assert(val);
-
-		tst = "mecdcfm";
-		val = v.validPalindrome(tst);
-		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
-		assert(!val);
-
-		tst = "abc";
-		val = v.validPalindrome(tst);
-		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << val << "\n";
-		assert(!val);
+		ValidPalindrome::process();
 	}
 	if (false)
 	{

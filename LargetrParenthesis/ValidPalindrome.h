@@ -1,5 +1,6 @@
 #pragma once
 /*
+* https://leetcode.com/problems/valid-palindrome-ii/description/
 680. Valid Palindrome II
 Easy
 Topics
@@ -38,32 +39,80 @@ Result: if the characters from the right and the left are the same return true
 
 */
 
-struct ValidPalindrome : public timeit
+namespace ValidPalindrome
 {
-	bool validPalindrome(string s) {
-		size_t i = 0;
-		size_t j = s.length() - 1;
-
-		while (i < j)
-		{
-			if (s[i++] == s[j--])
-			{
-			}
-			else
-				return isPalindrome(s, i, j) || isPalindrome(s, i, j);
-		}
-
-		return true;
-	}
-
-	bool isPalindrome(string s, int i, int j)
+	struct Solution : public timeit
 	{
-		while (i < j)
+		bool validPalindrome(const string& s) const
 		{
-			if (s[i++] != s[j--])
-				return false;
+			int i = 0;
+			int j = s.length() - 1;
+
+			while (i < j)
+			{
+				if (s[i] == s[j])
+				{
+					i++;
+					j--;
+				}
+				else
+					return isPalindrome(s, i + 1, j) || isPalindrome(s, i, j - 1);
+			}
+
+			return true;
 		}
 
-		return true;
+		bool isPalindrome(const string& s, int i, int j) const
+		{
+			while (i < j)
+			{
+				if (s[i++] != s[j--])
+					return false;
+			}
+
+			return true;
+		}
+	};
+
+	void process()
+	{
+		cout << "\nValidPalindrome\n";
+		Solution v;
+		auto val = v.validPalindrome("aba");
+		cout << " Valid palindrome (1 char removed) [aba]: " << (val?"Valid" :"invalid") << "\n";
+		assert(val);
+
+		val = v.validPalindrome("abac");
+		cout << " Valid palindrome (1 char removed) [abac]: " << (val ? "Valid" : "invalid") << "\n";
+		assert(val);
+
+		val = v.validPalindrome("medem");
+		cout << " Valid palindrome (1 char removed) [medem]: " << (val ? "Valid" : "invalid") << "\n";
+		assert(val);
+
+		val = v.validPalindrome("medecm");
+		cout << " Valid palindrome (1 char removed) [medecm]: " << (val ? "Valid" : "invalid") << "\n";
+		assert(val);
+
+		string tst = "mecdecm";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << (val ? "Valid" : "invalid") << "\n";
+		assert(!val);
+
+		tst = "mecdcem";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << (val ? "Valid" : "invalid") << "\n";
+		assert(val);
+
+		tst = "mecdcfm";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << (val ? "Valid" : "invalid") << "\n";
+		assert(!val);
+
+		tst = "abc";
+		val = v.validPalindrome(tst);
+		cout << " Valid palindrome (1 char removed) [" << tst << "]: " << (val ? "Valid" : "invalid") << "\n";
+		assert(!val);
+
 	}
-};
+}
