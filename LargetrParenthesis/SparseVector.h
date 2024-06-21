@@ -86,11 +86,11 @@ namespace sparsevec
 		// Return the dotProduct of two sparse vectors
 		int dotProduct(SparseVector& vec)
 		{
-			auto inter = GetIntersection(vec.GetSet());
+			auto interSectionSet = GetIntersection(vec.GetSet());
 			int sum{};
-			for (auto elem : inter)
+			for (auto intersectionIndex : interSectionSet)
 			{
-				sum += m_nums[elem] * vec.getNums()[elem];
+				sum += m_nums[intersectionIndex] * vec.getNums()[intersectionIndex];
 			}
 			return sum;
 		}

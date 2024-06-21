@@ -1,5 +1,7 @@
 #pragma once
 /*
+* https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii
+* 
 1650. Lowest Common Ancestor of a Binary Tree III
 
 Given two nodes of a binary tree p and q, return their lowest common ancestor (LCA).
@@ -54,8 +56,8 @@ Output: 1
 
 Constraints:
 
-The number of nodes in the tree is in the range [2, 105].
--109 <= Node.val <= 109
+The number of nodes in the tree is in the range [2, 10^5].
+-10^9 <= Node.val <= 10^9
 All Node.val are unique.
 p != q
 
@@ -82,18 +84,21 @@ namespace LowestCommon
 	public:
 		Node* lowestCommonAncestor(Node* p, Node* q) 
 		{
-			Node* a = p;
-			Node* b = q;
-			while (a != b) 
+			auto a = p;
+			auto b = q;
+			cout << "\nBegin a:\t" << a->val << "\tb:\t" << b->val << "\n";
+			while (a != b)
 			{
 				a = a == nullptr ? q : a->parent;
 				b = b == nullptr ? p : b->parent;
+				cout << "a:\t" << a->val << "\tb:\t" << b->val << "\n";
 			}
 			return a;
 		}
 	};	
 	void process()
 	{
+		cout << "LowestCommon\n";
 		Solution sol;
 		auto root = new Node(3);
 		root->left = new Node(5, root);
