@@ -206,5 +206,8 @@
     <ClInclude Include="LenghtOfLongestValidsubstring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MinimumNumberOfKeyPresses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

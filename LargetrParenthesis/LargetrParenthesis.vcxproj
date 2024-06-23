@@ -181,6 +181,7 @@
     <ClInclude Include="mergearrays.h" />
     <ClInclude Include="MinimumAddParenthesisValid.h" />
     <ClInclude Include="MinimumAdjacentSwapsToMakleValidArray.h" />
+    <ClInclude Include="MinimumNumberOfKeyPresses.h" />
     <ClInclude Include="MinRemoveValidParenthesis.h" />
     <ClInclude Include="MinWindowSubstring.h" />
     <ClInclude Include="movezero.h" />

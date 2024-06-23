@@ -1,5 +1,7 @@
 #pragma once
 /*
+* https://leetcode.com/problems/analyze-user-website-visit-pattern/description/
+* 
 1152. Analyze User Website Visit Pattern
 
 You are given two string arrays username and website and an integer array timestamp. 
@@ -195,211 +197,9 @@ namespace AnalyzeUserWebsiteVisit
 	using t_vecInt = vector<int>;
 	using intmatrix = vector< t_vecInt >;
 
-	class Solution
-	{
-		strrow m_username;
-		t_vecInt m_timestamp;
-		strrow m_website;
-		map<strrow, int> m_resultMap;
-
-		// Returns a matrix of combined indexes.
-		// From http://rosettacode.org/wiki/Combinations#C.2B.2B
-		intmatrix comb(int N, int K)
-		{
-
-			std::string bitmask(K, 1); // K leading 1's
-			bitmask.resize(N, 0); // N-K trailing 0's
-
-			t_vecInt row;
-			intmatrix result;
-			// Print integers and permute bitmask
-			do {
-				for (int i = 0; i < N; ++i) 
-				{
-					if (bitmask[i])
-						row.push_back(i);
-				}
-
-				result.push_back(row);
-				row.clear();
-			} while (std::prev_permutation(bitmask.begin(), bitmask.end()));
-			return result;
-		}
-
-		struct Visits
-		{
-			set<wsts> m_set;
-			strmatrix m_matrixOfSequences;
-			strrow m_workingRow;
-			void process_row()
-			{
-				for (auto el: m_set)
-				{
-					m_workingRow.push_back(el.second);
-				}
-			}
-		};
-		map<string, Visits > m_usersTsWsMap;
-
-		void organize_data()
-		{
-			// Organize the data by user, timestamp, website
-			for (size_t i = 0; i < m_username.size(); i++)
-			{
-				auto time_web = make_pair(m_timestamp[i], m_website[i]);
-
-				m_usersTsWsMap[m_username[i]].m_set.insert(time_web);
-			}
-			
-			for (auto& [name, visits]: m_usersTsWsMap)
-			{
-				// Get the websites visits ordered by timestamp
-				visits.process_row();
-
-#ifdef PRINTV
-				cout << "\n\nUsername: [" << name << "]\nSites visited:\t\n";
-				printv(visits.m_workingRow);
-				auto s = visits.m_set;
-				cout << "Visits organized by timestamp:\n";
-				help::printSet(s);
-#endif
-				// get the matrix of sequences of visits
-				/*
-				* visits ordered by timestamp
-				* home carst maps home
-				* sequences in sets of three (function is parametrized):
-				* home carts maps
-				* home carts	   home
-				*	   carts maps  home
-				* 
-				* so we have three sequences of size 3 ordered by timestamp
-				*/
-
-				// Finally we count the visits for this user - it 
-				// will get accumulated when we count for all users.
-				visits.m_matrixOfSequences = allSequences(visits.m_workingRow);
-				for (auto& row: visits.m_matrixOfSequences)
-				{
-					m_resultMap[row]++;
-#ifdef PRINTV
-
-					printv(row, false);
-					cout << " counter: " << m_resultMap[row] << "\n";
-#endif
-				}
-			}
-		}
-
-
-		void reset()
-		{
-			m_usersTsWsMap.clear();
-			m_resultMap.clear();
-			m_username.clear();
-			m_timestamp.clear();
-			m_website.clear();
-
-		}
-	public:
-		strmatrix allSequences(strrow sequence, size_t setSize = 3)
-		{
-			auto sequenceSize = sequence.size();
-#ifdef DISPLAY_SEQUENCES
-			cout << "Sequence with a size of ["<< sequenceSize << "]:\n--------------------------------------------\n";
-			printv(sequence);
-			cout << "--------------------------------------------\n";
-#endif
-			auto mymatrix = comb(sequenceSize, setSize);
-			auto rowSize = mymatrix.size();
-			auto colSize = mymatrix[0].size();
-			strmatrix result;
-			for (int i = 0; i < rowSize; i++)
-			{
-				strrow workingRow;
-				for (int j = 0; j < colSize; j++)
-				{
-					auto matrixElement = mymatrix[i][j];
-					workingRow.push_back(sequence[matrixElement]);
-				}
-				result.push_back(workingRow);
-			}
-#ifdef DISPLAY_SEQUENCES
-			cout << "Organized in sets of [" << setSize << "] number of rows: ["<< rowSize <<"]:\n--------------------------------------------\n";
-			for (auto& elem : result)
-			{
-				printv(elem);
-			}
-			cout << "--------------------------------------------\n\n";
-#endif // DISPLAY_SEQUENCES
-			return result;
-		}
-
-		
-		strrow mostVisitedPattern(strrow username,
-			vector<int> timestamp, strrow website)
-		{
-			reset();
-			m_username = username;
-			m_timestamp = timestamp;
-			m_website = website;
-
-			organize_data();
-
-			// at this point we have all the visits counted: we find the largest
-#ifdef PRINTV
-			for (auto& [vec, counter]: m_resultMap)
-			{
-				for (auto& el: vec)
-				{
-					cout << el << ",";
-				}
-				cout << " counter " << counter << "\n";
-			}
-#endif
-			strrow res;
-			int lastCounter = -INT_MAX;
-			set<int> detectCounters;
-			for (auto& [row, counter]: m_resultMap)
-			{
-				detectCounters.insert(counter);
-				if (counter > lastCounter)
-				{
-					lastCounter = counter;
-					res = row;
-				}
-				
-			}
-			if (detectCounters.size() == 1)
-			{
-				// all have the same counter. Initiate lexicographical comparison
-				strrow smallest;
-				for (auto& [row, counter] : m_resultMap)
-				{
-					if (smallest.size() == 0)
-					{
-						smallest = row;
-					}
-					if (row < smallest)
-					{
-						smallest = row;
-						res = row;
-					}
-
-				}
-
-
-			}
-			// finally we assign the top to our result
-			// return the result
-			return res;
-		}
-
-
-	};
-
 	void process()
 	{
-		Solution sol;
+		SOLUTION::Solution sol;
 #ifdef TEST_SEQUENCES
 		if (false)
 		{
@@ -435,7 +235,7 @@ namespace AnalyzeUserWebsiteVisit
 		}
 #endif
 #ifdef TEST_PROCESS
-		if(false)
+		if(true)
 		{
 			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
 			t_vecInt timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -445,7 +245,7 @@ namespace AnalyzeUserWebsiteVisit
 			cout << "\n\nResult: \n";
 			printv(r);
 		}
-		if (false)
+		if (true)
 		{
 			/*
 			Expected ["y","y","loedo"]
@@ -459,7 +259,7 @@ namespace AnalyzeUserWebsiteVisit
 			printv(r);
 
 		}
-		if (false)
+		if (true)
 		{
 			/*
 			Expected:
@@ -472,20 +272,6 @@ namespace AnalyzeUserWebsiteVisit
 			auto r = sol.mostVisitedPattern(username, timestamp, website);
 			cout << "\n\nResult: \n";
 			printv(r);
-		}
-		if (false)
-		{
-			/*
-			Expected: ["kzx","txvn","bsmy"]
-			*/
-			strrow username{ "ldigebxndh","jxm","iit","ldigebxndh","dut","oxkr","dut","ldigebxndh","iit" };
-			t_vecInt timestamp{ 246561774,336877562,613255786,581611682,67005296,164162280,644105652,998777950,962088025 };
-			strrow website{ "kzx","bsmy","qhmiliihh","txvn","snf","nrtj","ksakw","bsmy","txvn" };
-
-			auto r = sol.mostVisitedPattern(username, timestamp, website);
-			cout << "\n\nResult: \n";
-			printv(r);
-
 		}
 		if (true)
 		{

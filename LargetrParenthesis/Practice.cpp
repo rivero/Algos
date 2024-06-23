@@ -129,7 +129,7 @@ void printm(const map<T, U>& counts)
 #include "ClosesetBinarySearchTreeValue.h"
 #include "NumberOfClosedIslands.h"
 #include "LenghtOfLongestValidsubstring.h"
-
+#include "MinimumNumberOfKeyPresses.h"
 #pragma endgerion INCLUDES
 struct tests
 {
@@ -144,7 +144,7 @@ struct tests
 
 int main()
 {
-	tests t("minWindowSubstring");
+	tests t("MinimumNumberOfKeyPresses");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -577,6 +577,10 @@ int main()
 	if (t.contains("LenghtOfLongestValidsubstring"))
 	{
 		LenghtOfLongestValidsubstring::process();
+	}
+	if (t.contains(("MinimumNumberOfKeyPresses")))
+	{
+		MinimumNumberOfKeyPresses::process();
 	}
 }
 
