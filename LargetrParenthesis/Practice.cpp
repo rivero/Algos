@@ -130,7 +130,8 @@ void printm(const map<T, U>& counts)
 #include "NumberOfClosedIslands.h"
 #include "LenghtOfLongestValidsubstring.h"
 #include "MinimumNumberOfKeyPresses.h"
-#pragma endgerion INCLUDES
+#include "PlatesBetweenCandles.h"
+#pragma endregion INCLUDES
 struct tests
 {
 	string m_tests;
@@ -144,7 +145,7 @@ struct tests
 
 int main()
 {
-	tests t("MinimumNumberOfKeyPresses");
+	tests t("PlatesBetweenCandles");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -581,6 +582,10 @@ int main()
 	if (t.contains(("MinimumNumberOfKeyPresses")))
 	{
 		MinimumNumberOfKeyPresses::process();
+	}
+	if (t.contains("PlatesBetweenCandles"))
+	{
+		PlatesBetweenCandles::process();
 	}
 }
 

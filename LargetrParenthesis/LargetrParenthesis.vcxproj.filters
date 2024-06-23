@@ -209,5 +209,8 @@
     <ClInclude Include="MinimumNumberOfKeyPresses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlatesBetweenCandles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
