@@ -1,4 +1,7 @@
 #pragma once
+/*
+https://coderbyte.com/video/min-window-substring-solution
+*/
 namespace minWindowSubstring
 {
 
@@ -11,7 +14,7 @@ namespace minWindowSubstring
 
 		using ocmap = map<char, size_t>;
 
-		ocmap KMap;
+		ocmap KMap;// KMap This map contains the characters in substring
 		for (size_t i = 0; i < sub.size(); i++)
 		{
 			KMap[sub[i]]++;
@@ -40,11 +43,15 @@ namespace minWindowSubstring
 			for (auto elem : tmp)
 			{
 				// create map of characters in tmp
-				auto Kel = KMap.count(elem) > 0 ? KMap[elem] : 0;
+				// we figure out if we have the current tmp.elem in out KMAp (the substring chars map)
+				auto Kel = KMap.count(elem) > 0 ? KMap[elem] : 0; 
 				if (Kel > 0)
 				{
+					// We found the tmp.elem in our KMap (original substring)
 					// make sure that you only add to the map the
 					// characters in common with sub
+
+					// Do I have the char found in KMap also in NKMap?
 					auto NKel = NKMap.count(elem) > 0 ? NKMap[elem] : 0;
 					if (NKel != Kel)
 					{
@@ -52,6 +59,7 @@ namespace minWindowSubstring
 						//printm(NKMap);
 						if (KMap == NKMap)
 						{
+							// here we know we have a valid substring
 							break;
 						}
 					}
@@ -60,6 +68,7 @@ namespace minWindowSubstring
 			//cout << "NKmap\n";
 			//printm(NKMap);
 
+			// Slide the window
 			if (KMap != NKMap)
 			{
 				// Not a valid window
@@ -69,6 +78,7 @@ namespace minWindowSubstring
 					left++;
 				continue;
 			}
+
 			// Valid window
 			//cout << "Valid window [" << tmp << "]\n";
 			if (res.empty() || tmp.size() <= res.size())

@@ -144,7 +144,7 @@ struct tests
 
 int main()
 {
-	tests t("LenghtOfLongestValidsubstring");
+	tests t("minWindowSubstring");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
