@@ -42,7 +42,7 @@ namespace KthLargestElement
 			std::priority_queue<int, std::vector<int>, std::greater<int>>
 				myq(nums.begin(), nums.begin()+k);
 
-			for (int i = k; i < nums.size(); i++)
+			for (size_t i = k; i < nums.size(); i++)
 			{
 				int val = myq.top();
 				if (nums[i] > val)

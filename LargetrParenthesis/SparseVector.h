@@ -74,7 +74,7 @@ namespace sparsevec
 		SparseVector(vector<int>& nums)
 		{
 			m_nums = nums;
-			for (auto i = 0; i < nums.size(); i++)
+			for (size_t i = 0; i < nums.size(); i++)
 			{
 				if (nums[i] != 0)
 				{

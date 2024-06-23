@@ -143,7 +143,7 @@ struct tests
 
 int main()
 {
-	tests t("NumberOfClosedIslands BinaryTreeVerticalOrderTransversal ValidWordAbbreviation LowestCommon ValidPalindrome");
+	tests t("BinarySearch randompickweight NumberOfClosedIslands BinaryTreeVerticalOrderTransversal ValidWordAbbreviation LowestCommon ValidPalindrome");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -427,82 +427,11 @@ int main()
 		//	found 1
 	}
 
-	if (false)
+	if (t.contains("BinarySearch"))
 	{
-		cout << "\nConstructing\t";
-		auto root = createInts();
-
-		DeptFirst<int> d;
-		// Function call
-		cout << "\nPreorder traversal of binary tree is\t";
-		d.printPreOrder(root);
-
-		cout << "\nInorder traversal of binary tree is\t";
-		d.printInorder(root);
-
-		cout << "\nPostorder traversal of binary tree is\t";
-		d.printPostOrder(root);
-
-		cout << "\nDestructing\t";
-		Node<int>::DeleteTree(root);
-		delete root;
+		BinarySearch::process();
 	}
-	if (false)
-	{
-		cout << "\nConstructing char\t";
-		auto root = createChars();
-
-		DeptFirst<char> d;
-		// Function call
-		cout << "\nPreorder traversal of binary tree is\t";
-		d.printPreOrder(root);
-
-		cout << "\nInorder traversal of binary tree is\t";
-		d.printInorder(root);
-
-		cout << "\nPostorder traversal of binary tree is\t";
-		d.printPostOrder(root);
-
-		cout << "\nDestructing\t";
-		Node<char>::DeleteTree(root);
-		delete root;
-		cout << endl;
-	}
-	if (false)
-	{
-		cout << "\nConstructing char\t";
-		auto root = createChars();
-
-		BreadthFirst<char> b;
-		cout << "\nPrinting\t";
-		b.printLevel(root);
-
-		cout << "\nDestructing\t";
-		Node<char>::DeleteTree(root);
-		delete root;
-		cout << endl;
-	}
-
-	if (false)
-	{
-		cout << "\nConstructing BTVOT\t";
-		auto root = createCharsBTVOT();
-
-		BreadthFirst<int> b;
-		cout << "\nPrinting\t";
-		b.printLevel(root);
-
-		cout << "\nDestructing\t";
-		Node<int>::DeleteTree(root);
-		delete root;
-		cout << endl;
-	}
-	if (false)
-	{
-		Nooby n;
-		n.know_algos();
-		n.struct_bindings();
-	}
+	
 	if (t.contains("LowestCommon"))
 	{
 		LowestCommon::process();

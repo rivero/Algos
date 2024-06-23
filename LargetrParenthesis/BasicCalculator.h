@@ -1,6 +1,8 @@
 #pragma once
 /*
-Given a string s which represents an expression, evaluate this expression and return 
+* https://leetcode.com/problems/basic-calculator-ii/description/
+227. Basic Calculator II
+Given a string s which represents an expression, evaluate this expression and return
 its value.
 
 The integer division should truncate toward zero.
@@ -49,7 +51,7 @@ namespace basiccalc
 			char opr = '+';
 			stack<int>st;
 
-			for (int i = 0; i < s.length(); i++)
+			for (size_t i = 0; i < s.length(); i++)
 			{
 				char c = s[i];
 

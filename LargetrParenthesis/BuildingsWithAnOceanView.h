@@ -1,14 +1,13 @@
 #pragma once
-namespace buildingsoceanview
-{
-	/*
-	1762. Buildings With an Ocean View
-There are n buildings in a line. 
+/*
+* https://leetcode.com/problems/buildings-with-an-ocean-view/description/
+1762. Buildings With an Ocean View
+There are n buildings in a line.
 
 You are given an integer array heights of size n that represents the heights of the buildings in the line.
 
-The ocean is to the right of the buildings. 
-A building has an ocean view if the building can see the ocean without obstructions. 
+The ocean is to the right of the buildings.
+A building has an ocean view if the building can see the ocean without obstructions.
 
 Formally, a building has an ocean view if all the buildings to its right have a smaller height.
 
@@ -37,8 +36,10 @@ Constraints:
 
 
 HINT You can traverse the buildings from the nearest to the ocean to the furthest.
-	
+
 	*/
+namespace buildingsoceanview
+{
 	class Solution {
 	public:
 		vector<int> findBuildings(vector<int>& heights) 
@@ -63,7 +64,7 @@ HINT You can traverse the buildings from the nearest to the ocean to the furthes
 
 	void process()
 	{
-		cout << "Buildings With an Ocean View\n";
+		cout << "\nBuildings With an Ocean View\n";
 		Solution sol;
 		{
 			vector<int> vec{ 4, 2, 3, 1 };
