@@ -128,6 +128,7 @@ void printm(const map<T, U>& counts)
 #include "BinaryTreeRightSideView.h"
 #include "ClosesetBinarySearchTreeValue.h"
 #include "NumberOfClosedIslands.h"
+#include "LenghtOfLongestValidsubstring.h"
 
 #pragma endgerion INCLUDES
 struct tests
@@ -143,7 +144,7 @@ struct tests
 
 int main()
 {
-	tests t("BinarySearch randompickweight NumberOfClosedIslands BinaryTreeVerticalOrderTransversal ValidWordAbbreviation LowestCommon ValidPalindrome");
+	tests t("LenghtOfLongestValidsubstring");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -572,6 +573,10 @@ int main()
 	if (t.contains("NumberOfClosedIslands"))
 	{
 		NumberOfClosedIslands::process();
+	}
+	if (t.contains("LenghtOfLongestValidsubstring"))
+	{
+		LenghtOfLongestValidsubstring::process();
 	}
 }
 

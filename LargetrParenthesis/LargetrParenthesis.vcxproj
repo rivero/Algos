@@ -174,6 +174,7 @@
     <ClInclude Include="KthLargestElement.h" />
     <ClInclude Include="LargeIsland.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
+    <ClInclude Include="LenghtOfLongestValidsubstring.h" />
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />
     <ClInclude Include="LowestCommon.h" />
     <ClInclude Include="LowestCommonAncestorBT.h" />
