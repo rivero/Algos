@@ -54,9 +54,15 @@ At most 2 * 105 calls will be made to get and put.
         void moveElementToFront(int key, int value)
         {
             cache.erase(mymap[key]); // erase from its current position
-            cache.push_front({key, value}); // push it to the front
+            pushToFront(key, value);
+        }
+
+        void pushToFront(int key, int value)
+        {
+            cache.push_front({ key, value }); // push it to the front
             mymap[key] = cache.begin(); // update the map
         }
+
         int m_capacity{};
     public:
         LRUCache(int capacity) :m_capacity(capacity)
@@ -83,8 +89,7 @@ At most 2 * 105 calls will be made to get and put.
             else
             {
                 // element does not exist
-                cache.push_front({ key,value });
-                mymap[key] = cache.begin();
+				pushToFront(key, value);
                 if (mymap.size() > m_capacity)
                 {
                     // remove the last cache element in the map
