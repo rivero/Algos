@@ -131,6 +131,7 @@ void printm(const map<T, U>& counts)
 #include "LenghtOfLongestValidsubstring.h"
 #include "MinimumNumberOfKeyPresses.h"
 #include "PlatesBetweenCandles.h"
+#include "LRUCache.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -145,7 +146,7 @@ struct tests
 
 int main()
 {
-	tests t("PlatesBetweenCandles");
+	tests t("LRUCache");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -586,6 +587,10 @@ int main()
 	if (t.contains("PlatesBetweenCandles"))
 	{
 		PlatesBetweenCandles::process();
+	}
+	if (t.contains("LRUCache"))
+	{
+		LRUCache::process();
 	}
 }
 

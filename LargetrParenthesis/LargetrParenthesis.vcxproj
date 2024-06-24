@@ -178,6 +178,7 @@
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />
     <ClInclude Include="LowestCommon.h" />
     <ClInclude Include="LowestCommonAncestorBT.h" />
+    <ClInclude Include="LRUCache.h" />
     <ClInclude Include="mergearrays.h" />
     <ClInclude Include="MinimumAddParenthesisValid.h" />
     <ClInclude Include="MinimumAdjacentSwapsToMakleValidArray.h" />
