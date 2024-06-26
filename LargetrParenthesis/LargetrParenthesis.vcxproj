@@ -197,6 +197,7 @@
     <ClInclude Include="QuestionMarks.h" />
     <ClInclude Include="RandomPickWithWeight.h" />
     <ClInclude Include="RecursiveRabbitInterview.h" />
+    <ClInclude Include="ReorganizeString.h" />
     <ClInclude Include="ReverseLinkedList.h" />
     <ClInclude Include="ShortestPathBinaryMatrix.h" />
     <ClInclude Include="SimplifyPath.h" />

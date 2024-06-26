@@ -132,6 +132,7 @@ void printm(const map<T, U>& counts)
 #include "MinimumNumberOfKeyPresses.h"
 #include "PlatesBetweenCandles.h"
 #include "LRUCache.h"
+#include "ReorganizeString.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -146,7 +147,7 @@ struct tests
 
 int main()
 {
-	tests t("LRUCache");
+	tests t("ReorganizeString");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -591,6 +592,10 @@ int main()
 	if (t.contains("LRUCache"))
 	{
 		LRUCache::process();
+	}
+	if (t.contains("ReorganizeString"))
+	{
+		ReorganizeString::process();
 	}
 }
 
