@@ -147,7 +147,7 @@ struct tests
 
 int main()
 {
-	tests t("BinaryTreeVerticalOrderTransversal");
+	tests t("ValidWordAbbreviation");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{

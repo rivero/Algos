@@ -64,24 +64,25 @@ namespace ValidWordAbbreviation
 				bool startedWithDigit{};
 				while (isdigit(abbr[abbrIdx]))
 				{
+					// Its a digit
 					if (!startedWithDigit && abbr[abbrIdx] == '0')
-						return false; // cannot start with '0'
+						return false; // ...cannot start with '0'
 
-					startedWithDigit = true;
-					num = num * 10 + abbr[abbrIdx] - '0'; // convert to number
-					abbrIdx++;
+					startedWithDigit = true; // mark is as true to avoid false flags
+					num = num * 10 + abbr[abbrIdx] - '0'; // convert to number and add it to the number counter
+					abbrIdx++; // increase the abbreviation index
 				}
 
 				if (num == 0)
-				{
+				{ // no digits found
 					if (word[wordIdx] != abbr[abbrIdx])
-						return false; // no number and they are no equal.
-					wordIdx++;
-					abbrIdx++;
+						return false; // no digits found and they are no equal => FALSE.
+					wordIdx++; // move word index ahead
+					abbrIdx++; // move abbreviation index ahead
 				}
 				else
 				{
-					wordIdx += num;
+					wordIdx += num; // Digits found: increase the word index by the number found
 				}
 			}
 
