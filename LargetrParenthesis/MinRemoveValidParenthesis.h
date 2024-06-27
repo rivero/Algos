@@ -44,7 +44,7 @@ s[i] is either '(' , ')', or lowercase English letter.
 5. Store rest of indexes in queue in vector
 6. Create new string with valid indexes (not in vector)
 
-
+Complexity: O(n)
 */
 namespace MinRemoveValidParenthesis
 {

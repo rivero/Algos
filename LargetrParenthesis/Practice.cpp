@@ -147,7 +147,7 @@ struct tests
 
 int main()
 {
-	tests t("ValidWordAbbreviation");
+	tests t("MinRemoveValidParenthesis");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{

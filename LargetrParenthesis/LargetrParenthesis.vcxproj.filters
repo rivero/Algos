@@ -65,7 +65,7 @@
     <ClInclude Include="NestedListWeightSum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LowestCommon.h">
+    <ClInclude Include="LowestCommonAncestorBinaryTreeWithParent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MinWindowSubstring.h">
@@ -125,7 +125,7 @@
     <ClInclude Include="MinimumAddParenthesisValid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LowestCommonAncestorBT.h">
+    <ClInclude Include="LowestCommonAncestorBinaryTreeWithRoot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RecursiveRabbitInterview.h">
