@@ -46,8 +46,10 @@ Solution
 
 Get length of the string.
 find the numbers and where they are in the string.
-iterate add the lenghts of the string + the numbers and make sure they match the length of the string.
+iterate add the lengths of the string + the numbers and make sure they match the length of the string.
 
+Complexity
+Time: O(n^2)
 */
 namespace ValidWordAbbreviation
 {
