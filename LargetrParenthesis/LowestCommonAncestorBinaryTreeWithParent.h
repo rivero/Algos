@@ -63,7 +63,8 @@ p != q
 
 p and q exist in the tree.
 */
-namespace LowestCommon
+#define PRINTV
+namespace LowestCommonAncestorBinaryTreeWithParent
 {
 	class Node {
 	public:
@@ -86,19 +87,23 @@ namespace LowestCommon
 		{
 			auto a = p;
 			auto b = q;
+#ifdef PRINTV
 			cout << "\nBegin a:\t" << a->val << "\tb:\t" << b->val << "\n";
+#endif // PRINTV
 			while (a != b)
 			{
 				a = a == nullptr ? q : a->parent;
 				b = b == nullptr ? p : b->parent;
-				cout << "a:\t" << a->val << "\tb:\t" << b->val << "\n";
+#ifdef PRINTV
+			cout << "\nEnd   a:\t" << a->val << "\tb:\t" << b->val << "\n";
+#endif // PRINTV
 			}
 			return a;
 		}
 	};	
 	void process()
 	{
-		cout << "LowestCommon\n";
+		cout << "LowestCommonAncestorBinaryTreeWithParent\n";
 		Solution sol;
 		auto root = new Node(3);
 		root->left = new Node(5, root);

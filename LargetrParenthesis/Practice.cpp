@@ -83,7 +83,7 @@ void printm(const map<T, U>& counts)
 #include "MinRemoveValidParenthesis.h"
 #include "BinaryTreeVerticalOrderTransversal.h"
 #include "NestedListWeightSum.h"
-#include "LowestCommon.h"
+#include "LowestCommonAncestorBinaryTreeWithParent.h"
 #include "MinWindowSubstring.h"
 #include "QuestionMarks.h"
 #include "Auros.h"
@@ -103,7 +103,7 @@ void printm(const map<T, U>& counts)
 #include "BTreeToDLink.h"
 #include "NumberOfIslands.h"
 #include "MinimumAddParenthesisValid.h"
-#include "LowestCommonAncestorBT.h"
+#include "LowestCommonAncestorBinaryTreeWithRoot.h"
 #include "RecursiveRabbitInterview.h"
 #include "LongestIncreasingSubsequenceNLogN.h"
 #include "IncreasingTripleSequence.h"
@@ -147,7 +147,7 @@ struct tests
 
 int main()
 {
-	tests t("MinRemoveValidParenthesis");
+	tests t("LowestCommonAncestorBinaryTreeWithRoot LowestCommonAncestorBinaryTreeWithParent");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -436,9 +436,9 @@ int main()
 		BinarySearch::process();
 	}
 	
-	if (t.contains("LowestCommon"))
+	if (t.contains("LowestCommonAncestorBinaryTreeWithParent"))
 	{
-		LowestCommon::process();
+		LowestCommonAncestorBinaryTreeWithParent::process();
 	}
 	if (t.contains("SparseVector"))
 	{
@@ -476,9 +476,9 @@ int main()
 	{
 		MinimumAddParenthesisValid::process();
 	}
-	if (t.contains("LowestCommonAncestorBT"))
+	if (t.contains("LowestCommonAncestorBinaryTreeWithRoot"))
 	{
-		LowestCommonAncestorBT::process();
+		LowestCommonAncestorBinaryTreeWithRoot::process();
 	}
 	if (t.contains("RecursiveRabbitInterview"))
 	{

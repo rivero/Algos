@@ -1,7 +1,6 @@
 #pragma once
-namespace LowestCommonAncestorBT
-	/**
-	* https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
+/**
+* https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
 236. Lowest Common Ancestor of a Binary Tree
 
 Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
@@ -47,8 +46,8 @@ Output: 1
 Constraints:
 
 	The number of nodes in the tree is in the range [2, 105].
-	-10^9 <= Node.val <= 10^9
-	All Node.val are unique.
+	-10^9 <= TreeNode.val <= 10^9
+	All TreeNode.val are unique.
 	p != q
 	p and q will exist in the tree.
 
@@ -56,14 +55,15 @@ Solution
 NOTE that this API requires root.
 
 Look recursively for the first node that contains either p or q. Once it is found, return.
-Then choose the other leaf and look recursively for the other value (p or q). 
+Then choose the other leaf and look recursively for the other value (p or q).
 
-If not found we know that the other value (p or q) must exist under the leaf where we found 
+If not found we know that the other value (p or q) must exist under the leaf where we found
 the first value.
 
 Return that node's value.
 
 */
+namespace LowestCommonAncestorBinaryTreeWithRoot
 {
 	struct TreeNode 
 	{
@@ -101,6 +101,21 @@ Return that node's value.
 
 	void process()
 	{
+		cout << "LowestCommonAncestorBinaryTreeWithRoot\n";
+		Solution sol;
+		auto root = new TreeNode(3);
+		root->left = new TreeNode(5);
+		root->right = new TreeNode(1);
+		root->left->left = new TreeNode(6);
+		root->left->right = new TreeNode(2);
+		root->left->right->left = new TreeNode(7);
+		root->left->right->right = new TreeNode(4);
+		root->right->left = new TreeNode(0);
+		root->right->right = new TreeNode(8);
+
+		auto res = sol.lowestCommonAncestor(root, root->left, root->right);
+
+		cout << res->val << "\n";
 
 	}
 }
