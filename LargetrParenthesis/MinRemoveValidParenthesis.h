@@ -53,7 +53,7 @@ namespace MinRemoveValidParenthesis
 		string minRemoveToMakeValid(string s)
 		{
 			queue<int> q;
-			vector<int> v;
+			vector<int> invalidIdxVec;
 			for (size_t i = 0; i < s.size(); i++)
 			{
 				if (s[i] == '(')
@@ -67,18 +67,18 @@ namespace MinRemoveValidParenthesis
 						q.pop();
 					}
 					else
-						v.push_back(i);
+						invalidIdxVec.push_back(i);
 				}
 			}
 			while (!q.empty())
 			{
-				v.push_back(q.front());
+				invalidIdxVec.push_back(q.front());
 				q.pop();
 			}
 			string res;
 			for (size_t i = 0; i < s.size(); i++)
 			{
-				auto found = find(v.begin(), v.end(), i) != v.end();
+				auto found = find(invalidIdxVec.begin(), invalidIdxVec.end(), i) != invalidIdxVec.end();
 				if (!found)
 				{
 					res += s[i];
