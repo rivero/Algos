@@ -147,7 +147,7 @@ struct tests
 
 int main()
 {
-	tests t("ReorganizeString");
+	tests t("BinaryTreeVerticalOrderTransversal");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
