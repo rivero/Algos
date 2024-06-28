@@ -148,7 +148,7 @@ struct tests
 
 int main()
 {
-	tests t("LowestCommonAncestorBinaryTreeI LowestCommonAncestorBinaryTreeII LowestCommonAncestorBinaryTreeIII");
+	tests t("DotProductTwoSparseVector");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -441,7 +441,7 @@ int main()
 	{
 		LowestCommonAncestorBinaryTreeIII::process();
 	}
-	if (t.contains("SparseVector"))
+	if (t.contains("DotProductTwoSparseVector"))
 	{
 		DotProductTwoSparseVector::process();
 	}

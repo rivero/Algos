@@ -47,51 +47,37 @@ Because the vector is sparse, use a data structure that stores the index and val
 
 namespace DotProductTwoSparseVector
 {
-	class DotProductTwoSparseVector
+	class SparseVector
 	{
-		set<int> m_indexNotZero;
-		vector<int> m_nums;
+		unordered_map<int, int> m_map; // most efficient hash map O(1)
 	public:
-		const vector<int>& getNums() const
+		SparseVector(const vector<int>& nums)
 		{
-			return m_nums;
-		}
-		const set<int>& GetSet() const
-		{
-			return m_indexNotZero;
-		}
-
-		set<int> GetIntersection(set<int> otherSet)
-		{
-			set<int> result;
-			set_intersection(
-				m_indexNotZero.begin(), m_indexNotZero.end(),
-				otherSet.begin(), otherSet.end(),
-				inserter(result, result.begin()));
-			return result;
-		}
-
-		DotProductTwoSparseVector(vector<int>& nums)
-		{
-			m_nums = nums;
-			for (size_t i = 0; i < nums.size(); i++)
+			for (int i = 0; i < nums.size(); i++)
 			{
 				if (nums[i] != 0)
 				{
-					m_indexNotZero.insert(i);
+					m_map[i] = nums[i];
 				}
 			}
 		}
-
-		// Return the dotProduct of two sparse vectors
-		int dotProduct(DotProductTwoSparseVector& vec)
+		const unordered_map<int, int>& getMap() const 
 		{
-			auto interSectionSet = GetIntersection(vec.GetSet());
+			return m_map;
+		}
+		// Return the dotProduct of two sparse vectors
+		int dotProduct(SparseVector& vec)
+		{
 			int sum{};
-			for (auto intersectionIndex : interSectionSet)
+			auto& m = vec.getMap();
+			for (auto& [index, value]: m_map)
 			{
-				sum += m_nums[intersectionIndex] * vec.getNums()[intersectionIndex];
+				if (m.count(index) > 0)
+				{
+					sum += value * m.at(index);
+				}
 			}
+
 			return sum;
 		}
 
@@ -100,12 +86,34 @@ namespace DotProductTwoSparseVector
 	void process()
 	{
 		// Your SparseVector object will be instantiated and called as such:
-		vector<int> nums1{ 1,0,0,2,3 };
-		vector<int> nums2{ 0,3,0,4,0 };
-		 DotProductTwoSparseVector v1(nums1);
-		 DotProductTwoSparseVector v2(nums2);
-		 int ans = v1.dotProduct(v2);
-		 cout << ans << "\n";
+		cout << "DotProductTwoSparseVector\n";
+		{
+			vector<int> nums1{ 1,0,0,2,3 };
+			vector<int> nums2{ 0,3,0,4,0 };
+			SparseVector v1(nums1);
+			SparseVector v2(nums2);
+			int ans = v1.dotProduct(v2);
+			cout << ans << "\n";
+
+		}
+		{
+			vector<int> nums1{ 0,1,0,0,0 };
+			vector<int> nums2{ 0,0,0,0,2 };
+			SparseVector v1(nums1);
+			SparseVector v2(nums2);
+			int ans = v1.dotProduct(v2);
+			cout << ans << "\n";
+
+		}
+		{
+			vector<int> nums1{ 0,1,0,0,2,0,0 };
+			vector<int> nums2{ 1,0,0,0,3,0,4 };
+			SparseVector v1(nums1);
+			SparseVector v2(nums2);
+			int ans = v1.dotProduct(v2);
+			cout << ans << "\n";
+
+		}
 	}
 
 }
