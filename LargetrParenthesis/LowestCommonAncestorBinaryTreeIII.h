@@ -133,7 +133,7 @@ namespace LowestCommonAncestorBinaryTreeIII
 	};	
 	void process()
 	{
-		cout << "LowestCommonAncestorBinaryTreeWithParent\n";
+		cout << "LowestCommonAncestorBinaryTreeIII\n";
 		Solution sol;
 		auto root = new Node(3);
 		root->left = new Node(5, root);

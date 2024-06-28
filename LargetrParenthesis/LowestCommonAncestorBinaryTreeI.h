@@ -55,9 +55,9 @@ Solution
 NOTE that this API requires root.
 
 The algorithm explores the tree recursively, checking if p and q are present in the left and right subtrees.
+
 If both nodes are found in different subtrees, the current root is the LCA.
-If only one node is found, we return that node (which may be an ancestor of the other node).
-If neither node is found, we return nullptr.
+When we find the first p or q, we return the root to that node (which is also the ancestor of the other node).
 
 Time complexity: O(n)
 Space complexity: O(1) if not counting recursive stack frames else O(n)
@@ -95,7 +95,7 @@ namespace LowestCommonAncestorBinaryTreeI
 
 	void process()
 	{
-		cout << "LowestCommonAncestorBinaryTreeWithRoot\n";
+		cout << "LowestCommonAncestorBinaryTreeI\n";
 		Solution sol;
 		auto root = new TreeNode(3);
 		root->left = new TreeNode(5);

@@ -176,6 +176,7 @@
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LenghtOfLongestValidsubstring.h" />
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />
+    <ClInclude Include="LowestCommonAncestorBinaryTreeII.h" />
     <ClInclude Include="LowestCommonAncestorBinaryTreeIII.h" />
     <ClInclude Include="LowestCommonAncestorBinaryTreeI.h" />
     <ClInclude Include="LRUCache.h" />

@@ -218,5 +218,8 @@
     <ClInclude Include="ReorganizeString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LowestCommonAncestorBinaryTreeII.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
