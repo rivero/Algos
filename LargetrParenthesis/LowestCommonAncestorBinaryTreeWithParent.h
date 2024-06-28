@@ -66,8 +66,9 @@ p and q exist in the tree.
 Solution
 
 The algorithm simulates moving up the tree from both nodes until they meet at the LCA.
-If one node reaches the root before the other, it wraps around to the other node’s parent.
-The first common ancestor encountered during this traversal is the LCA.
+If one node reaches the root before the other, it resets itself to the other pointer.
+The iteration continues but one of the pointers is ahead in the iteration.
+slowly they both will catch up to their ancestor.
 
 Example 1:
 
@@ -112,12 +113,6 @@ namespace LowestCommonAncestorBinaryTreeWithParent
 	//It is just a variation of Intersection of LinkedList!
 	class Solution {
 	public:
-		/*
-		The algorithm simulates moving up the tree from both nodes until they meet at the LCA.
-		If one node reaches the root before the other, it wraps around to the other node’s parent.
-		The first common ancestor encountered during this traversal is the LCA.
-
-		*/
 		Node* lowestCommonAncestor(Node* p, Node* q) 
 		{
 			auto P = p;

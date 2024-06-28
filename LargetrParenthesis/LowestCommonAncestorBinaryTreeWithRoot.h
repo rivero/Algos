@@ -54,13 +54,13 @@ Constraints:
 Solution
 NOTE that this API requires root.
 
-Look recursively for the first node that contains either p or q. Once it is found, return.
-Then choose the other leaf and look recursively for the other value (p or q).
+The algorithm explores the tree recursively, checking if p and q are present in the left and right subtrees.
+If both nodes are found in different subtrees, the current root is the LCA.
+If only one node is found, we return that node (which may be an ancestor of the other node).
+If neither node is found, we return nullptr.
 
-If not found we know that the other value (p or q) must exist under the leaf where we found
-the first value.
-
-Return that node's value.
+Time complexity: O(n)
+Space complexity: O(1) if not counting recursive stack frames else O(n)
 
 */
 namespace LowestCommonAncestorBinaryTreeWithRoot
@@ -76,10 +76,10 @@ namespace LowestCommonAncestorBinaryTreeWithRoot
 	public:
 		TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
 		{
-			if (!root) // if root is null return (also base case for recursion)
+			if (!root)
 				return root;
 			
-			if (root == p || root == q) // if we found either p or q return: the node must be the lowest common ancestor
+			if (root == p || root == q)
 				return root;
 			
 			// value not found yet. Explore leafs
@@ -89,13 +89,7 @@ namespace LowestCommonAncestorBinaryTreeWithRoot
 			if (l && r) // if both leafs are valid -> root is the LCA
 				return root;
 			
-			if (l) // ... otherwise test left leaf
-				return l;
-			
-			if (r)  // ...then right leaf
-				return r;
-			
-			return nullptr; // tree ends here
+			return l ? l : r;
 		}
 	};
 
