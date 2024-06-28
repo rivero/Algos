@@ -203,7 +203,7 @@
     <ClInclude Include="ShortestPathBinaryMatrix.h" />
     <ClInclude Include="SimplifyPath.h" />
     <ClInclude Include="Solution.h" />
-    <ClInclude Include="SparseVector.h" />
+    <ClInclude Include="DotProductTwoSparseVector.h" />
     <ClInclude Include="SubarraySumEqualsK.h" />
     <ClInclude Include="SumRootToLeaf.h" />
     <ClInclude Include="sumtreenodes.h" />

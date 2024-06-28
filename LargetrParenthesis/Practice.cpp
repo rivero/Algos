@@ -93,7 +93,7 @@ void printm(const map<T, U>& counts)
 #include "sumtreenodes.h"
 #include "arrayStringsAreEqual.h"
 #include "findinter.h"
-#include "SparseVector.h"
+#include "DotProductTwoSparseVector.h"
 #include "RandomPickWithWeight.h"
 #include "BasicCalculator.h"
 #include "BuildingsWithAnOceanView.h"
@@ -443,7 +443,7 @@ int main()
 	}
 	if (t.contains("SparseVector"))
 	{
-		sparsevec::process();
+		DotProductTwoSparseVector::process();
 	}
 	if (t.contains("randompickweight"))
 	{

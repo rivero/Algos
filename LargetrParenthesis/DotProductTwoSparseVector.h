@@ -45,9 +45,9 @@ n == nums1.length == nums2.length
 Because the vector is sparse, use a data structure that stores the index and value where the element is nonzero.
 */
 
-namespace sparsevec
+namespace DotProductTwoSparseVector
 {
-	class SparseVector
+	class DotProductTwoSparseVector
 	{
 		set<int> m_indexNotZero;
 		vector<int> m_nums;
@@ -71,7 +71,7 @@ namespace sparsevec
 			return result;
 		}
 
-		SparseVector(vector<int>& nums)
+		DotProductTwoSparseVector(vector<int>& nums)
 		{
 			m_nums = nums;
 			for (size_t i = 0; i < nums.size(); i++)
@@ -84,7 +84,7 @@ namespace sparsevec
 		}
 
 		// Return the dotProduct of two sparse vectors
-		int dotProduct(SparseVector& vec)
+		int dotProduct(DotProductTwoSparseVector& vec)
 		{
 			auto interSectionSet = GetIntersection(vec.GetSet());
 			int sum{};
@@ -102,8 +102,8 @@ namespace sparsevec
 		// Your SparseVector object will be instantiated and called as such:
 		vector<int> nums1{ 1,0,0,2,3 };
 		vector<int> nums2{ 0,3,0,4,0 };
-		 SparseVector v1(nums1);
-		 SparseVector v2(nums2);
+		 DotProductTwoSparseVector v1(nums1);
+		 DotProductTwoSparseVector v2(nums2);
 		 int ans = v1.dotProduct(v2);
 		 cout << ans << "\n";
 	}

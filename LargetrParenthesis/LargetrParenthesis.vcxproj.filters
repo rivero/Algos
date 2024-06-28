@@ -98,7 +98,7 @@
     <ClInclude Include="findinter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SparseVector.h">
+    <ClInclude Include="DotProductTwoSparseVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RandomPickWithWeight.h">
