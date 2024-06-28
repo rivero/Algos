@@ -176,8 +176,8 @@
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LenghtOfLongestValidsubstring.h" />
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />
-    <ClInclude Include="LowestCommonAncestorBinaryTreeWithParent.h" />
-    <ClInclude Include="LowestCommonAncestorBinaryTreeWithRoot.h" />
+    <ClInclude Include="LowestCommonAncestorBinaryTreeIII.h" />
+    <ClInclude Include="LowestCommonAncestorBinaryTreeI.h" />
     <ClInclude Include="LRUCache.h" />
     <ClInclude Include="mergearrays.h" />
     <ClInclude Include="MinimumAddParenthesisValid.h" />

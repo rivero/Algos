@@ -94,7 +94,7 @@ Example 1:
 		Slowly but surely they will catch up with each other and when they are the same the LCA was found
 */
 #define PRINTV
-namespace LowestCommonAncestorBinaryTreeWithParent
+namespace LowestCommonAncestorBinaryTreeIII
 {
 	class Node {
 	public:

@@ -63,7 +63,7 @@ Time complexity: O(n)
 Space complexity: O(1) if not counting recursive stack frames else O(n)
 
 */
-namespace LowestCommonAncestorBinaryTreeWithRoot
+namespace LowestCommonAncestorBinaryTreeI
 {
 	struct TreeNode 
 	{

@@ -83,7 +83,7 @@ void printm(const map<T, U>& counts)
 #include "MinRemoveValidParenthesis.h"
 #include "BinaryTreeVerticalOrderTransversal.h"
 #include "NestedListWeightSum.h"
-#include "LowestCommonAncestorBinaryTreeWithParent.h"
+#include "LowestCommonAncestorBinaryTreeIII.h"
 #include "MinWindowSubstring.h"
 #include "QuestionMarks.h"
 #include "Auros.h"
@@ -103,7 +103,7 @@ void printm(const map<T, U>& counts)
 #include "BTreeToDLink.h"
 #include "NumberOfIslands.h"
 #include "MinimumAddParenthesisValid.h"
-#include "LowestCommonAncestorBinaryTreeWithRoot.h"
+#include "LowestCommonAncestorBinaryTreeI.h"
 #include "RecursiveRabbitInterview.h"
 #include "LongestIncreasingSubsequenceNLogN.h"
 #include "IncreasingTripleSequence.h"
@@ -438,7 +438,7 @@ int main()
 	
 	if (t.contains("LowestCommonAncestorBinaryTreeWithParent"))
 	{
-		LowestCommonAncestorBinaryTreeWithParent::process();
+		LowestCommonAncestorBinaryTreeIII::process();
 	}
 	if (t.contains("SparseVector"))
 	{
@@ -478,7 +478,7 @@ int main()
 	}
 	if (t.contains("LowestCommonAncestorBinaryTreeWithRoot"))
 	{
-		LowestCommonAncestorBinaryTreeWithRoot::process();
+		LowestCommonAncestorBinaryTreeI::process();
 	}
 	if (t.contains("RecursiveRabbitInterview"))
 	{
