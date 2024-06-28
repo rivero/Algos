@@ -62,6 +62,35 @@ All Node.val are unique.
 p != q
 
 p and q exist in the tree.
+
+Solution
+
+The algorithm simulates moving up the tree from both nodes until they meet at the LCA.
+If one node reaches the root before the other, it wraps around to the other node’s parent.
+The first common ancestor encountered during this traversal is the LCA.
+
+Example 1:
+
+			3
+		  /	  \
+		 5     1
+		/ \   / \
+	   6   2 0   8
+		  / \
+		 7   4
+
+		 p = 4, q = 8 Output = 3
+
+		 Values	Iterations
+											Magic here too
+												*
+		 P = p		4	2	5	3		null	8	(<- we catch up in the same level here)	1 3
+		 Q = q		8	1	3	null	4		2	(<- we catch up in the same level here)	5 3
+		                                ^													  ^ found LCA
+									  Magic here
+								Reset to other pointer
+		When magic happens, then one of the pointers is ahead in the iteration than the other. 
+		Slowly but surely they will catch up with each other and when they are the same the LCA was found
 */
 #define PRINTV
 namespace LowestCommonAncestorBinaryTreeWithParent
@@ -83,22 +112,28 @@ namespace LowestCommonAncestorBinaryTreeWithParent
 	//It is just a variation of Intersection of LinkedList!
 	class Solution {
 	public:
+		/*
+		The algorithm simulates moving up the tree from both nodes until they meet at the LCA.
+		If one node reaches the root before the other, it wraps around to the other node’s parent.
+		The first common ancestor encountered during this traversal is the LCA.
+
+		*/
 		Node* lowestCommonAncestor(Node* p, Node* q) 
 		{
-			auto a = p;
-			auto b = q;
+			auto P = p;
+			auto Q = q;
 #ifdef PRINTV
-			cout << "\nBegin a:\t" << a->val << "\tb:\t" << b->val << "\n";
+			cout << "\nBegin a:\t" << P->val << "\tb:\t" << Q->val << "\n";
 #endif // PRINTV
-			while (a != b)
+			while (P != Q)
 			{
-				a = a == nullptr ? q : a->parent;
-				b = b == nullptr ? p : b->parent;
+				P = P == nullptr ? q : P->parent;
+				Q = Q == nullptr ? p : Q->parent;
 #ifdef PRINTV
-			cout << "\nEnd   a:\t" << a->val << "\tb:\t" << b->val << "\n";
+			cout << "\nEnd   a:\t" << P->val << "\tb:\t" << Q->val << "\n";
 #endif // PRINTV
 			}
-			return a;
+			return P;
 		}
 	};	
 	void process()
