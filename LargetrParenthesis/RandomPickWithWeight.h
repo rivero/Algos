@@ -72,61 +72,99 @@ vector v:- [1,1+3, 1+3+4, 1+3+4+6].
 = [1, 4, 8 , 14]
 
 
-In case of random numbers from [0,14),
-if the number is 0 then I return index 0, (1)
-if number lies between [1-4) I return index 1, (4)
-if number lies between [4-8) I return index 2  (8)
-and if it lies in [8,14) I return index 3. (14)
-
-So, basically I'm returning the index of the upperbound of the random generated number from vector v.
+The key idea here is that the cumulative sum array v allows us to map the random number to an index 
+based on the weight distribution. 
+The larger the cumulative sum, the higher the probability of selecting that index.
 
 	*/
 #define PRINTV
-namespace randompickweight
+namespace RandomPickwithWeight
 {
 
 
 	class Solution 
 	{
 	public:
-		vector<int> v;
-		Solution(vector<int> w) 
+		vector<int> m_AccumWeights;
+		/*
+		Initialization:
+		The constructor Solution(vector<int> w) initializes a vector v to store cumulative sums of the weights.
+		It starts by pushing the first weight w[0] into v.
+		Cumulative Sums:
+		The loop iterates from index 1 to w.size() - 1.
+		For each index i, it calculates v[i] = v[i - 1] + w[i], which represents the cumulative sum of weights up to index i.
+		This cumulative sum array v allows us to map the random number to an index with the desired probability distribution
+		*/
+		Solution(vector<int> WeightsVector) 
 		{
-			v.push_back(w[0]);
+#ifdef PRINTV
+			cout << "vector WeightsVector containing the weights\n";
+			printv(WeightsVector);
+			cout << "\n";
+#endif
+			m_AccumWeights.push_back(WeightsVector[0]);
 
-			for (size_t i = 1; i < w.size(); i++) 
+			for (size_t i = 1; i < WeightsVector.size(); i++) 
 			{
-				v.push_back(v[i - 1] + w[i]);
+				m_AccumWeights.push_back(m_AccumWeights[i - 1] + WeightsVector[i]);
 			}
 #ifdef PRINTV
-			printv(v);
+			cout << "vector v to store cumulative sums of the weights\n";
+			printv(m_AccumWeights);
+			cout << "\n";
 #endif
 		}
+		/*Random Index Selection:
+		In the pickIndex() function:
+		Generate a random integer n in the range [0, v[v.size() - 1]).
+		Find the first element in v that is greater than n using upper_bound.
+		The index of this element corresponds to the chosen index.
+		Return the distance from the beginning of v to this chosen index.
 
+		The key idea here is that the cumulative sum array v allows us to map 
+		the random number to an index based on the weight distribution. 
+		The larger the cumulative sum, the higher the probability of selecting that index.
+		*/
 		int pickIndex() 
 		{
-			int n = rand() % v[v.size() - 1]; // pick random index within the vector
-			auto it = upper_bound(v.begin(), v.end(), n); // locate the upper bound since the choice is inclusive
+			int n = rand() % m_AccumWeights[m_AccumWeights.size() - 1]; // Generate a random integer n in the range [0, v[v.size() - 1]) from the weights vector.
+			auto it = upper_bound(m_AccumWeights.begin(), m_AccumWeights.end(), n); // finds the first element greater than since the choice is inclusive
 #ifdef PRINTV
-			cout << "random index n [" << n << "] *it (upper bound) [" << *it;
-			cout << "] distance [" << distance(v.begin(), it) << "]\n";
+			cout << "from weights vector random integer n [" << n << "] *it (upper bound) [" << *it;
+			cout << "] distance from the beginning to the upper bound [" << distance(m_AccumWeights.begin(), it) << "]\n";
 #endif
-			return distance(v.begin(), it); // calculate the distance from the beginning to the chosen upper bound
+			return distance(m_AccumWeights.begin(), it); // calculate the distance from the beginning to the chosen upper bound
 		}
 	};
 
 
 	void process()
 	{
-		cout << "\nrandompickweight\n";
-		// Your Solution object will be instantiated and called as such:
-		// ["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
-		Solution* obj = new Solution({1, 3});
+		cout << "\nRandomPickwithWeight\n";
 
-		for (int i = 0; i < 5;i++)
 		{
-			cout << obj->pickIndex() << "\n";
+			// Your Solution object will be instantiated and called as such:
+			// ["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
+			Solution* obj = new Solution({ 1, 3 });
+
+			for (int i = 0; i < 2; i++)
+			{
+				cout << obj->pickIndex() << "\n";
+			}
+			cout << "\n";
+
 		}
- 
+		{
+			// Your Solution object will be instantiated and called as such:
+			// ["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
+			Solution* obj = new Solution({ 1, 3, 2,4, 5, 6 });
+
+			for (int i = 0; i < 5; i++)
+			{
+				cout << obj->pickIndex() << "\n";
+			}
+			cout << "\n";
+
+		}
 	}
 }

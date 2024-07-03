@@ -44,7 +44,7 @@
     <ClInclude Include="ValidWordAbbreviation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ValidPalindrome.h">
+    <ClInclude Include="ValidPalindromeII.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MovingAverage.h">
@@ -104,7 +104,7 @@
     <ClInclude Include="RandomPickWithWeight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicCalculator.h">
+    <ClInclude Include="BasicCalculatorII.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BuildingsWithAnOceanView.h">

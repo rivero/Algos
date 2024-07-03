@@ -151,7 +151,7 @@
     <ClInclude Include="AnalyzeUserWebsiteVisit.h" />
     <ClInclude Include="arrayStringsAreEqual.h" />
     <ClInclude Include="Auros.h" />
-    <ClInclude Include="BasicCalculator.h" />
+    <ClInclude Include="BasicCalculatorII.h" />
     <ClInclude Include="BinarySearch.h" />
     <ClInclude Include="BinaryTreeDiameter.h" />
     <ClInclude Include="BinaryTreeRightSideView.h" />
@@ -212,7 +212,7 @@
     <ClInclude Include="TopKElements.h" />
     <ClInclude Include="ValidAnagram.h" />
     <ClInclude Include="ValidNumber.h" />
-    <ClInclude Include="ValidPalindrome.h" />
+    <ClInclude Include="ValidPalindromeII.h" />
     <ClInclude Include="ValidWordAbbreviation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

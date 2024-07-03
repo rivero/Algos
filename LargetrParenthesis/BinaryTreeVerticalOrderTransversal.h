@@ -12,9 +12,11 @@ If two nodes are in the same row and column, the order should be from left to ri
 
 Example 1:
 
-			3
-	9			20
-			15		7
+	  3
+	 / \
+	9	20
+	   /  \
+	  15   7
 
 Input: root = [3,9,20,null,null,15,7]
 Output: [[9],[3,15],[20],[7]]
@@ -99,12 +101,18 @@ namespace BinaryTreeVerticalOrderTransversal
 	};
 	struct Solution : protected SolutionMembers, private timeit
 	{
+		/*
+		scans a queue which contains nodes and levels. Starts at root, 0.
+		as it goes it adds to it the current level's left and right if they exist.
+		for left child the level is level - 1.
+		for right child is level + 1.
+		*/
 		void createLevels()
 		{
 			if (qu.empty()) 
 				return;
 
-			for (size_t i = 0; i < qu.size(); i++)
+			for (size_t i = 0; i < qu.size(); i++) 
 			{
 				auto [currNode, level] = qu.front(); qu.pop();
 
@@ -139,7 +147,7 @@ namespace BinaryTreeVerticalOrderTransversal
 			qu.push({ root, 0 });
 
 			createLevels();
-
+			// Once the vertical levels are built add them to the required resulting vector of vector of ints
 			for (const auto& [level, valuesVec] : verticalLevels)
 			{
 				ans.push_back(valuesVec);
@@ -155,6 +163,17 @@ namespace BinaryTreeVerticalOrderTransversal
 		cout << "BinaryTreeVerticalOrderTransversal\n";
 		if (true)
 		{
+			/*
+			* 
+					  3
+					 / \
+					9	20
+					   /  \
+					  15   7
+
+			Input [3,9,20,null,null,15,7]
+			Output [[9],[3,15],[20],[7]]
+			*/
 			auto root = new TreeNode(3);
 
 			root->left = new TreeNode(9);

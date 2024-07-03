@@ -76,7 +76,7 @@ void printm(const map<T, U>& counts)
 #include "ValidAnagram.h"
 #include "PalindromeNumber.h"
 #include "ValidWordAbbreviation.h"
-#include "ValidPalindrome.h"
+#include "ValidPalindromeII.h"
 #include "MovingAverage.h"
 #include "BinaryTreeDiameter.h"
 #include "Toeplitz.h"
@@ -95,7 +95,7 @@ void printm(const map<T, U>& counts)
 #include "findinter.h"
 #include "DotProductTwoSparseVector.h"
 #include "RandomPickWithWeight.h"
-#include "BasicCalculator.h"
+#include "BasicCalculatorII.h"
 #include "BuildingsWithAnOceanView.h"
 #include "KthLargestElement.h"
 #include "SimplifyPath.h"
@@ -148,7 +148,7 @@ struct tests
 
 int main()
 {
-	tests t("DotProductTwoSparseVector");
+	tests t("RandomPickwithWeight");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -304,7 +304,7 @@ int main()
 	}
 	if (t.contains("ValidPalindrome"))
 	{
-		ValidPalindrome::process();
+		ValidPalindromeII::process();
 	}
 	if (false)
 	{
@@ -445,13 +445,13 @@ int main()
 	{
 		DotProductTwoSparseVector::process();
 	}
-	if (t.contains("randompickweight"))
+	if (t.contains("RandomPickwithWeight"))
 	{
-		randompickweight::process();
+		RandomPickwithWeight::process();
 	}
 	if (t.contains("BasicCalculator"))
 	{
-		basiccalc::process();
+		BasicCalculatorII::process();
 	}
 	if (t.contains("buildingsoceanview"))
 	{

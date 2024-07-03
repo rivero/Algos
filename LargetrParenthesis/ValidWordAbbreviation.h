@@ -3,16 +3,15 @@
 * https://leetcode.com/problems/valid-word-abbreviation/description/
 * 
 408. Valid Word Abbreviation
-A string can be abbreviated by replacing any number of non-adjacent, non-empty substrings
-with their lengths.
+A string can be abbreviated by replacing any number of non-adjacent, non-empty substrings with their lengths.
 The lengths should not have leading zeros.
 
 For example, a string such as "substitution" could be abbreviated as (but not limited to):
-"s10n" ("s ubstitutio n")
-"sub4u4" ("sub stit u tion")
-"12" ("substitution")
-"su3i1u2on" ("su bst i t u ti on")
-"substitution" (no substrings replaced)
+	"s10n" ("s ubstitutio n")
+	"sub4u4" ("sub stit u tion")
+	"12" ("substitution")
+	"su3i1u2on" ("su bst i t u ti on")
+	"substitution" (no substrings replaced)
 
 The following are not valid abbreviations:
 "s55n" ("s ubsti tutio n", the replaced substrings are adjacent)
@@ -55,6 +54,18 @@ namespace ValidWordAbbreviation
 {
 	struct ValidWordAbbreviation : public timeit
 	{
+		/*
+		Using two pointers/indexes one to the abbreviation and the other to the original word.
+		start both from zero and proceed to move forward in the string in a while loop. We will test 
+		to find the first digit which shoult *NOT* be zero. It it is return false.
+		In the loop, create a boolean to start digits with zero and another one to numerically sum the abbreviated number.
+		Otherwise set our startWihtdigitFlag to true and convert the char to numeric and add it to the numeric counter.
+		After we finish couting and adding the numeric characters, test to see if the in-loop local num value is different from 0.
+		If it is 0, there where no digits found. Test to see if both abbr and word index are the same (they should be). If they
+		are not, return false.
+		If the num is not zero, add that number to the word index. This will move that pointer num positions ahead and it must stil match
+		the original char counter of the word parameter.
+		*/
 		bool validWordAbbreviation(string word, string abbr)
 		{
 			size_t wordIdx = 0;

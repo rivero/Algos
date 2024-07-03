@@ -40,7 +40,7 @@ s represents a valid expression.
 All the integers in the expression are non-negative integers in the range [0, 2^31 - 1].
 The answer is guaranteed to fit in a 32-bit integer.
 */
-namespace basiccalc
+namespace BasicCalculatorII
 {
 	class Solution 
 	{
@@ -51,7 +51,7 @@ namespace basiccalc
 			char opr = '+';
 			stack<int>st;
 
-			for (size_t i = 0; i < s.length(); i++)
+			for (size_t i = 0; i < s.size(); i++)
 			{
 				char c = s[i];
 

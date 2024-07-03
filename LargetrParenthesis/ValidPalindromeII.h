@@ -39,7 +39,7 @@ Result: if the characters from the right and the left are the same return true
 
 */
 
-namespace ValidPalindrome
+namespace ValidPalindromeII
 {
 	struct Solution : public timeit
 	{

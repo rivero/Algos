@@ -37,6 +37,17 @@ Constraints:
 
 HINT You can traverse the buildings from the nearest to the ocean to the furthest.
 
+Solution
+Initialize an empty vector res to store the indices of the visible buildings.
+Compute the total number of buildings (numBuildings) by subtracting 1 from the size of the heights vector.
+Push numBuildings (the last index) into res since the last building always sees the sunset.
+Initialize lastHeight with the height of the last building (heights[numBuildings]).
+Iterate from the second-to-last building (index numBuildings - 1) to the first building (index 0):
+If the height of the current building (heights[i]) is greater than lastHeight, it can see the sunset.
+Add its index (i) to the res vector and update lastHeight.
+Reverse the order of elements in res to match the original order of buildings from west to east.
+Return the res vector containing the indices of the visible buildings.
+
 	*/
 namespace buildingsoceanview
 {
