@@ -63,6 +63,25 @@ Constraints:
 1 <= path.length <= 3000
 path consists of English letters, digits, period '.', slash '/' or '_'.
 path is a valid absolute Unix path.
+
+
+Time Complexity:
+    The time complexity of an algorithm measures the number of operations it performs relative to the input size.
+    Let’s analyze the code:
+    The initial split operation using getline processes each character in the input path, which takes linear time (O(n)), 
+    where n is the length of the path.
+    The subsequent loop iterates through the split components (directories) and performs constant-time operations (e.g., 
+    checking for “…” or “.”).
+    Overall, the time complexity is dominated by the initial split operation, resulting in O(n) time complexity.
+
+Space Complexity:
+    Space complexity refers to the amount of memory used by an algorithm.
+    In this code:
+    We use two vectors (dir and ans_vec) to store the split components and the simplified path.
+    The space required by these vectors depends on the number of directories in the input path.
+    Therefore, the space complexity is also O(n), where n is the length of the input path.
+
+In summary, the given code has linear time complexity (O(n)) and linear space complexity (O(n)).
 	*/
     class Solution {
     public:
@@ -92,7 +111,8 @@ path is a valid absolute Unix path.
                 }
                 else 
                 {
-                    if (dir[i] != "") // in case we have "//" where split method will return ""(emptyString) in this case we won't be putting it in our ans_vec.
+                    if (dir[i] != "") // This deals with the case of empty string result of having "//" split. 
+                                      // If we have something push it back.
                         ans_vec.push_back(dir[i]);
                 }
             }

@@ -126,10 +126,13 @@ namespace InsertSortedCircularList
 				auto nextVal = cur->next->val;
 
 				// curVal is max (nextVal is min), and insertVal is outside (min, max)
-				if (curVal > nextVal && (insertVal >= curVal || insertVal <= nextVal)) 
+				// This condition handles the case where curVal is the maximum value in 
+				//		the list, and insertVal falls outside the range [curVal, nextVal]
+				if (curVal > nextVal && (curVal <= insertVal || insertVal <= nextVal))
 					break;
 
 				// insertVal is inside [curVal, nextVal]
+				//  This condition handles the case where insertVal should be inserted between cur and cur->next.
 				if (curVal <= insertVal && insertVal <= nextVal) 
 					break;
 			}
