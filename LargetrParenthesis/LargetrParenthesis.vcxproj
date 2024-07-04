@@ -156,7 +156,7 @@
     <ClInclude Include="BinaryTreeDiameter.h" />
     <ClInclude Include="BinaryTreeRightSideView.h" />
     <ClInclude Include="BinaryTreeVerticalOrderTransversal.h" />
-    <ClInclude Include="BTreeToDLink.h" />
+    <ClInclude Include="ConvertBSTtoDoubleLinkedList.h" />
     <ClInclude Include="BuildingsWithAnOceanView.h" />
     <ClInclude Include="CLoneGraph.h" />
     <ClInclude Include="ClosesetBinarySearchTreeValue.h" />
@@ -206,7 +206,7 @@
     <ClInclude Include="DotProductTwoSparseVector.h" />
     <ClInclude Include="SubarraySumEqualsK.h" />
     <ClInclude Include="SumRootToLeaf.h" />
-    <ClInclude Include="sumtreenodes.h" />
+    <ClInclude Include="RangeSumOfBST.h" />
     <ClInclude Include="timeit.h" />
     <ClInclude Include="Toeplitz.h" />
     <ClInclude Include="TopKElements.h" />

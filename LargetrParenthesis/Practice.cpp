@@ -90,7 +90,7 @@ void printm(const map<T, U>& counts)
 #include "FindParenthesis.h"
 #include "mergearrays.h"
 #include "movezero.h"
-#include "sumtreenodes.h"
+#include "RangeSumOfBST.h"
 #include "arrayStringsAreEqual.h"
 #include "findinter.h"
 #include "DotProductTwoSparseVector.h"
@@ -99,7 +99,7 @@ void printm(const map<T, U>& counts)
 #include "BuildingsWithAnOceanView.h"
 #include "KthLargestElement.h"
 #include "SimplifyPath.h"
-#include "BTreeToDLink.h"
+#include "ConvertBSTtoDoubleLinkedList.h"
 #include "NumberOfIslands.h"
 #include "MinimumAddParenthesisValid.h"
 #include "LowestCommonAncestorBinaryTreeI.h"
@@ -148,7 +148,7 @@ struct tests
 
 int main()
 {
-	tests t("RandomPickwithWeight");
+	tests t("RangeSumOfBST");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -234,9 +234,9 @@ int main()
 		mergearrays::merge(nums1, 3, nums2, 3);
 		printv(nums1);
 	}
-	if (false)
+	if (t.contains("RangeSumOfBST"))
 	{
-		cout << sumtreenodes::doRangeSumBST();
+		cout << RangeSumOfBST::process();
 	}
 	if (false)
 	{

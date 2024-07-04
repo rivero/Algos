@@ -1,5 +1,5 @@
 #pragma once
-namespace sumtreenodes
+namespace RangeSumOfBST
 {
 	/*
 Given the root node of a binary search tree and two integers low and high,
@@ -25,28 +25,31 @@ Definition for a binary tree node.
 		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 
 	};
-	int sum{};
-
-	void preorder(TreeNode* root, int low, int high)
+	struct Solution : public timeit 
 	{
-		if (root)
+		int m_sum{};
+
+		void preorder(TreeNode* root, int low, int high)
 		{
-			if (root->val >= low && root->val <= high)
-				sum += root->val;
-			preorder(root->left, low, high);
-			preorder(root->right, low, high);
+			if (root)
+			{
+				if (root->val >= low && root->val <= high)
+					m_sum += root->val;
+				preorder(root->left, low, high);
+				preorder(root->right, low, high);
+			}
 		}
-	}
 
-	int rangeSumBST(TreeNode* root, int low, int high)
+		int rangeSumBST(TreeNode* root, int low, int high)
+		{
+			preorder(root, low, high);
+			return m_sum;
+		}
+	};
+
+	int process()
 	{
-		preorder(root, low, high);
-		return sum;
-
-	}
-
-	int doRangeSumBST()
-	{
+		cout << "RangeSumOfBST\n";
 		auto root = new TreeNode(10);
 
 		root->left = new TreeNode(5);
@@ -55,8 +58,8 @@ Definition for a binary tree node.
 
 		root->right = new TreeNode(15);
 		root->right->right = new TreeNode(18);
-
-		return rangeSumBST(root, 7, 15);
+		Solution sol;
+		return sol.rangeSumBST(root, 7, 15);
 	}
 
 }

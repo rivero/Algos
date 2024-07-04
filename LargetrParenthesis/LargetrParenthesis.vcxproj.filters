@@ -89,7 +89,7 @@
     <ClInclude Include="movezero.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sumtreenodes.h">
+    <ClInclude Include="RangeSumOfBST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="arrayStringsAreEqual.h">
@@ -116,7 +116,7 @@
     <ClInclude Include="SimplifyPath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BTreeToDLink.h">
+    <ClInclude Include="ConvertBSTtoDoubleLinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NumberOfIslands.h">

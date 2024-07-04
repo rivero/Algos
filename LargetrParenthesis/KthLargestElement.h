@@ -31,14 +31,19 @@ namespace KthLargestElement
 	class Solution 
 	{
 	public:
-		int findKthLargest1(vector<int>& nums, int k) 
-		{
+		int findKthLargest(vector<int>& nums, int k) 
+		{ // 67 ms Beats 96.24 %
+			/*Time Complexity: O(n log n)
+			Space Complexity: O(1)*/
 			sort(nums.begin(), nums.end());
 			return nums[nums.size() - k];
 		}
 
-		int findKthLargest(vector<int>& nums, int k)
+		int findKthLargest1(vector<int>& nums, int k)
 		{
+			// 84 ms Beats 79.83 %
+			/*Time Complexity: O(n log k)
+			Space Complexity: O(k)*/
 			std::priority_queue<int, std::vector<int>, std::greater<int>>
 				myq(nums.begin(), nums.begin()+k);
 

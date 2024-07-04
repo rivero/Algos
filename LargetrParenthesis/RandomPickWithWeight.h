@@ -98,8 +98,8 @@ namespace RandomPickwithWeight
 		Solution(vector<int> WeightsVector) 
 		{
 #ifdef PRINTV
-			cout << "vector WeightsVector containing the weights\n";
-			printv(WeightsVector);
+			cout << "vector WeightsVector containing the weights. w[i] describes the weight of the ith index.\n";
+			printv(WeightsVector, true, true);
 			cout << "\n";
 #endif
 			m_AccumWeights.push_back(WeightsVector[0]);

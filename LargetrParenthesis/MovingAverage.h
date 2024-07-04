@@ -30,26 +30,31 @@ Constraints:
 1 <= size <= 1000
 -105 <= val <= 105
 At most 104 calls will be made to next.
+
+Time Complexity: O(1) (constant time)
+Space Complexity: O(W) (linear with respect to the window size)"
+
 */
 struct MovingAverage : public timeit
 {
 	queue<int> m_numbers;
 	size_t m_windowSize{};
-	double sum{};
+	double m_sum{};
 	MovingAverage(int size) : m_windowSize(size)
 	{
 	}
 
 	double next(int val)
 	{
-		if (m_numbers.size() + 1 > m_windowSize)
+		if (m_numbers.size() + 1 > m_windowSize) // If the queue size is greater than or equal to the window size...  
 		{
-			sum -= m_numbers.front();
+			// ...it removes the oldest element from the queue (constant time operation) then it 
+			m_sum -= m_numbers.front(); //updates the sum by subtracting the removed value...
 			m_numbers.pop();
 		}
-		m_numbers.push(val);
-		sum += val;
+		m_numbers.push(val); //...and adding the new value (constant time operation)
+		m_sum += val; // Finally, it computes the average by dividing the sum by the queue size (constant time operation).
 
-		return sum / m_numbers.size();
+		return m_sum / m_numbers.size();
 	}
 };

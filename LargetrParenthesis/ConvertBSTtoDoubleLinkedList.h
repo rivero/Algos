@@ -51,6 +51,24 @@ namespace BTreeToDLink
     -1000 <= Node.val <= 1000
     All the values of the tree are unique.
 
+    Solution
+	Time Complexity:
+        The treeToDoublyList(Node* root) function performs the following operations:
+            It initializes an empty set (m_set) and inserts values from the binary tree into the set 
+                (each insertion takes logarithmic time due to the set’s ordered nature).
+            It then iterates through the set to connect the nodes (linear time with respect to the number of nodes in the tree).
+                The overall time complexity is determined by the set insertions and the iteration, 
+                which results in O(N log N), where N represents the number of nodes in the binary tree 1.
+        The print_preorder(Node* node) function has a constant time complexity since it only prints the values of the nodes without modifying the data structure.
+    Space Complexity:
+        The space complexity depends on the additional data structures used:
+        The set (m_set) stores pairs of values and pointers to nodes. Since the set contains at most N elements (where N is the number of nodes in the tree), its space complexity is O(N).
+        Other variables (curIt, nextit, etc.) occupy constant space.
+        Therefore, the overall space complexity is O(N).
+    In summary:
+
+    Time Complexity: O(N log N)
+    Space Complexity: O(N)
     */
 
 	struct Node 
