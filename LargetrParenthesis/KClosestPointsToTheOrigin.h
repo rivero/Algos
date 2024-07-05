@@ -64,7 +64,7 @@ namespace KClosestPointsToTheOrigin
 			{
 				auto vec = points[i];
 				auto dist = sqrt(pow(vec[0], 2) + pow(vec[1], 2));
-				myset.insert({dist, vec});
+				myset.insert({dist, vec}); // the shorter distance will be at the beginning of this multiset
 			}
 
 			vector<vector<int>> myres;
