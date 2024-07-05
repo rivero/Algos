@@ -70,6 +70,33 @@ namespace IntervalListIntersections
 		Move the pointer that has the smaller end point (i.e., increment i or j).
 		Repeat until one of the pointers reaches the end of its list.
 
+		The provided code for finding the intersection of intervals has the following time and space complexity:
+
+**Time Complexity:** O(n + m)
+
+* **n** is the number of intervals in the first list (A).
+* **m** is the number of intervals in the second list (B).
+
+**Reasoning:**
+
+* The code uses two nested loops that iterate through both lists A and B. 
+* In the worst case, both loops might iterate through all elements of their respective lists.
+* The operations inside the loops (comparisons, pushing to the result vector) are constant time operations (O(1)).
+* Therefore, the overall time complexity is dominated by the nested loops, resulting in O(n + m).
+
+**Space Complexity:** O(min(n, m))
+
+* The code uses a single vector `res` to store the intersection intervals.
+* In the worst case, the number of intersections will be equal to the number of intervals in the smaller list (either n or m).
+* Since each intersection is stored as a vector of size 2, the space complexity is proportional to the number of intersections, 
+* which is O(min(n, m)).
+
+**Note:**
+
+* This analysis assumes that the size of each interval (constant space) is negligible compared to the total number of intervals.
+* If there's a need to optimize space further, techniques like modifying the original lists (if allowed) to store the intersections 
+* can be explored, but this might trade space for code complexity.
+
 	*/
 //#define PRINTV
 	class Solution 
@@ -95,17 +122,17 @@ namespace IntervalListIntersections
 				auto blow = B[j][0];
 				auto ahigh = A[i][1];
 				auto bhigh = B[j][1];
-				int lo = max(alow, blow), 
-					hi = min(ahigh, bhigh);
+				int maxStart = max(alow, blow), 
+					minEnd = min(ahigh, bhigh);
 
 #ifdef PRINTV
-				cout << "lo max(alow, blow): " << lo << " hi min(ahigh, bhigh): " << hi << "\n";
+				cout << "lo max(alow, blow): " << maxStart << " hi min(ahigh, bhigh): " << minEnd << "\n";
 #endif // PRINTV
-				if (lo <= hi)
+				if (maxStart <= minEnd)
 				{
-					res.push_back({ lo, hi });
+					res.push_back({ maxStart, minEnd });
 #ifdef PRINTV
-					cout << "\t* pushing {" << lo << "," << hi << "}\n\n";
+					cout << "\t* pushing {" << maxStart << "," << minEnd << "}\n\n";
 #endif
 				}
 #ifdef PRINTV
@@ -113,7 +140,7 @@ namespace IntervalListIntersections
 					cout << "NOT AN INTERSECTION\n\n";
 #endif
 				// Move the pointer that has the smaller end point (i.e., increment i or j).
-				if (hi == ahigh) 
+				if (minEnd == ahigh) 
 								 // if hi == ahigh (see they are compared in the min() ) then hi is the smallest pointer
 								 // because if the ahigh is the hi (which is the min) the next element in A might also fall within B
 					i++;
