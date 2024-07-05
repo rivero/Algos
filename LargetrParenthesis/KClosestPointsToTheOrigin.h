@@ -36,7 +36,16 @@ namespace KClosestPointsToTheOrigin
 	1 <= k <= points.length <= 10^4
 	-10^4 <= xi, yi <= 10^4
 
+	Solution
 
+	Uses a multiset to store pairs of distance and the corresponding point vector.
+	The multiset automatically sorts the elements based on the first element (distance) in ascending order.
+	Iterates through the multiset and extracts the first k elements (closest points) into the result vector.
+
+	Time Complexity: O(n * log(n)) in the worst case. 
+		This is because calculating the distance for each point and inserting it into the data structure takes O(n) time, 
+		and extracting the k closest elements takes O(log(n)) per element (roughly k * log(n) in total).
+	Space Complexity: O(n) due to the multiset potentially storing all distances and points.
 
 	*/
 
@@ -49,6 +58,7 @@ namespace KClosestPointsToTheOrigin
 			// return the k first elements in the set.
 			// create set to store pairs containing the distance and the vector
 			// set will sort pairs based on firs, second so the first k set elements are the answer
+			// because the first k set of elements are the closest to the origin
 			multiset < pair<double, vector<int>> > myset;
 			for (size_t i = 0; i <  points.size(); i++)
 			{
