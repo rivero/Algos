@@ -148,7 +148,7 @@ struct tests
 
 int main()
 {
-	tests t("RangeSumOfBST");
+	tests t("IntervalListIntersections");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
