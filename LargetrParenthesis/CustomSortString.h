@@ -58,18 +58,31 @@ namespace CustomSortString
 	By mapping each character to its corresponding order in order, 
 	we can then use this information to sort the characters in s accordingly.
 
-	Approach
-	Create a map (orderMap) to store the order of each character in order.
-	Iterate through the characters in order and store their order in the orderMap.
-	Define a custom comparator function (customComparator) that compares two characters based on their order in the orderMap.
-	Sort the string s using the custom comparator.
-	
-	Complexity
-	Time complexity:
-	O(n * log(n)), where n is the length of string s. The sorting operation dominates the time complexity.
-	Space complexity:
-	O(k), where k is the length of string order. The space complexity is determined by the orderMap
+	Solution
 
+	Creating the Order Map:
+		The algorithm starts by creating an unordered map called orderMap.
+		For each character in the order string, it assigns the index (position) of that character in the order string 
+		as its value in the map.
+		Essentially, orderMap stores the custom order of characters based on their appearance in the order string.
+	Custom Comparator Function:
+		The algorithm defines a custom comparator function using a lambda expression.
+		This comparator compares two characters, a and b, based on their corresponding indices in orderMap.
+		If the index of a is less than the index of b in orderMap, the function returns true, indicating that a should come before b in the sorted order.
+	Sorting the String:
+		Finally, the algorithm sorts the input string s using the custom comparator.
+		The std::sort function rearranges the characters in s according to their custom order specified by orderMap.
+
+	Time Complexity:
+		Constructing the orderMap takes O(n) time, where n is the length of the order string.
+		Sorting the string s using the custom comparator takes O(n log n) time (since the sorting algorithm is used).
+		Overall, the time complexity is O(n log n).
+	Space Complexity:
+		The algorithm uses additional space for the orderMap.
+		Thus, the space complexity is O(n)
+
+	Lambda
+	[capture clause](parameters){function definition}
 	*/
 
 	class Solution 
