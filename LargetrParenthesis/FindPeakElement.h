@@ -66,13 +66,67 @@ namespace FindPeakElement
 			return {};
 		}
 	};
+	struct SolutionCF
+	{
+		// Solution O(log N) => bisecting this unsorted array
+		int findPeakElement(vector<int> nums)
+		{
+			int n = nums.size();
+			if (n <= 1)
+				return 0;
+
+			// Test first element: Test if first element is greater than second element
+			if (nums[0] > nums[1])
+				return 0;
+			// Test last element: test of the last element is bigger than the previous
+			else if (nums[n - 1] > nums[n - 1 - 1])
+				return n - 1;
+
+			//	- Left < mid > right: Return mid
+			//	- Left < mid < right => Left = mid + 1 // increasing
+			//	- Otherwise => Right = mid + 1 // decreasing
+			size_t Left = 0, Right = n - 1;
+			while (Left <= Right)
+			{
+				auto mid = (Left + Right) / 2;
+				auto mid_val = nums[mid];
+				auto left_val = (mid > 0? nums[mid - 1] : INT_MIN);
+				auto right_val = (mid < n - 1? nums[mid + 1] : INT_MIN);
+
+				if (left_val < mid_val && mid_val > right_val)
+				{
+					return mid;
+				}
+				else if (left_val < mid_val && mid_val < right_val) // increasing slope
+					Left = mid + 1;
+				else
+					Right = mid - 1;
+			}
+
+			return {};
+		}
+	};
 	void process()
 	{
-		Solution sol;
-		cout << sol.findPeakElement({ 1,2,3,1 }) << "\n";
-		cout << sol.findPeakElement({ 1,2,1,3,5,6,4 }) << "\n";
-		cout << sol.findPeakElement({ 3,2,1 }) << "\n";
-		cout << sol.findPeakElement({ INT_MIN, INT_MIN+1 }) << "\n";
-		cout << sol.findPeakElement({ 3,5,4,3,4,5,7 }) << "\n";
+		{
+			Solution sol;
+			cout << sol.findPeakElement({ 1,2,3,1 }) << "\n";
+			cout << sol.findPeakElement({ 1,2,1,3,5,6,4 }) << "\n";
+			cout << sol.findPeakElement({ 3,2,1 }) << "\n";
+			cout << sol.findPeakElement({ INT_MIN, INT_MIN + 1 }) << "\n";
+			cout << sol.findPeakElement({ 3,5,4,3,4,5,7 }) << "\n";
+
+		}
+		{
+			cout << "CF\n";
+			SolutionCF sol;
+			cout << sol.findPeakElement({ 1,2,3,1 }) << "\n";
+			cout << sol.findPeakElement({ 1,2,1,3,5,6,4 }) << "\n";
+			cout << sol.findPeakElement({ 3,2,1 }) << "\n";
+			cout << sol.findPeakElement({ INT_MIN, INT_MIN + 1 }) << "\n";
+			cout << sol.findPeakElement({ 3,5,4,3,4,5,7 }) << "\n";
+
+		}
+
 	}
 }

@@ -24,6 +24,7 @@
 #include <limits>
 using namespace std;
 
+#pragma region print_helpers
 template <typename T>
 void printv(const T& v, bool newLine = true, bool printIndex = false)
 {
@@ -78,6 +79,7 @@ void printm(const map<T, U>& counts)
 	}
 	cout << "\n";
 }
+#pragma endregion
 
 #pragma region INCLUDES
 #include "timeit.h"
@@ -160,7 +162,7 @@ struct tests
 
 int main()
 {
-	tests t("SubarraySumEqualsK");
+	tests t("FindPeakElement");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
