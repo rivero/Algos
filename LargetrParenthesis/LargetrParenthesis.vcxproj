@@ -162,6 +162,7 @@
     <ClInclude Include="ClosesetBinarySearchTreeValue.h" />
     <ClInclude Include="CopyListwWithRandomPointer.h" />
     <ClInclude Include="CustomSortString.h" />
+    <ClInclude Include="ExclusiveTimeOfFunctions.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindParenthesis.h" />
     <ClInclude Include="FindPeakElement.h" />

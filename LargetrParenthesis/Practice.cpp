@@ -79,6 +79,22 @@ void printm(const map<T, U>& counts)
 	}
 	cout << "\n";
 }
+
+vector<string> strToVector(const string& str, char sep = ':')
+{
+	vector<string> res;
+	/*
+	The following split method was taken from https://www.javatpoint.com/how-to-split-strings-in-cpp
+	Program3.cpp Please refer this for more details.
+	*/
+	string T; // temp string to hold split value.
+	stringstream x(str);
+	while (getline(x, T, sep))
+	{
+		res.push_back(T);
+	}
+	return res;
+}
 #pragma endregion
 
 #pragma region INCLUDES
@@ -148,6 +164,7 @@ void printm(const map<T, U>& counts)
 #include "PlatesBetweenCandles.h"
 #include "LRUCache.h"
 #include "ReorganizeString.h"
+#include "ExclusiveTimeOfFunctions.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -162,7 +179,7 @@ struct tests
 
 int main()
 {
-	tests t("FindPeakElement");
+	tests t("ExclusiveTimeOfFunctions");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -551,7 +568,6 @@ int main()
 	{
 		ValidNumber::process();
 	}
-#pragma endregion
 	if (t.contains("ShortestPathBinaryMatrix"))
 	{
 		ShortestPathBinaryMatrix::process();
@@ -615,6 +631,11 @@ int main()
 	if (t.contains("LowestCommonAncestorBinaryTreeII"))
 	{
 		LowestCommonAncestorBinaryTreeII::process();
+	}
+#pragma endregion
+	if (t.contains("ExclusiveTimeOfFunctions"))
+	{
+		ExclusiveTimeOfFunctions::process();
 	}
 }
 

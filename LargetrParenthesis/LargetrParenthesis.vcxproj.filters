@@ -221,5 +221,8 @@
     <ClInclude Include="LowestCommonAncestorBinaryTreeII.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ExclusiveTimeOfFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
