@@ -42,8 +42,8 @@ namespace MinimumAddParenthesisValid
 	public:
 		int minAddToMakeValid(string s)
 		{
-			queue<int> q;
-			vector<int> invalidIdxVec;
+			queue<int> q; // stores opening '(' indexes
+			vector<int> invalidIdxVec; // stores invalid indexes (where there was not closing ')' )
 			for (int i = 0; i < s.size(); i++)
 			{
 				if (s[i] == '(')
@@ -52,23 +52,23 @@ namespace MinimumAddParenthesisValid
 				}
 				else if (s[i] == ')')
 				{
-					if (q.size() > 0)
+					if (q.size() > 0) // did we already have a')' index?...
 					{
-						q.pop();
+						q.pop(); // ...pop it.
 					}
 					else
 					{
-						invalidIdxVec.push_back(i);
+						invalidIdxVec.push_back(i); //... else invalid index found
 					}
 				}
 			}
 			while (!q.empty())
-			{
+			{ // if we have invalid indexes left add them to the invalidIdxVec vector
 				invalidIdxVec.push_back(q.front());
 				q.pop();
 			}
 
-			return invalidIdxVec.size();
+			return invalidIdxVec.size(); // returning the number of moves to make this string valid parenthesized
 		}
 	};
 
