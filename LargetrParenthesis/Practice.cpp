@@ -48,6 +48,17 @@ void printv(const T& v, bool newLine = true, bool printIndex = false)
 }
 
 template <typename T>
+void printm(const unordered_map<T, T>& counts)
+{
+	for (auto elem : counts)
+	{
+		cout << elem.first << " = " << elem.second << "\n";
+	}
+	cout << "\n";
+}
+
+
+template <typename T>
 void printm(const map<T, T>& counts)
 {
 	for (auto elem : counts)
@@ -56,6 +67,7 @@ void printm(const map<T, T>& counts)
 	}
 	cout << "\n";
 }
+
 
 template <typename T, typename U>
 void printm(const map<T, U>& counts)
@@ -148,7 +160,7 @@ struct tests
 
 int main()
 {
-	tests t("GroupShiftedStrings");
+	tests t("SubarraySumEqualsK");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
