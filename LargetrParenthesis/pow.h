@@ -48,18 +48,63 @@ namespace mypow
 
 	Output 0.00000
 	Expected 0.99979
-	*/
+
+	Solution
+	We use a memoization table (memo) to store previously computed results.
+	The power() function recursively calculates the value of x raised to the power of n.
+	It splits the problem into smaller subproblems by dividing the exponent by 2.
+	If n is odd, we multiply the result by x once more.
+	The memoization table ensures that we avoid redundant calculations
+
+	Time Complexity:
+		The function uses a divide-and-conquer approach by recursively computing the power of x to the n/2 and 
+		then combining the results.
+		The recursive call occurs for each halving of n, which means the number of recursive calls is 
+		proportional to the number of bits in n.
+		Therefore, the time complexity can be expressed as O(log n), where n represents the exponent.
+		This logarithmic behavior arises because each recursive step reduces the problem size by half.
+		The memoization (caching) of previously computed results further optimizes the time complexity 
+		by avoiding redundant calculations.
+	Space Complexity:
+		The space complexity refers to the amount of memory required by the algorithm.
+		In this case, the memoization table (memo) stores previously computed results.
+		Since the table has at most n entries (one for each unique pair of x and n), the space complexity is O(n).
+		Note that the space complexity is not affected by the recursive call stack, as it remains constant 
+		regardless of the recursion depth.
+	In summary:
+
+		Time Complexity: O(log n)
+		Space Complexity: O(n)
+*/
 
 	class Solution
 	{
+		unordered_map<int, double> m_map;
+		double fast_power(double x, int n)
+		{
+			if (n == 0)
+				return 1;
+			if (n == 1)
+				return x;
+
+			if (m_map.find(n) != m_map.end())
+			{
+				return m_map.at(n);
+			}
+
+			auto result = fast_power(x, n / 2);
+			result *= result;
+			if (n % 2 == 1) 
+			{
+				result *= x;
+			}
+
+			m_map[n] = result;
+			return result;
+		}
 	public:
 		double myPow(double x, int n)
 		{
-			// edge cases
-			if (n == 0)
-			{
-				return 1;
-			}
 
 			if (n == INT_MAX)
 				return (x == 1) ? 1 : (x == -1) ? -1 : 0;
@@ -68,16 +113,12 @@ namespace mypow
 				return (x == 1 || x == -1) ? 1 : 0;
 
 			auto pwr = abs(n);
-			auto base = x;
-			for (int i = 1; i < pwr; i++)
+			double res = fast_power(x, pwr);
+			if (n<0)
 			{
-				x *= base;
+				res = 1 / res;
 			}
-			if (n < 0)
-			{
-				x = 1 / x;
-			}
-			return x;
+			return res;
 		}
 	};
 
