@@ -147,7 +147,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "KClosestPointsToTheOrigin.h"
 #include "pow.h"
 #include "GroupShiftedStrings.h"
-#include "LargeIsland.h"
+#include "MakingALargeIsland.h"
 #include "ValidNumber.h"
 #include "ShortestPathBinaryMatrix.h"
 #include "IslandPerimeter.h"
@@ -165,6 +165,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "LRUCache.h"
 #include "ReorganizeString.h"
 #include "ExclusiveTimeOfFunctions.h"
+#include "MaximumSwap.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -179,7 +180,7 @@ struct tests
 
 int main()
 {
-	tests t("ExclusiveTimeOfFunctions");
+	tests t("MaximumSwap");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -633,9 +634,9 @@ int main()
 		LowestCommonAncestorBinaryTreeII::process();
 	}
 #pragma endregion
-	if (t.contains("ExclusiveTimeOfFunctions"))
+	if (t.contains("MaximumSwap"))
 	{
-		ExclusiveTimeOfFunctions::process();
+		MaximumSwap::process();
 	}
 }
 

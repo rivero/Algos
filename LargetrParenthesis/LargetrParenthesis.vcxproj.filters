@@ -164,7 +164,7 @@
     <ClInclude Include="GroupShiftedStrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LargeIsland.h">
+    <ClInclude Include="MakingALargeIsland.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ValidNumber.h">
@@ -222,6 +222,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ExclusiveTimeOfFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MaximumSwap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

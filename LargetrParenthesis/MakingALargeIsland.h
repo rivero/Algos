@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 namespace LargeIsland
 {
 	/*
@@ -40,6 +40,65 @@ namespace LargeIsland
 	1 <= n <= 500
 	grid[i][j] is either 0 or 1.
 
+Solution
+
+Certainly! Let's dive deeper into the code without focusing on complexity.
+
+1. **Solution Overview**:
+	- The goal of this solution is to find the largest island (connected land area) in a given grid.
+	- It does so by identifying individual land areas, calculating their sizes, and then considering adjacent 
+	water cells to potentially merge areas.
+
+2. **Key Components**:
+	- `SolutionBase`:
+		- Contains utility functions shared by the main solution.
+		- `landSize(row, col)` recursively explores the grid starting from a given cell `(row, col)` and returns the 
+		size of the connected land area.
+		- It marks visited cells with an island ID (incremented from 2 onwards).
+	- `Solution`:
+		- Inherits from `SolutionBase`.
+		- `get_areas(row, col)`:
+			- Calls `landSize` to find the size of the land area starting from `(row, col)`.
+			- Updates the maximum area (`m_max`) and stores the area in `m_IdAreaMap`.
+		- `get_all_areas()`:
+			- Iterates through the entire grid and calls `get_areas` for each land cell.
+			- Initializes grid dimensions (`m_rows` and `m_cols`).
+		- `largestIsland(grid)`:
+			- Sets the grid (`m_matrix`) and computes all land areas using `get_all_areas()`.
+			- Then iterates through water cells (value 0) to find adjacent islands and calculate their combined area.
+			- Updates `m_max` with the largest area encountered.
+
+3. **Algorithm Steps**:
+	- For each land cell (value 1):
+		- Explore its neighbors (up, down, left, right) recursively using `landSize`.
+		- Mark visited cells with an island ID.
+		- Update the maximum area (`m_max`) and store the area in `m_IdAreaMap`.
+	- For each water cell (value 0):
+		- Check neighboring land cells.
+		- Collect unique island IDs.
+		- Calculate the combined area of adjacent islands.
+		- Update `m_max` if a larger area is found.
+
+4. **Overall Approach**:
+	- Identify land areas and compute their sizes.
+	- Consider water cells adjacent to land areas and merge their sizes.
+	- Keep track of the largest area encountered.
+
+Feel free to ask if you need further clarification or have additional questions! 😊
+
+2. **Time Complexity**:
+	- The `landSize` function recursively explores the grid to find the size of a land area starting from a given cell. It visits each cell at most once.
+	- The `get_all_areas` function iterates through the entire grid and calls `get_areas` for each land cell.
+	- The outer loop in `largestIsland` iterates through all cells in the grid.
+	- The inner loop within the same function iterates through neighboring cells of water (value 0) and computes their combined area.
+	- Overall, the time complexity is dominated by the grid size, which is O(rows * cols).
+
+3. **Space Complexity**:
+	- The space complexity mainly depends on the additional data structures used:
+		- `m_matrix`: The grid itself, which requires O(rows * cols) space.
+		- `m_IdAreaMap`: A map that stores the area of each island, which can be up to O(rows * cols) in total.
+		- Recursive call stack in `landSize`: At most O(rows * cols) due to the recursion depth.
+	- Therefore, the overall space complexity is O(rows * cols).
 
 	*/
 #define PRINTV
@@ -58,7 +117,7 @@ namespace LargeIsland
 			cout << "\n";
 #endif
 		}
-		vector <vector<int> > m_directions{ {0,1},{0,-1},{1,0},{-1,0}, };// up, down, right, left
+		vector <vector<int> > m_directions{ {0,1},{0,-1},{1,0},{-1,0}, };// down, up, right, left
 		int m_rows{}, m_cols{}, m_max{ 0 };
 		vector< vector<int> > m_matrix;
 		size_t m_island_id{ 2 };
@@ -115,7 +174,8 @@ namespace LargeIsland
 			return m_max;
 		}
 	};
-
+	// For https://leetcode.com/problems/making-a-large-island/description/
+	// 827. Making A Large Island
 	class Solution : private SolutionBase
 	{
 

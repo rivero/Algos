@@ -173,7 +173,7 @@
     <ClInclude Include="IslandPerimeter.h" />
     <ClInclude Include="KClosestPointsToTheOrigin.h" />
     <ClInclude Include="KthLargestElement.h" />
-    <ClInclude Include="LargeIsland.h" />
+    <ClInclude Include="MakingALargeIsland.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LenghtOfLongestValidsubstring.h" />
     <ClInclude Include="LongestIncreasingSubsequenceNLogN.h" />
@@ -181,6 +181,7 @@
     <ClInclude Include="LowestCommonAncestorBinaryTreeIII.h" />
     <ClInclude Include="LowestCommonAncestorBinaryTreeI.h" />
     <ClInclude Include="LRUCache.h" />
+    <ClInclude Include="MaximumSwap.h" />
     <ClInclude Include="mergearrays.h" />
     <ClInclude Include="MinimumAddParenthesisValid.h" />
     <ClInclude Include="MinimumAdjacentSwapsToMakleValidArray.h" />
