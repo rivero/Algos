@@ -76,7 +76,7 @@ namespace SubarraySumEqualsK
 #endif
 			unordered_map<int, int> prefixSums_frequencies_map;
 			int prefix_sum = 0, ans = 0;
-			prefixSums_frequencies_map[prefix_sum] = 1; // for the case where the first element is 0
+			prefixSums_frequencies_map[prefix_sum] = 1; // To make ans += to count for the first time.
 
 			for (auto num : nums) 
 			{
