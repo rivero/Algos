@@ -40,7 +40,41 @@ namespace FindPeakElement
 	the last or first elements are peak but because anything outside the array is -∞ then they are peak
 
 	Complexity of this solution: T O(log n)
-	*/
+
+	Solution O(log n)
+Certainly! Let's dive into the explanation of the **findPeakElement** algorithm:
+
+1. **Problem Statement**:
+   - Given an array `nums`, find a peak element.
+   - A peak element is an element that is greater than or equal to its neighbors.
+
+2. **Approach**:
+   - We'll use a binary search approach to find the peak element efficiently.
+   - The key observation is that if we compare the middle element (`mid`) with its neighbors, we can determine 
+   whether the peak lies to the left or right of `mid`.
+
+3. **Algorithm Steps**:
+   - Initialize two pointers: `Left` and `Right` to cover the entire array.
+   - While `Left` is less than or equal to `Right`:
+	 - Calculate the middle index: `mid = (Left + Right) / 2`.
+	 - Get the values of `mid`, `mid - 1`, and `mid + 1` (if they exist).
+	 - Compare these values:
+	   - If `mid_val` is greater than both `left_val` and `right_val`, we've found a peak, so return `mid`.
+	   - If `mid_val` is greater than `left_val` but less than `right_val`, the peak lies to the right. Set `Left = mid + 1`.
+	   - Otherwise, the peak lies to the left. Set `Right = mid - 1`.
+
+4. **Edge Cases**:
+   - If the array has only one or zero elements, return the first index (since it's a peak by default).
+   - Check if the first or last element is a peak.
+
+5. **Time Complexity**:
+   - The binary search runs in O(log n) time, where `n` is the size of the input array.
+
+6. **Space Complexity**:
+   - The algorithm uses only a few variables, so the space complexity is O(1).
+
+In summary, this algorithm efficiently finds a peak element in a sorted or unsorted array using binary search. 
+Peaks can occur at the beginning, end, or within the array. Great job implementing this! 😊👍	*/
 
 	struct Solution 
 	{
