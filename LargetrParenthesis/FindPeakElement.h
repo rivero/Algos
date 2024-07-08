@@ -50,16 +50,17 @@ namespace FindPeakElement
 			if (n <= 1)
 				return 0;
 			
-			for (int i = 0; i < n; i++) 
+			// Test first element: Test if first element is greater than second element
+			if (nums[0] > nums[1])
+				return 0;
+			// Test last element: test of the last element is bigger than the previous
+			else if (nums[n - 1] > nums[n - 1 - 1])
+				return n - 1;
+
+			for (int i = 1; i < n - 1; i++)
 			{
-				// Test first element: Test if first element is greater than second element
-				if (i == 0 && nums[i] > nums[i + 1]) 
-					return i;
-				// Test last element: test of the last element is bigger than the previous
-				else if (i == n - 1 && nums[i] > nums[i - 1]) 
-					return i;
 				// Otherwise test if the current element is larger than the previous and larger than the next elements
-				else if (nums[i] > nums[i + 1] && nums[i] > nums[i - 1]) 
+				if (nums[i] > nums[i + 1] && nums[i] > nums[i - 1]) 
 					return i;
 			}
 			return {};
