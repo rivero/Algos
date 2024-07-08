@@ -119,7 +119,8 @@ namespace GroupShiftedStrings
 
 		Input: strings = ["abc","bcd","acef"]
 
-		Time complexity is O(n * m) where n is the length of the string vector and m is the lenght of the longest string in the vector.
+		Time complexity is O(n * m) where n is the length of the string vector and 
+		m is the lenght of the longest string in the vector.
 
 		feedback:
 			1. read and understand the question very well and ask clarification from your interviewer.
@@ -140,9 +141,33 @@ namespace GroupShiftedStrings
 			1. Again practicing more.
 			2. Practice system design.
 			3. Behavioral : LP 16, you need to make stories for all the 16 LP.
+
+	Time Complexity:
+		Let’s analyze the time complexity step by step:
+		The shift function processes each character in the input string once, resulting in a linear time complexity of O(n), 
+		where n is the length of the input string.
+		The loop that iterates over the input strings (in the groupStrings function) also takes linear time, as it processes 
+		each string once.
+		The insertion and lookup operations in the unordered map (mp) take average constant time (amortized O(1)) for each string.
+		Therefore, the overall time complexity is dominated by the linear processing of the input strings, resulting in O(N), 
+		where N is the total length of all input strings combined.
+	Space Complexity:
+		The space complexity includes the memory required by data structures used in the algorithm.
+		The primary data structures are:
+		The unordered map (mp), which stores the transformed strings as keys and vectors of strings as values. 
+		The space required for this map is proportional to the number of unique transformed strings, which can 
+		be at most the total number of input strings.
+		The vector of vectors (groups), which stores the grouped strings. The space required here is proportional 
+		to the total number of input strings.
+		Therefore, the space complexity is O(N), where N represents the total length of all input strings combined.
+	In summary:
+
+		Time Complexity: O(N)
+		Space Complexity: O(N)
+
 */
 
-	class Solution 
+	class Solution : public timeit
 	{
 		string shift(const string& s)
 		{
@@ -164,15 +189,8 @@ namespace GroupShiftedStrings
 			unordered_map<string, vector<string> > mp;
 			for (string s : strings)
 			{
-				//cout << "encoding " << s << "\n";
 				mp[shift(s)].push_back(s);
 			}
-
-			//for (auto& [str, vec]: mp)
-			//{
-			//	cout << "str [" << str << "]\nvec:\n";
-			//	printv(vec);
-			//}
 
 			vector<vector<string> > groups;
 
@@ -185,7 +203,7 @@ namespace GroupShiftedStrings
 
 	};		
 
-	class SolutionJ
+	class SolutionJ : public timeit
 	{
 		/*
 		My Solution
@@ -223,13 +241,13 @@ namespace GroupShiftedStrings
 		vector< vector<string> >groupStrings(vector<string> strings)
 		{
 			map< vector<int>, vector<string> > m;
-			for (auto s : strings)
+			for (auto& s : strings)
 			{
 				auto enc = encode(s);
 				m[enc].push_back(s);
 			}
 			vector <  vector<string> > res;
-			for (auto [envec, strvec] : m)
+			for (auto& [envec, strvec] : m)
 			{
 				res.push_back(strvec);
 			}

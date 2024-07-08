@@ -148,7 +148,7 @@ struct tests
 
 int main()
 {
-	tests t("mypow");
+	tests t("GroupShiftedStrings");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
