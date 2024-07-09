@@ -124,20 +124,7 @@ namespace CopyListwWithRandomPointer
 			return oldToCopy[head];
 		}
 	};
-	/*
-	Approach
-Each node has a unique copied node in the deep copy.
-If that copy is found, return it
-Else, create the new mapping, and allocate its random and next pointer recursively.
-Complexity
-Time complexity:
-O(n)
 
-Space complexity:
-O(n)
-
-Code
-	*/
 	struct Solution2 
 	{
 		unordered_map<Node*, Node*> clone;
@@ -150,10 +137,9 @@ Code
 			if (clone.find(node) != clone.end()) 
 				return clone[node];
 
-			auto newCurr = new Node(node->val);
-			clone[node] = newCurr;
-			newCurr->random = copyRandomList(node->random);
-			newCurr->next = copyRandomList(node->next);
+			clone[node] = new Node(node->val);
+			clone[node]->random = copyRandomList(node->random);
+			clone[node]->next = copyRandomList(node->next);
 
 			return clone[node];
 		}
