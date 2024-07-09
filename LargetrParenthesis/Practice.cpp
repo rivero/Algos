@@ -180,7 +180,7 @@ struct tests
 
 int main()
 {
-	tests t("MaximumSwap");
+	tests t("BinaryTreeRightSideView");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
