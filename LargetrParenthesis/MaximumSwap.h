@@ -20,6 +20,30 @@ Explanation: No swap.
 Constraints:
 
 0 <= num <= 108
+
+solution
+
+Certainly! Let's analyze the given `maximumSwap` function.
+
+1. **Function Description:**
+   - The `maximumSwap` function takes an integer `num` as input and returns an integer.
+   - If `num` is less than or equal to 11, it directly returns `num`.
+   - Otherwise, it performs a series of swaps on the digits of `num` to find the maximum possible value.
+
+2. **Algorithm Overview:**
+   - Convert the input integer `num` to a string `s`.
+   - Iterate through all pairs of indices `(i, j)` where `i` ranges from 0 to `s.size() - 1` and `j` ranges from 1 to `s.size() - 1`.
+   - Swap the characters at indices `i` and `j` in the string `s`.
+   - If the resulting integer after the swap is greater than the current maximum (`ans`), update `ans`.
+   - Swap the characters back to their original positions.
+   - Return the final value of `ans`.
+
+3. **Complexity Analysis:**
+   - Let `n` be the number of digits in the input `num`.
+   - The nested loops iterate over all pairs of indices, resulting in a time complexity of O(n^2).
+   - The space complexity is O(n) due to the string `s`.
+
+
 */
 namespace MaximumSwap
 {
