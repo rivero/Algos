@@ -50,13 +50,34 @@ namespace CopyListwWithRandomPointer
 	-10^4 <= Node.val <= 10^4
 	Node.random is null or is pointing to some node in the linked list.
 
-	Solution
+	Solution1
 
 	Two pases
 
 	First pass will store the nodes and next in a a hash
 
 	Second pass will make new nodes and establish the links
+
+	Solution 2
+
+1. **Function Description:**
+   - The `copyRandomList` function takes a pointer to the head of a special linked list (where each node has an additional `random` pointer) and returns a deep copy of the list.
+   - Each node in the copied list has the same value as the original node, and the `random` pointer points to the corresponding node in the copied list.
+
+2. **Algorithm Overview:**
+   - We use a recursive approach to create the deep copy.
+   - We maintain a `clone` map (or hash table) to store the mapping between original nodes and their corresponding copied nodes.
+   - If the current node is already in the `clone` map, we return the corresponding copied node.
+   - Otherwise, we create a new node with the same value as the original node and add it to the `clone` map.
+   - Recursively copy the `random` and `next` pointers for the current node.
+
+3. **Complexity Analysis:**
+   - Let `N` be the number of nodes in the original linked list.
+   - **Time Complexity**: The recursive function visits each node once, so the time complexity is O(N).
+   - **Space Complexity**:
+	 - The `clone` map stores at most `N` nodes, so the space complexity is O(N) due to the map.
+	 - Additionally, the recursive call stack contributes to the space complexity, but it is also O(N) 
+	 in the worst case (for a skewed linked list).
 	
 	*/
 
@@ -121,20 +142,20 @@ Code
 	{
 		unordered_map<Node*, Node*> clone;
 
-		Node* copyRandomList(Node* head) 
+		Node* copyRandomList(Node* node) 
 		{
-			if (!head) 
+			if (!node) 
 				return nullptr;
 
-			if (clone.find(head) != clone.end()) 
-				return clone[head];
+			if (clone.find(node) != clone.end()) 
+				return clone[node];
 
-			auto newCurr = new Node(head->val);
-			clone[head] = newCurr;
-			newCurr->random = copyRandomList(head->random);
-			newCurr->next = copyRandomList(head->next);
+			auto newCurr = new Node(node->val);
+			clone[node] = newCurr;
+			newCurr->random = copyRandomList(node->random);
+			newCurr->next = copyRandomList(node->next);
 
-			return clone[head];
+			return clone[node];
 		}
 	};
 
