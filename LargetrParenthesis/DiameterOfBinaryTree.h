@@ -33,9 +33,9 @@ Output: 1
 
   */
 
-namespace BinayTreeDiameter
+namespace DiameterOfBinaryTree
 {
-	struct BinayTreeDiameter : public timeit
+	struct Solution : public timeit
 	{
 		struct TreeNode {
 			int val{};
@@ -79,21 +79,21 @@ namespace BinayTreeDiameter
 	void process()
 	{
 		{
-			BinayTreeDiameter b;
-			auto root = new BinayTreeDiameter::TreeNode(1);
-			root->left = new BinayTreeDiameter::TreeNode(2);
-			root->right = new BinayTreeDiameter::TreeNode(3);
-			root->left->left = new BinayTreeDiameter::TreeNode(4);
-			root->left->right = new BinayTreeDiameter::TreeNode(5);
+			Solution b;
+			auto root = new Solution::TreeNode(1);
+			root->left = new Solution::TreeNode(2);
+			root->right = new Solution::TreeNode(3);
+			root->left->left = new Solution::TreeNode(4);
+			root->left->right = new Solution::TreeNode(5);
 			int val = b.diameterOfBinaryTree(root);
 			assert(val == 3);
 			cout << "result: " << val << "\n";
 
 		}
 		{
-			BinayTreeDiameter b;
-			auto root = new BinayTreeDiameter::TreeNode(1);
-			root->left = new BinayTreeDiameter::TreeNode(2);
+			Solution b;
+			auto root = new Solution::TreeNode(1);
+			root->left = new Solution::TreeNode(2);
 			int val = b.diameterOfBinaryTree(root);
 			assert(val == 1);
 			cout << "result: " << val << "\n";

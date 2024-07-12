@@ -50,7 +50,7 @@
     <ClInclude Include="MovingAverage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BinaryTreeDiameter.h">
+    <ClInclude Include="DiameterOfBinaryTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Toeplitz.h">

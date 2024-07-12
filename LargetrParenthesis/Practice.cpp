@@ -108,7 +108,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "ValidWordAbbreviation.h"
 #include "ValidPalindromeII.h"
 #include "MovingAverage.h"
-#include "BinaryTreeDiameter.h"
+#include "DiameterOfBinaryTree.h"
 #include "Toeplitz.h"
 #include "MinRemoveValidParenthesis.h"
 #include "BinaryTreeVerticalOrderTransversal.h"
@@ -180,7 +180,7 @@ struct tests
 
 int main()
 {
-	tests t("ClosesetBinarySearchTreeValue");
+	tests t("Toeplitz");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -348,83 +348,11 @@ int main()
 	}
 	if (t.contains("BinayTreeDiameter"))
 	{
-		BinayTreeDiameter::process();
+		DiameterOfBinaryTree::process();
 	}
-	if (false)
+	if (t.contains("Toeplitz"))
 	{
-		{
-			Toeplitz t;
-			vector<vector<int>> matrix
-			{
-				{1, 2, 3, 4},
-				{5, 1, 2, 3},
-				{9, 5, 1, 2}
-			};
-			for (auto elem: matrix)
-			{
-				printv(elem);
-			}
-			bool val = t.isToeplitzMatrix(matrix);
-			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
-		}
-		{
-			Toeplitz t;
-			vector<vector<int>> matrix
-			{
-				{1, 2, 3},
-				{5, 1, 2},
-				{9, 5, 1}
-			};
-			for (auto elem : matrix)
-			{
-				printv(elem);
-			}
-			bool val = t.isToeplitzMatrix(matrix);
-			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
-		}
-		{
-			Toeplitz t;
-			vector<vector<int>> matrix
-			{
-				{1, 2},
-				{5, 1},
-				{9, 5}
-			};
-			for (auto elem : matrix)
-			{
-				printv(elem);
-			}
-			bool val = t.isToeplitzMatrix(matrix);
-			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
-		}
-		{
-			Toeplitz t;
-			vector<vector<int>> matrix
-			{
-				{1, 2},
-				{5, 1}
-			};
-			for (auto elem : matrix)
-			{
-				printv(elem);
-			}
-			bool val = t.isToeplitzMatrix(matrix);
-			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
-		}
-		{
-			Toeplitz t;
-			vector<vector<int>> matrix
-			{
-				{1, 2},
-				{2, 2}
-			};
-			for (auto elem : matrix)
-			{
-				printv(elem);
-			}
-			bool val = t.isToeplitzMatrix(matrix);
-			cout << " this matrix  " << (val ? "is" : "is not") << " a Toeplitz matrix\n";
-		}
+		Toeplitz::process();
 	}
 	if (t.contains("MinRemoveValidParenthesis"))
 	{
