@@ -24,54 +24,55 @@ Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
 Example 2:
 Input: root = [1,2]
 Output: 1
- *
-  This algorithm does the following
-  - Recursively reaches the bottom
-  - as it goes back in the tree, it increments by one the counter which is the height.
-  - It adds the values of the left and right leaves
-  - the maximum distance is given by the max of the previous and new accumulated
+
+Solution
+Compute the number of edges of left and right leafs. Add them up and return the max + 1
+Recursively compute the height (number of edges) of the left subtree (left).
+Recursively compute the height of the right subtree (right).
+Update the diameter by considering the sum of left and right heights.
+Return the distance between the farthest leaf and the current node (1 + max(left, right)).
+
+Time Complexity:
+The algorithm visits each node once, so the time complexity is O(N), where N is the number of nodes in the tree.
+
+Space Complexity:
+The space complexity is determined by the recursive call stack.
+In the worst case (a skewed tree), the maximum depth of the call stack is O(N).
+Thus, the space complexity is O(N).
 
   */
 
 namespace DiameterOfBinaryTree
 {
+	struct TreeNode
+	{
+		int val{};
+		TreeNode* left{ nullptr };
+		TreeNode* right{ nullptr };
+		TreeNode() = default;
+		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+	};
+
 	struct Solution : public timeit
 	{
-		struct TreeNode {
-			int val{};
-			TreeNode* left{ nullptr };
-			TreeNode* right{ nullptr };
-			TreeNode() = default;
-			TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-			TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-		};
 		int diameterOfBinaryTree(TreeNode* root)
 		{
 			int diameter = 0;
-			helper("root", root, diameter);
+			helper(root, diameter);
 			return diameter;
 		}
 	private:
-		int helper(const char* const txt, TreeNode* node, int& diameter)
+		int helper(TreeNode* node, int& diameter)
 		{
-			// terminate
 			if (!node)
 				return 0;
 
-			// enumerate
-			int left = helper("left", node->left, diameter);
-			int right = helper("right", node->right, diameter);
+			auto left = helper(node->left, diameter);
+			auto right = helper(node->right, diameter);
 
-			// update the diameter
 			diameter = max(diameter, left + right);
 
-			//cout << txt << " (" << node->val << ")";
-			//cout << "\tdiameter: " << diameter;
-			//cout << " left: " << left;
-			//cout << " right: " << right;
-			//cout << "\n";
-
-			// return the distance between the farest leaf and the current `node`
 			return 1 + max(left, right);
 		}
 	};
@@ -80,11 +81,11 @@ namespace DiameterOfBinaryTree
 	{
 		{
 			Solution b;
-			auto root = new Solution::TreeNode(1);
-			root->left = new Solution::TreeNode(2);
-			root->right = new Solution::TreeNode(3);
-			root->left->left = new Solution::TreeNode(4);
-			root->left->right = new Solution::TreeNode(5);
+			auto root = new TreeNode(1);
+			root->left = new TreeNode(2);
+			root->right = new TreeNode(3);
+			root->left->left = new TreeNode(4);
+			root->left->right = new TreeNode(5);
 			int val = b.diameterOfBinaryTree(root);
 			assert(val == 3);
 			cout << "result: " << val << "\n";
@@ -92,8 +93,8 @@ namespace DiameterOfBinaryTree
 		}
 		{
 			Solution b;
-			auto root = new Solution::TreeNode(1);
-			root->left = new Solution::TreeNode(2);
+			auto root = new TreeNode(1);
+			root->left = new TreeNode(2);
 			int val = b.diameterOfBinaryTree(root);
 			assert(val == 1);
 			cout << "result: " << val << "\n";
