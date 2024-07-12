@@ -44,6 +44,32 @@ Constraints:
 0 <= key <= 104
 0 <= value <= 105
 At most 2 * 105 calls will be made to get and put.
+
+Solution
+
+1. **What is LRU Cache?**
+   - LRU Cache is a caching strategy that efficiently manages limited memory space by keeping track of the usage history of cached elements.
+   - When the cache is full, LRU removes the least recently used item to make room for new data.
+   - The priority of data in the cache changes based on recent access patterns.
+
+2. **How does LRU Cache work?**
+   - The LRU cache maintains a fixed-size data structure (e.g., a queue or linked list) to store key-value pairs.
+   - When an element is accessed (either read or written), it is moved to the front of the data structure.
+   - If the cache is full, the least recently used element (at the end of the data structure) is evicted.
+
+3. **Implementation Details:**
+   - The provided implementation uses a doubly linked list (`cache`) and a hashmap (`mymap`) to achieve constant-time operations.
+   - `cache` stores key-value pairs, and `mymap` maps keys to their positions in the `cache`.
+   - The `moveElementToFront` function updates the position of an element when accessed.
+   - The `put` function adds or updates an element, and if the cache is full, it removes the least recently used element.
+
+4. **Time Complexity:**
+   - `get(key)` and `put(key, value)` both operate in O(1) time.
+   - The hashmap (`mymap`) allows direct access to elements, and the doubly linked list (`cache`) maintains the order.
+
+5. **Space Complexity:**
+   - The space complexity is O(N), where N is the capacity of the cache.
+   - The doubly linked list and hashmap both contribute to the space usage.
 */
 {
 
