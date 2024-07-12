@@ -166,6 +166,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "ReorganizeString.h"
 #include "ExclusiveTimeOfFunctions.h"
 #include "MaximumSwap.h"
+#include "DiagonalTraverse.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -180,7 +181,7 @@ struct tests
 
 int main()
 {
-	tests t("Toeplitz");
+	tests t("DiagonalTraverse");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -565,6 +566,10 @@ int main()
 	if (t.contains("MaximumSwap"))
 	{
 		MaximumSwap::process();
+	}
+	if (t.contains("DiagonalTraverse"))
+	{
+		DiagonalTraverse::process();
 	}
 }
 

@@ -227,5 +227,8 @@
     <ClInclude Include="MaximumSwap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DiagonalTraverse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
