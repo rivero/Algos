@@ -54,34 +54,21 @@ namespace ClosesetBinarySearchTreeValue
 			{
 				return;
 			}
+			bst(root->left, target);
 			auto difference = abs(target - double(root->val));
 			if (difference < m_lastDifference)
 			{
 				m_lastDifference = difference;
 				m_val = root->val;
 			}
-			else if (difference == m_lastDifference)
-			{
-				if (root->val < m_val)
-				{
-					m_val = root->val;
-				}
-			}
+
 			bst(root->right, target);
-			bst(root->left, target);
 
 		}
 	public:
 		int closestValue(TreeNode* root, double target)
 		{
-			if (!root)
-			{
-				return m_val;
-			}
-
-			m_val = root->val;
 			bst(root, target);
-			
 			return m_val;
 		}
 	};

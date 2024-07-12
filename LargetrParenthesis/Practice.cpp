@@ -180,7 +180,7 @@ struct tests
 
 int main()
 {
-	tests t("BinaryTreeRightSideView");
+	tests t("ClosesetBinarySearchTreeValue");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
