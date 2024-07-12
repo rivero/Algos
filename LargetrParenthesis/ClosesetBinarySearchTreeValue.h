@@ -31,6 +31,33 @@ namespace ClosesetBinarySearchTreeValue
 	0 <= Node.val <= 109
 	-109 <= target <= 109
 	
+	Solution:
+
+	**Method `bst` (Binary Search Tree Traversal):**
+	   - This method performs an in-order traversal of a binary search tree (BST) rooted at `root`.
+		 - Recurse on the left subtree (`root->left`).
+		 - Calculate the absolute difference between the target value and the current node's value.
+		 - If this difference is smaller than the previously recorded difference (`m_lastDifference`), 
+		   update `m_lastDifference` and `m_val`.
+		 - Recurse on the right subtree (`root->right`).
+
+	In summary, this code snippet defines a class that finds the closest value to a given target in a binary search tree. 
+	The `bst` method recursively traverses the tree, updating the closest value as it goes. 
+	The `closestValue` method initializes the traversal and returns the result.
+
+
+	**Time Complexity**:
+	- The `closestValue` method performs an in-order traversal of the binary search tree (BST).
+	- In the worst case, it visits every node in the BST once.
+	- Therefore, the time complexity of the `closestValue` method is **O(n)**, where **n** is the number of nodes in the BST¹.
+	
+	**Space Complexity**:
+	- The space complexity is determined by the recursive call stack during the traversal.
+	- In the worst case, the maximum depth of the recursion is equal to the height of the BST.
+	- If the BST is balanced, the height is **O(log n)** (where **n** is the number of nodes).
+	- However, if the BST is skewed (e.g., a linked list), the height can be **O(n)**.
+	- Therefore, the space complexity of the `closestValue` method is **O(n)** in the worst case¹.
+
 	*/
 
 	struct TreeNode {
@@ -43,7 +70,7 @@ namespace ClosesetBinarySearchTreeValue
 
 	};
 
-	class Solution 
+	class Solution : public timeit
 	{
 		int m_val{-1};
 		double m_lastDifference{ std::numeric_limits<double>::max()};
