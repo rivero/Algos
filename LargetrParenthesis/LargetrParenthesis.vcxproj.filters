@@ -236,5 +236,8 @@
     <ClInclude Include="MergeIntervals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TopKFrequentElements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

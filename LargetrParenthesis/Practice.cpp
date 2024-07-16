@@ -169,6 +169,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "DiagonalTraverse.h"
 #include "RandomPickIndex.h"
 #include "MergeIntervals.h"
+#include "TopKFrequentElements.h"
 
 #pragma endregion INCLUDES
 struct tests
@@ -184,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("MergeIntervals");
+	tests t("TopKFrequentElements");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -581,6 +582,10 @@ int main()
 	if (t.contains("MergeIntervals"))
 	{
 		MergeIntervals::process();
+	}
+	if (t.contains("TopKFrequentElements"))
+	{
+		TopKFrequentElements::process();
 	}
 }
 
