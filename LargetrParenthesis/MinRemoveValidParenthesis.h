@@ -36,58 +36,68 @@ Constraints:
 1 <= s.length <= 105
 s[i] is either '(' , ')', or lowercase English letter.
 
-0. Use queue of indexes
+0. Use stack of indexes
 1. scan the string
+3. when close parenthesis is found pop index if stack not empty
+4. if stack is empty and find close parenthesis mark that string element with '*' (to avoid).
 2. when an open parenthesis is push index
-3. when close parenthesis is found pop index
-4. if queue is empty and find close parenthesis store index in vector5.
-5. Store rest of indexes in queue in vector
-6. Create new string with valid indexes (not in vector)
+5. If stack has elements, mark those elements (they are indexes) as invalid (*)
+6. Create new string with valid indexes (not invalid)
 
 Complexity: O(n)
 */
 namespace MinRemoveValidParenthesis
 {
-	struct Solution : public timeit
+	class Solution : public timeit
 	{
-		string minRemoveToMakeValid(string s)
+	public:
+		string minRemoveToMakeValid(string str) 
 		{
-			queue<int> q;
-			vector<int> invalidIdxVec;
-			for (size_t i = 0; i < s.size(); i++)
+
+			stack<int> st; // indices
+			int n = str.size();
+
+			// Pass 1: Mark invalid closing parentheses
+			for (int i = 0; i < n; i++) 
 			{
-				if (s[i] == '(')
+				char& x = str[i];
+				if (x == ')') 
 				{
-					q.push(i);
-				}
-				else if (s[i] == ')')
-				{
-					if (q.size() > 0)
+					if (!st.empty()) 
 					{
-						q.pop();
+						st.pop(); // Valid matching found
 					}
-					else
-						invalidIdxVec.push_back(i);
+					else 
+					{
+						str[i] = '*'; // Invalid closing parenthesis
+					}
 				}
-			}
-			while (!q.empty())
-			{
-				invalidIdxVec.push_back(q.front());
-				q.pop();
-			}
-			string res;
-			for (size_t i = 0; i < s.size(); i++)
-			{
-				auto found = find(invalidIdxVec.begin(), invalidIdxVec.end(), i) != invalidIdxVec.end();
-				if (!found)
+				else if (x == '(') 
 				{
-					res += s[i];
+					st.push(i); // Push index of '('
 				}
 			}
-			return res;
+
+			// Pass 2: Mark unmatched opening parentheses
+			while (!st.empty()) 
+			{
+				str[st.top()] = '*';
+				st.pop();
+			}
+
+			// Construct the final valid string
+			string ans;
+			for (int i = 0; i < n; i++) 
+			{
+				if (str[i] != '*') 
+				{
+					ans += str[i];
+				}
+			}
+
+			return ans;
 		}
 	};
-
 	void process()
 	{
 		{

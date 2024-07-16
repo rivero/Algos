@@ -24,7 +24,7 @@ Output: [[9],[3,15],[20],[7]]
 Example 2:
 		3
 	9			8
-4		01			7
+4		0,1       7
 
 Input: root = [3,9,8,4,0,1,7]
 Output: [[4],[9],[3,0,1],[8],[7]]
@@ -32,7 +32,7 @@ Output: [[4],[9],[3,0,1],[8],[7]]
 Example 3:
 		3
 	9			8
-4		01			7
+4		0,1			7
 
 	5			2
 Input: root = [3,9,8,4,0,1,7,null,null,null,2,5]
@@ -93,14 +93,10 @@ namespace BinaryTreeVerticalOrderTransversal
 
 	};
 
-	struct SolutionMembers
+	struct Solution : private timeit
 	{
 		queue<pair<TreeNode*, int>> qu;
 		map<int, vector<int>> verticalLevels;
-
-	};
-	struct Solution : protected SolutionMembers, private timeit
-	{
 		/*
 		scans a queue which contains nodes and levels. Starts at root, 0.
 		as it goes it adds to it the current level's left and right if they exist.
