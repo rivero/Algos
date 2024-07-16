@@ -50,6 +50,33 @@ Solution is O(n)
 
 Using reservoir sampling:
 
+Certainly! Let's break down the algorithm implemented in the given `Solution` class:
+
+1. **Constructor** (`Solution(vector<int> nums)`):
+   - The constructor initializes the `m_nums` vector with the input `nums`.
+   - This vector will be used for subsequent operations.
+
+2. **Method** (`int pick(int target)`):
+   - The `pick` method takes an integer `target` as input and aims to randomly select an index where `m_nums[i]` equals the target value.
+   - It maintains two variables:
+	 - `count`: The number of occurrences of the target value encountered so far.
+	 - `result`: The index to return (initialized to -1).
+   - The method iterates through the `m_nums` vector:
+	 - If `m_nums[i]` equals the target value:
+	   - It increments `count`.
+	   - It generates a random number between 0 and `count-1`.
+	   - If the random number is 0, it updates `result` to the current index `i`.
+   - The final `result` contains the randomly selected index corresponding to the target value.
+
+3. **Random Selection**:
+   - The algorithm ensures that each occurrence of the target value has an equal probability of being selected.
+   - By using `rand() % (++count) == 0`, it achieves this uniform random sampling.
+
+4. **Efficiency**:
+   - Time Complexity: *O(n)*, where *n* is the size of the `m_nums` vector (due to the linear scan).
+   - Space Complexity: *O(n)* (due to the storage of the `m_nums` vector).
+
+In summary, this algorithm provides a simple way to randomly select an index where the target value occurs in the given array. 
 
 */
 namespace RandomPickIndex
