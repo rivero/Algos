@@ -168,6 +168,8 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "MaximumSwap.h"
 #include "DiagonalTraverse.h"
 #include "RandomPickIndex.h"
+#include "MergeIntervals.h"
+
 #pragma endregion INCLUDES
 struct tests
 {
@@ -182,7 +184,7 @@ struct tests
 
 int main()
 {
-	tests t("RandomPickIndex");
+	tests t("MergeIntervals");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -575,6 +577,10 @@ int main()
 	if (t.contains("RandomPickIndex"))
 	{
 		RandomPickIndex::process();
+	}
+	if (t.contains("MergeIntervals"))
+	{
+		MergeIntervals::process();
 	}
 }
 
