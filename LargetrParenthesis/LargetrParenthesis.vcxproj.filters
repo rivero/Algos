@@ -230,5 +230,8 @@
     <ClInclude Include="DiagonalTraverse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RandomPickIndex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -167,6 +167,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "ExclusiveTimeOfFunctions.h"
 #include "MaximumSwap.h"
 #include "DiagonalTraverse.h"
+#include "RandomPickIndex.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -181,7 +182,7 @@ struct tests
 
 int main()
 {
-	tests t("DiagonalTraverse");
+	tests t("RandomPickIndex");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -570,6 +571,10 @@ int main()
 	if (t.contains("DiagonalTraverse"))
 	{
 		DiagonalTraverse::process();
+	}
+	if (t.contains("RandomPickIndex"))
+	{
+		RandomPickIndex::process();
 	}
 }
 

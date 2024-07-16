@@ -199,6 +199,7 @@
     <ClInclude Include="PopulatingNextRightPointersEachNode.h" />
     <ClInclude Include="pow.h" />
     <ClInclude Include="QuestionMarks.h" />
+    <ClInclude Include="RandomPickIndex.h" />
     <ClInclude Include="RandomPickWithWeight.h" />
     <ClInclude Include="RecursiveRabbitInterview.h" />
     <ClInclude Include="ReorganizeString.h" />
