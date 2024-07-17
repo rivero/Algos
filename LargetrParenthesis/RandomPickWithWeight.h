@@ -157,7 +157,7 @@ namespace RandomPickwithWeight
 		{
 			// Your Solution object will be instantiated and called as such:
 			// ["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
-			Solution* obj = new Solution({ 1, 3, 2,4, 5, 6 });
+			Solution* obj = new Solution({ 1, 3, 2, 4, 5, 6 });
 
 			for (int i = 0; i < 5; i++)
 			{

@@ -185,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("BasicCalculatorII");
+	tests t("RandomPickwithWeight");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
