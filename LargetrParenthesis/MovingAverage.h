@@ -1,5 +1,9 @@
 #pragma once
 /*
+* https://leetcode.com/problems/moving-average-from-data-stream/description/
+
+346. Moving Average From Data Stream
+
 Given a stream of integers and a window size, calculate the moving average of
 all integers in the sliding window.
 
