@@ -185,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("BuildingsWithAnOceanView");
+	tests t("BasicCalculatorII");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -414,7 +414,7 @@ int main()
 	{
 		RandomPickwithWeight::process();
 	}
-	if (t.contains("BasicCalculator"))
+	if (t.contains("BasicCalculatorII"))
 	{
 		BasicCalculatorII::process();
 	}

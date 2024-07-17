@@ -9,13 +9,11 @@ The integer division should truncate toward zero.
 
 You may assume that the given expression is always valid. All intermediate results 
 will be in the 
-range of [-231, 231 - 1].
+range of [-2^31, 2^31 - 1].
 
 Note: You are not allowed to use any built-in function which evaluates strings as
 mathematical expressions, 
 such as eval().
-
-
 
 Example 1:
 
@@ -45,7 +43,7 @@ namespace BasicCalculatorII
 	class Solution 
 	{
 	public:
-		int calculate(string s) 
+		int calculate(const string& s) 
 		{
 			int num = 0;
 			char opr = '+';
@@ -100,6 +98,7 @@ namespace BasicCalculatorII
 	void process()
 	{
 		Solution sol;
-		cout << sol.calculate("300+2*2") << "\n";
+		string calc("300 + 2 * 2");
+		cout << sol.calculate(calc) << "\n";
 	}
 }
