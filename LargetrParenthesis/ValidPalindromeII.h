@@ -2,12 +2,9 @@
 /*
 * https://leetcode.com/problems/valid-palindrome-ii/description/
 680. Valid Palindrome II
-Easy
-Topics
-Companies
+
 Given a string s, return true if the s can be palindrome after deleting at most
 one character from it.
-
 
 Example 1:
 
@@ -22,7 +19,6 @@ Example 3:
 
 Input: s = "abc"
 Output: false
-
 
 Constraints:
 
@@ -41,9 +37,10 @@ Result: if the characters from the right and the left are the same return true
 
 namespace ValidPalindromeII
 {
-	struct Solution : public timeit
+	class Solution : public timeit
 	{
-		bool validPalindrome(const string& s) const
+	public:
+		bool validPalindrome(const string& s)
 		{
 			int i = 0;
 			int j = s.length() - 1;
@@ -56,24 +53,18 @@ namespace ValidPalindromeII
 					j--;
 				}
 				else
-					return isPalindrome(s, i + 1, j) || isPalindrome(s, i, j - 1);
+					return pal(s, i + 1, j) || pal(s, i, j - 1);
 			}
-
 			return true;
 		}
-
-		bool isPalindrome(const string& s, int i, int j) const
+		bool pal(const string& s, int i, int j)
 		{
 			while (i < j)
-			{
 				if (s[i++] != s[j--])
 					return false;
-			}
-
 			return true;
 		}
 	};
-
 	void process()
 	{
 		cout << "\nValidPalindrome\n";
