@@ -185,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("RandomPickwithWeight");
+	tests t("KthLargestElement");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
