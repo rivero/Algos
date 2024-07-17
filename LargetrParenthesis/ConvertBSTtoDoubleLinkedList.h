@@ -4,6 +4,7 @@ namespace BTreeToDLink
     /*
     * 
 	* 
+    https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/description/
     426. Convert Binary Search Tree to Sorted Doubly Linked List
 	
     Convert a Binary Search Tree to a sorted Circular Doubly-Linked List in place.
@@ -52,120 +53,99 @@ namespace BTreeToDLink
     All the values of the tree are unique.
 
     Solution
-	Time Complexity:
-        The treeToDoublyList(Node* root) function performs the following operations:
-            It initializes an empty set (m_set) and inserts values from the binary tree into the set 
-                (each insertion takes logarithmic time due to the set’s ordered nature).
-            It then iterates through the set to connect the nodes (linear time with respect to the number of nodes in the tree).
-                The overall time complexity is determined by the set insertions and the iteration, 
-                which results in O(N log N), where N represents the number of nodes in the binary tree 1.
-        The print_preorder(Node* node) function has a constant time complexity since it only prints the values of the nodes without modifying the data structure.
-    Space Complexity:
-        The space complexity depends on the additional data structures used:
-        The set (m_set) stores pairs of values and pointers to nodes. Since the set contains at most N elements (where N is the number of nodes in the tree), its space complexity is O(N).
-        Other variables (curIt, nextit, etc.) occupy constant space.
-        Therefore, the overall space complexity is O(N).
-    In summary:
 
-    Time Complexity: O(N log N)
-    Space Complexity: O(N)
-    */
+	### Algorithm Explanation:
+	The given algorithm converts a binary tree into a doubly linked list (DLL) 
+	while maintaining the same order as the in-order traversal of the tree. Here are the key steps:
 
-	struct Node 
-    {
+	1. **In-Order Traversal with Set:**
+	   - The algorithm starts by performing an in-order traversal of the binary tree.
+	   - During traversal, it inserts each node into a set (m_set) as a pair (value, Node*).
+	   - The set ensures that the nodes are sorted based on their values.
+
+	2. **Building the Doubly Linked List:**
+	   - After completing the traversal, the algorithm iterates through the set.
+	   - It connects adjacent nodes in the set to create the doubly linked list.
+	   - The left pointer of a node points to the previous node, and the right pointer points to the next node.
+
+	3. **Adjusting the Head and Tail:**
+	   - Finally, the algorithm adjusts the head and tail of the doubly linked list.
+	   - The head is set to the first node in the set (which corresponds to the smallest value).
+	   - The tail is set to the last node in the set (which corresponds to the largest value).
+
+	### Time Complexity:
+	- The time complexity of the algorithm depends on the in-order traversal, which visits each node once.
+	- Therefore, the time complexity is **O(N)**, where **N** is the number of nodes in the binary tree.
+
+	### Space Complexity:
+	- The space complexity is determined by the set (m_set) used to store the nodes.
+	- Since the set contains all nodes, the space complexity is also **O(N)**.
+
+	In summary, this algorithm efficiently converts a binary tree to a doubly linked list 
+	while maintaining the order of in-order traversal. 
+
+*/
+	class Node {
 	public:
-        int val{};
-        Node* left{ nullptr };
-        Node* right{ nullptr };
+		int val;
+		Node* left;
+		Node* right;
 
 		Node() {}
 
-		Node(int _val) : val(_val)
-        {
+		Node(int _val) {
+			val = _val;
+			left = NULL;
+			right = NULL;
 		}
 
-		Node(int _val, Node* _left, Node* _right) 
-        {
+		Node(int _val, Node* _left, Node* _right) {
 			val = _val;
 			left = _left;
 			right = _right;
 		}
 	};
-    class Solution 
-    {
-		using valnod = pair<int, Node*>;
-		set<valnod> m_set;
-        void process(Node* node)
-        {
-            if (!node)
-            {
-                return;
-            }
-            m_set.insert({node->val, node});
-            process(node->left);
-            process(node->right);
-        }
-    public:
-		void print_preorder(Node* node)
+
+	class Solution
+	{
+		set< pair<int, Node*> > m_set;
+		void process(Node* node)
 		{
 			if (!node)
-			{
 				return;
-			}
-			static int counter{};
-			if (++counter > m_set.size())
-			{
-				return;
-			}
-			cout << "val [" << node->val << "]\n";
-			print_preorder(node->right);
+			process(node->left);
+			m_set.insert({ node->val, node });
+			process(node->right);
+
 		}
-        Node* treeToDoublyList(Node* root)
-        {
-            // Create set of pairs (value, Node* ) 
-            // the set will be sorted based on pair 
-            // We recursively iterate and insert values to set.
-            // at the end we iterate the set and point the Nodes accordingly
-            m_set.clear();
-            process(root);
+	public:
 
-            if (m_set.size() == 0)
-            {
-                return {};
-            }
-			
-            print();
-			
-            auto curIt = m_set.begin();
-			auto nextit = m_set.begin();
-            nextit++;
-            while (nextit != m_set.end())
-            {
-                curIt->second->right = nextit->second;
-                nextit->second->left = curIt->second;
-                curIt++;
-                nextit++;
-            }
-            curIt = m_set.begin();
-            nextit = --m_set.end();
-            curIt->second->left = nextit->second;
-            nextit->second->right = curIt->second;
-            root = curIt->second;
-            return root;
 
-        }
+		Node* treeToDoublyList(Node* root)
+		{
+			if (!root)
+				return {};
+			process(root);
+			auto curIt = m_set.begin();
+			auto nextIt = m_set.begin();
+			nextIt++;
+			while (nextIt != m_set.end())
+			{
+				curIt->second->right = nextIt->second;
+				nextIt->second->left = curIt->second;
+				curIt++;
+				nextIt++;
+			}
+			auto [val, start] = *m_set.begin();
+			auto [val2, finish] = *(--m_set.end());
+			start->left = finish;
+			finish->right = start;
+			root = start;
+			return root;
 
-        void print()
-        {
-            for (auto [val, node] : m_set)
-            {
-                cout << "val: " << val << " node " << node << "\n";
-
-            }
-        }
-
-    };
-	void process()
+		}
+	};
+    void process()
 	{
         auto root = new Node(4);
         root->left = new Node(2);
@@ -174,8 +154,6 @@ namespace BTreeToDLink
 		root->left->right = new Node(3);
         Solution sol;
         root = sol.treeToDoublyList(root);
-        sol.print_preorder(root);
-
         root = sol.treeToDoublyList(nullptr);
 	}
 }
