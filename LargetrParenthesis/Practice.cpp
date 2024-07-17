@@ -185,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("TopKFrequentElements");
+	tests t("BuildingsWithAnOceanView");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -418,9 +418,9 @@ int main()
 	{
 		BasicCalculatorII::process();
 	}
-	if (t.contains("buildingsoceanview"))
+	if (t.contains("BuildingsWithAnOceanView"))
 	{
-		buildingsoceanview::process();
+		BuildingsWithAnOceanView::process();
 	}
 	if (t.contains("KthLargestElement"))
 	{

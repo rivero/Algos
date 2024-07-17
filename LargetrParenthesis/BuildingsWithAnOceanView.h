@@ -49,7 +49,7 @@ Reverse the order of elements in res to match the original order of buildings fr
 Return the res vector containing the indices of the visible buildings.
 
 	*/
-namespace buildingsoceanview
+namespace BuildingsWithAnOceanView
 {
 	class Solution {
 	public:
