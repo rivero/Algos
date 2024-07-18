@@ -41,61 +41,30 @@ namespace IntervalListIntersections
 	0 <= startj < endj <= 10^9
 	endj < startj+1
 
-	Time Complexity (T):
-		You’re iterating through both lists of intervals (A and B) in a single loop.
-		The loop runs until either i reaches the end of A or j reaches the end of B.
-		Since you’re processing each interval once, the total number of iterations is proportional to the sum of the lengths of both lists: (n + m).
-		Therefore, the time complexity is (O(n + m)).
-	Space Complexity (S):
-		You’re using a constant amount of additional space (variables like alow, blow, ahigh, bhigh, lo, and hi).
-		These variables don’t depend on the input size; they remain the same regardless of the input.
-		Thus, the space complexity is (O(1)).
 
+	1. We have two input arrays, `A` and `B`, each containing intervals represented as pairs of integers: `[start, end]`.
+	2. Initialize an empty result vector, `res`, to store the intersection intervals.
+	3. Initialize two pointers, `i` and `j`, to traverse the intervals in `A` and `B`, respectively.
+	4. While both pointers are within bounds (i.e., `i < A.size()` and `j < B.size()`):
+	   - Get the start and end points of the current intervals from `A` and `B`: `alow`, `ahigh`, `blow`, and `bhigh`.
+	   - Calculate the intersection interval:
+		 - The start of the intersection interval is the maximum of `alow` and `blow`: `lo = max(alow, blow)`.
+		 - The end of the intersection interval is the minimum of `ahigh` and `bhigh`: `hi = min(ahigh, bhigh)`.
+	   - If `lo <= hi`, there is a valid intersection, so add `{lo, hi}` to the result vector.
+	   - Update the pointers:
+		 - If `hi` equals `ahigh`, move the pointer in `A` to the next interval (`i++`).
+		 - Otherwise, move the pointer in `B` to the next interval (`j++`).
+	5. Return the resulting vector `res` containing the intersection intervals.
 
-	Approach
-		The intersection of two closed intervals is either:
-			An empty set (if there is no overlap between the intervals).
-			A closed interval [c, d] (if there is an overlap).
-		To find the intersection, we can use the following rule:
-			If the intervals [a, b] and [c, d] overlap (i.e., max(a, c) ≤ min(b, d)), 
-			then their intersection is [max(a, c), min(b, d)].
-
-	Solution
-		Initialize two pointers, i and j, to iterate through firstList and secondList, respectively.
-		While both pointers are within bounds:
-		Calculate the maximum of the start points: maxStart = max(firstList[i][0], secondList[j][0]).
-		Calculate the minimum of the end points: minEnd = min(firstList[i][1], secondList[j][1]).
-		If maxStart is less than or equal to minEnd, there is an intersection.
-		Add [maxStart, minEnd] to the result.
-		Move the pointer that has the smaller end point (i.e., increment i or j).
-		Repeat until one of the pointers reaches the end of its list.
-
-		The provided code for finding the intersection of intervals has the following time and space complexity:
-
-**Time Complexity:** O(n + m)
-
-* **n** is the number of intervals in the first list (A).
-* **m** is the number of intervals in the second list (B).
-
-**Reasoning:**
-
-* The code uses two nested loops that iterate through both lists A and B. 
-* In the worst case, both loops might iterate through all elements of their respective lists.
-* The operations inside the loops (comparisons, pushing to the result vector) are constant time operations (O(1)).
-* Therefore, the overall time complexity is dominated by the nested loops, resulting in O(n + m).
-
-**Space Complexity:** O(min(n, m))
-
-* The code uses a single vector `res` to store the intersection intervals.
-* In the worst case, the number of intersections will be equal to the number of intervals in the smaller list (either n or m).
-* Since each intersection is stored as a vector of size 2, the space complexity is proportional to the number of intersections, 
-* which is O(min(n, m)).
-
-**Note:**
-
-* This analysis assumes that the size of each interval (constant space) is negligible compared to the total number of intervals.
-* If there's a need to optimize space further, techniques like modifying the original lists (if allowed) to store the intersections 
-* can be explored, but this might trade space for code complexity.
+	This algorithm efficiently finds the overlapping intervals between `A` and `B`. 
+	It leverages the fact that the intervals are sorted by their start points. 
+	By comparing the start and end points, we can identify the intersection intervals without unnecessary checks. 
+	The time complexity of this algorithm is O(N + M), where N and M are the sizes of arrays `A` and `B`, respectively. 😊
+	
+	The space complexity of this algorithm is indeed O(1) because it doesn't use any additional data structures that 
+	grow with the input size. 
+	Instead, it operates directly on the input arrays `A` and `B`, reusing the same variables for the intersection intervals. 
+	Well spotted! 😊👍
 
 	*/
 //#define PRINTV
