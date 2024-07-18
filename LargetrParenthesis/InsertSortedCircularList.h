@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 namespace InsertSortedCircularList
 {
 	/*
@@ -63,6 +63,34 @@ namespace InsertSortedCircularList
 
 	The number of nodes in the list is in the range [0, 5 * 10^4].
 	-10^6 <= Node.val, insertVal <= 10^6
+
+1. **Base Case (Empty List):**
+   - If the input `head` is `nullptr` (i.e., the list is empty), create a new node with the value `insertVal`.
+   - Set its `next` pointer to itself (since it's the only node in the list).
+   - Return this new node as the new head of the list.
+
+2. **Iterating Through the List:**
+   - Initialize a pointer `cur` to the `head`.
+   - While `cur->next` is not equal to the original `head` (i.e., we haven't completed a full loop through the circular list):
+	 - Get the values of the current node (`curVal`) and the next node (`nextVal`).
+	 - Check if the current node's value is greater than the next node's value:
+	   - If so, we've reached the end of the sorted portion of the list.
+	   - Check if the `insertVal` should be inserted between the current and next nodes:
+		 - If `(curVal <= insertVal && insertVal <= nextVal)`, we found the proper position to insert the value.
+		 - Otherwise, continue iterating.
+	 - If the current node's value is not greater than the next node's value:
+	   - Check if the `insertVal` should be inserted between the current and next nodes:
+		 - If `(curVal > nextVal && (curVal <= insertVal || insertVal <= nextVal))`, we found the proper position to insert the value.
+		 - Otherwise, continue iterating.
+
+3. **Insertion:**
+   - Create a new node with the value `insertVal` and set its `next` pointer to `cur->next`.
+   - Update `cur->next` to point to the new node.
+   - Return the original `head`.
+
+This algorithm maintains the sorted order of the circular linked list while inserting the new value. 
+The time complexity is O(N), where N is the number of nodes in the list, since we iterate through the entire list once. 
+The space complexity is O(1) because we don't use any additional data structures. 😊👍
 	*/
 
 	struct Node 
