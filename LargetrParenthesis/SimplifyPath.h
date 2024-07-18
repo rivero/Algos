@@ -2,6 +2,7 @@
 namespace SimplifyPath
 {
 	/*
+    * https://leetcode.com/problems/simplify-path/description/
 71. Simplify Path
 
 Given an absolute path for a Unix-style file system, which begins with a slash '/', 
@@ -83,52 +84,56 @@ Space Complexity:
 
 In summary, the given code has linear time complexity (O(n)) and linear space complexity (O(n)).
 	*/
-    class Solution {
-    public:
-        string simplifyPath(string path) 
-        {
-            vector<string> dir, ans_vec;
-            /*
-            The following split method was taken from https://www.javatpoint.com/how-to-split-strings-in-cpp
-            Program3.cpp Please refer this for more details.
-            */
-            string T; // temp string to hold split value.
-            stringstream x(path);
-            while (getline(x, T, '/')) 
-            {
-                dir.push_back(T);
-            }
-            for (int i = 0; i < dir.size(); i++) 
-            {
-                if (dir[i] == "..") 
-                {
-                    if (ans_vec.size() > 0) // this is a fail check if we are on root directory then we can't move to previous dir.
-                        ans_vec.pop_back();
-                }
-                else if (dir[i] == ".") 
-                {
-                    // stay on the current directory
-                }
-                else 
-                {
-                    if (dir[i] != "") // This deals with the case of empty string result of having "//" split. 
-                                      // If we have something push it back.
-                        ans_vec.push_back(dir[i]);
-                }
-            }
-			string ans;
-            for (int i = 0; i < ans_vec.size(); i++)
-            {
-                // join all the remaining dir with '/'.
-                ans += "/" + ans_vec[i];
-            }
-            // in case we don't have anything present in ans_dir then we'll simply return root directory.
-            if (ans == "") 
-                ans = "/";
-            return ans;
-        }
-    };
+	class Solution
+	{
+	public:
+		string simplifyPath(string path)
+		{
+			if (path.empty())
+				return {};
 
+			// parse the path into a vector of folders
+			vector<string> folders;
+
+			// split the string into path tokens
+			string folderName;
+			stringstream streamPath(path);
+			while (getline(streamPath, folderName, '/'))
+			{
+				folders.push_back(folderName);
+			}
+
+			// scan the resulting vector containing the folder names and process
+			// according to the description. We place the corrected path in a 
+			// string vector
+			vector<string> correctedPath;
+			for (int i = 0; i < folders.size(); i++)
+			{
+				auto currentFolder = folders[i];
+				if (currentFolder == "..")
+				{
+					if (correctedPath.size() > 0)
+						correctedPath.pop_back(); // move one folder up
+				}
+				else if (currentFolder == ".")
+					continue; // stay here
+				else
+				{
+					if (!currentFolder.empty()) // it can be empty if we find "//"
+						correctedPath.push_back(currentFolder);
+				}
+			}
+
+			string simplifiedPath;
+			for (auto& folder : correctedPath)
+			{
+				simplifiedPath += "/" + folder;
+			}
+			if (simplifiedPath.empty())
+				simplifiedPath = "/";
+			return simplifiedPath;
+		}
+	};
 	void process()
 	{
         Solution sol;

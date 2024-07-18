@@ -185,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("KthLargestElement");
+	tests t("SimplifyPath");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
