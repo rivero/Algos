@@ -185,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("CustomSortString");
+	tests t("ShortestPathBinaryMatrix");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
