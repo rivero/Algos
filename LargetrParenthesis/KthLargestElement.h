@@ -95,10 +95,10 @@ namespace KthLargestElement
 	heap is set to be a min-heap.
 
 	from i = k compare nums[i] with the heap's min (top)  value.
-	if nums[i] is larger, remove the k value in the heap and push nums[i]
+	if nums[i] is larger, remove the top value in the heap and push nums[i]
 	Continue comparing. 
 
-	Since the min-heap sorts from smalles to biggest, the top value will be the kth largest.
+	Since the min-heap sorts from smallest to biggest, the top value will be the kth largest.
 
 	2, 3
 
