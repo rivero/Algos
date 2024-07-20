@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 namespace mypow
 {
 	/*
@@ -55,6 +55,25 @@ namespace mypow
 	It splits the problem into smaller subproblems by dividing the exponent by 2.
 	If n is odd, we multiply the result by x once more.
 	The memoization table ensures that we avoid redundant calculations
+
+	1. `fast_power(x, n/2)`:
+			- When computing `x^n`, we can divide the problem into smaller subproblems by considering `x^(n/2)`.
+			- By recursively calculating `fast_power(x, n/2)`, we effectively split the problem in half.
+			- The idea is to compute the result for `n/2` and then use it to build the result for `n`.
+			- This approach reduces the number of multiplications needed to compute the final result.
+
+	2. Example:
+		- Suppose we want to calculate `x^8`.
+		- Instead of directly multiplying `x` eight times, we can break it down as follows:
+			- Compute `x^4` by calling `fast_power(x, 8/2)`.
+			- Then square the result: `(x^4)^2`.
+			- This gives us `x^8`.
+
+	3. Recursion:
+		- The `fast_power` function continues this process recursively until it reaches the base cases (when `n` is 0 or 1).
+		- By dividing the problem into smaller halves, it efficiently computes the final result.
+
+In summary, `fast_power(x, n/2)` is a crucial step in the algorithm for calculating `x` raised to the power of `n`.
 
 	Time Complexity:
 		The function uses a divide-and-conquer approach by recursively computing the power of x to the n/2 and 
