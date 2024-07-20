@@ -170,7 +170,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "RandomPickIndex.h"
 #include "MergeIntervals.h"
 #include "TopKFrequentElements.h"
-
+#include "NextPermutation.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -185,7 +185,7 @@ struct tests
 
 int main()
 {
-	tests t("ShortestPathBinaryMatrix");
+	tests t("NextPermutation");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -586,6 +586,10 @@ int main()
 	if (t.contains("TopKFrequentElements"))
 	{
 		TopKFrequentElements::process();
+	}
+	if (t.contains("NextPermutation"))
+	{
+		NextPermutation::process();
 	}
 }
 

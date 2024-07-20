@@ -193,6 +193,7 @@
     <ClInclude Include="movezero.h" />
     <ClInclude Include="MovingAverage.h" />
     <ClInclude Include="NestedListWeightSum.h" />
+    <ClInclude Include="NextPermutation.h" />
     <ClInclude Include="NumberOfClosedIslands.h" />
     <ClInclude Include="NumberOfIslands.h" />
     <ClInclude Include="PalindromeNumber.h" />

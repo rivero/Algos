@@ -239,5 +239,8 @@
     <ClInclude Include="TopKFrequentElements.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NextPermutation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
