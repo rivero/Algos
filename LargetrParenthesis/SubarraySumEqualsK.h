@@ -30,83 +30,67 @@ namespace SubarraySumEqualsK
 
 	Subarray equals k or divisable by k  and the like are always solved with prefix sum.
 
+The given code snippet defines an algorithm to find the number of subarrays in an array `nums` 
+whose sum equals a given target value `k`. Here's how it works:
 
+1. **Prefix Sums and Frequencies Map**:
+   - The algorithm uses a prefix sums approach to keep track of cumulative sums as it iterates through the array.
+   - It maintains an unordered map (`prefixSums_frequencies_map`) where keys represent prefix sums, 
+   and values represent the frequency of each prefix sum encountered so far.
+   - Initially, the map contains one entry: `prefix_sum = 0` with a frequency of 1.
 
-	Certainly! Let's break down the algorithm step by step:
+2. **Iterating Through `nums`**:
+   - The algorithm processes each element `num` in the array.
+   - It updates the `prefix_sum` by adding the current `num`.
+   - Calculates the difference `difference = prefix_sum - k`.
 
-	1. **Initialization**:
-	   - We create an unordered map (hash table) called `mp` to store prefix sums and their frequencies.
-	   - Initialize `prefix_sum` to 0 (the sum of an empty subarray).
-	   - Initialize `ans` to 0 (the count of subarrays with sum equal to `k`).
-	   - Set `mp[0] = 1` to account for the case where the entire array has a sum of `k`.
+3. **Counting Subarrays**:
+   - If the map contains an entry for `difference`, it means there exists a subarray with a sum equal to `k`.
+   - The algorithm increments the answer (`ans`) by the frequency of `difference` in the map.
+   - This step ensures that all subarrays ending at the current index contribute to the count.
 
-	2. **Iterating through the array**:
-	   - For each element `it` in the `nums` array:
-		 - Update `prefix_sum` by adding `it`.
-		 - Calculate the difference `difference = prefix_sum - k`.
-		 - Check if `difference` exists in the map (`mp`). If it does, add the frequency of `difference` to `ans`.
-		 - Increment the frequency of the current `prefix_sum` in the map.
+4. **Updating the Map**:
+   - The algorithm increments the frequency of the current `prefix_sum` in the map.
+   - This accounts for subarrays starting from the beginning of the array.
 
-	3. **Return the answer**:
-	   - The final value of `ans` represents the total count of subarrays with sum equal to `k`.
+5. **Final Result**:
+   - The final result is the value of `ans`, representing the total number of subarrays with a sum equal to `k`.
 
-	4. **Time Complexity**:
-	   - The algorithm iterates through the array once, so the time complexity is O(n), where `n` is the size of the input array.
+**Time Complexity**:
+- The algorithm iterates through the array once, performing constant-time operations for each element.
+- Constructing the `prefixSums_frequencies_map` takes O(n) time.
+- Therefore, the overall time complexity of the `subarraySum` algorithm is O(n).
 
-	5. **Space Complexity**:
-	   - The space complexity is O(n) due to the hash map (`mp`) storing prefix sums and their frequencies.
+**Space Complexity**:
+- The space complexity is determined by the additional data structure (`prefixSums_frequencies_map`).
+- In the worst case, the map can store all distinct prefix sums, resulting in O(n) space.
+- Thus, the overall space complexity is O(n).
 
-	In summary, this algorithm efficiently counts subarrays with a target sum of `k` using a hash map to keep track of prefix sums. 
-	
-	It's a great example of how hash maps can be used to optimize certain problems! 😊👍
 	*/
-	class Solution 
-	{
+	class Solution {
 	public:
-
-		int subarraySum(vector<int> nums, int k) 
+		int subarraySum(vector<int>& nums, int k)
 		{
-			if (nums.size() == 0)
-			{
-				return 0;
-			}
-#ifdef PRINTV
-			cout << "Sum should equal k [" << k << "] input vector:\n";
-			printv(nums);
-#endif
-			unordered_map<int, int> prefixSums_frequencies_map;
-			int prefix_sum = 0, ans = 0;
-			prefixSums_frequencies_map[prefix_sum] = 1; // To make ans += to count for the first time.
+			if (nums.empty())
+				return {};
 
-			for (auto num : nums) 
+			unordered_map<int, int> m;
+			int prefix_sum{}, ans{};
+			m[prefix_sum] = 1;
+
+			for (auto num : nums)
 			{
 				prefix_sum += num;
-				int difference = prefix_sum - k;
-#ifdef PRINTV
-				cout << "prefix sum: " << prefix_sum << " difference with k [" << k << "]: " << difference << "\n";
-#endif // PRINTV
-				if (prefixSums_frequencies_map.find(difference) != prefixSums_frequencies_map.end()) 
+				auto diff = prefix_sum - k;
+				if (m.count(diff) > 0)
 				{
-					// we have seen this difference before, meaning prefix - k already counted
-					// we have see this sum before, then between this time and the previous time we found a subarray
-#ifdef PRINTV
-					cout << "found " << difference << "\n";
-#endif
-					ans += prefixSums_frequencies_map[difference];
+					ans += m[diff];
 				}
-#ifdef PRINTV
-				cout << "increasing prefixSums_frequencies_map[" << prefix_sum << "]\n";
-#endif
-				prefixSums_frequencies_map[prefix_sum]++;
-#ifdef PRINTV
-				cout << "prefix Sums to frequencies map:\n";
-				printm(prefixSums_frequencies_map);
-#endif // PRINTV
+				m[prefix_sum]++;
 			}
 			return ans;
 		}
 	};
-
 
 	class SolutionBruteForce 
 	{
