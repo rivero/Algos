@@ -52,6 +52,30 @@ reverse and return
 If the pivot index is found, look for the next element that is smaller FROM RIGHT TO LEFT
 at that index, reverse the vector.
 
+1. **Problem Description**:
+	- Given an array of integers, we want to find the next lexicographically greater permutation of the array.
+	- If such an arrangement is not possible, we need to rearrange the array to the lowest possible order (sorted in ascending order).
+
+2. **Solution Explanation**:
+	- The provided solution aims to find the next permutation by following these steps:
+		1. **Find the Pivot**:
+			- Iterate from **right to left** through the array to find the pivot index.
+			- The pivot index is the first element that is smaller than the element to its right (i.e., `nums[i] > nums[i-1]`).
+		2. **No Pivot Found**:
+			- If no pivot element is found (i.e., the array is sorted in descending order), reverse the entire array to get the lowest possible order.
+		3. **Find the Next Greater Element**:
+			- Starting from the right end of the array, find the first element greater than the pivot element.
+			- Swap this element with the pivot element.
+		4. **Reverse the Remaining Elements**:
+			- Reverse the subarray from the pivot index + 1 to the end of the array.
+			- This ensures that the remaining elements are in ascending order.
+		5. **Result**:
+			- The modified array represents the next lexicographically greater permutation.
+
+3. **Complexities**:
+	- Time Complexity: The solution iterates through the array twice (finding the pivot and reversing the subarray), 
+	which results in linear time complexity: O(n).
+	- Space Complexity: The solution uses only a constant amount of extra space, so the space complexity is O(1).
 
 */
 namespace NextPermutation
@@ -80,18 +104,14 @@ namespace NextPermutation
 				return;
 			}
 
-			while (nums[nums_len] <= nums[pivot_index]) // look for the first number grater than the pivot FROM RIGHT TO LEFT
+			while (nums[nums_len] <= nums[pivot_index]) // Find the first element greater than the pivot element FROM RIGHT TO LEFT
 			{
 				nums_len--;
 			}
 			// swap the numbers
 			swap(nums[nums_len], nums[pivot_index]);
 			// reverse from pivot to the end
-			auto itbeg = nums.begin() + pivot_index + 1;
-			reverse(itbeg,nums.end());
-
-
-
+			reverse(nums.begin() + pivot_index + 1,nums.end());
 		}
 	};
 
@@ -101,10 +121,26 @@ namespace NextPermutation
 
 			vector<int> vec
 			{
-				1,2,3
+				1,1,5
 			};
+			cout << "begin\n";
+			printv(vec);
 			Solution sol;
 			sol.nextPermutation(vec);
+			cout << "end\n";
+			printv(vec);
+		}
+		{
+
+			vector<int> vec
+			{
+				1,2,3
+			};
+			cout << "begin\n";
+			printv(vec);
+			Solution sol;
+			sol.nextPermutation(vec);
+			cout << "end\n";
 			printv(vec);
 		}
 		{
@@ -113,8 +149,11 @@ namespace NextPermutation
 			{
 				1, 4, 5, 8, 7
 			};
+			cout << "begin\n";
+			printv(vec);
 			Solution sol;
 			sol.nextPermutation(vec);
+			cout << "end\n";
 			printv(vec);
 		}
 	}
