@@ -242,5 +242,8 @@
     <ClInclude Include="NextPermutation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ThreeSum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

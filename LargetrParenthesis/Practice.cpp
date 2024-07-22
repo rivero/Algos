@@ -171,6 +171,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "MergeIntervals.h"
 #include "TopKFrequentElements.h"
 #include "NextPermutation.h"
+#include "ThreeSum.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -185,7 +186,7 @@ struct tests
 
 int main()
 {
-	tests t("NextPermutation");
+	tests t("ThreeSum");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -590,6 +591,10 @@ int main()
 	if (t.contains("NextPermutation"))
 	{
 		NextPermutation::process();
+	}
+	if (t.contains("ThreeSum"))
+	{
+		ThreeSum::process();
 	}
 }
 

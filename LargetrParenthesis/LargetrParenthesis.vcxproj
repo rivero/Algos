@@ -213,6 +213,7 @@
     <ClInclude Include="SubarraySumEqualsK.h" />
     <ClInclude Include="SumRootToLeaf.h" />
     <ClInclude Include="RangeSumOfBST.h" />
+    <ClInclude Include="ThreeSum.h" />
     <ClInclude Include="timeit.h" />
     <ClInclude Include="Toeplitz.h" />
     <ClInclude Include="TopKElements.h" />
