@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 namespace GroupShiftedStrings
 {
 	/*
@@ -143,7 +143,7 @@ namespace GroupShiftedStrings
 			3. Behavioral : LP 16, you need to make stories for all the 16 LP.
 
 	Time Complexity:
-		Let�s analyze the time complexity step by step:
+		Let’s analyze the time complexity step by step:
 		The shift function processes each character in the input string once, resulting in a linear time complexity of O(n), 
 		where n is the length of the input string.
 		The loop that iterates over the input strings (in the groupStrings function) also takes linear time, as it processes 
@@ -165,21 +165,67 @@ namespace GroupShiftedStrings
 		Time Complexity: O(N)
 		Space Complexity: O(N)
 
+		From AI
+		Certainly! Let's delve into the algorithm and discuss its complexities.
+
+The given code snippet defines a function called `groupStrings` that groups strings based on a specific property. 
+
+1. **String Shifting**:
+   - The `shift` function takes a string `s` as input and computes a shifted representation of it.
+   - For each adjacent pair of characters in `s`, it calculates the difference (modulo 26) between their ASCII values.
+   - If the difference is negative, it wraps around by adding 26.
+   - The resulting shifted string is constructed by appending these differences (represented as characters) with commas.
+
+2. **Grouping Strings**:
+   - The main function `groupStrings` processes an input vector of strings (`strings`).
+   - It maintains an unordered map (`mp`) where the keys are the shifted representations of strings, and the values are vectors 
+   of original strings.
+   - For each input string `s`, the algorithm computes its shifted representation using the `shift` function and adds it to the 
+   corresponding group in the map.
+   - This step ensures that strings with the same shifted representation are grouped together.
+
+3. **Output**:
+   - After processing all input strings, the algorithm constructs the final result.
+   - It iterates through the map entries and appends the grouped strings to the `groups` vector.
+
+**Time Complexity**:
+- The `shift` function processes each character in a string, resulting in linear time complexity (O(n)) for each string.
+- The overall time complexity depends on the total number of characters across all input strings.
+- Let `N` be the total number of characters in all strings combined.
+- Constructing the map (`mp`) takes O(N) time.
+- Constructing the output vector (`groups`) also takes O(N) time.
+- Therefore, the overall time complexity of the `groupStrings` algorithm is O(N).
+
+**Space Complexity**:
+- The space complexity is determined by the additional data structures used:
+  - The map (`mp`) stores shifted representations as keys and vectors of strings as values. Its space complexity is O(N).
+  - The output vector (`groups`) also contributes to the space complexity.
+- Thus, the overall space complexity is O(N).
+
+In summary, the `groupStrings` algorithm efficiently groups strings based on their shifted representations. If you have any further questions or need clarification, feel free to ask! 😊 ¹²
+
+Source: Conversation with Copilot, 7/22/2024
+(1) Complete Guide On Complexity Analysis - Data Structure and Algorithms .... https://www.geeksforgeeks.org/complete-guide-on-complexity-analysis/.
+(2) Introduction to Strings – Data Structure and Algorithm Tutorials. https://www.geeksforgeeks.org/introduction-to-strings-data-structure-and-algorithm-tutorials/.
+(3) Rabin-Karp Algorithm for Pattern Searching - GeeksforGeeks. https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/.
 */
 
 	class Solution : public timeit
 	{
+		/*For each adjacent pair of characters in `s`, it calculates the difference (distance) between their ASCII values.
+			- If the difference is negative, it wraps around by adding 26.
+			it creates a string containing the differences (represented as characters) with commas as a string
+		*/
 		string shift(const string& s)
 		{
 			string t;
-			int n = s.length();
+			auto n = s.size();
 			for (int i = 1; i < n; i++)
 			{
-				int diff = s[i] - s[i - 1];
+				char diff = s[i] - s[i - 1];
 				if (diff < 0)
 					diff += 26;
-
-				t += 'a' + diff + ',';
+				t += diff;
 			}
 			return t;
 		}
@@ -192,6 +238,9 @@ namespace GroupShiftedStrings
 				mp[shift(s)].push_back(s);
 			}
 
+			/*For each input string `s`, the algorithm computes its shifted representation using the `shift` function and adds it to the
+   corresponding group in the map.
+   - This step ensures that strings with the same shifted representation are grouped together.*/
 			vector<vector<string> > groups;
 
 			for (auto&[key, group] : mp)
