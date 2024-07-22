@@ -126,11 +126,11 @@ namespace ExclusiveTimeOfFunctions
 			The following split method was taken from https://www.javatpoint.com/how-to-split-strings-in-cpp
 			Program3.cpp Please refer this for more details.
 			*/
-			string T; // temp string to hold split value.
-			stringstream x(str);
-			while (getline(x, T, sep))
+			string tempStr; // temp string to hold split value.
+			stringstream sStream(str);
+			while (getline(sStream, tempStr, sep))
 			{
-				res.push_back(T);
+				res.push_back(tempStr);
 			}
 			return res;
 		}
@@ -139,35 +139,35 @@ namespace ExclusiveTimeOfFunctions
 		vector<int> exclusiveTime(int n, vector<string>& logs)
 		{
 			map<int, int> execution_times;
-			stack<int> call_stack;
+			stack<int> functionStartStack;
 			int prev_start_time{};
-
+			int func_id{};
 			for (auto &log: logs)
 			{
 				auto v = strToVector(log);
-				auto func_id = stoi(v[0]);
+				func_id = stoi(v[0]);
 				auto call_type = v[1];
 				auto timestamp = stoi(v[2]);
 
 				if (call_type == "start")
 				{
-					if (call_stack.size() > 0)
+					if (functionStartStack.size() > 0)
 					{
-						execution_times[call_stack.top()] += timestamp - prev_start_time;
+						execution_times[functionStartStack.top()] += timestamp - prev_start_time;
 					}
-					call_stack.push(func_id);
+					functionStartStack.push(func_id);
 					prev_start_time = timestamp;
 				}
 				else
 				{
-					auto function_id = call_stack.top(); call_stack.pop();
-					execution_times[function_id] += timestamp - prev_start_time + 1;
+					func_id = functionStartStack.top(); functionStartStack.pop();
+					execution_times[func_id] += timestamp - prev_start_time + 1;
 					prev_start_time = timestamp + 1;
 				}
 			}
 			
 			vector<int> res;
-			for (auto & [function_id, times] : execution_times)
+			for (auto & [func_id, times] : execution_times)
 			{
 				res.push_back(times);
 			}
