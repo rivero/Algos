@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /**
 * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
 236. Lowest Common Ancestor of a Binary Tree
@@ -6,9 +6,9 @@
 Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
 According to the definition of LCA on Wikipedia:
-�The lowest common ancestor is defined between two nodes p and q
+“The lowest common ancestor is defined between two nodes p and q
 as the lowest node in T that has both p and q as descendants
-(where we allow a node to be a descendant of itself).�
+(where we allow a node to be a descendant of itself).”
 
 Example 1:
 
@@ -61,6 +61,27 @@ When we find the first p or q, we return the root to that node (which is also th
 
 Time complexity: O(n)
 Space complexity: O(1) if not counting recursive stack frames else O(n)
+
+### Algorithm Explanation:
+
+### Key Steps:
+1. If the current node `root` is null, return `root` (base case).
+2. If `root` is equal to either `p` or `q`, return `root` (one of the nodes is the ancestor of the other).
+3. Recursively search the left subtree (`root->left`) for `p` and `q` (stored in `l`).
+4. Recursively search the right subtree (`root->right`) for `p` and `q` (stored in `r`).
+5. If both `l` and `r` are valid (i.e., not null), the current `root` is the LCA.
+6. Otherwise, return the non-null value between `l` and `r`.
+
+### Time Complexity:
+- The worst-case time complexity of this algorithm is O(n), where n is the number of nodes in the binary tree.
+- In the worst case, we explore all nodes to find the LCA.
+
+### Space Complexity:
+- The space complexity is O(h), where h is the height of the binary tree.
+- This accounts for the recursive call stack during traversal.
+
+Overall, the provided code efficiently finds the LCA of two nodes in a binary tree. 
+If you have any further questions or need additional clarification, feel free to ask! 😊
 
 */
 namespace LowestCommonAncestorBinaryTreeI

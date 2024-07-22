@@ -206,6 +206,7 @@
     <ClInclude Include="RecursiveRabbitInterview.h" />
     <ClInclude Include="ReorganizeString.h" />
     <ClInclude Include="ReverseLinkedList.h" />
+    <ClInclude Include="RotateImage.h" />
     <ClInclude Include="ShortestPathBinaryMatrix.h" />
     <ClInclude Include="SimplifyPath.h" />
     <ClInclude Include="Solution.h" />

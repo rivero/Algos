@@ -58,7 +58,7 @@ namespace BuildingsWithAnOceanView
 			vector<int> res;
 			auto numBuildings = heights.size() - 1;
 			res.push_back(numBuildings);
-			int lastHeight{ heights[numBuildings ]};
+			int lastHeight{ heights[numBuildings]};
 			int i = numBuildings - 1;
 			for (; i >= 0; i--)
 			{

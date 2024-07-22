@@ -172,6 +172,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "TopKFrequentElements.h"
 #include "NextPermutation.h"
 #include "ThreeSum.h"
+#include "RotateImage.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -186,7 +187,7 @@ struct tests
 
 int main()
 {
-	tests t("ThreeSum");
+	tests t("RotateImage");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -595,6 +596,10 @@ int main()
 	if (t.contains("ThreeSum"))
 	{
 		ThreeSum::process();
+	}
+	if (t.contains("RotateImage"))
+	{
+		RotateImage::process();
 	}
 }
 
