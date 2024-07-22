@@ -69,7 +69,7 @@ whose sum equals a given target value `k`. Here's how it works:
 	*/
 	class Solution {
 	public:
-		int subarraySum(vector<int>& nums, int k)
+		int subarraySum(vector<int> nums, int k)
 		{
 			if (nums.empty())
 				return {};

@@ -123,10 +123,10 @@ Peaks can occur at the beginning, end, or within the array. Great job implementi
 			while (Left <= Right)
 			{
 				auto mid = (Left + Right) / 2;
-				auto mid_val = nums[mid];
 				auto left_val = (mid > 0? nums[mid - 1] : INT_MIN);
 				auto right_val = (mid < n - 1? nums[mid + 1] : INT_MIN);
 
+				auto mid_val = nums[mid];
 				if (left_val < mid_val && mid_val > right_val)
 				{
 					return mid;
