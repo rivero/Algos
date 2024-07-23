@@ -43,7 +43,8 @@ O(n)
 Solution
 
 1. **Function Description:**
-   - The `rightSideView` function takes a binary tree's root node as input and returns a vector of integers representing the right view of the tree.
+   - The `rightSideView` function takes a binary tree's root node as input and returns a vector of integers representing the right 
+   view of the tree.
    - The right view of a binary tree is the set of nodes visible when the tree is visited from the right side.
 
 2. **Algorithm Overview:**
@@ -70,15 +71,6 @@ Solution
 	 ```
 	 - The right view would be `[1, 3, 6, 7]`.
 
-Feel free to ask if you have any further questions! 😊
-
-Source: Conversation with Copilot, 7/9/2024
-(1) Print Right View of a Binary Tree - GeeksforGeeks. https://www.geeksforgeeks.org/print-right-view-binary-tree-2/.
-(2) 199. Binary Tree Right Side View — Hands-On Problem-Solving in Python .... https://mohsentabibian.github.io/LeetCode-Solutions/07.%20Trees/199.%20Binary%20Tree%20Right%20Side%20View.html.
-(3) Binary Tree Right Side View | CodePath Cliffnotes. https://guides.codepath.org/compsci/Binary-Tree-Right-Side-View.
-(4) Binary Tree Right Side View LeetCode Solution - TutorialCup. https://tutorialcup.com/leetcode-solutions/binary-tree-right-side-view-leetcode-solution.htm.
-(5) LeetCode: 199. Binary Tree Right Side View. https://blog.salvatorelabs.com/leetcode/199-binary-tree-right-side-view/.
-
 */
 namespace BinaryTreeRightSideView
 {
@@ -92,39 +84,38 @@ namespace BinaryTreeRightSideView
 		
 	};
 
-    class Solution 
-    {
-    public:
-        vector<int> rightSideView(TreeNode* root) 
-        {
-            vector<int> result;
-            if (!root)
-                return result;
+	class Solution {
+	public:
+		vector<int> rightSideView(TreeNode* root)
+		{
+			if (!root) return {};
 
-            // Level order traversal BFS with a queue
-            queue<TreeNode*> levels;
-            levels.push(root);
+			vector<int> res;
 
-            while (!levels.empty()) 
-            {
-                int size = levels.size();
+			// BFS use queue
+			queue<TreeNode*> levels;
+			levels.push(root); // root always going to be seen
 
-                TreeNode* current = levels.front();
-                result.push_back(current->val);
+			while (!levels.empty())
+			{
+				int size = levels.size();
+				auto node = levels.front();
+				res.push_back(node->val);
+				for (int i = 0; i < size; i++)
+				{
+					if (node->right)
+						levels.push(node->right);
+					if (node->left)
+						levels.push(node->left);
+					levels.pop();
+					node = levels.front();
+				}
+			}
+			return res;
 
-                for (int i = 0; i < size; i++) 
-                {
-                    current = levels.front();
-                    if (current->right)
-                        levels.push(current->right);
-                    if (current->left)
-                        levels.push(current->left);
-                    levels.pop();
-                }
-            }
-            return result;
-        }
-    };
+		}
+	};
+
 	void process()
 	{
         {
