@@ -1,7 +1,6 @@
 #pragma once
-namespace LRUCache
-    /*
-	146. LRU Cache
+/*
+146. LRU Cache
 Medium
 Topics
 Companies
@@ -12,8 +11,8 @@ Implement the LRUCache class:
 LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
 
 int get(int key) Return the value of the key if the key exists, otherwise return -1.
-void put(int key, int value) Update the value of the key if the key exists. 
-Otherwise, add the key-value pair to the cache. If the number of keys exceeds the 
+void put(int key, int value) Update the value of the key if the key exists.
+Otherwise, add the key-value pair to the cache. If the number of keys exceeds the
 capacity from this operation, evict the least recently used key.
 The functions get and put must each run in O(1) average time complexity.
 
@@ -71,25 +70,38 @@ Solution
    - The space complexity is O(N), where N is the capacity of the cache.
    - The doubly linked list and hashmap both contribute to the space usage.
 */
+namespace LRUCache
 {
 
     class LRUCache 
     {
+		int m_capacity{};
         list< pair<int, int> > cache;
         unordered_map<int, list< pair<int, int> >::iterator> mymap;
-        void moveElementToFront(int key, int value)
+
+        void moveToFront(int key, int value)
         {
             cache.erase(mymap[key]); // erase from its current position
-            pushToFront(key, value);
+            pushFront(key, value);
         }
 
-        void pushToFront(int key, int value)
+        void pushFront(int key, int value)
         {
             cache.push_front({ key, value }); // push it to the front
             mymap[key] = cache.begin(); // update the map
         }
 
-        int m_capacity{};
+		void checkCapacity()
+		{
+			if (mymap.size() > m_capacity)
+			{
+				// remove the last cache element in the map
+				mymap.erase(cache.back().first);
+				// ...then remove last element in the cache
+				cache.pop_back();
+			}
+		}
+
     public:
         LRUCache(int capacity) :m_capacity(capacity)
         {
@@ -100,8 +112,8 @@ Solution
             if (mymap.find(key) != mymap.end())
             {
                 // if the element exists, move it to the front
-                moveElementToFront(key, mymap[key]->second);
-                return (*mymap[key]).second;
+                moveToFront(key, mymap[key]->second);
+                return mymap[key]->second;
             }
             return -1;
         }
@@ -110,21 +122,17 @@ Solution
         {
             if (mymap.find(key) != mymap.end())
             {
-                moveElementToFront(key, value);
+                moveToFront(key, value);
             }
             else
             {
                 // element does not exist
-				pushToFront(key, value);
-                if (mymap.size() > m_capacity)
-                {
-                    // remove the last cache element in the map
-                    mymap.erase(cache.back().first);
-					// ...then remove last element in the cache
-					cache.pop_back();
-                }
+				pushFront(key, value);
+                checkCapacity();
+
             }
         }
+
     };
 
     /**
