@@ -174,6 +174,7 @@
     <ClInclude Include="IslandPerimeter.h" />
     <ClInclude Include="KClosestPointsToTheOrigin.h" />
     <ClInclude Include="KthLargestElement.h" />
+    <ClInclude Include="LetterCombinationOfAPhoneNumber.h" />
     <ClInclude Include="MakingALargeIsland.h" />
     <ClInclude Include="LenghtOfLastWord.h" />
     <ClInclude Include="LenghtOfLongestValidsubstring.h" />

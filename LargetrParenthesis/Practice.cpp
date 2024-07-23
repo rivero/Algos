@@ -173,6 +173,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "NextPermutation.h"
 #include "ThreeSum.h"
 #include "RotateImage.h"
+#include "LetterCombinationOfAPhoneNumber.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -187,7 +188,7 @@ struct tests
 
 int main()
 {
-	tests t("RotateImage");
+	tests t("LetterCombinationOfAPhoneNumber");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -600,6 +601,10 @@ int main()
 	if (t.contains("RotateImage"))
 	{
 		RotateImage::process();
+	}
+	if (t.contains("LetterCombinationOfAPhoneNumber"))
+	{
+		LetterCombinationOfAPhoneNumber::process();
 	}
 }
 

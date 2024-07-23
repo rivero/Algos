@@ -120,27 +120,5 @@ namespace RotateImage
 			cout << "\n";
 
 		}
-		{
-			Solution sol;
-			vector<vector<int>> matrix
-			{
-				{1,2,3},
-				{4,5,6},
-				{7,8,9}
-			};
-			for (auto el : matrix)
-			{
-				printv(el);
-			}
-			cout << "\n";
-
-			sol.rotateCounterclockwise(matrix);
-
-			for (auto el : matrix)
-			{
-				printv(el);
-			}
-			cout << "\n";
-		}
 	}
 }

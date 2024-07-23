@@ -248,5 +248,8 @@
     <ClInclude Include="RotateImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LetterCombinationOfAPhoneNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
