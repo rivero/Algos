@@ -160,7 +160,7 @@
     <ClInclude Include="BinaryTreeVerticalOrderTransversal.h" />
     <ClInclude Include="ConvertBSTtoDoubleLinkedList.h" />
     <ClInclude Include="BuildingsWithAnOceanView.h" />
-    <ClInclude Include="CLoneGraph.h" />
+    <ClInclude Include="CloneGraph.h" />
     <ClInclude Include="ClosesetBinarySearchTreeValue.h" />
     <ClInclude Include="CopyListwWithRandomPointer.h" />
     <ClInclude Include="CustomSortString.h" />

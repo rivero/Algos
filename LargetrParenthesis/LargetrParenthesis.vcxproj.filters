@@ -182,7 +182,7 @@
     <ClInclude Include="CopyListwWithRandomPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CLoneGraph.h">
+    <ClInclude Include="CloneGraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PopulatingNextRightPointersEachNode.h">

@@ -153,7 +153,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "IslandPerimeter.h"
 #include "AllNodesInDistanceKInBinaryTree.h"
 #include "CopyListwWithRandomPointer.h"
-#include "CLoneGraph.h"
+#include "CloneGraph.h"
 #include "SubarraySumEqualsK.h"
 #include "FindPeakElement.h"
 #include "BinaryTreeRightSideView.h"

@@ -116,6 +116,12 @@ IF NOT THAN ONLY WE CLONED IT.
 Thats the only reason we are using hash map so that we don't need to clone again and again.
 For every uncloned node we make a clone and iterate over the neighbors of original node using dfs traversal or bfs traversal.
 
+3. **Complexity Analysis:**
+   - **Time Complexity:** O(N + M), where N is the number of nodes and M is the number of edges in the graph.
+	 - Every node and edge is visited once during traversal and copying.
+   - **Space Complexity:** O(N), primarily due to the recursion stack and the space needed for the visited dictionary.
+n.
+
 */
 namespace CloneGraph
 {
@@ -131,43 +137,34 @@ namespace CloneGraph
 		}
 	};
 
-	//'IF YOU LIKE IT THEN PLS UpVote😎😎😎'
-	// https://leetcode.com/problems/clone-graph/solutions/1792834/c-easy-explanation-dfs/
-
-	Node* dfs(Node* cur, unordered_map<Node*, Node*>& mp)
-	{
-		// Create clone using val ctor
-		auto clone = new Node(cur->val);
-		mp[cur] = clone; // store clone in map to avoid re-cloning
-		vector<Node*> neighbour;
-		for (auto& it : cur->neighbors) // iterate on all neighbors
-		{
-			if (mp.find(it) != mp.end())   // neighbor is already cloned?
-			{
-				neighbour.push_back(mp[it]);    //...yes: directly push back the clone node from map to neigh
-			}
-			else // not yet cloned - proceed with this neighbor recursively
-				neighbour.push_back(dfs(it, mp));
-		}
-		clone->neighbors = neighbour;
-		return clone;
-	}
-
 	class Solution
 	{
-	public:
-		Node* cloneGraph(Node* node) 
+		unordered_map<Node*, Node*> mp;
+		Node* dfs(Node* node)
 		{
-			if (!node)
-				return node;
-			
-			if (node->neighbors.empty())   //if only one node present no neighbors
+			auto clone = new Node(node->val);
+			mp[node] = clone; // to avoid re-cloning
+			vector<Node*> pals;
+			for (auto& n : node->neighbors)
+			{
+				if (mp.count(n) > 0) // neighbor already cloned
+					pals.push_back(mp[n]);
+				else // neighbor not yet cloned
+					pals.push_back(dfs(n));
+			}
+			clone->neighbors = pals;
+			return clone;
+		}
+	public:
+		Node* cloneGraph(Node* node)
+		{
+			if (!node) return node;
+
+			if (node->neighbors.empty())
 				return new Node(node->val);
 
-			unordered_map<Node*, Node*> mp;
-			return dfs(node, mp);
+			return dfs(node);
 		}
-
 	};
 
 	void process()
