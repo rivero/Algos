@@ -1,6 +1,6 @@
 ﻿#pragma once
 /*
-https://leetcode.com/problems/clone-graph/description/
+https://leetcode.com/problems/clone-graph
 
 133. Clone Graph
 Given a reference of a node in a connected undirected graph.
