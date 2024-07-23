@@ -49,37 +49,30 @@ namespace KClosestPointsToTheOrigin
 
 	*/
 
-	class Solution 
+	class Solution
 	{
-
 	public:
-		vector<vector<int>> kClosest(vector<vector<int>>& points, int k) 
+		vector<vector<int>> kClosest(vector<vector<int>>& points, int k)
 		{
-			// return the k first elements in the set.
-			// create set to store pairs containing the distance and the vector
-			// set will sort pairs based on firs, second so the first k set elements are the answer
-			// because the first k set of elements are the closest to the origin
-			multiset < pair<double, vector<int>> > myset;
-			for (size_t i = 0; i <  points.size(); i++)
+			// store multiple equal results sorted from smaller to larger
+			multiset< pair< double, vector<int> > > myset;
+
+			for (auto& point : points)
 			{
-				auto vec = points[i];
-				auto dist = sqrt(pow(vec[0], 2) + pow(vec[1], 2));
-				myset.insert({dist, vec}); // the shorter distance will be at the beginning of this multiset
+				auto dist = sqrt(pow(point[0], 2) + pow(point[1], 2));
+				myset.insert({ dist, point });
 			}
 
-			vector<vector<int>> myres;
-			for (auto& elem: myset)
+			vector<vector<int>> res;
+			for (auto& element : myset)
 			{
-				myres.push_back(elem.second);
-				if (myres.size()==k)
-				{
+				res.push_back(element.second);
+				if (res.size() == k)
 					break;
-				}
 			}
-			return myres;
+			return res;
 		}
 	};
-
 	void process()
 	{
 		Solution sol;
