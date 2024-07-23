@@ -166,6 +166,7 @@
     <ClInclude Include="CustomSortString.h" />
     <ClInclude Include="ExclusiveTimeOfFunctions.h" />
     <ClInclude Include="findinter.h" />
+    <ClInclude Include="FindKClosestElements.h" />
     <ClInclude Include="FindParenthesis.h" />
     <ClInclude Include="FindPeakElement.h" />
     <ClInclude Include="GroupShiftedStrings.h" />
