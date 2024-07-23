@@ -176,6 +176,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "LetterCombinationOfAPhoneNumber.h"
 #include "BinaryTreeLevelOrderTransversal.h"
 #include "FindKClosestElements.h"
+#include "MaxConsecutiveOnesIII.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -190,7 +191,7 @@ struct tests
 
 int main()
 {
-	tests t("FindKClosestElements");
+	tests t("MaxConsecutiveOnesIII");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -615,6 +616,10 @@ int main()
 	if (t.contains("FindKClosestElements"))
 	{
 		FindKClosestElements::process();
+	}
+	if (t.contains("MaxConsecutiveOnesIII"))
+	{
+		MaxConsecutiveOnesIII::process();
 	}
 }
 

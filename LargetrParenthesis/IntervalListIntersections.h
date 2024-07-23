@@ -78,15 +78,6 @@ namespace IntervalListIntersections
 			for (int i = 0, j = 0; i < A.size() && j < B.size();) 
 			{
 				
-#ifdef PRINTV
-				cout << "A[" << i << "]:\t";
-				printv(A[i]);
-
-				cout << "B[" << j << "]:\t";
-				printv(B[j]);
-				cout << "\t^\t^\n";
-				cout << "\tlow\thigh\n";
-#endif
 				auto alow = A[i][0];
 				auto blow = B[j][0];
 				auto ahigh = A[i][1];
@@ -94,20 +85,10 @@ namespace IntervalListIntersections
 				int maxStart = max(alow, blow), 
 					minEnd = min(ahigh, bhigh);
 
-#ifdef PRINTV
-				cout << "lo max(alow, blow): " << maxStart << " hi min(ahigh, bhigh): " << minEnd << "\n";
-#endif // PRINTV
 				if (maxStart <= minEnd)
 				{
 					res.push_back({ maxStart, minEnd });
-#ifdef PRINTV
-					cout << "\t* pushing {" << maxStart << "," << minEnd << "}\n\n";
-#endif
 				}
-#ifdef PRINTV
-				else
-					cout << "NOT AN INTERSECTION\n\n";
-#endif
 				// Move the pointer that has the smaller end point (i.e., increment i or j).
 				if (minEnd == ahigh) 
 								 // if hi == ahigh (see they are compared in the min() ) then hi is the smallest pointer

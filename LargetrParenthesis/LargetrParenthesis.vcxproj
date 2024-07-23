@@ -185,6 +185,7 @@
     <ClInclude Include="LowestCommonAncestorBinaryTreeIII.h" />
     <ClInclude Include="LowestCommonAncestorBinaryTreeI.h" />
     <ClInclude Include="LRUCache.h" />
+    <ClInclude Include="MaxConsecutiveOnesIII.h" />
     <ClInclude Include="MaximumSwap.h" />
     <ClInclude Include="mergearrays.h" />
     <ClInclude Include="MergeIntervals.h" />

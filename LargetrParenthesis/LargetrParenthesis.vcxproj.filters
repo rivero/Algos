@@ -257,5 +257,8 @@
     <ClInclude Include="FindKClosestElements.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MaxConsecutiveOnesIII.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
