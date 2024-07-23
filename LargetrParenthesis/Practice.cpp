@@ -256,18 +256,9 @@ int main()
 
 		sol.lambda_expression();
 	}
-	if (false)
+	if (t.contains("TopKElements"))
 	{
-		{
-			vector<int> vec{ 1,1,1,2,2,3, 7, 7, 7 };
-			topk::TopKElements(vec);
-
-		}
-		{
-			vector<int> vec{ 1,1,2,2,3,3 };
-			topk::TopKElements(vec, 3);
-
-		}
+		TopKElements::process();
 	}
 	if (false)
 	{

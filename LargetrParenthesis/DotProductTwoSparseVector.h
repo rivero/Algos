@@ -61,7 +61,7 @@ namespace DotProductTwoSparseVector
 				}
 			}
 		}
-		const unordered_map<int, int>& getMap() const 
+		const unordered_map<int, int>& getMap() const
 		{
 			return m_map;
 		}
@@ -69,12 +69,11 @@ namespace DotProductTwoSparseVector
 		int dotProduct(SparseVector& vec)
 		{
 			int sum{};
-			auto& m = vec.getMap();
-			for (auto& [index, value]: m_map)
+			for (auto& [index, value] : m_map)
 			{
-				if (m.count(index) > 0)
+				if (vec.getMap().count(index) > 0)
 				{
-					sum += value * m.at(index);
+					sum += value * vec.getMap().at(index);
 				}
 			}
 

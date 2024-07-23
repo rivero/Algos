@@ -57,4 +57,21 @@ namespace TopKElements
 		}
 	};
 
+	void process()
+	{
+		Solution sol;
+
+		{
+			vector<int> vec{ 1,1,1,2,2,3, 7, 7, 7 };
+			sol.topKFrequent(vec,2);
+
+		}
+		{
+			vector<int> vec{ 1,1,2,2,3,3 };
+			sol.topKFrequent(vec, 3);
+
+		}
+
+	}
+
 }
