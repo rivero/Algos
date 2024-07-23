@@ -16,6 +16,18 @@ Example 3:
 Input: root = []
 Output: []
 
+Solution
+We start with the root node and add it to a queue.
+While the queue is not empty:
+For each level, we process all nodes currently in the queue (i.e., all nodes at the same level).
+We add their values to the current level vector.
+If a node has left and/or right children, we enqueue them.
+After processing all nodes at the current level, we move to the next level.
+
+"Time Complexity: O(n) , where n is the total number of nodes in the tree.
+Space Complexity: O(n) due to the queue and vector"
+
+
 */
 namespace BinaryTreeLevelOrderTransversal
 {
