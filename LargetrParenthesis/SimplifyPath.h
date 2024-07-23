@@ -65,24 +65,20 @@ Constraints:
 path consists of English letters, digits, period '.', slash '/' or '_'.
 path is a valid absolute Unix path.
 
+Solution:
+Split the input path by slashes to get a list of directory names and other components (e.g., ‘.’, ‘…’).
+Iterate through this list:
+Ignore empty strings (resulting from consecutive slashes) and ‘.’ components.
+If we encounter ‘…’, check if the stack has directories to move up from. If so, pop the last directory.
+Add other directory names to the stack.
+Combine the directories in the stack to form the simplified canonical path.
+Ensure the path begins with a slash and each directory is separated by a single slash.
+Avoid adding a trailing slash.
 
-Time Complexity:
-    The time complexity of an algorithm measures the number of operations it performs relative to the input size.
-    Let’s analyze the code:
-    The initial split operation using getline processes each character in the input path, which takes linear time (O(n)), 
-    where n is the length of the path.
-    The subsequent loop iterates through the split components (directories) and performs constant-time operations (e.g., 
-    checking for “…” or “.”).
-    Overall, the time complexity is dominated by the initial split operation, resulting in O(n) time complexity.
 
-Space Complexity:
-    Space complexity refers to the amount of memory used by an algorithm.
-    In this code:
-    We use two vectors (dir and ans_vec) to store the split components and the simplified path.
-    The space required by these vectors depends on the number of directories in the input path.
-    Therefore, the space complexity is also O(n), where n is the length of the input path.
+Time Complexity: O(n) , where n is the length of the path.
+Space Complexity: O(n) due to the stack
 
-In summary, the given code has linear time complexity (O(n)) and linear space complexity (O(n)).
 	*/
 	class Solution
 	{

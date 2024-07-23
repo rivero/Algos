@@ -251,5 +251,8 @@
     <ClInclude Include="LetterCombinationOfAPhoneNumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryTreeLevelOrderTransversal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

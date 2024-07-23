@@ -153,6 +153,7 @@
     <ClInclude Include="Auros.h" />
     <ClInclude Include="BasicCalculatorII.h" />
     <ClInclude Include="BinarySearch.h" />
+    <ClInclude Include="BinaryTreeLevelOrderTransversal.h" />
     <ClInclude Include="DiagonalTraverse.h" />
     <ClInclude Include="DiameterOfBinaryTree.h" />
     <ClInclude Include="BinaryTreeRightSideView.h" />

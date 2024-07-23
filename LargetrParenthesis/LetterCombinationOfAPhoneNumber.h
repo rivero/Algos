@@ -23,6 +23,29 @@ Constraints:
 0 <= digits.length <= 4
 digits[i] is a digit in the range ['2', '9'].
 
+Solution:
+The backtrack function is a recursive helper function that generates the letter combinations.
+
+It takes two parameters:
+combination: A string representing the current combination of letters.
+next_digits: The remaining digits to process.
+
+If next_digits is empty (i.e., all digits have been processed), the current combination is added to the output vector.
+
+Otherwise, it iterates through the letters corresponding to the first digit in next_digits (retrieved using the numLetters function).
+
+For each letter, it recursively calls backtrack with an updated combination (adding the letter) and the remaining 
+next_digits (excluding the first digit).
+
+Complexity:
+
+"Let n be the length of the input digits.
+The total number of possible letter combinations is exponential (up to 4^n).
+Therefore, the time complexity of this algorithm is O(4^n) since we explore all possible combinations.
+The space complexity is also O(4^n) because we store all valid combinations in the output vector."
+
+
+
 */
 namespace LetterCombinationOfAPhoneNumber
 {
