@@ -31,33 +31,37 @@ namespace BinaryTreeLevelOrderTransversal
 	class Solution
 	{
 	public:
-		vector<vector<int>> levelOrder(TreeNode* root) 
+		vector<vector<int>> levelOrder(TreeNode* root)
 		{
-		
-			if (!root) 
+			if (!root)
 				return {};
 
-			queue<TreeNode*>q;
-			vector<vector<int>>ans;
+			queue<TreeNode*> q;
+			vector<vector<int>> ans;
 
 			q.push(root);
 
-			while (!q.empty()) 
+			while (!q.empty())
 			{
-				vector<int>level;
-				int n = q.size();
-				
-				for (int i = 0; i < n; i++) 
+				int levelSize = q.size(); // Number of nodes at the current level
+				vector<int> level;
+
+				for (int i = 0; i < levelSize; i++)
 				{
-					level.push_back(q.front()->val);
-					if (q.front()->left) q.push(q.front()->left);
-					if (q.front()->right) q.push(q.front()->right);
-					q.pop();
+					auto curr = q.front(); q.pop();
+
+					level.push_back(curr->val);
+
+					if (curr->left)
+						q.push(curr->left);
+					if (curr->right)
+						q.push(curr->right);
 				}
+
 				ans.push_back(level);
 			}
-			return ans;
 
+			return ans;
 		}
 	};
 	void process()
