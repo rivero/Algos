@@ -46,29 +46,51 @@ At most 2 * 105 calls will be made to get and put.
 
 Solution
 
-1. **What is LRU Cache?**
-   - LRU Cache is a caching strategy that efficiently manages limited memory space by keeping track of the usage history of cached elements.
-   - When the cache is full, LRU removes the least recently used item to make room for new data.
-   - The priority of data in the cache changes based on recent access patterns.
+1. **Data Structures:**
+   - The LRU cache uses two primary data structures:
+	 - A **doubly linked list** (`cache`) to maintain the order of elements based on their usage.
+	 - An **unordered map** (`mymap`) to store the key-value pairs and their corresponding iterators in the linked list.
 
-2. **How does LRU Cache work?**
-   - The LRU cache maintains a fixed-size data structure (e.g., a queue or linked list) to store key-value pairs.
-   - When an element is accessed (either read or written), it is moved to the front of the data structure.
-   - If the cache is full, the least recently used element (at the end of the data structure) is evicted.
+2. **Initialization:**
+   - The `LRUCache` class is initialized with a specified capacity.
+   - The `cache` list is initially empty, and the `mymap` map is also empty.
 
-3. **Implementation Details:**
-   - The provided implementation uses a doubly linked list (`cache`) and a hashmap (`mymap`) to achieve constant-time operations.
-   - `cache` stores key-value pairs, and `mymap` maps keys to their positions in the `cache`.
-   - The `moveElementToFront` function updates the position of an element when accessed.
-   - The `put` function adds or updates an element, and if the cache is full, it removes the least recently used element.
+3. **`moveToFront` Function:**
+   - This function takes a `key` and a `value`.
+   - It removes the existing entry for the `key` from the `cache`.
+   - Then, it pushes a new entry with the same `key` and updated `value` to the front of the `cache`.
+   - The corresponding iterator in `mymap` is updated to point to the new position in the `cache`.
 
-4. **Time Complexity:**
-   - `get(key)` and `put(key, value)` both operate in O(1) time.
-   - The hashmap (`mymap`) allows direct access to elements, and the doubly linked list (`cache`) maintains the order.
+4. **`pushFront` Function:**
+   - This function adds a new key-value pair to the front of the `cache`.
+   - It also updates the corresponding iterator in `mymap`.
 
-5. **Space Complexity:**
-   - The space complexity is O(N), where N is the capacity of the cache.
-   - The doubly linked list and hashmap both contribute to the space usage.
+5. **`checkCapacity` Function:**
+   - This function checks if the current size of the cache (`mymap.size()`) exceeds the specified capacity (`m_capacity`).
+   - If so, it removes the least recently used element:
+	 - Deletes the entry from `mymap` using the key of the last element in the `cache`.
+	 - Removes the last element from the `cache`.
+
+6. **`get` Function:**
+   - Given a `key`, it checks if the key exists in `mymap`.
+   - If found:
+	 - Moves the corresponding element to the front of the `cache` (since it's recently used).
+	 - Returns the associated value.
+   - If not found, returns `-1`.
+
+7. **`put` Function:**
+   - Given a `key` and a `value`:
+	 - If the `key` exists in `mymap`, updates its value and moves it to the front.
+	 - If the `key` doesn't exist:
+	   - Adds a new key-value pair to the front of the `cache`.
+	   - Checks the capacity and evicts the least recently used element if needed.
+
+8. **Complexity Analysis:**
+   - Time Complexity:
+	 - `put()` operation: O(1) (constant time for insertion or update).
+	 - `get()` operation: O(1) (constant time to retrieve a value).
+   - Auxiliary Space: O(N) (where N is the capacity of the cache).
+
 */
 namespace LRUCache
 {
