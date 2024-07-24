@@ -31,7 +31,6 @@ In this code:
 
 The time complexity of this solution is O(2^N), where N is the number of elements in the input array. This is because there are 2^N possible subsets, and we explore each possibility once. The space complexity is also O(2^N) due to the result vector containing all subsets.
 
-Feel free to adapt this code to your specific needs or further optimize it if necessary! 😊
 */
 namespace SubSets
 {
