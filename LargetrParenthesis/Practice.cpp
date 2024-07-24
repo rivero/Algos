@@ -177,6 +177,8 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "BinaryTreeLevelOrderTransversal.h"
 #include "FindKClosestElements.h"
 #include "MaxConsecutiveOnesIII.h"
+#include "FindMaxLenValidSubsequenceII.h"
+#include "SubSets.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -191,7 +193,7 @@ struct tests
 
 int main()
 {
-	tests t("MaxConsecutiveOnesIII");
+	tests t("SubSets");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -563,7 +565,6 @@ int main()
 	{
 		LowestCommonAncestorBinaryTreeII::process();
 	}
-#pragma endregion
 	if (t.contains("MaximumSwap"))
 	{
 		MaximumSwap::process();
@@ -611,6 +612,15 @@ int main()
 	if (t.contains("MaxConsecutiveOnesIII"))
 	{
 		MaxConsecutiveOnesIII::process();
+	}
+	if (t.contains("FindMaxLenValidSubsequenceII"))
+	{
+		FindMaxLenValidsubsequenceII::process();
+	}
+#pragma endregion
+	if (t.contains("SubSets"))
+	{
+		SubSets::process();
 	}
 }
 

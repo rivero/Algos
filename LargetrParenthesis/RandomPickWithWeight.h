@@ -76,6 +76,45 @@ The key idea here is that the cumulative sum array v allows us to map the random
 based on the weight distribution. 
 The larger the cumulative sum, the higher the probability of selecting that index.
 
+1. **Algorithm Description**:
+   - The given class `Solution` implements a weighted random index picker.
+   - It initializes an internal vector `m_AccumWeights` to store the cumulative weights of the input vector `w`.
+   - The cumulative weight at each index `i` represents the sum of weights from index 0 to `i`.
+   - The `pickIndex` function generates a random number `n` between 0 (inclusive) and the total cumulative weight (exclusive).
+   - It then finds the first index in `m_AccumWeights` where the cumulative weight is greater than or equal to `n`.
+
+2. **Explanation**:
+   - The algorithm starts by constructing the cumulative weights vector `m_AccumWeights`.
+   - The cumulative weight at index `i` is calculated as `m_AccumWeights[i] = m_AccumWeights[i-1] + w[i]`.
+   - The cumulative weights represent the "ranges" of weights for each index. Larger weights contribute more to the cumulative sum.
+   - When picking an index, the algorithm generates a random number `n` within the range `[0, total_cumulative_weight)`.
+   - By using `upper_bound`, it finds the first index in `m_AccumWeights` where the cumulative weight exceeds or equals `n`.
+   - The selected index corresponds to the weight range that contains the random value `n`.
+
+3. **Probability Explanation**:
+   - The probability of selecting a specific index `i` is proportional to its cumulative weight.
+   - Larger cumulative weights mean that the corresponding index has a greater share of the total weight.
+   - Therefore, indices with larger cumulative weights have a higher probability of being selected.
+   - This property ensures that the selection process is weighted according to the input weights.
+
+4. **Example**:
+   - Suppose we have weights `[2, 3, 1]`.
+   - The cumulative weights are `[2, 5, 6]`.
+   - The total cumulative weight is 6.
+   - If we generate a random number `n` between 0 and 5:
+	 - If `n` is in the range `[0, 2)`, we select index 0 (weight 2).
+	 - If `n` is in the range `[2, 5)`, we select index 1 (weight 3).
+	 - If `n` is in the range `[5, 6)`, we select index 2 (weight 1).
+
+5. **Complexities**:
+   - **Time Complexity**:
+	 - Constructing `m_AccumWeights` takes linear time (`O(n)`), where `n` is the size of the input vector.
+	 - The `pickIndex` function performs a binary search using `upper_bound`, which takes logarithmic time (`O(log n)`).
+	 - Overall, the time complexity is `O(n + log n)`, which simplifies to `O(n)`.
+   - **Space Complexity**:
+	 - The algorithm uses additional space for `m_AccumWeights`, which is linear (`O(n)`).
+
+
 	*/
 #define PRINTV
 namespace RandomPickwithWeight
@@ -127,8 +166,10 @@ namespace RandomPickwithWeight
 		*/
 		int pickIndex() 
 		{
-			int n = rand() % m_AccumWeights[m_AccumWeights.size() - 1]; // Generate a random integer n in the range [0, v[v.size() - 1]) from the weights vector.
-			auto it = upper_bound(m_AccumWeights.begin(), m_AccumWeights.end(), n); // finds the first element greater than since the choice is inclusive
+			// Generate a random integer n in the range [0, v[v.size() - 1]) from the weights vector.
+			int n = rand() % m_AccumWeights[m_AccumWeights.size() - 1]; 
+			// finds the first element greater than since the choice is inclusive
+			auto it = upper_bound(m_AccumWeights.begin(), m_AccumWeights.end(), n); 
 #ifdef PRINTV
 			cout << "from weights vector random integer n [" << n << "] *it (upper bound) [" << *it;
 			cout << "] distance from the beginning to the upper bound [" << distance(m_AccumWeights.begin(), it) << "]\n";

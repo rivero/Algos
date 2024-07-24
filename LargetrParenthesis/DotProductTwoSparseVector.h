@@ -43,6 +43,42 @@ n == nums1.length == nums2.length
 
 
 Because the vector is sparse, use a data structure that stores the index and value where the element is nonzero.
+
+Certainly! Let's analyze the provided `SparseVector` class and discuss its complexities.
+
+1. **Algorithm Description**:
+   - The given `SparseVector` class represents a sparse vector using an unordered map.
+   - It initializes a hash map (`m_map`) to store non-zero elements of the input vector.
+   - The class provides methods to construct a sparse vector, retrieve its internal map, and compute the dot product with 
+   another sparse vector.
+
+2. **Explanation**:
+   - The class has the following components:
+	 - `m_map`: An unordered map where the keys represent indices (positions) and the values represent non-zero elements.
+	 - `SparseVector(const vector<int>& nums)`: The constructor initializes the sparse vector by iterating through the input 
+	 vector `nums`. If an element at index `i` is non-zero, it adds it to `m_map`.
+	 - `getMap()`: A method that returns a reference to the internal map.
+	 - `dotProduct(SparseVector& vec)`: Computes the dot product between the current sparse vector and another sparse vector `vec`.
+	   - It iterates through the elements in the internal map (`m_map`).
+	   - For each non-zero element at index `index`, it checks if `vec` also has a non-zero element at the same index.
+	   - If so, it adds the product of the values to the `sum`.
+
+3. **Complexities**:
+   - **Time Complexity**:
+	 - Constructing the sparse vector in the constructor takes linear time (`O(n)`), where `n` is the size of the input vector.
+	 - The `dotProduct` method iterates through the internal map, which has at most `n` elements (where `n` is the size of the 
+	 input vector).
+	 - The worst-case time complexity for computing the dot product is `O(n)` (when both vectors have non-zero elements at the 
+	 same indices).
+   - **Space Complexity**:
+	 - The space complexity is determined by the size of the internal map (`m_map`).
+	 - In the worst case, when all elements in the input vector are non-zero, the space complexity is `O(n)`.
+
+4. **Sparse Vector Representation**:
+   - The use of an unordered map allows efficient storage of non-zero elements without wasting space for zero elements.
+   - This representation is particularly useful for sparse vectors, where most elements are zero.
+
+
 */
 
 namespace DotProductTwoSparseVector

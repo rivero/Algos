@@ -57,70 +57,55 @@ The Graph is connected and all nodes can be visited starting from the given node
 
 Solution
 
-1. Cloned Graph has all nodes as new nodes and don't have node as reference to given original graph.
-2. Graph has no practical edges, i.e no pointers for edges.
-		 (2,3)            (1,3)<---adj list
-		  (1)-------------(2)
-			|              |
-			|              |
-			|              |
-		  (4)-------------(3)
-		  (1,3)          (2,4)
-If i say '1' is my starting point and how should i jump to '2' for that i have to iterate through this adjacency list.
+Certainly! Let's dive into the provided algorithm for deep copying a graph and discuss its complexities.
 
-Algorithm
+1. **Algorithm Description**:
+   - The given `Solution` class provides a method `cloneGraph` that takes a graph represented by a `Node*` (with neighbors) 
+   and returns a deep copy of the graph.
+   - The algorithm uses depth-first search (DFS) to traverse the original graph and create a copy.
 
-We need to traverse all node of original graph and as soon as we reach a node, we will make a copy node.
-And recur for rest of the graph.
-This is a typical recursion type problem implemented on Graph.
-For 'Recursion' we use basically 'DFS' or 'BFS'.
-I am using DFS
+2. **Explanation**:
+   - The algorithm proceeds as follows:
+	 1. Initialize an unordered map `mp` to store the mapping between original nodes and their corresponding clones.
+	 2. Define a helper function `dfs` that takes a `Node*` (representing the current node in the original graph) and returns 
+	 its clone.
+	 3. In the `dfs` function:
+		- Create a new node `clone` with the same value as the original node.
+		- Store the mapping between the original node and its clone in the `mp` map.
+		- Initialize an empty vector `pals` to store the cloned neighbors.
+		- For each neighbor `n` of the original node:
+		  - If `n` has already been cloned (i.e., exists in `mp`), add its clone to `pals`.
+		  - Otherwise, recursively call `dfs(n)` to clone `n` and add its clone to `pals`.
+		- Set the neighbors of `clone` to the cloned neighbors stored in `pals`.
+		- Return the `clone`.
+	 4. In the `cloneGraph` function:
+		- Handle edge cases:
+		  - If the input `node` is `nullptr`, return `nullptr`.
+		  - If the input node has no neighbors (i.e., isolated node), create a new node with the same value and return it.
+		- Otherwise, call `dfs(node)` to clone the entire graph.
 
-Key points
-1. We use HashMap to solve it and using DFS.
-2. Initially our hash map will be empty and we try to map the old node with the new node or the copy node.
-3. We start with any entry point.
-4. I am using '1' as my entry point.
+3. **Complexities**:
+   - **Time Complexity**:
+	 - The algorithm traverses each node once (via DFS).
+	 - For each node, the time spent on cloning its neighbors is proportional to the number of neighbors.
+	 - In total, the time complexity is linear: `O(V + E)`, where `V` is the number of nodes (vertices) and `E` is the number 
+	 of edges.
+   - **Space Complexity**:
+	 - The space complexity is determined by the additional memory used for the map `mp` and the recursive call stack during DFS.
+	 - In the worst case, when all nodes are unique and interconnected, the space complexity is also linear: `O(V + E)`.
 
-Now lets see how its going i am starting with 1 and whenever i visited a new node i coloned it and put in there.
-We are using DFS so algorithm is like 'it starts at the root node (select some arbitrary node as root node in the case of a graph) 
-and explores as far as possible along each branch before backtracking.
-So the basic idea is to start from the root or any arbitrary node and mark the node and move to the adjacent unmarked node and 
-continue this loop until there is no unmarked adjacent node.
-
-Then backtrack and check for other unmarked nodes and traverse them. Finally, print the nodes in the path.'
-So we are using HashMap to put all the visited node or old node there with clone one to.
- _________
-| HashMap |
- ----------
-|Old|Clone|
-| 1  | 1 |
-|  2 | 2 |
-|  3 | 3 |
-|  4 | 4 |
----------
-
-Now i started with 1 so i cloned it and from 1 can go to 2 and 4 so i go 2 and when i visited 2 i cloned 2 and now fro  
-i have two choices either go to previous one that is 1 or discover 3 i.e new node so accordingly to dfs i go to 3 and from 3 
-i can go to 4 i go there and cloned it. 
-
-Now if we see from each node we have visited to a new node but what about 4. 
-So here half part of Dfs is completed, and now its time for recursive call to go back and now from here we check from current node 
-i can go where and where.
-
-And follow the same rules over there.
-
-BUT BEFORE STARTING ANY CLONING WE HAVE TO CHECK THAT IF WE HAVE CLONED THAT NODE ALREADY THERE OR NOT. 
-IF NOT THAN ONLY WE CLONED IT.
-
-Thats the only reason we are using hash map so that we don't need to clone again and again.
-For every uncloned node we make a clone and iterate over the neighbors of original node using dfs traversal or bfs traversal.
-
-3. **Complexity Analysis:**
-   - **Time Complexity:** O(N + M), where N is the number of nodes and M is the number of edges in the graph.
-	 - Every node and edge is visited once during traversal and copying.
-   - **Space Complexity:** O(N), primarily due to the recursion stack and the space needed for the visited dictionary.
-n.
+4. **Example**:
+   - Suppose we have the following graph:
+	 ```
+	 1 -- 2
+	 |    |
+	 4 -- 3
+	 ```
+   - The algorithm creates clones as follows:
+	 - Clone of node 1 (with value 1) has neighbors 2 and 4.
+	 - Clone of node 2 (with value 2) has neighbors 1 and 3.
+	 - Clone of node 3 (with value 3) has neighbors 2 and 4.
+	 - Clone of node 4 (with value 4) has neighbors 1 and 3.
 
 */
 namespace CloneGraph

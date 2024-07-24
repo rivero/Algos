@@ -36,6 +36,16 @@ Constraints:
 The values of the integers in the nested list is in the range [-100, 100].
 The maximum depth of any integer is less than or equal to 50.
 
+"We want to sum all the integers of in the list and multiply them by its depth.
+The depth is the number of lists that the current object recursively has inside.
+If an element is an integer, it value is multiplied by depth.
+If the element is a nested list, the algo recursively processes that list increasing the depth by one."
+
+
+"Time Complexity: O(n)
+Space Complexity: O(d) where d is the max depth and it can be quite big or small depending on the lists sizes"
+
+
 
 */
 namespace NestedListWeightSum

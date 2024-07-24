@@ -167,6 +167,7 @@
     <ClInclude Include="ExclusiveTimeOfFunctions.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindKClosestElements.h" />
+    <ClInclude Include="FindMaxLenValidSubsequenceII.h" />
     <ClInclude Include="FindParenthesis.h" />
     <ClInclude Include="FindPeakElement.h" />
     <ClInclude Include="GroupShiftedStrings.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Solution.h" />
     <ClInclude Include="DotProductTwoSparseVector.h" />
     <ClInclude Include="SubarraySumEqualsK.h" />
+    <ClInclude Include="SubSets.h" />
     <ClInclude Include="SumRootToLeaf.h" />
     <ClInclude Include="RangeSumOfBST.h" />
     <ClInclude Include="ThreeSum.h" />

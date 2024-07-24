@@ -92,6 +92,24 @@ Example 1:
 								Reset to other pointer
 		When magic happens, then one of the pointers is ahead in the iteration than the other. 
 		Slowly but surely they will catch up with each other and when they are the same the LCA was found
+
+2. **Explanation**:
+   - The algorithm starts with `P` and `Q` pointing to the input nodes `p` and `q`.
+   - In each iteration, it checks whether `P` and `Q` are equal. If they are, it means they have met at the LCA.
+   - Otherwise, it updates `P` and `Q` as follows:
+	 - If `P` is `nullptr`, it sets `P` to `q`.
+	 - If `Q` is `nullptr`, it sets `Q` to `p`.
+   - The loop continues until `P` and `Q` meet (i.e., `P == Q`).
+
+3. **Complexities**:
+   - **Time Complexity**: The while loop runs until `P` and `Q` meet, which takes at most `O(h)` iterations, where `h` is the height 
+   of the tree. 
+   In a balanced binary tree, `h` is approximately `log(n)` (where `n` is the number of nodes). 
+   Thus, the time complexity is `O(log(n))`.
+   
+   - **Space Complexity**: The algorithm uses only a constant amount of extra space (for `P` and `Q`). 
+   Hence, the space complexity is `O(1)`.
+
 */
 #define PRINTV
 namespace LowestCommonAncestorBinaryTreeIII

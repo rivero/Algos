@@ -75,47 +75,54 @@ namespace ThreeSum
 		{
 			sort(nums.begin(), nums.end());
 			vector<vector<int>> res;
-			int i{};
+			int baseIdx{};
 
-			while (i < nums.size() - 2) // to have room for j and k
+			while (baseIdx < nums.size() - 2) // to have room for j and k
 			{
-				// remove dupes: is our current nums[i] equal to our last one?
-				while (i > 0 && nums[i] == nums[i - 1] && i < nums.size() -1)
-					i++;
+				// remove i dupes starting AFTER 0
+				while (baseIdx > 0 && nums[baseIdx] == nums[baseIdx - 1] && baseIdx < nums.size() -1)
+					baseIdx++;
 
-				auto j = i + 1;
-				auto k = nums.size() - 1;
+				// init out inner indexes:
+				auto left = baseIdx + 1;
+				auto right = nums.size() - 1;
 
-				while (j < k)
+				while (left < right)
 				{
-					auto cur_sum = nums[i] + nums[j] + nums[k];
+					// perform sum, compare and add to result
+					auto cur_sum = nums[baseIdx] + nums[left] + nums[right];
 
 					if (cur_sum == target)
 					{
-						res.push_back({ nums[i] , nums[j] , nums[k] });
+						res.push_back({ nums[baseIdx] , nums[left] , nums[right] });
 						
-						j++;
-						while (nums[j] == nums[j - 1] && j < k)
-							j++;
+						// increase our inner left and remove dupes
+						left++;
+						while (nums[left] == nums[left - 1] && left < right)
+							left++;
 
-						k--;
-						while (nums[k] == nums[k + 1] && k >= j)
-							k--;
+						// shrink window and remove dupes on inner right (k)
+						right--;
+						while (nums[right] == nums[right + 1] && right >= left)
+							right--;
 					}
 					else if (cur_sum > target)
 					{
-						k--;
-						while (nums[k] == nums[k + 1] && k >= j)
-							k--;
+						// shrink window and remove dupes on inner right (k)
+						right--;
+						while (nums[right] == nums[right + 1] && right >= left)
+							right--;
 					}
 					else
 					{
-						j++;
-						while (nums[j] == nums[j - 1] && j < k)
-							j++;
+						// increase our inner left and remove dupes
+						left++;
+						while (nums[left] == nums[left - 1] && left < right)
+							left++;
 					}
 				}
-				i++;
+				// move inward from our base idx
+				baseIdx++;
 			}
 			return res;
 		}

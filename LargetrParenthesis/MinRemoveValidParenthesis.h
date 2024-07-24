@@ -48,56 +48,41 @@ Complexity: O(n)
 */
 namespace MinRemoveValidParenthesis
 {
-	class Solution : public timeit
+	class Solution : protected timeit
 	{
 	public:
-		string minRemoveToMakeValid(string str) 
+		string minRemoveToMakeValid(string s) 
 		{
-
-			stack<int> st; // indices
-			int n = str.size();
-
-			// Pass 1: Mark invalid closing parentheses
-			for (int i = 0; i < n; i++) 
+			stack<int> op;
+			for (int i = 0; i < s.size(); i++)
 			{
-				char& x = str[i];
-				if (x == ')') 
+				if (s[i] == ')')
 				{
-					if (!st.empty()) 
-					{
-						st.pop(); // Valid matching found
-					}
-					else 
-					{
-						str[i] = '*'; // Invalid closing parenthesis
-					}
+					if (op.size() > 0)
+						op.pop();
+					else
+						s[i] = '*';
 				}
-				else if (x == '(') 
+				else if (s[i] == '(')
 				{
-					st.push(i); // Push index of '('
+					op.push(i);
 				}
 			}
-
-			// Pass 2: Mark unmatched opening parentheses
-			while (!st.empty()) 
+			while (!op.empty())
 			{
-				str[st.top()] = '*';
-				st.pop();
+				s[op.top()] = '*';
+				op.pop();
 			}
-
-			// Construct the final valid string
 			string ans;
-			for (int i = 0; i < n; i++) 
+			for (int i = 0; i < s.size(); i++)
 			{
-				if (str[i] != '*') 
-				{
-					ans += str[i];
-				}
+				if (s[i] != '*')
+					ans += s[i];
 			}
-
 			return ans;
 		}
-	};
+	};	
+	
 	void process()
 	{
 		{

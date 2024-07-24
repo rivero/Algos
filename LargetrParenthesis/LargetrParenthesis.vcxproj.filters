@@ -260,5 +260,11 @@
     <ClInclude Include="MaxConsecutiveOnesIII.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FindMaxLenValidSubsequenceII.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubSets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

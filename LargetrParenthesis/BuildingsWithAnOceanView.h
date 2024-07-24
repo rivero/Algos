@@ -38,20 +38,55 @@ Constraints:
 HINT You can traverse the buildings from the nearest to the ocean to the furthest.
 
 Solution
-Initialize an empty vector res to store the indices of the visible buildings.
-Compute the total number of buildings (numBuildings) by subtracting 1 from the size of the heights vector.
-Push numBuildings (the last index) into res since the last building always sees the sunset.
-Initialize lastHeight with the height of the last building (heights[numBuildings]).
-Iterate from the second-to-last building (index numBuildings - 1) to the first building (index 0):
-If the height of the current building (heights[i]) is greater than lastHeight, it can see the sunset.
-Add its index (i) to the res vector and update lastHeight.
-Reverse the order of elements in res to match the original order of buildings from west to east.
-Return the res vector containing the indices of the visible buildings.
+Certainly! Let's break down the provided `findBuildings` algorithm and discuss its complexities.
+
+1. **Algorithm Description**:
+   - The given function `findBuildings` takes a vector of integers `heights`, representing the heights of buildings.
+   - It aims to find the indices of buildings that can see the sunset (i.e., buildings taller than all the buildings to their right).
+   - The algorithm iterates through the `heights` array from right to left, maintaining a record of the maximum height encountered 
+   so far.
+   - Buildings that are taller than the current maximum height are added to the result vector.
+
+2. **Explanation**:
+   - The algorithm proceeds as follows:
+	 1. Initialize an empty vector `res` to store the indices of buildings that can see the sunset.
+	 2. Calculate the total number of buildings (`numBuildings`) by subtracting 1 from the size of the `heights` vector.
+	 3. Add the index of the last building (which is always visible) to `res`.
+	 4. Initialize `lastHeight` with the height of the last building (`heights[numBuildings]`).
+	 5. Iterate through the remaining buildings from right to left (starting at index `numBuildings - 1`):
+		- If the height of the current building (`heights[i]`) is greater than `lastHeight`, it means this building can see the 
+		sunset.
+		- Add its index to `res` and update `lastHeight` to the current building's height.
+	 6. Reverse the order of elements in `res` (since we processed buildings from right to left).
+	 7. Return the resulting vector `res`.
+
+3. **Complexities**:
+   - **Time Complexity**:
+	 - The algorithm iterates through the `heights` vector once, performing constant-time operations (comparisons, additions, and 
+	 updates).
+	 - Thus, the overall time complexity is linear: `O(n)`, where `n` is the number of buildings.
+   - **Space Complexity**:
+	 - The space complexity is determined by the additional memory used to store the result vector `res`.
+	 - In the worst case, when all buildings are visible, the space complexity is also linear: `O(n)`.
+
+4. **Example**:
+   - Suppose we have `heights = [4, 5, 2, 9, 1, 6]`.
+   - The algorithm proceeds as follows:
+	 - Initialize `res = []`.
+	 - Add the index of the last building (index 5) to `res`.
+	 - Initialize `lastHeight = 6`.
+	 - Iterate from right to left:
+	   - Building at index 4 (height 1) is shorter than `lastHeight`, so skip.
+	   - Building at index 3 (height 9) is taller than `lastHeight`, so add its index (3) to `res` and update `lastHeight` to 9.
+	   - Building at index 2 (height 2) is shorter than `lastHeight`, so skip.
+	   - Building at index 1 (height 5) is taller than `lastHeight`, so add its index (1) to `res` and update `lastHeight` to 5.
+	 - Reverse `res` to get `[1, 3, 5]`.
 
 	*/
 namespace BuildingsWithAnOceanView
 {
-	class Solution {
+	class Solution 
+	{
 	public:
 		vector<int> findBuildings(vector<int>& heights) 
 		{

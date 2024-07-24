@@ -72,6 +72,8 @@ Space complexity: O(1) if not counting recursive stack frames else O(n)
 5. If both `l` and `r` are valid (i.e., not null), the current `root` is the LCA.
 6. Otherwise, return the non-null value between `l` and `r`.
 
+once we find other node, we return it, Because the other node is either under the found node or under the root of the found node.
+
 ### Time Complexity:
 - The worst-case time complexity of this algorithm is O(n), where n is the number of nodes in the binary tree.
 - In the worst case, we explore all nodes to find the LCA.
@@ -79,9 +81,6 @@ Space complexity: O(1) if not counting recursive stack frames else O(n)
 ### Space Complexity:
 - The space complexity is O(h), where h is the height of the binary tree.
 - This accounts for the recursive call stack during traversal.
-
-Overall, the provided code efficiently finds the LCA of two nodes in a binary tree. 
-If you have any further questions or need additional clarification, feel free to ask! 😊
 
 */
 namespace LowestCommonAncestorBinaryTreeI
