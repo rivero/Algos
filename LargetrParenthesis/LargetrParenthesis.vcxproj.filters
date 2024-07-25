@@ -275,5 +275,8 @@
     <ClInclude Include="SearchInRotatedSortedArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InsertInterval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

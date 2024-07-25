@@ -173,6 +173,7 @@
     <ClInclude Include="FindPeakElement.h" />
     <ClInclude Include="GroupShiftedStrings.h" />
     <ClInclude Include="IncreasingTripleSequence.h" />
+    <ClInclude Include="InsertInterval.h" />
     <ClInclude Include="InsertSortedCircularList.h" />
     <ClInclude Include="IntervalListIntersections.h" />
     <ClInclude Include="IslandPerimeter.h" />

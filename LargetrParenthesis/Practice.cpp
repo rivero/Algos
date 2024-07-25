@@ -182,6 +182,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "SubSets.h"
 #include "FindMinimumInRotatedSortedArray.h"
 #include "SearchInRotatedSortedArray.h"
+#include "InsertInterval.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -196,7 +197,7 @@ struct tests
 
 int main()
 {
-	tests t("SearchInRotatedSortedArray");
+	tests t("InsertInterval");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -637,6 +638,8 @@ int main()
 	{
 		SearchInRotatedSortedArray::process();
 	}
+	if (t.contains("InsertInterval"))
+		InsertInterval::process();
 }
 
 
