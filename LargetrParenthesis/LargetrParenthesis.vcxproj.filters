@@ -269,5 +269,8 @@
     <ClInclude Include="Permutations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FindMinimumInRotatedSortedArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

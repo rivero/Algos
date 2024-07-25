@@ -168,6 +168,7 @@
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindKClosestElements.h" />
     <ClInclude Include="FindMaxLenValidSubsequenceII.h" />
+    <ClInclude Include="FindMinimumInRotatedSortedArray.h" />
     <ClInclude Include="FindParenthesis.h" />
     <ClInclude Include="FindPeakElement.h" />
     <ClInclude Include="GroupShiftedStrings.h" />
