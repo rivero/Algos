@@ -24,65 +24,73 @@ Constraints:
 digits[i] is a digit in the range ['2', '9'].
 
 Solution:
-The backtrack function is a recursive helper function that generates the letter combinations.
+Certainly! Let's break down the algorithm and discuss its complexities:
 
-It takes two parameters:
-combination: A string representing the current combination of letters.
-next_digits: The remaining digits to process.
+1. **Algorithm Explanation**:
+	- The given algorithm generates all possible letter combinations that a given string of digits (from 2 to 9) could represent.
+	- It uses a recursive approach with backtracking.
+	- The `letterCombinations` function initializes an empty result vector (`output`) and calls the `backtrack` helper function.
+	- The `backtrack` function explores different choices (letters) for each position in the combination.
+	- It maintains a mapping of digits to corresponding letters (stored in `phone_map`).
+	- When the current combination is complete (i.e., `digits` is empty), it adds the combination to the result vector.
+	- The algorithm backtracks by removing the last letter from the combination.
 
-If next_digits is empty (i.e., all digits have been processed), the current combination is added to the output vector.
+2. **Time Complexity**:
+	- The time complexity of this algorithm depends on the total number of possible combinations.
+	- Since each digit maps to a variable number of letters (e.g., '2' maps to 'abc', '3' maps to 'def', etc.), 
+	the total number of combinations can vary.
+	- In the worst case, when all digits map to the maximum number of letters ('7' and '9' map to 4 letters each), 
+	the total number of combinations is 4^N, where N is the length of the input string.
+	- Therefore, the time complexity is O(4^N).
 
-Otherwise, it iterates through the letters corresponding to the first digit in next_digits (retrieved using the numLetters function).
-
-For each letter, it recursively calls backtrack with an updated combination (adding the letter) and the remaining 
-next_digits (excluding the first digit).
-
-Complexity:
-
-"Let n be the length of the input digits.
-The total number of possible letter combinations is exponential (up to 4^n).
-Therefore, the time complexity of this algorithm is O(4^n) since we explore all possible combinations.
-The space complexity is also O(4^n) because we store all valid combinations in the output vector."
-
-
-
+3. **Space Complexity**:
+	- The space complexity is O(N) due to the recursive call stack.
+	- Additionally, the result vector (`output`) stores all valid combinations, which contributes to the space usage.
 */
 namespace LetterCombinationOfAPhoneNumber
 {
-	class Solution 
+	class Solution
 	{
-		vector<string> output;
-	public:
-		vector<string> letterCombinations(string digits) 
+		vector<string> combinations;
+		static string lettersNum(const string& digits)
 		{
-			if (digits.empty()) return {};
-
-			backtrack("", digits);
-			return output;
-		}
-		string numLetters(string next_digits)
-		{
-			static const vector<string> phone_map{ "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
-			return phone_map[next_digits[0] - '2'];
-		}
-
-	private:
-		void backtrack(string combination, string next_digits)
-		{
-			if (next_digits.empty()) 
+			static const vector<string> phone_map
 			{
-				output.push_back(combination);
-			}
-			else 
+				"abc",
+				"def",
+				"ghi",
+				"jkl",
+				"mno",
+				"pqrs",
+				"tuv",
+				"wxyz",
+			};
+			return phone_map[digits[0] - '2'];
+		}
+		void backtrack(const string& digits, const string& combination = "")
+		{
+			// base case
+			if (digits.empty())
+				combinations.push_back(combination);
+			else
 			{
-				string letters = numLetters(next_digits);
-				for (char letter : letters) 
+				auto letters = lettersNum(digits);
+				for (auto letter : letters)
 				{
-					backtrack(combination + letter, next_digits.substr(1));
+					backtrack(digits.substr(1), combination + letter);
 				}
 			}
 		}
+	public:
+		vector<string> letterCombinations(const string& digits)
+		{
+			if (digits.empty()) return {};
+
+			backtrack(digits);
+			return combinations;
+		}
 	};
+
 	void process()
 	{
 		/*
