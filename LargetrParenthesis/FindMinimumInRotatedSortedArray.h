@@ -68,8 +68,7 @@ namespace FindMinimumInRotatedSortedArray
 	public:
 		int findMin(vector<int>& nums)
 		{
-			auto n = nums.size();
-			size_t l{ 0 }, r{ n - 1 };
+			size_t l{ 0 }, r{ nums.size() - 1 };
 			while (l < r)
 			{
 				int m = (l + r) / 2;
@@ -81,6 +80,6 @@ namespace FindMinimumInRotatedSortedArray
 			return nums[l];
 		}
 	};
-	void process(){}
+	void process() {}
 
 }

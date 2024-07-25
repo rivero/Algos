@@ -181,6 +181,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "Permutations.h"
 #include "SubSets.h"
 #include "FindMinimumInRotatedSortedArray.h"
+#include "SearchInRotatedSortedArray.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -195,7 +196,7 @@ struct tests
 
 int main()
 {
-	tests t("FindMinimumInRotatedSortedArray");
+	tests t("SearchInRotatedSortedArray");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -631,6 +632,10 @@ int main()
 	if (t.contains("FindMinimumInRotatedSortedArray"))
 	{
 		FindMinimumInRotatedSortedArray::process();
+	}
+	if (t.contains("SearchInRotatedSortedArray"))
+	{
+		SearchInRotatedSortedArray::process();
 	}
 }
 

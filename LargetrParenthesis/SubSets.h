@@ -53,7 +53,7 @@ namespace SubSets
 			}
 		}
 	public:
-		vector<vector<int>> subsets(vector<int>& nums)
+		vector<vector<int>> subsets(vector<int> nums)
 		{
 			backtrack(nums);
 			return Subsets;
