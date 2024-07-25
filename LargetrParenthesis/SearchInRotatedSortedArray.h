@@ -38,6 +38,38 @@ nums is an ascending array that is possibly rotated.
 -10^4 <= target <= 10^4
 
 
+Certainly! Let's break down the algorithm and discuss its complexities:
+
+1. **Algorithm Explanation**:
+	- The given algorithm searches for a target value in a rotated sorted array (also known as a rotated array).
+	- The array is sorted in ascending order, but it has been rotated at some pivot point.
+	- The algorithm first finds the index of the minimum element (the pivot) using binary search.
+	- Then, it determines which half of the array (left or right of the pivot) contains the target value.
+	- Finally, it performs binary search again within the appropriate half to find the target.
+
+2. **Step-by-Step Explanation**:
+	- **Finding the Pivot**:
+		- The algorithm starts by finding the index of the minimum element (pivot) in the rotated array.
+		- It uses binary search to locate the pivot index (`min_i`).
+		- The pivot index divides the array into two sorted subarrays: `[0, min_i-1]` and `[min_i, n-1]`.
+	- **Determining the Target Side**:
+		- If `min_i` is 0, the entire array is sorted, and we search the entire array.
+		- Otherwise, we compare the target with the first and last elements:
+			- If `target` lies between `nums[0]` and `nums[min_i-1]`, we search the left side.
+			- Otherwise, we search the right side.
+	- **Binary Search for the Target**:
+		- Within the chosen side, the algorithm performs binary search to find the target.
+		- It adjusts the pointers (`l` and `r`) based on comparisons with `target`.
+
+3. **Time Complexity**:
+	- The time complexity of this algorithm is O(log N), where N is the size of the input array.
+	- The initial binary search to find the pivot takes O(log N) time.
+	- The second binary search within the chosen side also takes O(log N) time.
+
+4. **Space Complexity**:
+	- The space complexity is O(1) because the algorithm uses only a few variables (`l`, `r`, `m`, and `min_i`) 
+	without any additional data structures.
+
 */
 namespace SearchInRotatedSortedArray
 {
