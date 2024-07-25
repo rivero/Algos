@@ -178,6 +178,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "FindKClosestElements.h"
 #include "MaxConsecutiveOnesIII.h"
 #include "FindMaxLenValidSubsequenceII.h"
+#include "Permutations.h"
 #include "SubSets.h"
 #pragma endregion INCLUDES
 struct tests
@@ -193,7 +194,7 @@ struct tests
 
 int main()
 {
-	tests t("SubSets");
+	tests t("Permutations");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -621,6 +622,10 @@ int main()
 	if (t.contains("SubSets"))
 	{
 		SubSets::process();
+	}
+	if (t.contains("Permutations"))
+	{
+		Permutations::process();
 	}
 }
 
