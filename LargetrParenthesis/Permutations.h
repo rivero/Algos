@@ -25,7 +25,7 @@ Constraints:
 All the integers of nums are unique.
 
 Certainly! Let's break down the algorithm and discuss its complexities:
-
+Solution 2
 1. **Algorithm Explanation**:
 	- The given algorithm generates all possible permutations of the input vector `nums`.
 	- It uses a recursive approach with backtracking.
@@ -42,10 +42,37 @@ Certainly! Let's break down the algorithm and discuss its complexities:
 3. **Space Complexity**:
 	- The space complexity is O(N) due to the recursive call stack.
 	- Additionally, the result vector (`res`) stores all permutations, which contributes to the space usage.
+
+Solution 
+
+Certainly! Let's dive into the algorithm and discuss its complexities:
+
+1. **Algorithm Explanation**:
+	- The given algorithm generates all possible permutations of the input vector `nums`.
+	- It uses a recursive approach with backtracking.
+	- The `permute` function initializes an empty result vector (`res`) and calls the `backtrack` helper function.
+	- The `backtrack` function explores different choices (elements) for each position in the permutation.
+	- It maintains a boolean vector (`used`) to keep track of which elements have been used.
+	- When the current permutation is complete (i.e., its size equals the size of `nums`), it adds the permutation to the result 
+	vector.
+	- The algorithm backtracks by undoing the choice (resetting `used[i]` and popping the last element from `permutation`).
+
+2. **Time Complexity**:
+	- The time complexity of this algorithm is also O(N * N!), where N is the size of the input vector.
+	- Similar to the previous algorithm, it generates N! permutations.
+	- However, the difference lies in the way choices are made: instead of swapping elements, it uses a boolean vector to mark 
+	used elements.
+	- The total number of recursive calls is still N! (factorial of N).
+
+3. **Space Complexity**:
+	- The space complexity is O(N) due to the recursive call stack.
+	- Additionally, the result vector (`res`), the boolean vector (`used`), and the temporary `permutation` contribute to the space 
+	usage.
+
 */
 namespace Permutations
 {
-	class Solution : protected timeit 
+	class Solution2 : protected timeit 
 	{
 		vector<vector<int>> res;
 		void permutations(vector<int> nums, int l)
@@ -72,7 +99,7 @@ namespace Permutations
 			return res;
 		}
 	};
-	class Solution2 : protected timeit
+	class Solution : protected timeit
 	{
 		vector<vector<int>> res;
 		vector<int> permutation;
