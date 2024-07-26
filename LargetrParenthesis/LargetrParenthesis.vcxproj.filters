@@ -83,7 +83,7 @@
     <ClInclude Include="mergearrays.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="movezero.h">
+    <ClInclude Include="MoveZeroes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RangeSumOfBST.h">

@@ -197,7 +197,7 @@
     <ClInclude Include="MinimumNumberOfKeyPresses.h" />
     <ClInclude Include="MinRemoveValidParenthesis.h" />
     <ClInclude Include="MinWindowSubstring.h" />
-    <ClInclude Include="movezero.h" />
+    <ClInclude Include="MoveZeroes.h" />
     <ClInclude Include="MovingAverage.h" />
     <ClInclude Include="NestedListWeightSum.h" />
     <ClInclude Include="NextPermutation.h" />

@@ -119,7 +119,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "TopKElements.h"
 #include "FindParenthesis.h"
 #include "mergearrays.h"
-#include "movezero.h"
+#include "MoveZeroes.h"
 #include "RangeSumOfBST.h"
 #include "arrayStringsAreEqual.h"
 #include "findinter.h"
@@ -203,58 +203,9 @@ int main()
 	{
 		FindParenthesis::test();
 	}
-	if (t.contains("move_zeroes"))
+	if (t.contains("MoveZeroes"))
 	{
-		cout << "move_zeroes\n";
-		{
-			vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
-			printv(vec);
-			cout << movezero::move_zeroes(vec) << "\n";
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-			printv(vec);
-			cout << movezero::move_zeroes(vec) << "\n";
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-			printv(vec);
-			cout << movezero::move_zeroes(vec) << "\n";
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
-			printv(vec);
-			cout << movezero::move_zeroes(vec) << "\n";
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-			printv(vec);
-			cout << movezero::move_zeroes(vec) << "\n";
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
-			printv(vec);
-			cout << movezero::move_zeroes(vec) << "\n";
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
-			printv(vec);
-			cout << movezero::move_zeroes(vec) << "\n";
-			printv(vec);
-			cout << "\n";
-		}
+		MoveZeroes::process();
 	}
 	if (false)
 	{
