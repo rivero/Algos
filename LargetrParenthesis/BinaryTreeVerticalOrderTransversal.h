@@ -78,6 +78,34 @@ Constraints:
 
 The number of nodes in the tree is in the range [0, 100].
 -100 <= Node.val <= 100
+
+
+1. **Algorithm Explanation**:
+   - The given code defines a class `Solution` that aims to find the vertical order traversal of a binary tree.
+   - The goal is to group nodes based on their vertical positions in the tree.
+   - The algorithm uses a queue-based approach to traverse the tree level by level, maintaining the vertical levels.
+   - Here are the key steps:
+	 - Initialize an empty queue (`qu`) to store pairs of nodes and their corresponding vertical levels.
+	 - Initialize an empty map (`verticalLevels`) to store nodes grouped by their vertical levels.
+	 - Start by pushing the root node and its level (which is 0) into the queue.
+	 - The `createLevels` function processes the queue:
+	   - While the queue is not empty:
+		 - Dequeue a pair `(currNode, level)` from the front of the queue.
+		 - Add the value of `currNode` to the `verticalLevels` map at the specified `level`.
+		 - If `currNode` has a left child, enqueue it with `level - 1`.
+		 - If `currNode` has a right child, enqueue it with `level + 1`.
+	 - The `verticalOrder` function initializes an empty result vector (`ans`).
+	 - It pushes the root node and its level (0) into the queue.
+	 - Calls `createLevels` to build the vertical levels.
+	 - Finally, it constructs the result by adding the values from `verticalLevels` to `ans`.
+
+2. **Complexities**:
+   - **Time Complexity**: The algorithm traverses the entire tree once, visiting each node exactly once. Therefore, the time complexity is O(N), where N is the number of nodes in the tree.
+   - **Space Complexity**:
+	 - The space complexity includes the memory used for the queue (`qu`) and the map (`verticalLevels`).
+	 - In the worst case, the queue can store all nodes (O(N)), and the map can store all distinct vertical levels (O(N)).
+	 - Overall space complexity remains O(N).
+
 */
 #define PRINTV
 namespace BinaryTreeVerticalOrderTransversal

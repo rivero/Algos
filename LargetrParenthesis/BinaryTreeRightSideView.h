@@ -1,6 +1,6 @@
 ﻿#pragma once
-// https://leetcode.com/problems/binary-tree-right-side-view/solutions/5144012/c-simple-solution-by-using-bfs-and-queue-detailed-explanation/
 /*
+https://leetcode.com/problems/binary-tree-right-side-view/
 Intuition
 Approach
 In solving this problem, we'll use the BFS algorithm.
@@ -70,6 +70,37 @@ Solution
 	   7
 	 ```
 	 - The right view would be `[1, 3, 6, 7]`.
+
+
+	 ## Why Pop Within the Iteration?
+
+The primary reason for popping the current node within the iteration is to **process each node at the current level exactly once**.
+
+Here's a breakdown of the logic:
+
+1. **`size = levels.size();`**: This line captures the number of nodes at the current level.
+2. **Process the current node:**
+   - `auto node = levels.front();`: This line retrieves the first node of the current level.
+   - `res.push_back(node->val);`: Adds the value of the current node to the result.
+3. **Process children:**
+   - `if (node->right) levels.push(node->right);`: Enqueues the right child if it exists.
+   - `if (node->left) levels.push(node->left);`: Enqueues the left child if it exists.
+4. **Pop the processed node:**
+   - `levels.pop();`: Removes the current node from the queue. This is crucial because we've finished processing it, 
+   and we want to move on to the next node at the current level.
+5. **Update the current node:**
+   - `node = levels.front();`: Sets the current node to the next node in the queue.
+
+By popping the current node after processing its children, we ensure that:
+
+- We accurately calculate the `size` of the current level at the beginning of the iteration.
+- We process each node at the current level exactly once.
+- We move on to the next node in the queue for the next iteration.
+
+This approach guarantees that we process all nodes at each level and correctly identify the rightmost node for each level.
+
+**Would you like to delve deeper into any other aspect of this code?**
+
 
 */
 namespace BinaryTreeRightSideView

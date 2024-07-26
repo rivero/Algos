@@ -68,12 +68,15 @@ There is exactly one island in grid.
 
 ## Explanation:
 
-The algorithm efficiently calculates the island perimeter by considering each land cell as contributing 4 sides to the perimeter initially. Then, it corrects for overlapping sides by subtracting 2 for each shared side with an adjacent land cell. This approach avoids the need for complex data structures or recursion, making it efficient for this problem.
+The algorithm efficiently calculates the island perimeter by considering each land cell as contributing 4 sides to the 
+perimeter initially. Then, it corrects for overlapping sides by subtracting 2 for each shared side with an adjacent land cell. 
+This approach avoids the need for complex data structures or recursion, making it efficient for this problem.
 
 **Key points:**
 
 - The algorithm assumes that there is only one island in the grid.
-- It leverages the observation that each land cell contributes 4 sides to the perimeter initially, and then corrects for shared sides.
+- It leverages the observation that each land cell contributes 4 sides to the perimeter initially, and then corrects 
+for shared sides.
 
 This direct approach is suitable for the given problem and provides an efficient solution.
 
