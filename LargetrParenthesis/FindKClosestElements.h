@@ -44,39 +44,31 @@ In summary:
 - Time complexity: *O(n log k)*
 - Space complexity: *O(k)*
 
-Feel free to ask if you have any more questions! 😊👍
-
 */
 namespace FindKClosestElements
 {
-	class Solution 
+	class Solution
 	{
 	public:
 		vector<int> findClosestElements(vector<int>& arr, int k, int x)
 		{
-			// sort differences and elements in a priority_queue
-			priority_queue< pair<int, int> > pq;
-
-			// store k number of pair <diff, elem> in priority queue
-			// since we use a pq, the largest are the ones being popped
-			// leaving the k smallest, sorted by the difference.
+			priority_queue < pair<int, int> > pq;
 			for (int i = 0; i < arr.size(); i++)
 			{
 				pq.push({ abs(arr[i] - x), arr[i] });
 				if (pq.size() > k)
 					pq.pop();
 			}
-
-			// prepare answer
 			vector<int> ans;
 			while (!pq.empty())
 			{
-				ans.push_back(pq.top().second);
-				pq.pop();
+				auto [diff, elem] = pq.top(); pq.pop();
+				ans.push_back(elem);
 			}
 			sort(ans.begin(), ans.end());
 			return ans;
-
 		}
-	};	void process() {}
+	};
+	
+	void process() {}
 }

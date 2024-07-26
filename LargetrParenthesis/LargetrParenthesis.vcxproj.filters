@@ -77,9 +77,6 @@
     <ClInclude Include="Auros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TopKElements.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FindParenthesis.h">
       <Filter>Header Files</Filter>
     </ClInclude>

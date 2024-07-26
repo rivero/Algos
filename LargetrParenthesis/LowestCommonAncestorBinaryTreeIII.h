@@ -140,8 +140,8 @@ namespace LowestCommonAncestorBinaryTreeIII
 #endif // PRINTV
 			while (P != Q)
 			{
-				P = P == nullptr ? q : P->parent;
-				Q = Q == nullptr ? p : Q->parent;
+				P = !P ? q : P->parent;
+				Q = !Q ? p : Q->parent;
 #ifdef PRINTV
 			cout << "\nEnd   a:\t" << P->val << "\tb:\t" << Q->val << "\n";
 #endif // PRINTV

@@ -38,18 +38,44 @@ All Node.val are unique.
 p != q
 
 Solution
-Solution
-NOTE that this API requires root.
 
-The algorithm explores the tree recursively, checking if p and q are present in the left and right subtrees.
+1. **Algorithm Explanation**:
+   - The `lowestCommonAncestor` function aims to find the lowest common ancestor (LCA) of two nodes, `p` and `q`, in a binary tree.
+   - The algorithm follows these steps:
+	 1. Define a helper function called `dfs` (depth-first search) that takes three parameters: 
+	 the current `root`, and the target nodes `p` and `q`.
+	 2. In the `dfs` function:
+		- If the current `root` is null, return null.
+		- Recursively call `dfs` on the left subtree (`root->left`) and the right subtree (`root->right`).
+		- Check if the current `root` is equal to either `p` or `q`. If so:
+		  - Update the corresponding flag (`p_found` or `q_found`) to indicate that the node has been found.
+		  - Return the current `root`.
+		- If both left and right subtrees (`l` and `r`) are not null, it means that `p` and `q` are found in different subtrees. In this case, the current `root` is the LCA.
+		- Otherwise, return the non-null subtree (either `l` or `r`).
+	 3. In the `lowestCommonAncestor` function:
+		- Call `dfs` with the root of the tree and the target nodes `p` and `q`.
+		- If both `p` and `q` are found (i.e., `p_found` and `q_found` are true), return the result of `dfs`.
+		- Otherwise, return null.
 
-We need to postorder the tree to find both p and q at the same time we test for values already.
+2. **Complexities**:
+   - Time Complexity: O(N), where N is the number of nodes in the binary tree.
+	 - The algorithm traverses each node once during the depth-first search.
+   - Space Complexity: O(H), where H is the height of the binary tree.
+	 - The space is used for the recursive call stack during the depth-first search.
 
-If both nodes are found in different subtrees, the current root is the LCA.
-When we find the first p or q, we return the root to that node (which is also the ancestor of the other node).
-
-Time complexity: O(n)
-Space complexity: O(1) if not counting recursive stack frames else O(n)
+3. **Example**:
+   - Given a binary tree:
+	 ```
+		 3
+		/ \
+	   5   1
+	  / \ / \
+	 6  2 0  8
+	   / \
+	  7   4
+	 ```
+	 - Nodes 5 and 1 have LCA = 3.
+	 - Nodes 5 and 4 have LCA = 5.
 
 */
 namespace LowestCommonAncestorBinaryTreeII

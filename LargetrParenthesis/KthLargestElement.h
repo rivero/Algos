@@ -120,7 +120,7 @@ namespace KthLargestElement
 
 		int findKthLargest(vector<int>& nums, int k)
 		{
-			std::priority_queue<int, std::vector<int>, std::greater<int>>
+			priority_queue<int, vector<int>, greater<int>>
 				min_heap(nums.begin(), nums.begin() + k);
 
 			for (int i = k; i < nums.size(); i++)
