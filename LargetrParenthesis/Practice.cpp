@@ -172,6 +172,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "TopKFrequentElements.h"
 #include "NextPermutation.h"
 #include "ThreeSum.h"
+#include "TwoSum.h"
 #include "RotateImage.h"
 #include "LetterCombinationOfAPhoneNumber.h"
 #include "BinaryTreeLevelOrderTransversal.h"
@@ -547,6 +548,10 @@ int main()
 	if (t.contains("ThreeSum"))
 	{
 		ThreeSum::process();
+	}
+	if (t.contains("TwoSum"))
+	{
+		TwoSum::process();
 	}
 	if (t.contains("RotateImage"))
 	{

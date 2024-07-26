@@ -228,6 +228,7 @@
     <ClInclude Include="timeit.h" />
     <ClInclude Include="Toeplitz.h" />
     <ClInclude Include="TopKFrequentElements.h" />
+    <ClInclude Include="TwoSum.h" />
     <ClInclude Include="ValidAnagram.h" />
     <ClInclude Include="ValidNumber.h" />
     <ClInclude Include="ValidPalindromeII.h" />
