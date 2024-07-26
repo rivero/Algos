@@ -201,7 +201,7 @@ int main()
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
-		par::test();
+		FindParenthesis::test();
 	}
 	if (t.contains("move_zeroes"))
 	{

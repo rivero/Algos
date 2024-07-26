@@ -34,41 +34,59 @@ Constraints:
 
 1 <= s.length <= 1000
 s[i] is either '(' or ')'.
+
+Certainly! Let's dive into the `minAddToMakeValid` function, its algorithm, and complexities.
+
+1. **Algorithm Explanation**:
+	 1. Initialize an empty stack (`st`) to keep track of opening parentheses indices.
+	 2. Iterate through each character in the input string `s`.
+		- If the character is ')':
+		  - If the stack is not empty, pop an opening parenthesis index from the stack (matching the current closing parenthesis).
+		  - Otherwise, record the current closing parenthesis index in the `invalidIdx` vector.
+		- If the character is '(', push its index onto the stack.
+	 3. After the first pass, any remaining opening parentheses indices in the stack are considered invalid.
+	 4. Collect all invalid indices in the `invalidIdx` vector.
+	 5. Return the size of the `invalidIdx` vector, which represents the minimum number of additions needed to balance the 
+	 parentheses.
+
+2. **Complexities**:
+   - Time Complexity: O(N), where N is the length of the input string `s`.
+	 - The algorithm processes each character in `s` once.
+   - Space Complexity: O(N) for the stack and the `invalidIdx` vector.
+
+3. **Example**:
+   - Input: `"())"`
+	 - After processing: `invalidIdx = [0]`, so the result is 1.
+   - Input: `"((("`
+	 - After processing: `invalidIdx = [0, 1, 2]`, so the result is 3.
+
 */
 namespace MinimumAddParenthesisValid
 {
-	class Solution 
+	class Solution
 	{
 	public:
 		int minAddToMakeValid(string s)
 		{
-			queue<int> q; // stores opening '(' indexes
-			vector<int> invalidIdxVec; // stores invalid indexes (where there was not closing ')' )
+			stack<size_t> st;
+			vector<size_t> invalidIdx;
 			for (int i = 0; i < s.size(); i++)
 			{
-				if (s[i] == '(')
+				if (s[i] == ')')
 				{
-					q.push(i);
-				}
-				else if (s[i] == ')')
-				{
-					if (q.size() > 0) // did we already have a')' index?...
-					{
-						q.pop(); // ...pop it.
-					}
+					if (st.size() > 0)
+						st.pop();
 					else
-					{
-						invalidIdxVec.push_back(i); //... else invalid index found
-					}
+						invalidIdx.push_back(i);
 				}
+				else if (s[i] == '(')
+					st.push(i);
 			}
-			while (!q.empty())
-			{ // if we have invalid indexes left add them to the invalidIdxVec vector
-				invalidIdxVec.push_back(q.front());
-				q.pop();
+			while (!st.empty())
+			{
+				invalidIdx.push_back(st.top()); st.pop();
 			}
-
-			return invalidIdxVec.size(); // returning the number of moves to make this string valid parenthesized
+			return invalidIdx.size();
 		}
 	};
 
