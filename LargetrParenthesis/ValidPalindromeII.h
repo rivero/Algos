@@ -27,11 +27,30 @@ s consists of lowercase English letters.
 
 Solution
 
-Using two pointers, iterate them to meet in the middle
-if there is one character not matching the other ignore this problem once.
-continue iterating
+1. **Algorithm Explanation**:
+   - The `validPalindrome` function checks whether a given string `s` is a valid palindrome after removing at most one character.
+   - The algorithm follows these steps:
+	 1. Initialize two pointers, `i` (starting from the beginning) and `j` (starting from the end) of the string `s`.
+	 2. While `i` is less than `j`, do the following:
+		- If `s[i]` is equal to `s[j]`, move both pointers inward (increment `i` and decrement `j`).
+		- If `s[i]` is not equal to `s[j]`, it means we encountered a mismatch.
+		  - We have two options:
+			1. Skip the character at `i` and check if the remaining substring (`s[i+1:j]`) is a palindrome. This is done by calling the helper function `pal(s, i + 1, j)`.
+			2. Skip the character at `j` and check if the remaining substring (`s[i:j-1]`) is a palindrome. This is also done by calling `pal(s, i, j - 1)`.
+		  - If either of these options returns true, the string can be made a palindrome by removing one character.
+	 3. If the loop completes without encountering any mismatches, return `true` (the original string is a valid palindrome).
+	 4. Otherwise, return `false`.
 
-Result: if the characters from the right and the left are the same return true
+2. **Complexities**:
+   - Time Complexity: O(N), where N is the length of the string `s`.
+	 - The algorithm processes each character in `s` once.
+   - Space Complexity: O(1), as no additional data structures are used; the checks are performed in place using the two pointers.
+
+3. **Example**:
+   - Input: `"abca"`
+	 - We can remove 'b' to make it a palindrome: `"aca"`.
+	 - Output: `true`
+
 
 */
 
