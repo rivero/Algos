@@ -24,9 +24,6 @@ nums[i] is either 0 or 1.
 
 This algorithm aims to find the maximum consecutive number of ones in an array `nums` after flipping at most `k` zeros.
 
-Certainly! Let's break down the given algorithm step by step. This algorithm aims to find the maximum consecutive number of ones 
-in an array `nums` after flipping at most `k` zeros.
-
 1. **Initialization**:
    - Initialize two pointers, `left` and `right`, both initially pointing to the start of the array.
 
