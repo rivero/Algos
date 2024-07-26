@@ -45,8 +45,6 @@ Solution 2
 
 Solution 
 
-Certainly! Let's dive into the algorithm and discuss its complexities:
-
 1. **Algorithm Explanation**:
 	- The given algorithm generates all possible permutations of the input vector `nums`.
 	- It uses a recursive approach with backtracking.

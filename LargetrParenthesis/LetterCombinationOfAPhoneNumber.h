@@ -23,30 +23,51 @@ Constraints:
 0 <= digits.length <= 4
 digits[i] is a digit in the range ['2', '9'].
 
-Solution:
-Certainly! Let's break down the algorithm and discuss its complexities:
+## Algorithm Explanation
 
-1. **Algorithm Explanation**:
-	- The given algorithm generates all possible letter combinations that a given string of digits (from 2 to 9) could represent.
-	- It uses a recursive approach with backtracking.
-	- The `letterCombinations` function initializes an empty result vector (`output`) and calls the `backtrack` helper function.
-	- The `backtrack` function explores different choices (letters) for each position in the combination.
-	- It maintains a mapping of digits to corresponding letters (stored in `phone_map`).
-	- When the current combination is complete (i.e., `digits` is empty), it adds the combination to the result vector.
-	- The algorithm backtracks by removing the last letter from the combination.
+**Problem:** Given a string of digits, return all possible letter combinations that the number could represent. 
+A mapping of digit to letters is given below:
+```
+2: abc
+3: def
+4: ghi
+5: jkl
+6: mno
+7: pqrs
+8: tuv
+9: wxyz
+```
 
-2. **Time Complexity**:
-	- The time complexity of this algorithm depends on the total number of possible combinations.
-	- Since each digit maps to a variable number of letters (e.g., '2' maps to 'abc', '3' maps to 'def', etc.), 
-	the total number of combinations can vary.
-	- In the worst case, when all digits map to the maximum number of letters ('7' and '9' map to 4 letters each), 
-	the total number of combinations is 4^N, where N is the length of the input string.
-	- Therefore, the time complexity is O(4^N).
+**Approach:** Backtracking
 
-3. **Space Complexity**:
-	- The space complexity is O(N) due to the recursive call stack.
-	- Additionally, the result vector (`output`) stores all valid combinations, which contributes to the space usage.
-*/
+**Code Breakdown:**
+
+1. **`vector<string> combinations;`:** This vector will store all the generated letter combinations.
+2. **`static string lettersNum(const string& digits)`:**
+   - A helper function to map a digit to its corresponding letters.
+   - Uses a static `phone_map` to store the digit-to-letter mapping.
+   - Returns the letters corresponding to the first digit of the input `digits`.
+3. **`void backtrack(const string& digits, const string& combination = "")`:**
+   - Recursive function to generate letter combinations.
+   - `digits`: The remaining digits to process.
+   - `combination`: The current letter combination being built.
+   - Base case: If `digits` is empty, add the current `combination` to `combinations`.
+   - Recursive case:
+	 - Get the letters corresponding to the first digit of `digits`.
+	 - For each letter, recursively call `backtrack` with the remaining digits and the updated `combination`.
+4. **`vector<string> letterCombinations(const string& digits)`:**
+   - Public function to initiate the combination generation process.
+   - Checks if `digits` is empty and returns an empty vector if so.
+   - Calls `backtrack(digits)` to start the backtracking.
+   - Returns the `combinations` vector containing all generated letter combinations.
+
+	Let n be the length of the input digits.
+	The total number of possible letter combinations is exponential (up to 4^n).
+	Therefore, the time complexity of this algorithm is O(4^n) since we explore all possible combinations.
+	The space complexity is also O(4^n) because we store all valid combinations in the output vector.
+
+
+   */
 namespace LetterCombinationOfAPhoneNumber
 {
 	class Solution

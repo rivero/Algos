@@ -23,16 +23,40 @@ Constraints:
 All the numbers of nums are unique.
 
 
-In this code:
-- The `generateSubsets` function recursively generates all subsets by including or excluding the current element.
-- We start with an empty subset and explore all possibilities.
-- The base case is when we reach the end of the array.
-- The `subsets` function initializes an empty vector for the result and an empty vector for the current subset, 
-then calls `generateSubsets`.
+**Algorithm Explanation:**
 
-The time complexity of this solution is O(2^N), where N is the number of elements in the input array. 
-This is because there are 2^N possible subsets, and we explore each possibility once. 
-The space complexity is also O(2^N) due to the result vector containing all subsets.
+**Problem:** Find all possible subsets of a given set of numbers.
+
+**Approach:** Backtracking
+
+**Code Breakdown:**
+
+1. **`vector<vector<int>> Subsets;`:** This vector will store all the generated subsets.
+2. **`vector<int> subset;`:** This vector temporarily holds a subsSet during the backtracking process.
+3. **`backtrack(vector<int>& nums, int index = 0)`:**
+   - Recursive function to generate subsets.
+   - `nums`: The input array of numbers.
+   - `index`: The starting index for considering elements in the current backtracking step.
+4. **`Subsets.push_back(subset);`:** Adds the current `subset` to the `Subsets` vector.
+5. **`for(int i = index; i < nums.size(); i++)`:** Iterates through the remaining elements in `nums`.
+   - `subset.push_back(nums[i])`:** Adds the current element to the `subset`.
+   - `backtrack(nums, i + 1)`: Recursively calls `backtrack` with the next index.
+   - `subset.pop_back()`: Removes the current element from the `subset` to backtrack.
+6. **`vector<vector<int>> subsets(vector<int>& nums)`:**
+   - Public function to initiate the subset generation process.
+   - Calls `backtrack(nums)` to start the backtracking.
+   - Returns the `Subsets` vector containing all generated subsets.
+
+**Time Complexity:**
+
+- The time complexity is O(2^n), where n is the number of elements in the input array. 
+  This is because for each element, there are two choices: include it in the subset or exclude it. 
+  This leads to an exponential growth in the number of subsets.
+
+**Space Complexity:**
+
+- The space complexity is O(n) in the worst case, where n is the number of elements in the input array. 
+  This is due to the recursion depth and the size of the `subset` vector.
 
 */
 namespace SubSets
