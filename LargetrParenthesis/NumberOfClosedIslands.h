@@ -42,8 +42,55 @@ namespace NumberOfClosedIslands
 	1 <= grid.length, grid[0].length <= 100
 	0 <= grid[i][j] <=1
 
-	DFS Testing for land
-	T: O(n*m)
+
+## Algorithm Explanation: Counting Closed Islands
+
+### Problem:
+Given a 2D grid map of '1's (land) and '0's (water), count the number of closed islands. A closed island is a group of connected 
+1s that is completely surrounded by 0s, and is not connected to any edge of the grid.
+
+### Algorithm:
+The provided code implements a depth-first search (DFS) approach to count the number of closed islands in a given grid.
+
+**Key steps:**
+
+1. **Initialization:**
+   - `Land`, `Water`, and `Visited` are defined as constants for clarity.
+   - `m_grid` stores the input grid.
+   - `m_rows` and `m_cols` store the dimensions of the grid.
+
+2. **`search_land` function:**
+   - Performs DFS to explore a connected land region.
+   - Takes the current row and column as input.
+   - Returns 1 if the land region is a closed island, 0 otherwise.
+   - Base cases:
+	 - If the current position is out of bounds, return 0 (not a closed island).
+	 - If the current position is water or already visited, return 1 (closed island so far).
+   - Mark the current position as visited.
+   - Recursively explore the four neighboring cells (up, down, left, right).
+   - Return the minimum value returned by the recursive calls. This ensures that the land region is completely surrounded by 
+   water for it to be considered a closed island.
+
+3. **`closedIsland` function:**
+   - Iterates through the grid, excluding the border cells.
+   - For each land cell, calls `search_land` to check if it's part of a closed island.
+   - Increments the `counter` if `search_land` returns 1 (indicating a closed island).
+   - Returns the final count of closed islands.
+
+### Time and Space Complexity:
+
+- **Time complexity:** O(M * N), where M and N are the dimensions of the grid. Each cell is visited at most once during the DFS.
+- **Space complexity:** O(M * N) in the worst case, due to the recursion stack and the `m_grid` matrix.
+
+### Explanation:
+The algorithm effectively counts closed islands by exploring connected land regions using DFS. By marking visited cells and 
+checking if all neighboring cells are water or out of bounds, it determines if a land region is completely enclosed. 
+The minimum value returned from recursive calls ensures that the island is surrounded by water on all sides.
+
+This approach efficiently handles the problem by avoiding unnecessary exploration and accurately identifying closed islands.
+
+**Would you like to explore any specific part of the code in more detail?**
+
 	 */
 
 	class Solution
