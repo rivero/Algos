@@ -83,27 +83,26 @@ namespace NestedListWeightSum
 
 	};
 
-	struct Solution : protected timeit
+	struct Solution
 	{
 
 		int depthSum(vector<NestedInteger> nestedList, int depth = 1)
 		{
 			int sum{};
-			for (auto& elem : nestedList)
+			for (auto& ni : nestedList)
 			{
-				if (elem.isInteger())
+				if (ni.isInteger())
 				{
-					sum += elem.getInteger() * depth;
+					sum += ni.getInteger() * depth;
 				}
 				else
 				{
-					sum += depthSum(elem.getList(), depth + 1);
+					sum += depthSum(ni.getList(), depth + 1);
 				}
 			}
 			return sum;
 		}
 	};
-
 	void process()
 	{
 		NestedInteger n1(1);
