@@ -33,38 +33,126 @@ namespace SubarraySumEqualsK
 The given code snippet defines an algorithm to find the number of subarrays in an array `nums` 
 whose sum equals a given target value `k`. Here's how it works:
 
-1. **Prefix Sums and Frequencies Map**:
-   - The algorithm uses a prefix sums approach to keep track of cumulative sums as it iterates through the array.
-   - It maintains an unordered map (`prefixSums_frequencies_map`) where keys represent prefix sums, 
-   and values represent the frequency of each prefix sum encountered so far.
-   - Initially, the map contains one entry: `prefix_sum = 0` with a frequency of 1.
+## Understanding the Algorithm: Subarray Sum Equals K
 
-2. **Iterating Through `nums`**:
-   - The algorithm processes each element `num` in the array.
-   - It updates the `prefix_sum` by adding the current `num`.
-   - Calculates the difference `difference = prefix_sum - k`.
+### Problem Statement
+Given an array of integers `nums` and an integer `k`, the algorithm calculates the total number of contiguous subarrays whose 
+sum equals `k`.
 
-3. **Counting Subarrays**:
-   - If the map contains an entry for `difference`, it means there exists a subarray with a sum equal to `k`.
-   - The algorithm increments the answer (`ans`) by the frequency of `difference` in the map.
-   - This step ensures that all subarrays ending at the current index contribute to the count.
+### Algorithm Breakdown
 
-4. **Updating the Map**:
-   - The algorithm increments the frequency of the current `prefix_sum` in the map.
-   - This accounts for subarrays starting from the beginning of the array.
+#### Initialization
+* **`unordered_map<int, int> m`**: A hash map to store the frequency of prefix sums encountered so far. The key is the prefix sum, 
+and the value is its frequency.
+* **`int prefix_sum{}, ans{}`**: `prefix_sum` to keep track of the current running sum, initialized to 0. `ans` to store the final 
+count of subarrays with sum `k`, initialized to 0.
+* **`m[prefix_sum] = 1`**: Initially, the prefix sum is 0, and it occurs once.
 
-5. **Final Result**:
-   - The final result is the value of `ans`, representing the total number of subarrays with a sum equal to `k`.
+#### Iteration and Calculation
+* Iterates through each element `num` in the `nums` array.
+  * **`prefix_sum += num`**: Updates the `prefix_sum` by adding the current element.
+  * **`auto diff = prefix_sum - k`**: Calculates the difference between the current `prefix_sum` and the target sum `k`.
+  * **`if (m.count(diff) > 0)`**: Checks if the calculated `diff` exists in the hash map. If it does, it means there was a previous 
+  subarray ending at an earlier index whose sum was `diff`. Adding the current element to that subarray would result in a subarray 
+  with sum `k`. Therefore, `ans` is incremented by the frequency of `diff` in the hash map.
+  * **`m[prefix_sum]++`**: Updates the frequency of the current `prefix_sum` in the hash map.
 
-**Time Complexity**:
-- The algorithm iterates through the array once, performing constant-time operations for each element.
-- Constructing the `prefixSums_frequencies_map` takes O(n) time.
-- Therefore, the overall time complexity of the `subarraySum` algorithm is O(n).
+#### Return Value
+* Returns the final count of subarrays with sum `k`, stored in the `ans` variable.
 
-**Space Complexity**:
-- The space complexity is determined by the additional data structure (`prefixSums_frequencies_map`).
-- In the worst case, the map can store all distinct prefix sums, resulting in O(n) space.
-- Thus, the overall space complexity is O(n).
+### Key Idea
+The algorithm leverages the concept of prefix sums and a hash map to efficiently count the number of subarrays with a given sum. 
+storing the frequency of prefix sums, we can quickly determine if a subarray with the desired sum exists by calculating the 
+difference between the current prefix sum and the target sum.
+
+### Time and Space Complexity
+* **Time complexity**: O(n), where n is the length of the input array.
+* **Space complexity**: O(n) in the worst case, due to the hash map.
+
+### Example
+Consider the input array `nums = [1, 1, 1]` and `k = 2`.
+
+* Initially, `prefix_sum = 0`, `m[0] = 1`, and `ans = 0`.
+* For the first element `1`, `prefix_sum = 1`, `diff = -1` (not in the map), `m[1] = 1`.
+* For the second element `1`, `prefix_sum = 2`, `diff = 0`, `m[0] = 1`, so `ans` becomes 1, `m[2] = 1`.
+* For the third element `1`, `prefix_sum = 3`, `diff = 1`, `m[1] = 1`, so `ans` becomes 2, `m[3] = 1`.
+
+The final answer is `2`, which is the correct number of subarrays with sum `2`.
+
+By effectively using prefix sums and a hash map, this algorithm provides an efficient solution to the problem of counting subarrays 
+with a given sum.
+
+
+## Example with Different Values
+
+Let's consider the input array `nums = [3, 4, -7, 3, 1, 1, 1, 1]` and `k = 3`.
+
+### Step-by-Step Breakdown
+
+**Initialization:**
+* `prefix_sum = 0`
+* `ans = 0`
+* `m = {0: 1}`
+
+**Iteration:**
+
+1. **num = 3:**
+   * `prefix_sum = 3`
+   * `diff = 0`
+   * `m[3] = 1`
+
+2. **num = 4:**
+   * `prefix_sum = 7`
+   * `diff = 4`
+   * `m[7] = 1`
+
+3. **num = -7:**
+   * `prefix_sum = 0`
+   * `diff = -3`
+   * `m[0] += 1` (now `m[0] = 2`)
+
+4. **num = 3:**
+   * `prefix_sum = 3`
+   * `diff = 0`
+   * `ans += m[0]` (now `ans = 2`)
+   * `m[3] += 1` (now `m[3] = 2`)
+
+5. **num = 1:**
+   * `prefix_sum = 4`
+   * `diff = 1`
+   * `m[4] = 1`
+
+6. **num = 1:**
+   * `prefix_sum = 5`
+   * `diff = 2`
+   * `m[5] = 1`
+
+7. **num = 1:**
+   * `prefix_sum = 6`
+   * `diff = 3`
+   * `m[6] = 1`
+
+8. **num = 1:**
+   * `prefix_sum = 7`
+   * `diff = 4`
+   * `m[7] += 1` (now `m[7] = 2`)
+
+**Final Answer:**
+* `ans = 2`
+
+There are two subarrays with sum 3: `[3]` and `[-7, 3, 3]`.
+
+This example demonstrates how the algorithm effectively calculates the number of subarrays with the given sum by utilizing the 
+prefix sum and hash map to keep track of the frequencies.
+
+**Would you like to try another example?**
+
+EQUALS to K follow same pattern all are solved with prefix sum: a prefix sum is like an accumulated sum
+1, 2, 3 = 1, 3, 6
+
+When we have two equal prefix sums: 
+1, 2, 3, -3 = 1, 3, 6, 3
+                 ^     ^  <- these two are the same
 
 	*/
 	class Solution {
@@ -74,19 +162,19 @@ whose sum equals a given target value `k`. Here's how it works:
 			if (nums.empty())
 				return {};
 
-			unordered_map<int, int> m;
+			unordered_map<int, int> freqPrefixSumsMap;
 			int prefix_sum{}, ans{};
-			m[prefix_sum] = 1;
+			freqPrefixSumsMap[prefix_sum] = 1;
 
 			for (auto num : nums)
 			{
 				prefix_sum += num;
 				auto diff = prefix_sum - k;
-				if (m.count(diff) > 0)
+				if (freqPrefixSumsMap.count(diff) > 0)
 				{
-					ans += m[diff];
+					ans += freqPrefixSumsMap[diff];
 				}
-				m[prefix_sum]++;
+				freqPrefixSumsMap[prefix_sum]++;
 			}
 			return ans;
 		}

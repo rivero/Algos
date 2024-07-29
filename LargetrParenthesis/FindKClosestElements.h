@@ -38,7 +38,8 @@ In this implementation:
    - Since we perform these operations for each element in the array, the overall time complexity is *O(n log k)*.
 
 2. **Space Complexity**:
-   - We use a max heap (priority queue) to store at most *k* elements. Therefore, the space complexity is *O(k)*.
+   - We use a max heap (priority queue) to store at most *k* elements; we also utilize a vector for the k elements.
+   Therefore, the space complexity is *O(k)*.
 
 In summary:
 - Time complexity: *O(n log k)*

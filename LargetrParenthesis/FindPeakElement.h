@@ -1,47 +1,46 @@
 ﻿#pragma once
-namespace FindPeakElement
-{
-	/*
-	*
-	162. Find Peak Element
+/*
+*
+https://leetcode.com/problems/find-peak-element/
+162. Find Peak Element
 
-	A peak element is an element that is strictly greater than its neighbors.
+A peak element is an element that is strictly greater than its neighbors.
 
-	Given a 0-indexed integer array nums, find a peak element, and return its index. 
-	If the array contains multiple peaks, return the index to any of the peaks.
+Given a 0-indexed integer array nums, find a peak element, and return its index.
+If the array contains multiple peaks, return the index to any of the peaks.
 
-	You may imagine that nums[-1] = nums[n] = -∞. 
-	In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+You may imagine that nums[-1] = nums[n] = -∞.
+In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
 
-	You must write an algorithm that runs in O(log n) time.
+You must write an algorithm that runs in O(log n) time.
 
-	Example 1:
-	Input: nums = [1,2,3,1]
-	Output: 2
-	Explanation: 3 is a peak element and your function should return the index number 2.
+Example 1:
+Input: nums = [1,2,3,1]
+Output: 2
+Explanation: 3 is a peak element and your function should return the index number 2.
 
-	Example 2:
-	Input: nums = [1,2,1,3,5,6,4]
-	Output: 5
-	Explanation: Your function can return either index number 1 where the peak element is 2, 
-	or index number 5 where the peak element is 6.
-	Constraints:
+Example 2:
+Input: nums = [1,2,1,3,5,6,4]
+Output: 5
+Explanation: Your function can return either index number 1 where the peak element is 2,
+or index number 5 where the peak element is 6.
+Constraints:
 
-	1 <= nums.length <= 1000
-	-2^31 <= nums[i] <= 2^31 - 1
-	nums[i] != nums[i + 1] for all valid i.
+1 <= nums.length <= 1000
+-2^31 <= nums[i] <= 2^31 - 1
+nums[i] != nums[i + 1] for all valid i.
 
-	Binary search  has complexity of O(log n) BUT the input is not sorted!!
-	sUse 2 pointers: l and r
-	Choose the mid and check if it is either larger or smaller than the right and left neightbout 
-	to see if we are increasing or decreasing.
+Binary search  has complexity of O(log n) BUT the input is not sorted!!
+sUse 2 pointers: l and r
+Choose the mid and check if it is either larger or smaller than the right and left neightbout
+to see if we are increasing or decreasing.
 
-	Edge case
-	the last or first elements are peak but because anything outside the array is -∞ then they are peak
+Edge case
+the last or first elements are peak but because anything outside the array is -∞ then they are peak
 
-	Complexity of this solution: T O(log n)
+Complexity of this solution: T O(log n)
 
-	Solution O(log n)
+Solution O(log n)
 Certainly! Let's dive into the explanation of the **findPeakElement** algorithm:
 
 1. **Problem Statement**:
@@ -50,7 +49,7 @@ Certainly! Let's dive into the explanation of the **findPeakElement** algorithm:
 
 2. **Approach**:
    - We'll use a binary search approach to find the peak element efficiently.
-   - The key observation is that if we compare the middle element (`mid`) with its neighbors, we can determine 
+   - The key observation is that if we compare the middle element (`mid`) with its neighbors, we can determine
    whether the peak lies to the left or right of `mid`.
 
 3. **Algorithm Steps**:
@@ -73,8 +72,10 @@ Certainly! Let's dive into the explanation of the **findPeakElement** algorithm:
 6. **Space Complexity**:
    - The algorithm uses only a few variables, so the space complexity is O(1).
 
-In summary, this algorithm efficiently finds a peak element in a sorted or unsorted array using binary search. 
+In summary, this algorithm efficiently finds a peak element in a sorted or unsorted array using binary search.
 Peaks can occur at the beginning, end, or within the array. Great job implementing this! 😊👍	*/
+namespace FindPeakElement
+{
 
 	struct Solution 
 	{

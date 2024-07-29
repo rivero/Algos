@@ -41,10 +41,26 @@ Uses a multiset to store pairs of distance and the corresponding point vector.
 The multiset automatically sorts the elements based on the first element (distance) in ascending order.
 Iterates through the multiset and extracts the first k elements (closest points) into the result vector.
 
-Time Complexity: O(n * log(n)) in the worst case.
-	This is because calculating the distance for each point and inserting it into the data structure takes O(n) time,
-	and extracting the k closest elements takes O(log(n)) per element (roughly k * log(n) in total).
-Space Complexity: O(n) due to the multiset potentially storing all distances and points.
+1. **Time Complexity**:
+   - The main part of the function involves iterating through the `points` vector and calculating the Euclidean 
+   distance for each point.
+   - The `for` loop that iterates through the `points` vector runs in linear time, O(n), where n is the number of points.
+   - Inside the loop, we compute the Euclidean distance using `sqrt(pow(point[0], 2) + pow(point[1], 2))`. This operation 
+   takes constant time for each point.
+   - The `multiset` insertion operation (`myset.insert({ dist, point })`) also takes logarithmic time (O(log n)) because 
+   it maintains the sorted order of distances.
+   - Overall, the time complexity of the function is dominated by the loop and the insertion into the `multiset`.
+   - Therefore, the time complexity is **O(n log n)**.
+
+2. **Space Complexity**:
+   - The function uses additional memory to store the `multiset` (`myset`) and the resulting `res` vector.
+   - The `multiset` stores at most `n` elements so its space complexity is **O(n)**.
+   - The `res` vector stores the `k` closest points, so its space complexity is **O(k)**.
+   - Ignoring other constant-sized variables, the overall space complexity is **O(n)**.
+
+In summary:
+- **Time Complexity**: O(n log k)
+- **Space Complexity**: O(n) ¹²
 
 */
 {
