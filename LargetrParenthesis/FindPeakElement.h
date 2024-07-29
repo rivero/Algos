@@ -41,7 +41,6 @@ the last or first elements are peak but because anything outside the array is -�
 Complexity of this solution: T O(log n)
 
 Solution O(log n)
-Certainly! Let's dive into the explanation of the **findPeakElement** algorithm:
 
 1. **Problem Statement**:
    - Given an array `nums`, find a peak element.
@@ -73,7 +72,7 @@ Certainly! Let's dive into the explanation of the **findPeakElement** algorithm:
    - The algorithm uses only a few variables, so the space complexity is O(1).
 
 In summary, this algorithm efficiently finds a peak element in a sorted or unsorted array using binary search.
-Peaks can occur at the beginning, end, or within the array. Great job implementing this! 😊👍	*/
+*/
 namespace FindPeakElement
 {
 
@@ -129,9 +128,7 @@ namespace FindPeakElement
 
 				auto mid_val = nums[mid];
 				if (left_val < mid_val && mid_val > right_val)
-				{
 					return mid;
-				}
 				else if (left_val < mid_val && mid_val < right_val) // increasing slope
 					Left = mid + 1;
 				else

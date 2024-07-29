@@ -1,7 +1,7 @@
 #pragma once
 /*
 *
-
+https://leetcode.com/problems/merge-intervals/
 56. Merge Intervals
 
 Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, 
@@ -45,40 +45,33 @@ The provided C++ code efficiently merges overlapping intervals using the followi
 - The additional space used for storing the merged intervals is O(n).
 - Hence, the space complexity is O(n).
 
-This algorithm efficiently handles overlapping intervals and provides the desired non-overlapping intervals.
-
-
 */
 namespace MergeIntervals
 {
-	class Solution {
+	class Solution 
+	{
 	public:
-		vector<vector<int>> merge(vector<vector<int>>& arr) 
+		vector<vector<int>> merge(vector<vector<int>>& intervals)
 		{
-			sort(arr.begin(), arr.end());
-			int n = arr.size();
-
+			sort(intervals.begin(), intervals.end());
+			int n = intervals.size();
 			vector<vector<int>> ans;
-			ans.push_back(arr[0]);
-			for (int i = 1; i < n; i++) 
+			ans.push_back(intervals[0]);
+			for (int i = 1; i < n; i++)
 			{
-				auto nextFirstElement = arr[i][0];
-				auto nextSecondElement = arr[i][1];
-				auto previousSecondElement = ans.back()[1];
-				if (nextFirstElement > previousSecondElement)
+				auto curFirst = intervals[i][0];
+				auto prevSec = ans.back()[1];
+				if (curFirst > prevSec)
+					ans.push_back(intervals[i]);
+				else
 				{
-					ans.push_back(arr[i]);
-				}
-				else 
-				{
-					ans.back()[1] = max(previousSecondElement, nextSecondElement);
+					auto curSec = intervals[i][1];
+					ans.back()[1] = max(prevSec, curSec);
 				}
 			}
-
 			return ans;
 		}
-	};
-	void process()
+	};	void process()
 	{
 		Solution sol;
 		vector<vector<int>> vec =
