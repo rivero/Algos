@@ -93,6 +93,12 @@ Example 1:
 		When magic happens, then one of the pointers is ahead in the iteration than the other. 
 		Slowly but surely they will catch up with each other and when they are the same the LCA was found
 
+		Find the node's parent. When the parent becomes null, set the current node to the other node. 
+		This will cause that the current node and the other node enter into a asynchroniyu in thir iterations.
+		Each time they are at the top, they will set themselves to the other node. The iteration will slowly move the nodes
+		to be closer in a inward vertical motion (less space between their levels) 
+		Eventually, they will synchronz and reach thir mutual parent node.
+
 2. **Explanation**:
    - The algorithm starts with `P` and `Q` pointing to the input nodes `p` and `q`.
    - In each iteration, it checks whether `P` and `Q` are equal. If they are, it means they have met at the LCA.
@@ -140,8 +146,8 @@ namespace LowestCommonAncestorBinaryTreeIII
 #endif // PRINTV
 			while (P != Q)
 			{
-				P = !P ? q : P->parent;
-				Q = !Q ? p : Q->parent;
+				P = P ? P->parent : q;
+				Q = Q ? Q->parent : p;
 #ifdef PRINTV
 			cout << "\nEnd   a:\t" << P->val << "\tb:\t" << Q->val << "\n";
 #endif // PRINTV

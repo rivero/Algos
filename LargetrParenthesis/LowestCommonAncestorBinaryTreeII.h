@@ -76,6 +76,12 @@ Solution
 	 ```
 	 - Nodes 5 and 1 have LCA = 3.
 	 - Nodes 5 and 4 have LCA = 5.
+We use a DFS approach were we search for the values in both trees.
+if we find the value in one tree and in other tree, three root is the LCA
+if we find the value in one tree and not in the other, that node with the value is the LCA because nodes can be their own LCA.
+	this is because one we know that the other three doesnt contain the value, we are guaranteed that the not found value
+	will be a descendant of the found value so we return that one.
+However, if either value is not found we return null
 
 */
 namespace LowestCommonAncestorBinaryTreeII
