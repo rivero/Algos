@@ -100,83 +100,91 @@ Solution
 - Compare the all the users's sequences against everyone else
 */
 
-
-namespace SOLUTION
-{
-	class Solution {
-	public:
-		vector<string> mostVisitedPattern(vector<string>& username, vector<int>& timestamp, vector<string>& website) 
-		{
-			map<string, vector<pair<int, string>>> mp;
-			set<string> web;
-			int n = username.size();
-
-			for (int i = 0; i < n; i++)
-			{
-				mp[username[i]].push_back({ timestamp[i],website[i] });
-				web.insert(website[i]);
-			}
-
-			for (auto& it : mp)
-			{
-				sort(it.second.begin(), it.second.end());
-			}
-
-			vector<string> ans;
-			int maxCount = 0;
-			for (auto& u : web)
-			{
-				for (auto& v : web)
-				{
-					for (auto& w : web)
-					{
-						int currentCount = 0;
-						for (auto& it : mp)
-						{
-							auto& sites = it.second;
-							int current = 0;
-
-							for (auto& [_, site] : sites)
-							{
-								if (current == 0 && u == site)
-								{
-									current++;
-								}
-								else if (current == 1 && v == site)
-								{
-									current++;
-								}
-								else if (current == 2 && w == site)
-								{
-									current++;
-									currentCount++;
-									break;
-								}
-							}
-
-						}
-						if (maxCount < currentCount)
-						{
-							ans = { u,v,w };
-							maxCount = currentCount;
-						}
-					}
-				}
-			}
-			return ans;
-
-		}
-	};
-}
-
 #define PRINTV
 //#define TEST_SEQUENCES
 #define TEST_PROCESS
 #define DISPLAY_SEQUENCES
 
-
 namespace AnalyzeUserWebsiteVisit
 {
+	class Solution 
+	{
+	public:
+		vector<string> mostVisitedPattern(vector<string>& username, vector<int>& timestamp, vector<string>& website) {
+			// 1. Group each user's visited website and sort by timestamp
+			unordered_map<string, map<int, string>> usrTSwebsiteMap; // user: {timestamp, website}
+			for (int i = 0; i < username.size(); i++) 
+			{
+				usrTSwebsiteMap[username[i]][timestamp[i]] = website[i];
+			}
+
+			cout << "\n\nuser timestamp website map:\n";
+			for (auto [user, tswsmp] : usrTSwebsiteMap)
+			{
+				cout << user << "\n";
+				for (auto [ts, ws] : tswsmp)
+				{
+					cout << "\tts:" << ts << "\tws:" << ws << "\n";
+				} 
+				cout << "\n";
+			}
+
+			// 2. Collect each user's pattern
+			unordered_map<string, int> count; // pattern: user_count
+			for (auto [user, TSwebsiteMap] : usrTSwebsiteMap)
+			{
+				unordered_set<string> pattern; // each user's pattern(triplets)
+				for (auto i = TSwebsiteMap.begin(); i != TSwebsiteMap.end(); ++i) 
+				{
+					for (auto j = next(i); j != TSwebsiteMap.end(); ++j) 
+					{
+						for (auto k = next(j); k != TSwebsiteMap.end(); ++k) 
+						{
+							string p = i->second + "A" + j->second + "B" + k->second;
+							pattern.insert(p);
+						}
+					}
+				}
+				// 3. Count each pattern's user
+				for (auto p : pattern) 
+				{
+					count[p]++;
+				}
+			}
+			cout << "counter:\n";
+			for (auto [site, counter] : count)
+			{
+				cout << "site:" << site << "\tcounter: " << counter << "\n";
+			}
+
+			// 4. find largest count's pattern.
+			//    If count is same, result is lexicographically small pattern.
+			string res = "";
+			int maxCount = 0;
+			for (auto [site, counter] : count)
+			{
+				if (counter > maxCount) 
+				{
+					res = site;
+					maxCount = counter;
+				}
+				else if (counter == maxCount && site < res) 
+				{
+					res = site; 
+				}
+			}
+			// res looks like: "cartAmapsBhome
+
+			// 5. return result
+			vector<string> result;
+			size_t first = res.find("A"), second = res.find("B");
+			result.push_back(res.substr(0, first));
+			result.push_back(res.substr(first + 1, second - first - 1));
+			result.push_back(res.substr(second + 1));
+			return result;
+		}
+	};
+
 	struct help
 	{
 		static void printSet(auto s)
@@ -199,7 +207,7 @@ namespace AnalyzeUserWebsiteVisit
 
 	void process()
 	{
-		SOLUTION::Solution sol;
+		Solution sol;
 #ifdef TEST_SEQUENCES
 		if (false)
 		{
@@ -235,7 +243,7 @@ namespace AnalyzeUserWebsiteVisit
 		}
 #endif
 #ifdef TEST_PROCESS
-		if(true)
+		if (true)
 		{
 			strrow username{ "joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary" };
 			t_vecInt timestamp{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

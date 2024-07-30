@@ -186,6 +186,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "SearchInRotatedSortedArray.h"
 #include "InsertInterval.h"
 #include "ContiguousArray.h"
+#include "AccountsMerge.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -200,7 +201,7 @@ struct tests
 
 int main()
 {
-	tests t("ContiguousArray");
+	tests t("AccountsMerge");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -600,15 +601,6 @@ int main()
 		InsertInterval::process();
 	if (t.contains("ContiguousArray"))
 		ContiguousArray::process();
+	if (t.contains("AccountsMerge"))
+		AccountsMerge::process();
 }
-
-
-//"the color re(d))()(()"
-//
-//"the color re)("
-//
-//"the color re(d))()(()" should be 0 no matching
-//
-//"(c(oder)) b(yte)" = 1
-//
-//"(coder)(byte))" = 0

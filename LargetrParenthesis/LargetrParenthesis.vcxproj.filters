@@ -284,5 +284,8 @@
     <ClInclude Include="ContiguousArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AccountsMerge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

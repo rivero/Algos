@@ -147,6 +147,7 @@
     <ClCompile Include="Practice.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccountsMerge.h" />
     <ClInclude Include="AllNodesInDistanceKInBinaryTree.h" />
     <ClInclude Include="AnalyzeUserWebsiteVisit.h" />
     <ClInclude Include="arrayStringsAreEqual.h" />
