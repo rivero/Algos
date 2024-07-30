@@ -95,9 +95,59 @@ It is guaranteed that there is at least one user who visited at least three webs
 All the tuples [username[i], timestamp[i], website[i] are unique
 
 Solution
-- Create an algorithm to obtain all the possible 3 sequences (n sequences)
-- Create a collection of users plus all the sequences
-- Compare the all the users's sequences against everyone else
+## Algorithm Explanation
+
+**Problem:** Find the most visited website pattern among users.
+
+**Algorithm Steps:**
+
+1. **Group Websites by User and Timestamp:**
+   * Create a map `usrTSwebsiteMap` to store user, timestamp, and website information.
+   * Iterate through `username`, `timestamp`, and `website` arrays, populating the map.
+
+2. **Generate Patterns for Each User:**
+   * Iterate through each user's website visits.
+   * Generate all possible triplets of websites.
+   * Store these triplets in a set `pattern` to avoid duplicates.
+
+3. **Count Pattern Occurrences:**
+   * Create a map `count` to store the frequency of each pattern.
+   * Iterate through each user's patterns and increment their count in the `count` map.
+
+4. **Find Most Frequent Pattern:**
+   * Iterate through the `count` map to find the pattern with the highest frequency.
+   * If multiple patterns have the same maximum frequency, choose the lexicographically smallest pattern.
+
+5. **Extract and Return Result:**
+   * Convert the pattern string into a vector of websites and return it.
+
+### Time Complexity
+
+* **Grouping websites:** O(n), where n is the number of records.
+* **Generating patterns:** O(n^3) in the worst case for each user, leading to O(n^4) overall.
+* **Counting patterns:** O(n^3) in the worst case.
+* **Finding most frequent pattern:** O(n^3) in the worst case.
+
+**Total time complexity:** O(n^4)
+
+### Space Complexity
+
+* `usrTSwebsiteMap`: O(n)
+* `count`: O(n^3) in the worst case (number of unique patterns)
+* `pattern`: O(n^3) for each user
+* `mergedAccounts`: O(n)
+
+**Total space complexity:** O(n^3)
+
+## Optimization Potential
+
+* **Trimming website lists:** If a user's website list exceeds a certain length, consider only the most recent visits to reduce the number of pattern combinations.
+* **Early stopping:** If a pattern's count exceeds the current maximum, stop generating patterns for the current user.
+* **Data structures:** Explore using more efficient data structures for storing and processing patterns.
+
+While the provided code correctly solves the problem, the time and space complexities are high due to the exhaustive generation of all possible patterns. Optimizations can significantly improve performance for larger datasets.
+
+
 */
 
 #define PRINTV

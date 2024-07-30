@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /*
 https://leetcode.com/problems/accounts-merge
 721. Accounts Merge
@@ -58,7 +58,70 @@ Constraints:
 accounts[i][0] consists of English letters.
 accounts[i][j] (for j
 
-If any of my emails is included in the previous 
+## Understanding the Code and Its Complexities
+
+### Algorithm Overview
+
+The provided code implements an algorithm to merge accounts based on common emails. It utilizes a Disjoint-Set Union (DSU) 
+data structure to efficiently group accounts with shared emails.
+
+### Code Breakdown
+
+**DSU Implementation:**
+* `idMap`: Represents the parent of each element in the DSU.
+* `getRootParent`: Performs path compression to find the root of an element.
+
+**accountsMerge Function:**
+
+1. **Initialization:**
+   * Creates a DSU structure with `n` elements (where `n` is the number of accounts).
+   * Initializes an `emailToIdMap` to map emails to account indices.
+
+2. **Email Processing:**
+   * Iterates through each account and its emails.
+   * If an email is seen for the first time, maps it to the current account index.
+   * If the email exists, merges the current account with the account associated with the email using DSU.
+
+3. **Merging Accounts:**
+   * Creates a `mergedMap` to store merged accounts.
+   * Iterates through `emailToIdMap` and assigns emails to their respective merged account based on their root in the DSU.
+
+4. **Constructing Result:**
+   * Creates a `mergedAccounts` vector to store the final result.
+   * For each merged account, sorts the emails and adds the account name to the beginning.
+
+### Time Complexity
+
+* **DSU operations:** Amortized O(α(n)) per operation, where α is the inverse Ackermann function, which is practically constant.
+* **Iterating through accounts and emails:** O(n * m), where n is the number of accounts and m is the average number of emails 
+per account.
+* **Creating merged accounts:** O(n * m) in the worst case.
+* **Sorting emails:** O(m log m) for each account, but this is generally dominated by the outer loop.
+
+Overall, the time complexity is **O(n * m log m)** in the worst case.
+
+### Space Complexity
+
+* `idMap`: O(n)
+* `emailToIdMap`: O(n * m)
+* `mergedMap`: O(n * m) in the worst case, but often less due to merging.
+* `mergedAccounts`: O(n * m) in the worst case.
+
+Overall, the space complexity is **O(n * m)**.
+
+### Key Points
+
+* The DSU is crucial for efficiently merging accounts based on shared emails.
+* The use of `emailToIdMap` helps in quickly finding the corresponding account for an email.
+* The `mergedMap` is used to group emails by their account.
+* The final result is constructed by sorting emails and adding the account name.
+
+This implementation effectively merges accounts based on common emails, providing a clear and efficient solution.
+
+**Would you like to explore any specific optimizations or alternative approaches?**
+
+
+
 */
 
 
