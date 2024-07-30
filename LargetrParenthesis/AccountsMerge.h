@@ -60,63 +60,59 @@ accounts[i][j] (for j
 
 If any of my emails is included in the previous 
 */
+
+
+
 namespace AccountsMerge
 {
-	class Solution 
-	{
-	public:
-		vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) 
-		{
-			if (accounts.empty()) return {};
+	class Solution {
+	private:
+		vector<int> idMap;
 
-			set<pair<string, vector<string>>> accountsSet;
-
-			for (int i = 0; i < accounts.size(); i++) 
-			{
-				auto& usrName = accounts[i][0];
-
-				// Extract the emails from the first account
-				vector<string> emails = vector<string>(accounts[i].begin() + 1, accounts[i].end());
-				sort(emails.begin(), emails.end());
-				accountsSet.insert({ usrName, emails });
+		int getRootParent(int x) {
+			if (idMap[x] != x) {
+				idMap[x] = getRootParent(idMap[x]);
 			}
+			return idMap[x];
+		}
 
-			map<string, vector<string>> res;
-
-			for (auto acc = accountsSet.begin(); acc != accountsSet.end(); ++acc) 
-			{
-				auto& [usrName, emails] = *acc;
-				res[usrName] = emails;
-			
-				for (auto accNext = next(acc); accNext != accountsSet.end(); ++accNext)
-				{
-					auto& [usrNameNext, emailsNext] = *accNext;
-					vector<string> commonEmails;
-					set_union(emails.begin(), emails.end(), 
-						emailsNext.begin(), emailsNext.end(), back_inserter(commonEmails));
-					if (commonEmails.empty())
-					{
-						res[usrNameNext] = emailsNext;
+	public:
+		vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+			int n = accounts.size();
+			idMap.resize(n);
+			for (int i = 0; i < n; ++i) {
+				idMap[i] = i;
+			}
+			unordered_map<string, int> emailToIdMap;
+			for (int i = 0; i < n; ++i) {
+				const auto& account = accounts[i];
+				for (int j = 1; j < account.size(); ++j) {
+					const string& email = account[j];
+					auto it = emailToIdMap.find(email);
+					if (it != emailToIdMap.end()) {
+						idMap[getRootParent(i)] = getRootParent(it->second);
 					}
-					else
-					{
-						for(auto& email: commonEmails)
-							res[usrName].push_back(email);
+					else {
+						emailToIdMap[email] = i;
 					}
-				
 				}
 			}
-			vector<vector<string>> result;
-			for (auto& [usrName, emails] : res)
-			{
-				vector<string> row;
-				row.push_back(usrName);
-				row.insert(row.end(), emails.begin(), emails.end());
-				result.push_back(row);
+			unordered_map<int, vector<string>> mergedMap;
+			for (const auto& entry : emailToIdMap) {
+				int id = getRootParent(entry.second);
+				mergedMap[id].push_back(entry.first);
 			}
-			return result;
+			vector<vector<string>> mergedAccounts;
+			for (auto& entry : mergedMap) {
+				vector<string>& emails = entry.second;
+				sort(emails.begin(), emails.end());
+				emails.insert(emails.begin(), accounts[entry.first][0]);
+				mergedAccounts.push_back(move(emails));
+			}
+			return mergedAccounts;
 		}
 	};
+
 	void process()
 	{
 		Solution sol;
