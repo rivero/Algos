@@ -278,5 +278,11 @@
     <ClInclude Include="TwoSum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SubsetsII.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContiguousArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

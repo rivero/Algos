@@ -202,12 +202,6 @@ The given code snippet defines a function called `groupStrings` that groups stri
   - The output vector (`groups`) also contributes to the space complexity.
 - Thus, the overall space complexity is O(N).
 
-In summary, the `groupStrings` algorithm efficiently groups strings based on their shifted representations. If you have any further questions or need clarification, feel free to ask! 😊 ¹²
-
-Source: Conversation with Copilot, 7/22/2024
-(1) Complete Guide On Complexity Analysis - Data Structure and Algorithms .... https://www.geeksforgeeks.org/complete-guide-on-complexity-analysis/.
-(2) Introduction to Strings – Data Structure and Algorithm Tutorials. https://www.geeksforgeeks.org/introduction-to-strings-data-structure-and-algorithm-tutorials/.
-(3) Rabin-Karp Algorithm for Pattern Searching - GeeksforGeeks. https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/.
 */
 
 	class Solution : public timeit

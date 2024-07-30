@@ -181,9 +181,11 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "FindMaxLenValidSubsequenceII.h"
 #include "Permutations.h"
 #include "SubSets.h"
+#include "SubsetsII.h"
 #include "FindMinimumInRotatedSortedArray.h"
 #include "SearchInRotatedSortedArray.h"
 #include "InsertInterval.h"
+#include "ContiguousArray.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -198,7 +200,7 @@ struct tests
 
 int main()
 {
-	tests t("InsertInterval");
+	tests t("ContiguousArray");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -596,6 +598,8 @@ int main()
 	}
 	if (t.contains("InsertInterval"))
 		InsertInterval::process();
+	if (t.contains("ContiguousArray"))
+		ContiguousArray::process();
 }
 
 

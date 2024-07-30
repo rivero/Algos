@@ -154,6 +154,7 @@
     <ClInclude Include="BasicCalculatorII.h" />
     <ClInclude Include="BinarySearch.h" />
     <ClInclude Include="BinaryTreeLevelOrderTransversal.h" />
+    <ClInclude Include="ContiguousArray.h" />
     <ClInclude Include="DiagonalTraverse.h" />
     <ClInclude Include="DiameterOfBinaryTree.h" />
     <ClInclude Include="BinaryTreeRightSideView.h" />
@@ -222,6 +223,7 @@
     <ClInclude Include="DotProductTwoSparseVector.h" />
     <ClInclude Include="SubarraySumEqualsK.h" />
     <ClInclude Include="SubSets.h" />
+    <ClInclude Include="SubsetsII.h" />
     <ClInclude Include="SumRootToLeaf.h" />
     <ClInclude Include="RangeSumOfBST.h" />
     <ClInclude Include="ThreeSum.h" />

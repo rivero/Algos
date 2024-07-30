@@ -33,26 +33,42 @@ Constraints:
 -109 <= target <= 109
 Only one valid answer exists.
 
-1. **Algorithm Explanation**:
-   - The `twoSum` function aims to find a pair of indices in the given integer vector `nums` such that the corresponding elements add up to the given `target`.
-   - The algorithm follows these steps:
-	 1. Create an unordered map (hash table) called `hash` to store each element of `nums` along with its index.
-	 2. Iterate through `nums`:
-		- For each element `nums[i]`, calculate the complement (`complement = target - nums[i]`).
-		- Check if the complement exists in the `hash`.
-		- If found, return the pair of indices `{i, hash[complement]}`.
-		- Add that value, index to map
-	 3. If no valid pair is found, return an empty vector (indicating no solution).
+## Understanding the Two-Sum Algorithm
 
-2. **Complexities**:
-   - Time Complexity: O(N), where N is the size of the input vector `nums`.
-	 - The algorithm processes each element in `nums` once while building the hash table.
-   - Space Complexity: O(N), due to the space used by the hash table (`hash`).
+### Problem Statement
+Given an array of integers `nums` and an integer `target`, find the indices of the two numbers such that they add up to the target.
 
-3. **Example**:
-   - Input: `nums = [2, 7, 11, 15], target = 9`
-	 - The pair `[0, 1]` (indices of elements 2 and 7) adds up to the target.
-	 - Output: `[0, 1]`
+### Algorithm Explanation
+This algorithm uses a hash map to efficiently solve the two-sum problem.
+
+1. **Create a hash map:** An empty hash map `hash` is created to store elements and their corresponding indices.
+2. **Iterate through the array:**
+   * For each number `num` in the array:
+	 * Calculate the `complement` as `target - num`.
+	 * If the `complement` exists in the hash map, it means we found a pair that adds up to the target. Return the indices of 
+	 the current number and the complement.
+	 * Otherwise, store the current number and its index in the hash map for potential future matches.
+3. **Return an empty vector:** If no pair is found, return an empty vector.
+
+### Why Does It Work?
+The core idea is that for every number `num` we encounter, we check if its complement `target - num` already exists in the hash map.
+If it does, we've found a pair that sums up to the target.
+
+* **Hash map efficiency:** Using a hash map provides efficient lookup for elements. The average time complexity for searching, 
+insertion, and deletion in a hash map is O(1).
+* **One-pass solution:** The algorithm iterates through the array only once, making it an efficient solution.
+
+By storing elements and their indices in the hash map, we can quickly check if the complement of a number exists, avoiding the 
+need for nested loops.
+
+**Example:**
+For `nums = [2, 7, 11, 15]` and `target = 9`,
+* The algorithm iterates through the array:
+  * `num = 2`, `complement = 7`. Since `7` is not in the hash map, store `(2, 0)` in the hash map.
+  * `num = 7`, `complement = 2`. Since `2` is in the hash map, return the indices `[1, 0]`.
+
+**Time complexity:** O(n) due to the single pass through the array.
+**Space complexity:** O(n) for the hash map in the worst case.
 
 (7) Two Sum Problems - 4+ ways to solve. - DEV Community. https://dev.to/ggorantala/two-sum-problems-4c9j.
 

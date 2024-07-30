@@ -77,6 +77,14 @@ at that index, reverse the vector.
 	which results in linear time complexity: O(n).
 	- Space Complexity: The solution uses only a constant amount of extra space, so the space complexity is O(1).
 
+
+	Find first element's index that is smaller thanits right.
+	Test if we found it - else reverse the numbers and return
+	find the first rightmost number greater than the one at the pivot
+	swap this number with the pivot
+	reverse the numbers at the right of the pivot to ensure we have the next permutation
+
+
 */
 namespace NextPermutation
 {
@@ -85,33 +93,33 @@ namespace NextPermutation
 	public:
 		void nextPermutation(vector<int>& nums)
 		{
-			int pivot_index{-1};
+			int pivot{-1};
 
 			// iterate from the RIGHT to find the pivot
-			auto nums_len = nums.size() - 1;
-			for (int i = nums_len; i >= 0; i--)
+			auto n = nums.size() - 1;
+			for (int i = n; i > -1; i--)
 			{
 				if (nums[i] > nums[i-1])
 				{
-					pivot_index = i - 1;
+					pivot = i - 1;
 					break;
 				}
 			}
 
-			if (pivot_index == -1) // no element pivot was found
+			if (pivot == -1) // no element pivot was found
 			{
 				reverse(nums.begin(), nums.end());
 				return;
 			}
 
-			while (nums[nums_len] <= nums[pivot_index]) // Find the first element greater than the pivot element FROM RIGHT TO LEFT
+			while (nums[n] <= nums[pivot]) // Find the first element greater than the pivot element FROM RIGHT TO LEFT
 			{
-				nums_len--;
+				n--;
 			}
 			// swap the numbers
-			swap(nums[nums_len], nums[pivot_index]);
+			swap(nums[n], nums[pivot]);
 			// reverse from pivot to the end
-			reverse(nums.begin() + pivot_index + 1,nums.end());
+			reverse(nums.begin() + pivot + 1,nums.end());
 		}
 	};
 
