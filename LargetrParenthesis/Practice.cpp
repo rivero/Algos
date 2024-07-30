@@ -187,6 +187,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "InsertInterval.h"
 #include "ContiguousArray.h"
 #include "AccountsMerge.h"
+#include "FindFirstAndLastPositionOfelementInSortedArray.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -201,7 +202,7 @@ struct tests
 
 int main()
 {
-	tests t("AccountsMerge");
+	tests t("FindFirstAndLastPositionOfelementInSortedArray");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -603,4 +604,6 @@ int main()
 		ContiguousArray::process();
 	if (t.contains("AccountsMerge"))
 		AccountsMerge::process();
+	if (t.contains("FindFirstAndLastPositionOfelementInSortedArray"))
+		FindFirstAndLastPositionOfelementInSortedArray::process();
 }

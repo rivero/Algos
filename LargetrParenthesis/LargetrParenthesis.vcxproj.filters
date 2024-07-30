@@ -287,5 +287,8 @@
     <ClInclude Include="AccountsMerge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FindFirstAndLastPositionOfelementInSortedArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

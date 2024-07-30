@@ -167,6 +167,7 @@
     <ClInclude Include="CopyListwWithRandomPointer.h" />
     <ClInclude Include="CustomSortString.h" />
     <ClInclude Include="ExclusiveTimeOfFunctions.h" />
+    <ClInclude Include="FindFirstAndLastPositionOfelementInSortedArray.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindKClosestElements.h" />
     <ClInclude Include="FindMaxLenValidSubsequenceII.h" />
