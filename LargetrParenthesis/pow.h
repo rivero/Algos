@@ -50,30 +50,79 @@ namespace mypow
 	Expected 0.99979
 
 	Solution
-	We use a memoization table (memo) to store previously computed results.
-	The power() function recursively calculates the value of x raised to the power of n.
-	It splits the problem into smaller subproblems by dividing the exponent by 2.
-	If n is odd, we multiply the result by x once more.
-	The memoization table ensures that we avoid redundant calculations
 
-	1. `fast_power(x, n/2)`:
-			- When computing `x^n`, we can divide the problem into smaller subproblems by considering `x^(n/2)`.
-			- By recursively calculating `fast_power(x, n/2)`, we effectively split the problem in half.
-			- The idea is to compute the result for `n/2` and then use it to build the result for `n`.
-			- This approach reduces the number of multiplications needed to compute the final result.
+**Algorithm Breakdown:**
 
-	2. Example:
-		- Suppose we want to calculate `x^8`.
-		- Instead of directly multiplying `x` eight times, we can break it down as follows:
-			- Compute `x^4` by calling `fast_power(x, 8/2)`.
-			- Then square the result: `(x^4)^2`.
-			- This gives us `x^8`.
+This code implements a recursive function `fast_power` to efficiently calculate `base` raised to the power of `pwr`. 
+It uses a divide-and-conquer approach with memoization to optimize performance:
+
+1. **Base Cases:**
+   - If `pwr` is 0, return 1 (any number raised to the power of 0 is 1).
+   - If `pwr` is 1, return `base` (any number raised to the power of 1 is itself).
+
+2. **Memoization Check:**
+   - The function first checks if the result for `pwr` has already been calculated and stored in the `powers` map. 
+   If found, it directly returns the cached value. This saves redundant calculations for frequently used powers.
+
+3. **Recursive Call with Half Power:**
+   - If `pwr` is not found in the map, the function calculates the result for `base` raised to `pwr / 2` recursively. 
+   This reduces the problem size by half in each recursive call.
+
+4. **Squaring the Result (`result *= result`):**
+	 - Since we're calculating powers that are often even (`pwr` is divisible by 2), 
+	 raising `base` to `pwr` can be efficiently computed by squaring the result obtained for `pwr / 2`.
+	 - Squaring essentially multiplies the base by itself `pwr / 2` times, which is equivalent 
+	 to calculating `base ^ (pwr / 2) * base ^ (pwr / 2)`.
+
+5. **Handling Odd Powers:**
+   - After squaring, if `pwr` is odd (`pwr % 2 == 1`), the function multiplies the result by `base` one more time. 
+   This accounts for the additional base needed for an odd power.
+
+6. **Memoization and Return:**
+   - The final result for `base ^ pwr` is calculated and stored in the `powers` map for future use.
+   - The function then returns the calculated result.
+
+**Why `result *= result` is Necessary:**
+- This step exploits the property of exponentiation that `a ^ n = (a ^ (n / 2)) ^ 2` (for even `n`).
+- The `result *= result` essentially squares the base raised to half the power, effectively achieving `base ^ pwr` for even `pwr`.
+- We are working with even poiwers and then correct for odd in the last step when we result *= base
+
+**Overall, the `fast_power` function provides a time-efficient solution for calculating exponentiations by:**
+
+- Reducing the problem size with divide-and-conquer.
+- Avoiding redundant calculations with memoization.
+- Optimizing even power calculations with squaring.
 
 	3. Recursion:
 		- The `fast_power` function continues this process recursively until it reaches the base cases (when `n` is 0 or 1).
-		- By dividing the problem into smaller halves, it efficiently computes the final result.
 
-In summary, `fast_power(x, n/2)` is a crucial step in the algorithm for calculating `x` raised to the power of `n`.
+	## Example: Calculating 2^8 using the `fast_power` algorithm
+
+	### Breakdown
+
+	Let's break down the calculation of `2^8` using the `fast_power` algorithm:
+
+	1. **Initial call:** `fast_power(2, 8)`
+	2. **Recursive call:** `fast_power(2, 4)`
+	3. **Recursive call:** `fast_power(2, 2)`
+	4. **Base case:** `fast_power(2, 1)` returns 2
+	5. **Squaring:** `result = 2 * 2 = 4`
+	6. **Memoization:** Store `4` in `powers` for `pwr = 2`
+	7. **Return:** `4`
+	8. **Squaring:** `result = 4 * 4 = 16`
+	9. **Memoization:** Store `16` in `powers` for `pwr = 4`
+	10. **Return:** `16`
+	11. **Squaring:** `result = 16 * 16 = 256`
+	12. **Memoization:** Store `256` in `powers` for `pwr = 8`
+	13. **Return:** `256`
+
+	### Explanation
+
+	The algorithm effectively calculates `2^8` by recursively dividing the power by 2, squaring the result at each step, 
+	and handling odd powers appropriately. Memoization is used to store intermediate results, preventing redundant calculations.
+
+	The final result is `256`.
+
 
 	Time Complexity:
 		The function uses a divide-and-conquer approach by recursively computing the power of x to the n/2 and 

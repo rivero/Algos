@@ -49,8 +49,54 @@ pivot is the index where the elements are no longer increasing FROM RIGHT TO LEF
 if the pivot is not found, the numbers are increasing FROM LEFT TO RIGHT.
 reverse and return
 
-If the pivot index is found, look for the next element that is smaller FROM RIGHT TO LEFT
-at that index, reverse the vector.
+## Understanding the Next Permutation Algorithm
+
+### Core Idea
+
+The next permutation of a number sequence is the lexicographically next greater permutation. 
+To find this, we identify a decreasing suffix in the sequence and then rearrange the sequence to find the next larger permutation.
+
+Locate the breakpoint
+Is where the sequence starts decreasing from right to left
+
+**This breakpoint is crucial because:**
+
+* It indicates that the elements to the right of the breakpoint are in descending order.
+* To find the next permutation, we need to modify the elements to the right of the breakpoint 
+while keeping the left part unchanged.
+
+### Elaboration
+
+Let's break down the process further:
+
+1. **Finding the Breakpoint:**
+   * Iterate through the array from right to left.
+   * The first element that is smaller than its next element is the breakpoint.
+
+2. **Finding the Successor:**
+   * Find the smallest element in the suffix (elements to the right of the breakpoint) that is greater than the element at 
+   the breakpoint. This element is called the successor.
+
+3. **Swapping:**
+   * Swap the element at the breakpoint with the successor.
+
+4. **Reversing the Suffix:**
+   * Reverse the elements to the right of the breakpoint to form the smallest possible permutation with the swapped elements.
+
+**Example:**
+
+Consider the array `[1, 2, 3, 4, 5, 8, 7]`.
+
+* Breakpoint: Index 4 (where 5 is less than 8)
+* Successor: 7
+* Swap 5 and 7: `[1, 2, 3, 7, 5, 8, 4]`
+* Reverse the suffix: `[1, 2, 3, 7, 4, 5, 8]`
+
+This is the next permutation of the given array.
+
+* Understanding the breakpoint and successor is crucial for the process.
+* Reversing the suffix ensures the smallest possible increase in the permutation.
+
 
 1. **Problem Description**:
 	- Given an array of integers, we want to find the next lexicographically greater permutation of the array.
@@ -77,12 +123,6 @@ at that index, reverse the vector.
 	which results in linear time complexity: O(n).
 	- Space Complexity: The solution uses only a constant amount of extra space, so the space complexity is O(1).
 
-
-	Find first element's index that is smaller thanits right.
-	Test if we found it - else reverse the numbers and return
-	find the first rightmost number greater than the one at the pivot
-	swap this number with the pivot
-	reverse the numbers at the right of the pivot to ensure we have the next permutation
 
 
 */

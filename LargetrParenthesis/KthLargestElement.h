@@ -75,18 +75,42 @@ heap: [5,6]
 
 The final state of the heap shows that the top of the min-heap is the kth largest element is 5.
 
-Complexity
-Time Complexity: O(nlogk)
-Each of the n elements is processed once. However, heap operations take O(logk) time, leading to an overall
-complexity of O(nlogk).
+## Algorithm Explanation: Finding Kth Largest Element
 
-Space Complexity: O(k)
-The solution uses a heap with a maximum of k elements.
+**Steps:**
 
-Performance
-This solution is both time and space-efficient. By focusing only on the k largest elements and using the
-properties of a heap, it ensures optimal runtime for a wide range of inputs. The controlled space usage
-ensures that even for large k, the memory overhead remains minimal.
+1. **Create a Min-Heap:**
+   - Initialize a min-heap `min_heap` using the first `k` elements from the `nums` array.
+   - A min-heap prioritizes elements with the **smallest** values at the top.
+
+2. **Iterate Through Remaining Elements:**
+   - Iterate over the remaining elements in `nums` (starting from index `k`).
+   - For each element:
+	  - If the current element (`nums[i]`) is greater than the top element (smallest) in the min-heap:
+		 - Remove the top element (kth largest so far) from the min-heap.
+		 - Push the current element (`nums[i]`) onto the min-heap.
+
+**Rationale:**
+
+- The initial `k` elements in the min-heap will be the smallest `k` elements seen so far.
+- By iterating through the remaining elements and replacing the smallest in the heap with larger elements, 
+the min-heap will eventually contain the `k` largest elements.
+
+3. **Return Kth Largest:**
+   - After iterating through the entire array, the top element of the min-heap will be the kth largest element in the original array.
+
+## Time and Space Complexity
+
+**Time Complexity:**
+
+* O(n log k) for creating the initial min-heap (using `priority_queue`).
+* O(n - k) for iterating through the remaining elements and potentially modifying the heap (worst case: all elements are larger, 
+leading to n heap modifications).
+* Overall, the time complexity is dominated by the heap operations, resulting in O(n log k).
+
+**Space Complexity:**
+
+* O(k) for storing elements in the min-heap.
 
 My explanation
 

@@ -46,7 +46,7 @@ This algorithm employs a sliding window technique to efficiently solve the probl
   * The final answer is the maximum size of the valid window, which is `right - left`.
 
 ### Key Idea
-The algorithm maintains a sliding window where the number of zeros within the window is at most `k`. It expands the window as 
+The algorithm maintains an expanding, sliding window where the number of zeros within the window is at most `k`. It expands the window as 
 long as the number of zeros is within the limit. When the limit is exceeded, it shrinks the window from the left while adjusting 
 the `k` value accordingly.
 
@@ -55,16 +55,32 @@ the `k` value accordingly.
 * **Space complexity:** O(1), as the algorithm uses constant extra space.
 
 ### Example
-Consider the input array `nums = [1,1,1,0,0,0,1,1,1,1,0]` and `k = 2`.
+## Understanding the Algorithm
+
+**Key Idea:**
+
+* Maintain a sliding window where the number of zeros within the window is less than or equal to `k`.
+* Expand the window to the right as long as the number of zeros is less than or equal to `k`.
+* If the number of zeros exceeds `k`, contract the window from the left by removing elements until the number of zeros becomes 
+less than or equal to `k` again.
+
+**Example:**
+
+Consider the array `nums = [1,1,1,0,0,1,1,1,1,0,1,1,1,0]` and `k = 2`.
 
 * Initially, `left = 0`, `right = 0`, and `k = 2`.
-* The window expands until we encounter two zeros, making `k = 0`.
-* To maintain `k >= 0`, we shrink the window from the left, incrementing `k` when removing a zero.
-* The maximum window size is achieved when the window contains the substring `[1,1,1,0,0,1,1,1,1,1]`.
+* The window expands to include `[1,1,1,0]`.
+* The next element is `0`, so `k` decrements to 1.
+* The window expands to include `[1,1,1,0,0]`.
+* Now, `k` is 0, so we need to shrink the window.
+* The leftmost element is `1`, so the window becomes `[1,1,0,0,1]`.
+* The window continues to expand, and the maximum length is found when the right pointer reaches the end of the array.
 
-The algorithm effectively finds the longest subarray with at most `k` zeros by intelligently managing the sliding window.
-
-**Would you like to see another example or explore a different aspect of the algorithm?**
+* `left` and `right` are pointers defining the sliding window.
+* `k` keeps track of the remaining allowed zeros.
+* The loop iterates through the array, expanding the window as long as `k` is non-negative.
+* When `k` becomes negative, it means there are too many zeros in the window, so the left pointer is moved to shrink the window.
+* The maximum length of the valid window is returned.
 
 */
 namespace MaxConsecutiveOnesIII

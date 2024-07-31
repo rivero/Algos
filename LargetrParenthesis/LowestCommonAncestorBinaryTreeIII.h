@@ -94,10 +94,10 @@ Example 1:
 		Slowly but surely they will catch up with each other and when they are the same the LCA was found
 
 		Find the node's parent. When the parent becomes null, set the current node to the other node. 
-		This will cause that the current node and the other node enter into a asynchroniyu in thir iterations.
-		Each time they are at the top, they will set themselves to the other node. The iteration will slowly move the nodes
-		to be closer in a inward vertical motion (less space between their levels) 
-		Eventually, they will synchronz and reach thir mutual parent node.
+		This will cause that the current node and the other node enter into a asynchronous iterations.
+		Each time they are at the top, they will set themselves to the other node. The iteration will slowly move the nodes 
+		to be in the same level in a inward vertical motion (less space between their levels) 
+		Eventually, they will synchronize and reach their mutual parent node.
 
 2. **Explanation**:
    - The algorithm starts with `P` and `Q` pointing to the input nodes `p` and `q`.

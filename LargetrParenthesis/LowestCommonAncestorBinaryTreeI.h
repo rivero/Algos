@@ -54,14 +54,6 @@ Constraints:
 Solution
 NOTE that this API requires root.
 
-The algorithm explores the tree recursively, checking if p and q are present in the left and right subtrees.
-
-If both nodes are found in different subtrees, the current root is the LCA.
-When we find the first p or q, we return the root to that node (which is also the ancestor of the other node).
-
-Time complexity: O(n)
-Space complexity: O(1) if not counting recursive stack frames else O(n)
-
 ### Algorithm Explanation:
 
 ### Key Steps:
@@ -82,11 +74,15 @@ once we find other node, we return it, Because the other node is either under th
 - The space complexity is O(h), where h is the height of the binary tree.
 - This accounts for the recursive call stack during traversal.
 
+My explanation
+
 We use a DFS approach were we search for the values in both trees.
-if we find the value in one tree and in other tree, three root is the LCA
-if we find the value in one tree and not in the other, that node with the value is the LCA because nodes can be their own LCA.
-	this is because one we know that the other three doesnt contain the value, we are guaranteed that the not found value 
-	will be a descendant of the found value so we return that one. 
+If both left and right subtrees return non-null values, it means p and q are in different subtrees, 
+	so the current node is the LCA.
+
+If only one subtree returns a non-null value, return that subtree's root as the LCA. This is because if the other three 
+doesnt contain the value, then the not found value will be a descendant of the found value.
+.
 
 */
 namespace LowestCommonAncestorBinaryTreeI

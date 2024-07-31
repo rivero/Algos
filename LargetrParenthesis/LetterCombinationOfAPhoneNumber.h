@@ -63,9 +63,60 @@ A mapping of digit to letters is given below:
 
 	Let n be the length of the input digits.
 	The total number of possible letter combinations is exponential (up to 4^n).
-	Therefore, the time complexity of this algorithm is O(4^n) since we explore all possible combinations.
-	The space complexity is also O(4^n) because we store all valid combinations in the output vector.
+	TIME COMPLEXITY: Therefore, the time complexity of this algorithm is O(4^n) since we explore all possible combinations.
+	SPACE COMPLEXITY: The space complexity is also O(4^n) because we store all valid combinations in the output vector.
 
+	The algorithm effectively explores all possible letter combinations by recursively branching out for each digit. 
+	The backtrack function builds combinations incrementally, adding one letter at a time. 
+	The lettersNum function provides a mapping between digits and letters.
+
+	Example:
+	Breakdown for "23"
+	1. Initial Call:
+
+	letterCombinations("23") is called.
+	An empty combinations vector is created.
+	2. Backtracking:
+
+	backtrack("23", "") is called.
+	lettersNum("23") returns "ab".
+	3. First Recursive Call:
+
+	backtrack("3", "a") is called.
+	lettersNum("3") returns "def".
+	4. Second Level Backtracking:
+
+	backtrack("", "ad") is called.
+	digits is empty, so "ad" is added to combinations.
+	backtrack("", "ae") is called.
+	digits is empty, so "ae" is added to combinations.
+	backtrack("", "af") is called.
+	digits is empty, so "af" is added to combinations.
+	5. First Recursive Call Backtracks:
+
+	Returns to the previous level.
+	6. Second Recursive Call:
+
+	backtrack("3", "b") is called.
+	Similar steps as above lead to "bd", "be", and "bf" being added to combinations.
+	7. Final Result:
+
+	The combinations vector now contains:
+	"ad"
+	"ae"
+	"af"
+	"bd"
+	"be"
+	"bf"
+	Return Value:
+	The function returns the combinations vector containing all possible letter combinations for "23".
+
+
+	          ""
+	  /	       |       \
+	 a         b        c
+	/|\       /|\      /|\
+   ad ae af bd be bf cd ce cf
 
    */
 namespace LetterCombinationOfAPhoneNumber

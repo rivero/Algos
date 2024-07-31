@@ -36,16 +36,6 @@ Constraints:
 1 <= s.length <= 105
 s[i] is either '(' , ')', or lowercase English letter.
 
-0. Use stack of indexes
-1. scan the string
-3. when close parenthesis is found pop index if stack not empty; if stack is empty mark that string element with '*' (to avoid).
-2. when an open parenthesis is push index
-5. Once finished parsing string, If stack has elements, mark those elements (they are indexes) as invalid (*)
-6. Create new string with valid indexes (not invalid)
-7. Return result
-
-Certainly! Let's break down the `minRemoveToMakeValid` function and discuss its algorithm and complexities.
-
 	 1. Initialize an empty stack (`op`) to keep track of opening parentheses indices.
 	 2. Iterate through each character in the input string `s`.
 		- If the character is ')':

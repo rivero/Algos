@@ -60,10 +60,16 @@ If the values are the same as their previous counterparts, the pointers continue
 
 7. **Increment `i`**: Finally, the outer loop increments `i` to move to the next unique value.
 
-**Time Complexity**:
-- The sorting step takes O(n log n) time.
-- The nested loops (two-pointer approach) iterate through the array, resulting in O(n^2) operations.
-- Combining both, the overall time complexity of the `threeSum` algorithm is O(n^2).
+Time Complexity
+Sorting: O(n log n) using a typical sorting algorithm like quicksort or merge sort.
+Iterating and finding triplets: O(n^2) in the worst case, as the outer loop iterates through n elements, 
+and the inner two-pointer loop iterates through n elements for each outer loop iteration.
+Overall time complexity: O(n^2) due to the nested loops.
+
+Space Complexity
+O(n) for sorting the input array (in-place sorting algorithms like quicksort have O(1) extra space).
+O(n) for the res vector to store the result triplets.
+Overall space complexity: O(n).
 
 */
 namespace ThreeSum
