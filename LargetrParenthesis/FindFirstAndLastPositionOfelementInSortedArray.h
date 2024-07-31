@@ -71,9 +71,8 @@ namespace FindFirstAndLastPositionOfelementInSortedArray
 						leftIndex = mid;
 					right = mid - 1; // Look for the leftmost occurrence
 				}
-				else if (nums[mid] < target) {
+				else
 					left = mid + 1;
-				}
 			}
 
 			// Find the rightmost occurrence
@@ -87,15 +86,13 @@ namespace FindFirstAndLastPositionOfelementInSortedArray
 						rightIndex = mid;
 					left = mid + 1; // Look for the rightmost occurrence
 				}
-				else {
+				else
 					right = mid - 1;
-				}
 			}
 
 			return { leftIndex, rightIndex };
 		}
 	};
-
 
 	void process() {}
 }
