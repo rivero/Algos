@@ -49,10 +49,33 @@ Solution
 the space used is often less than O(n).
 
 ## Key Idea
-The algorithm effectively utilizes a hashmap to keep track of the first occurrence of each `count` value. By calculating the 
-difference between the current index and the previously seen index of the same `count`, we can efficiently find the length of 
-subarrays with equal numbers of 0s and 1s. The initialization `seen_at[0] = -1` is crucial for handling subarrays starting from 
-the beginning of the input array.
+## Why Seeing a Count Before Indicates a Potential Answer
+
+**Understanding the Problem:**
+We're looking for the longest continuous subarray where the number of 0s and 1s are equal. We're using a hash map to store the 
+cumulative sum (count) of the array elements where 1 is represented as 1 and 0 as -1.
+
+**Key Insight:**
+
+* If we encounter a count that has been seen before, it implies that the subarray between the previous occurrence of that count 
+and the current index has an equal number of 0s and 1s.
+
+**Reasoning:**
+
+* The cumulative sum represents the difference between the number of 1s and 0s encountered so far.
+* If we encounter the same cumulative sum again, it means that the number of additional 1s and 0s since the last occurrence of 
+that sum is equal.
+* Therefore, the subarray between the two occurrences of the same count has an equal number of 0s and 1s.
+
+**Example:**
+
+Consider the array `[0, 1, 0]`.
+* The cumulative sums are: `-1, 0, -1`.
+* When we encounter the second `-1`, we know that there's a subarray from index 0 to index 2 with equal numbers of 0s and 1s.
+
+**In conclusion,** by keeping track of the indices where specific cumulative sums occur, we can efficiently find the longest subarray with an equal number of 0s and 1s.
+
+**Would you like to explore other approaches to solving this problem?**
 
 Example:
 ## Example: Finding Maximum Length Subarray with Equal 0s and 1s
