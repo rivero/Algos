@@ -25,7 +25,8 @@ Constraints:
 -2^31 <= nums[i] <= 2^31 - 1
 
 1. **Algorithm Explanation**:
-   - The purpose of the `moveZeroes` function is to move all zeros to the end of the given integer vector `nums` while maintaining the relative order of the non-zero elements.
+   - The purpose of the `moveZeroes` function is to move all zeros to the end of the given integer vector `nums` while maintaining
+   the relative order of the non-zero elements.
    - The algorithm follows these steps:
 	 1. Initialize a pointer `j` to keep track of the position where the next non-zero element should be placed.
 	 2. Iterate through the vector `nums` using a pointer `i`.

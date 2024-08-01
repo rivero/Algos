@@ -43,12 +43,47 @@ All the integers in abbr will fit in a 32-bit integer.
 
 Solution
 
-Get length of the string.
-find the numbers and where they are in the string.
-iterate add the lengths of the string + the numbers and make sure they match the length of the string.
+## Algorithm Explanation
 
-Complexity
-Time: O(n^2)
+**Purpose:** Determines if an abbreviation `abbr` is valid for a given word `word`.
+
+**Logic:**
+
+1. **Initialize indices:** `wordIdx` and `abbrIdx` point to the current characters in `word` and `abbr`, respectively.
+2. **Iterate through both strings:**
+   * **Handle digits:**
+	 * If the current character in `abbr` is a digit:
+	   * Ensure the digit is not a leading zero.
+	   * Convert the consecutive digits to a number `num`.
+	   * Increment `wordIdx` by `num` to skip the corresponding characters in `word`.
+   * **Handle characters:**
+	 * If the current characters in `word` and `abbr` match, increment both indices.
+	 * Otherwise, return `false`.
+3. **Check for complete match:** After the loop, return `true` if both indices reached the end of their respective strings, 
+indicating a valid abbreviation. Otherwise, return `false`.
+
+## Time Complexity: O(m + n)
+* `m` is the length of `word`.
+* `n` is the length of `abbr`.
+* The algorithm iterates through both strings at most once, resulting in a linear time complexity.
+
+## Space Complexity: O(1)
+* The algorithm uses a constant amount of extra space for variables, regardless of the input size.
+
+**Key points:**
+
+* The algorithm efficiently handles both characters and numeric abbreviations.
+* It correctly handles leading zeros in the abbreviation.
+* The time and space complexities are optimal for this problem.
+
+---
+**Succinct Explanation:**
+
+The algorithm validates if an abbreviation matches a word. And abbreviation subtitutes letters with numbers. 
+It iterates through both strings simultaneously, handling digits in the abbreviation by skipping corresponding characters in the 
+word, avoiding leading zeroes. 
+The process continues until both strings are fully processed, and a boolean result indicates a match or mismatch.
+
 */
 namespace ValidWordAbbreviation
 {
@@ -68,38 +103,33 @@ namespace ValidWordAbbreviation
 		*/
 		bool validWordAbbreviation(string word, string abbr)
 		{
-			size_t wordIdx = 0;
-			size_t abbrIdx = 0;
-
-			while (abbrIdx < abbr.length() && wordIdx < word.length())
+			size_t wIdx = 0;
+			size_t aIdx = 0;
+			while (aIdx < abbr.size() && wIdx < word.size())
 			{
 				size_t num = 0;
-				bool startedWithDigit{};
-				while (isdigit(abbr[abbrIdx]))
+				bool isDig = false;
+				while (isdigit(abbr[aIdx]))
 				{
-					// Its a digit
-					if (!startedWithDigit && abbr[abbrIdx] == '0')
-						return false; // ...cannot start with '0'
-
-					startedWithDigit = true; // mark is as true to avoid false flags
-					num = num * 10 + abbr[abbrIdx] - '0'; // convert to number and add it to the number counter
-					abbrIdx++; // increase the abbreviation index
+					if (abbr[aIdx] == '0' && !isDig)
+						return false;
+					isDig = true;
+					num = num * 10 + abbr[aIdx] - '0'; // convert to num and add
+					aIdx++;
 				}
 
-				if (num == 0)
-				{ // no digits found
-					if (word[wordIdx] != abbr[abbrIdx])
-						return false; // no digits found and they are no equal => FALSE.
-					wordIdx++; // move word index ahead
-					abbrIdx++; // move abbreviation index ahead
-				}
-				else
+				if (num == 0) // no abbr found
 				{
-					wordIdx += num; // Digits found: increase the word index by the number found
+					if (word[wIdx] != abbr[aIdx])
+						return false;
+					wIdx++, aIdx++;
+				}
+				else // nu found
+				{
+					wIdx += num; // skip num spaces in word
 				}
 			}
-
-			return wordIdx == word.length() && abbrIdx == abbr.length();
+			return wIdx == word.size() && aIdx == abbr.size();
 		}
 	};
 
