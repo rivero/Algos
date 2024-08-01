@@ -80,7 +80,7 @@
     <ClInclude Include="FindParenthesis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mergearrays.h">
+    <ClInclude Include="MergeSortedArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MoveZeroes.h">

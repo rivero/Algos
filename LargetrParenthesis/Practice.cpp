@@ -118,7 +118,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "Auros.h"
 #include "TopKElements.h"
 #include "FindParenthesis.h"
-#include "mergearrays.h"
+#include "MergeSortedArray.h"
 #include "MoveZeroes.h"
 #include "RangeSumOfBST.h"
 #include "arrayStringsAreEqual.h"
@@ -222,13 +222,9 @@ int main()
 	{
 		TopKElements::process();
 	}
-	if (false)
+	if (t.contains("MergeSortedArray"))
 	{
-		vector<int> nums1{ 1,2,3,0,0,0 };
-		vector<int> nums2{ 2,5,6 };
-
-		mergearrays::merge(nums1, 3, nums2, 3);
-		printv(nums1);
+		MergeSortedArray::process();
 	}
 	if (t.contains("RangeSumOfBST"))
 	{

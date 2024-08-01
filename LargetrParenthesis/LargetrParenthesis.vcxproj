@@ -193,7 +193,7 @@
     <ClInclude Include="LRUCache.h" />
     <ClInclude Include="MaxConsecutiveOnesIII.h" />
     <ClInclude Include="MaximumSwap.h" />
-    <ClInclude Include="mergearrays.h" />
+    <ClInclude Include="MergeSortedArray.h" />
     <ClInclude Include="MergeIntervals.h" />
     <ClInclude Include="MinimumAddParenthesisValid.h" />
     <ClInclude Include="MinimumAdjacentSwapsToMakleValidArray.h" />
