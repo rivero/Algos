@@ -46,9 +46,11 @@ This algorithm employs a sliding window technique to efficiently solve the probl
   * The final answer is the maximum size of the valid window, which is `right - left`.
 
 ### Key Idea
-The algorithm maintains an expanding, sliding window where the number of zeros within the window is at most `k`. It expands the window as 
-long as the number of zeros is within the limit. When the limit is exceeded, it shrinks the window from the left while adjusting 
-the `k` value accordingly.
+The algorithm maintains an expanding, sliding window where the number of zeros within the window is at most `k`. It expands the 
+window as long as the number of zeros is within the limit. When the limit is exceeded, it shrinks the window from the left while 
+adjusting the `k` value accordingly.
+
+THE LEFT POINTER CHASES AN EVER EXPANDING RIGHT POINTER KEEPING THE NUMBER OF ZEROES TO LESS OR EQUAL TO K
 
 ### Time and Space Complexity
 * **Time complexity:** O(n), where n is the length of the input array.
@@ -56,13 +58,6 @@ the `k` value accordingly.
 
 ### Example
 ## Understanding the Algorithm
-
-**Key Idea:**
-
-* Maintain a sliding window where the number of zeros within the window is less than or equal to `k`.
-* Expand the window to the right as long as the number of zeros is less than or equal to `k`.
-* If the number of zeros exceeds `k`, contract the window from the left by removing elements until the number of zeros becomes 
-less than or equal to `k` again.
 
 **Example:**
 

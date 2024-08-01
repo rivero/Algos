@@ -51,8 +51,7 @@ This algorithm uses a hash map to efficiently solve the two-sum problem.
 3. **Return an empty vector:** If no pair is found, return an empty vector.
 
 ### Why Does It Work?
-The core idea is that for every number `num` we encounter, we check if its complement `target - num` already exists in the hash map.
-If it does, we've found a pair that sums up to the target.
+ For any two numbers to add up to a target, one number is the complement of the other with respect to the target.
 
 * **Hash map efficiency:** Using a hash map provides efficient lookup for elements. The average time complexity for searching, 
 insertion, and deletion in a hash map is O(1).
