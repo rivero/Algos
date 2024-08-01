@@ -35,8 +35,10 @@ Solution
 		- If `s[i]` is equal to `s[j]`, move both pointers inward (increment `i` and decrement `j`).
 		- If `s[i]` is not equal to `s[j]`, it means we encountered a mismatch.
 		  - We have two options:
-			1. Skip the character at `i` and check if the remaining substring (`s[i+1:j]`) is a palindrome. This is done by calling the helper function `pal(s, i + 1, j)`.
-			2. Skip the character at `j` and check if the remaining substring (`s[i:j-1]`) is a palindrome. This is also done by calling `pal(s, i, j - 1)`.
+			1. Skip the character at `i` and check if the remaining substring (`s[i+1:j]`) is a palindrome. 
+				This is done by calling the helper function `pal(s, i + 1, j)`.
+			2. Skip the character at `j` and check if the remaining substring (`s[i:j-1]`) is a palindrome. 
+				This is also done by calling `pal(s, i, j - 1)`.
 		  - If either of these options returns true, the string can be made a palindrome by removing one character.
 	 3. If the loop completes without encountering any mismatches, return `true` (the original string is a valid palindrome).
 	 4. Otherwise, return `false`.
