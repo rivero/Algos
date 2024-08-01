@@ -36,6 +36,32 @@ Constraints:
 1 <= s.length <= 2 * 105
 s consists only of printable ASCII characters.
 
+## Algorithm Explanation
+
+**Purpose:** Determines if a given string is a palindrome, ignoring non-alphanumeric characters and case sensitivity.
+
+**Steps:**
+
+1. **Base cases:** If the string is empty or has only one character, it's a palindrome.
+2. **Initialize pointers:** `l` points to the beginning, `r` points to the end of the string.
+3. **Iterate and compare:**
+   * **Skip non-alphanumeric characters:** Increment `l` or decrement `r` as long as the current character is not 
+   alphanumeric or whitespace.
+   * **Compare characters:** If the characters at `l` and `r` are different (ignoring case), the string is not a palindrome.
+   * **Advance pointers:** Move `l` forward and `r` backward.
+4. **Return result:** If the loop completes without finding a mismatch, the string is a palindrome.
+
+## Time Complexity
+
+* **O(n):** In the worst case, the entire string is scanned once, where n is the length of the string. 
+The inner loops for skipping non-alphanumeric characters don't affect the overall time complexity because 
+they only skip characters and don't iterate through the whole string again.
+
+## Space Complexity
+
+* **O(1):** The algorithm uses constant extra space for the variables `l`, `r`, and possibly temporary 
+variables for character comparisons. The space used doesn't grow with the input size.
+
 */
 namespace ValidPalindrome
 {
