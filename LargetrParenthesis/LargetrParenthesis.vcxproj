@@ -235,6 +235,7 @@
     <ClInclude Include="TwoSum.h" />
     <ClInclude Include="ValidAnagram.h" />
     <ClInclude Include="ValidNumber.h" />
+    <ClInclude Include="ValidPalindrome.h" />
     <ClInclude Include="ValidPalindromeII.h" />
     <ClInclude Include="ValidWordAbbreviation.h" />
   </ItemGroup>

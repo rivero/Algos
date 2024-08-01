@@ -107,6 +107,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "PalindromeNumber.h"
 #include "ValidWordAbbreviation.h"
 #include "ValidPalindromeII.h"
+#include "ValidPalindrome.h"
 #include "MovingAverage.h"
 #include "DiameterOfBinaryTree.h"
 #include "Toeplitz.h"
@@ -202,7 +203,7 @@ struct tests
 
 int main()
 {
-	tests t("FindFirstAndLastPositionOfelementInSortedArray");
+	tests t("ValidPalindrome");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -294,10 +295,12 @@ int main()
 	{
 		ValidWordAbbreviation::process();
 	}
-	if (t.contains("ValidPalindrome"))
+	if (t.contains("ValidPalindromeII"))
 	{
 		ValidPalindromeII::process();
 	}
+	if (t.contains("ValidPalindrome"))
+		ValidPalindrome::process();
 	if (false)
 	{
 		MovingAverage movingAverage(3);
