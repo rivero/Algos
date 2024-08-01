@@ -80,9 +80,9 @@ We use a DFS approach were we search for the values in both trees.
 If both left and right subtrees return non-null values, it means p and q are in different subtrees, 
 	so the current node is the LCA.
 
-If only one subtree returns a non-null value, return that subtree's root as the LCA. This is because if the other three 
-doesnt contain the value, then the not found value will be a descendant of the found value.
-.
+If only one subtree returns a non-null value, return that subtree's root as the LCA. 
+	This is because if the other three doesnt contain the value, then the not found value will be a descendant of the found node.
+.	Because of the constraint "p and q will exist in the three"
 
 */
 namespace LowestCommonAncestorBinaryTreeI
