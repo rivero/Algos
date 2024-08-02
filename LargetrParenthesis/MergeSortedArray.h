@@ -46,87 +46,56 @@
 
 	Solution
 **Explanation:**
+* 
+* **Merges two sorted arrays into a single sorted array.**
 
-Consider the following example:
+- Overlaps `nums1` and `nums2` from the end.
+- Compares elements from both arrays.
+- Copies the larger element to the end of `nums1`.
+- Repeats until `nums2` is empty.
+- Remaining elements in `nums1` are already in correct position.
 
-```cpp
-vector<int> nums1 = {1, 3, 5, 0, 0, 0};
-vector<int> nums2 = {2, 4, 6};
-```
 
-**Initial State:**
+## Understanding the Merge Algorithm: An Example
 
-```
-nums1: [1, 3, 5, 0, 0, 0]
-nums2: [2, 4, 6]
-i = 2 (index of last element in nums1)
-j = 2 (index of last element in nums2)
-k = 5 (index of last position in nums1)
-```
+**Problem:** Merge two sorted arrays, `nums1` and `nums2`, into `nums1`.
 
-**Iteration 1:**
+**Approach:**
+* Start from the end of both arrays.
+* Compare elements from `nums1` and `nums2`.
+* Place the larger element at the end of `nums1`.
+* Decrement the corresponding index.
+* Repeat until `nums2` is empty.
 
-- Compare `nums1[i] = 5` and `nums2[j] = 6`.
-- Since `5` is smaller, place `5` at `nums1[k]`.
-- Decrement `i` and `k`.
+**Example:**
 
-```
-nums1: [1, 3, 5, 0, 0, 5]
-nums2: [2, 4, 6]
-i = 1
-j = 2
-k = 4
-```
+nums1   1       2       3       0       0       0
+nums2   2       5       6
 
-**Iteration 2:**
+1       2       3       0       0       6
 
-- Compare `nums1[i] = 3` and `nums2[j] = 6`.
-- Since `3` is smaller, place `3` at `nums1[k]`.
-- Decrement `i` and `k`.
+1       2       3       0       5       6
 
-```
-nums1: [1, 3, 5, 3, 0, 5]
-nums2: [2, 4, 6]
-i = 0
-j = 2
-k = 3
-```
+1       2       3       3       5       6
 
-**Iteration 3:**
+1       2       2       3       5       6
+1       2       2       3       5       6
 
-- Compare `nums1[i] = 1` and `nums2[j] = 6`.
-- Since `1` is smaller, place `1` at `nums1[k]`.
-- Decrement `i` and `k`.
 
-```
-nums1: [1, 3, 5, 3, 1, 5]
-nums2: [2, 4, 6]
-i = -1
-j = 2
-k = 2
-```
+**Explanation:**
+* The algorithm starts from the end of both arrays.
+* It compares the last elements of `nums1` and `nums2` (3 and 6).
+* Since 6 is larger, it's placed at the end of `nums1`, and `j` is decremented.
+* This process continues until `nums2` is empty.
+* The remaining elements in `nums1` are already sorted, so no further operations are needed.
 
-**Iteration 4:**
+This efficient approach merges two sorted arrays in-place while maintaining the sorted order.
 
-- Since `i` is -1, all elements from `nums1` have been processed.
-- Copy remaining elements from `nums2` to `nums1`.
-
-```
-nums1: [1, 2, 3, 4, 5, 6]
-nums2: [2, 4, 6]
-```
-
-**Final State:**
-
-```
-nums1: [1, 2, 3, 4, 5, 6]
-```
+**Would you like to see another example?**
 
 ## Understanding Time and Space Complexity
 
 ### Time Complexity
-Time complexity measures how the runtime of an algorithm grows as the input size increases. It's typically expressed using Big O 
-notation.
 
 **For the optimized merge function:**
 * **Time complexity: O(m + n)**
@@ -161,6 +130,10 @@ namespace MergeSortedArray
 	}
 	void merge(vector<int>& nums1, int m, vector<int>& nums2, int n)
 	{
+		cout << "nums1\t";
+		printv(nums1);
+		cout << "nums2\t";
+		printv(nums2);
 		int i = m - 1, j = n - 1, k = m + n - 1;
 
 		while (j >= 0)
@@ -176,6 +149,9 @@ namespace MergeSortedArray
 				j--;
 			}
 			k--;
+			cout << "\n";
+
+			printv(nums1);
 		}
 	}
 	void process()

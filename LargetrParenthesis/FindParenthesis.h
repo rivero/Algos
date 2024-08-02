@@ -81,17 +81,40 @@ namespace FindParenthesis
 	}
 	// move all zeroes to the right side
 
+	int findLongestValidParenthesis(const string& s) 
+	{
+		int maxLen = 0;
+		int lastIndex[3] = { INT_MIN, INT_MIN, INT_MIN }; // last index for [, (, {
+
+		for (int i = 0; i < s.size(); ++i) 
+		{
+			if (s[i] == '[' || s[i] == '(' || s[i] == '{') 
+			{
+				lastIndex[s[i] - '('] = i; // Efficiently map character to index
+			}
+			else 
+			{
+				int openIndex = lastIndex[s[i] - ']']; // Efficiently map closing to opening
+				if (openIndex != INT_MIN) {
+					maxLen = max(maxLen, i - openIndex + 1);
+				}
+			}
+		}
+
+		return maxLen;
+	}
+
 	void test()
 	{
 		cout << "FindParenthesis\n";
-		FindParenthesis::FindParenthesis("");
-		FindParenthesis::FindParenthesis("(){}[]");
-		FindParenthesis::FindParenthesis("(}");
-		FindParenthesis::FindParenthesis("(((((((}");
-		FindParenthesis::FindParenthesis("([]]){{}((}}");
-		FindParenthesis::FindParenthesis("(           )}");
-		FindParenthesis::FindParenthesis("(           {}");
-		FindParenthesis::FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
+		FindParenthesis("");
+		FindParenthesis("(){}[]");
+		FindParenthesis("(}");
+		FindParenthesis("(((((((}");
+		FindParenthesis("([]]){{}((}}");
+		FindParenthesis("(           )}");
+		FindParenthesis("(           {}");
+		FindParenthesis("([]]){{}((]]){{}((  ]]){{}((]]){{}((]]){{}((]]){{}((]]){{}(( ]]){{}((]]){{}((]]){{}((]]){{}(( }}");
 
 	}
 

@@ -208,6 +208,7 @@
     <ClInclude Include="NumberOfClosedIslands.h" />
     <ClInclude Include="NumberOfIslands.h" />
     <ClInclude Include="PalindromeNumber.h" />
+    <ClInclude Include="PeekingIterator.h" />
     <ClInclude Include="Permutations.h" />
     <ClInclude Include="PlatesBetweenCandles.h" />
     <ClInclude Include="PopulatingNextRightPointersEachNode.h" />

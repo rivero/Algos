@@ -191,6 +191,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "AccountsMerge.h"
 #include "FindFirstAndLastPositionOfelementInSortedArray.h"
 #include "ValidParenthesis.h"
+#include "PeekingIterator.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -205,7 +206,7 @@ struct tests
 
 int main()
 {
-	tests t("ValidPalindrome");
+	tests t("MoveZeroes");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{

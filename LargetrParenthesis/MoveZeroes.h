@@ -24,15 +24,36 @@ Constraints:
 1 <= nums.length <= 10^4
 -2^31 <= nums[i] <= 2^31 - 1
 
-1. **Algorithm Explanation**:
-   - The purpose of the `moveZeroes` function is to move all zeros to the end of the given integer vector `nums` while maintaining
-   the relative order of the non-zero elements.
-   - The algorithm follows these steps:
-	 1. Initialize a pointer `j` to keep track of the position where the next non-zero element should be placed.
-	 2. Iterate through the vector `nums` using a pointer `i`.
-		- If `nums[i]` is not zero, swap `nums[j]` with `nums[i]` (placing the non-zero element at position `j`).
-		- Increment `j`.
-	 3. After the loop, all non-zero elements will be in their correct positions, and zeros will be at the end of the vector.
+The algorithm moves non-zero elements to the beginning of the vector.
+the j index chases but never reaches i.
+as we advance, the non zero elements on i are slowly moved to the j position.
+the j position advances only if there is a swap. Because the j index stays until there is a number on i,
+each time the i is swapped with j only the numbers != 0 are swapped and j then moves forward
+
+
+
+0       1       0       3       12
+0       1       0       3       12
+swap
+1       0       0       3       12
+1       0       0       3       12
+swap
+1       3       0       0       12
+swap
+1       3       12      0       0
+1       3       12      0       0
+
+--
+
+MoveZeroes
+2       1
+swap
+2       1
+swap
+2       1
+2       1
+
+
 
 2. **Complexities**:
    - Time Complexity: O(N), where N is the size of the input vector `nums`.
@@ -57,9 +78,10 @@ namespace MoveZeroes
 			{
 				if (nums[i] != 0) 
 				{
-					swap(nums[j], nums[i]);
-					j++;
+					swap(nums[j++], nums[i]);
+					cout << "\n";
 				}
+				printv(nums);
 			}
 		}
 	};
@@ -69,53 +91,72 @@ namespace MoveZeroes
 		cout << "MoveZeroes\n";
 		Solution sol;
 		{
-			vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
+			vector<int> vec{ 2, 1 };
 			printv(vec);
 			sol.moveZeroes(vec);
 			printv(vec);
 			cout << "\n";
 		}
+		if (false)
 		{
-			vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-			printv(vec);
-			sol.moveZeroes(vec);
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-			printv(vec);
-			sol.moveZeroes(vec);
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
-			printv(vec);
-			sol.moveZeroes(vec);
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-			printv(vec);
-			sol.moveZeroes(vec);
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
-			printv(vec);
-			sol.moveZeroes(vec);
-			printv(vec);
-			cout << "\n";
-		}
-		{
-			vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
-			printv(vec);
-			sol.moveZeroes(vec);
-			printv(vec);
-			cout << "\n";
+			{
+				vector<int> vec{ 0,1,0,3,12 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+			{
+				vector<int> vec{ 2, 0, 3, 0, 4, 5, 0 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+
+			{
+				vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+			{
+				vector<int> vec{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+			{
+				vector<int> vec{ 0, 1, 0, 1, 0, 1, 0 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+			{
+				vector<int> vec{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+			{
+				vector<int> vec{ 0, 1, 2, 0, 0, 3,4 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+			{
+				vector<int> vec{ 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,4 };
+				printv(vec);
+				sol.moveZeroes(vec);
+				printv(vec);
+				cout << "\n";
+			}
+
 		}
 
 	}
