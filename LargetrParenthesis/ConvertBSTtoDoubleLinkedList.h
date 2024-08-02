@@ -106,46 +106,42 @@ namespace BTreeToDLink
 		}
 	};
 
+
 	class Solution
 	{
-		set< pair<int, Node*> > m_set;
+		set< pair<int, Node*> > valueNode;
 		void process(Node* node)
 		{
-			if (!node)
-				return;
-			process(node->left);
-			m_set.insert({ node->val, node });
-			process(node->right);
+			// base case
+			if (!node) return;
 
+			process(node->left);
+			valueNode.insert({ node->val, node });
+			process(node->right);
 		}
 	public:
-
-
 		Node* treeToDoublyList(Node* root)
 		{
-			if (!root)
-				return {};
+			if (!root) return root;
+
 			process(root);
-			auto curIt = m_set.begin();
-			auto nextIt = m_set.begin();
-			nextIt++;
-			while (nextIt != m_set.end())
+
+			for (auto nextIt = next(valueNode.begin()); nextIt != valueNode.end(); ++nextIt)
 			{
-				curIt->second->right = nextIt->second;
-				nextIt->second->left = curIt->second;
-				curIt++;
-				nextIt++;
+				auto& [prevVal, prevNode] = *prev(nextIt);
+				auto& [nextVal, nextNode] = *nextIt;
+				prevNode->right = nextNode;
+				nextNode->left = prevNode;
 			}
-			auto [val, start] = *m_set.begin();
-			auto [val2, finish] = *(--m_set.end());
+			auto [val, start] = *valueNode.begin();
+			auto [val2, finish] = *(prev(valueNode.end()));
 			start->left = finish;
 			finish->right = start;
 			root = start;
 			return root;
-
 		}
 	};
-    void process()
+	void process()
 	{
         auto root = new Node(4);
         root->left = new Node(2);

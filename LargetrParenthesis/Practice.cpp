@@ -172,6 +172,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "MergeIntervals.h"
 #include "TopKFrequentElements.h"
 #include "NextPermutation.h"
+#include "FourSum.h"
 #include "ThreeSum.h"
 #include "TwoSum.h"
 #include "RotateImage.h"
@@ -189,6 +190,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "ContiguousArray.h"
 #include "AccountsMerge.h"
 #include "FindFirstAndLastPositionOfelementInSortedArray.h"
+#include "ValidParenthesis.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -605,4 +607,8 @@ int main()
 		AccountsMerge::process();
 	if (t.contains("FindFirstAndLastPositionOfelementInSortedArray"))
 		FindFirstAndLastPositionOfelementInSortedArray::process();
+	if (t.contains("ValidParenthesis"))
+		ValidParenthesis::process();
+	if (t.contains("FourSum"))
+		FourSum::process();
 }

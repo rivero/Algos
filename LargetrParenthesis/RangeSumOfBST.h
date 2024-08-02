@@ -1,7 +1,8 @@
 #pragma once
-namespace RangeSumOfBST
-{
-	/*
+/*
+* https://leetcode.com/problems/range-sum-of-bst/
+
+* 938. Range Sum of BST
 Given the root node of a binary search tree and two integers low and high,
 return the sum of values of all nodes with a value in the inclusive range [low, high].
 
@@ -48,10 +49,12 @@ Certainly! Let's break down the code snippet and discuss why it uses a preorder 
 	- If so, we add its value to `m_sum`.
 	- Then, we recursively call `rangeSumBST` on the left and right subtrees.
 
-In summary, this code snippet calculates the sum of values within the specified range in a BST using a preorder traversal approach. 
+In summary, this code snippet calculates the sum of values within the specified range in a BST using a preorder traversal approach.
 
 It accumulates the sum by FIRST checking each node's value against the range and recursing through the tree.
    */
+namespace RangeSumOfBST
+{
 	struct TreeNode
 	{
 		int val{};

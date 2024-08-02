@@ -1,5 +1,8 @@
 #pragma once
 /*
+* https://leetcode.com/problems/3sum/description/
+* https://www.youtube.com/watch?v=8IjCNFIo8YI  with prefix
+* https://www.youtube.com/watch?v=wTZC9jFZpSI this solution
 15. 3Sum
 Given an integer array nums, return all the triplets 
 [nums[i], nums[j], nums[k]] 
@@ -74,65 +77,56 @@ Overall space complexity: O(n).
 */
 namespace ThreeSum
 {
-	class Solution 
+	class Solution
 	{
 	public:
-		vector<vector<int>> threeSum(vector<int>& nums, int target = 0) 
+		vector<vector<int>> threeSum(vector<int>& nums, int target = 0)
 		{
 			sort(nums.begin(), nums.end());
 			vector<vector<int>> res;
-			int baseIdx{};
-
-			while (baseIdx < nums.size() - 2) // to have room for j and k
+			int i{}; // base Index
+			while (i < nums.size() - 2) // to accommodate l and r
 			{
-				// remove i dupes starting AFTER 0
-				while (baseIdx > 0 && nums[baseIdx] == nums[baseIdx - 1] && baseIdx < nums.size() -1)
-					baseIdx++;
+				// remove dupes in i
+				while (i > 0 && nums[i] == nums[i - 1] && i < nums.size() - 1)
+					i++;
 
-				// init out inner indexes:
-				auto left = baseIdx + 1;
-				auto right = nums.size() - 1;
-
-				while (left < right)
+				int l = i + 1, r = nums.size() - 1;
+				while (l < r)
 				{
-					// perform sum, compare and add to result
-					auto cur_sum = nums[baseIdx] + nums[left] + nums[right];
-
+					auto cur_sum = nums[i] + nums[l] + nums[r];
 					if (cur_sum == target)
 					{
-						res.push_back({ nums[baseIdx] , nums[left] , nums[right] });
-						
-						// increase our inner left and remove dupes
-						left++;
-						while (nums[left] == nums[left - 1] && left < right)
-							left++;
-
-						// shrink window and remove dupes on inner right (k)
-						right--;
-						while (nums[right] == nums[right + 1] && right >= left)
-							right--;
+						res.push_back({ nums[i] , nums[l] , nums[r] });
+						// shrink window to avoid l and r
+						l++;
+						while (nums[l] == nums[l - 1] && l < r)
+							// remove dupes in l
+							l++;
+						r--;
+						while (nums[r] == nums[r + 1] && l < r)
+							// remove dupes in r
+							r--;
 					}
 					else if (cur_sum > target)
 					{
-						// shrink window and remove dupes on inner right (k)
-						right--;
-						while (nums[right] == nums[right + 1] && right >= left)
-							right--;
+						r--;
+						while (nums[r] == nums[r + 1] && l < r)
+							r--;
 					}
 					else
 					{
-						// increase our inner left and remove dupes
-						left++;
-						while (nums[left] == nums[left - 1] && left < right)
-							left++;
+						l++;
+						while (nums[l] == nums[l - 1] && l < r)
+							l++;
 					}
 				}
-				// move inward from our base idx
-				baseIdx++;
+				i++;
 			}
 			return res;
 		}
 	};
+
 	void process()
 	{
 		cout << "ThreeSum\n";

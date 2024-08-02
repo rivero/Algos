@@ -293,5 +293,11 @@
     <ClInclude Include="ValidPalindrome.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ValidParenthesis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FourSum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
