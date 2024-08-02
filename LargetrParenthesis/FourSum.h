@@ -49,7 +49,7 @@ namespace FourSum
 				int j = i + 1;
 				while (j < n - 2)
 				{
-					while (j > i + 1 && nums[j] == nums[j + 1])
+					while (j > i + 1 && nums[j] == nums[j - 1])
 						j++;
 
 					int l = j + 1, r = n - 1;
