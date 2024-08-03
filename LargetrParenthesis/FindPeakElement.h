@@ -71,12 +71,11 @@ Solution O(log n)
 6. **Space Complexity**:
    - The algorithm uses only a few variables, so the space complexity is O(1).
 
-In summary, this algorithm efficiently finds a peak element in a sorted or unsorted array using binary search.
 */
 namespace FindPeakElement
 {
 
-	struct Solution 
+	struct SolutionBruteForce 
 	{
 		int findPeakElement(vector<int> nums) 
 		{
@@ -100,44 +99,37 @@ namespace FindPeakElement
 			return {};
 		}
 	};
-	struct SolutionCF
+	class Solution
 	{
-		// Solution O(log N) => bisecting this unsorted array
-		int findPeakElement(vector<int> nums)
+	public:
+		int findPeakElement(vector<int>& nums)
 		{
 			int n = nums.size();
-			if (n <= 1)
-				return 0;
+			if (n <= 1) return 0;
 
-			// Test first element: Test if first element is greater than second element
 			if (nums[0] > nums[1])
-				return 0;
-			// Test last element: test of the last element is bigger than the previous
-			else if (nums[n - 1] > nums[n - 1 - 1])
+				return 0; // first element is a peak
+			if (nums[n - 1] > nums[n - 2]) // last element is a peak
 				return n - 1;
 
-			//	- Left < mid > right: Return mid
-			//	- Left < mid < right => Left = mid + 1 // increasing
-			//	- Otherwise => Right = mid + 1 // decreasing
-			size_t Left = 0, Right = n - 1;
-			while (Left <= Right)
+			size_t l = 0, r = n - 1;
+			while (l <= r)
 			{
-				auto mid = (Left + Right) / 2;
-				auto left_val = (mid > 0? nums[mid - 1] : INT_MIN);
-				auto right_val = (mid < n - 1? nums[mid + 1] : INT_MIN);
-
-				auto mid_val = nums[mid];
-				if (left_val < mid_val && mid_val > right_val)
-					return mid;
-				else if (left_val < mid_val && mid_val < right_val) // increasing slope
-					Left = mid + 1;
+				auto m = l + (r - l) / 2;
+				auto lv = m > 0 ? nums[m - 1] : INT_MIN;
+				auto rv = m < n - 1 ? nums[m + 1] : INT_MIN;
+				auto mv = nums[m];
+				if (lv < mv && mv > rv)
+					return m;
+				else if (lv < mv && mv < rv)
+					l = m + 1; // peak is at the right
 				else
-					Right = mid - 1;
+					r = m - 1; // peak is at the left
 			}
-
 			return {};
 		}
 	};
+
 	void process()
 	{
 		{

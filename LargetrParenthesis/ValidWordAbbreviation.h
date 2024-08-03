@@ -103,33 +103,33 @@ namespace ValidWordAbbreviation
 		*/
 		bool validWordAbbreviation(string word, string abbr)
 		{
-			size_t wIdx = 0;
-			size_t aIdx = 0;
-			while (aIdx < abbr.size() && wIdx < word.size())
+			size_t w = 0, a = 0;
+			while (a < abbr.size() && w < word.size())
 			{
-				size_t num = 0;
-				bool isDig = false;
-				while (isdigit(abbr[aIdx]))
+				int num = 0;
+				bool canWeHaveZero = false;
+				while (isdigit(abbr[a]))
 				{
-					if (abbr[aIdx] == '0' && !isDig)
+					if (abbr[a] == '0' && !canWeHaveZero)
 						return false;
-					isDig = true;
-					num = num * 10 + abbr[aIdx] - '0'; // convert to num and add
-					aIdx++;
+					canWeHaveZero = true;
+					num = num * 10 + abbr[a] - '0';
+					a++;
 				}
-
-				if (num == 0) // no abbr found
+				if (num == 0)
 				{
-					if (word[wIdx] != abbr[aIdx])
+					// no abbr
+					if (word[w] != abbr[a])
 						return false;
-					wIdx++, aIdx++;
+					w++, a++;
 				}
-				else // nu found
+				else
 				{
-					wIdx += num; // skip num spaces in word
+					// number found
+					w += num;
 				}
 			}
-			return wIdx == word.size() && aIdx == abbr.size();
+			return w == word.size() && a == abbr.size();
 		}
 	};
 

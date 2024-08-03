@@ -52,6 +52,25 @@ Certainly! Let's break down the code snippet and discuss why it uses a preorder 
 In summary, this code snippet calculates the sum of values within the specified range in a BST using a preorder traversal approach.
 
 It accumulates the sum by FIRST checking each node's value against the range and recursing through the tree.
+
+## Complexity Analysis
+
+### Time Complexity: O(N)
+* The algorithm traverses the entire binary search tree (BST) once.
+* At each node, it performs constant-time operations (comparison, addition).
+* The time complexity is directly proportional to the number of nodes (N) in the tree.
+
+### Space Complexity: O (h) == O(log n)
+* The space complexity is primarily determined by the recursion depth, which is equal to the height (H) of the tree.
+* In the worst case, the tree is skewed, and the height can be equal to the number of nodes (N), resulting in O(N) space complexity.
+* However, in balanced trees, the height is typically logarithmic to the number of nodes (log N), leading to O(log N) space complexity.
+
+**Note:** The extra space used for the `sum` variable is considered constant and doesn't affect the overall space complexity analysis.
+
+**In summary,** the algorithm has a time complexity of O(N) and a space complexity of O(H), where H is the height of the tree.
+
+**Would you like to explore any potential optimizations or alternative approaches to this problem?**
+
    */
 namespace RangeSumOfBST
 {

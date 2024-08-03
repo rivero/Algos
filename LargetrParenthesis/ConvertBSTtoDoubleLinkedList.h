@@ -110,21 +110,21 @@ namespace BTreeToDLink
 	class Solution
 	{
 		set< pair<int, Node*> > valueNode;
-		void process(Node* node)
+		void buildSet(Node* node)
 		{
 			// base case
 			if (!node) return;
 
-			process(node->left);
+			buildSet(node->left);
 			valueNode.insert({ node->val, node });
-			process(node->right);
+			buildSet(node->right);
 		}
 	public:
 		Node* treeToDoublyList(Node* root)
 		{
 			if (!root) return root;
 
-			process(root);
+			buildSet(root);
 
 			for (auto nextIt = next(valueNode.begin()); nextIt != valueNode.end(); ++nextIt)
 			{
@@ -141,6 +141,10 @@ namespace BTreeToDLink
 			return root;
 		}
 	};
+
+
+
+
 	void process()
 	{
         auto root = new Node(4);

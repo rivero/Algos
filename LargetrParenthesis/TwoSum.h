@@ -53,9 +53,14 @@ This algorithm uses a hash map to efficiently solve the two-sum problem.
 ### Why Does It Work?
  For any two numbers to add up to a target, one number is the complement of the other with respect to the target.
 
-* **Hash map efficiency:** Using a hash map provides efficient lookup for elements. The average time complexity for searching, 
-insertion, and deletion in a hash map is O(1).
-* **One-pass solution:** The algorithm iterates through the array only once, making it an efficient solution.
+2, 7, 11, 15 target = 9
+
+complement = 9 - 2 = 7
+stores {2, 0}
+complement = 9 - 2 = 2
+2 exists, index is 0
+
+return index of 7 and index of 2. {1, 0}
 
 By storing elements and their indices in the hash map, we can quickly check if the complement of a number exists, avoiding the 
 need for nested loops.

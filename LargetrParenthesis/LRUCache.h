@@ -46,50 +46,38 @@ At most 2 * 105 calls will be made to get and put.
 
 Solution
 
-1. **Data Structures:**
-   - The LRU cache uses two primary data structures:
-	 - A **doubly linked list** (`cache`) to maintain the order of elements based on their usage.
-	 - An **unordered map** (`mymap`) to store the key-value pairs and their corresponding iterators in the linked list.
+## Algorithm Explanation
 
-2. **Initialization:**
-   - The `LRUCache` class is initialized with a specified capacity.
-   - The `cache` list is initially empty, and the `mymap` map is also empty.
+This code implements an LRU (Least Recently Used) cache. It uses a combination of a `list` and an `unordered_map` to efficiently 
+store and retrieve key-value pairs.
 
-3. **`moveToFront` Function:**
-   - This function takes a `key` and a `value`.
-   - It removes the existing entry for the `key` from the `cache`.
-   - Then, it pushes a new entry with the same `key` and updated `value` to the front of the `cache`.
-   - The corresponding iterator in `mymap` is updated to point to the new position in the `cache`.
+* **`list` (keyValList):** Stores key-value pairs as a doubly linked list. This allows for efficient insertion and removal of 
+elements at both ends.
+* **`unordered_map` (keyItMap):** Maps keys to their corresponding iterators in the `list`. This enables quick lookup of elements 
+in the list.
 
-4. **`pushFront` Function:**
-   - This function adds a new key-value pair to the front of the `cache`.
-   - It also updates the corresponding iterator in `mymap`.
+**Key operations:**
 
-5. **`checkCapacity` Function:**
-   - This function checks if the current size of the cache (`mymap.size()`) exceeds the specified capacity (`m_capacity`).
-   - If so, it removes the least recently used element:
-	 - Deletes the entry from `mymap` using the key of the last element in the `cache`.
-	 - Removes the last element from the `cache`.
+* **`pushFront(k, v)`:** Adds a key-value pair to the front of the list and updates the corresponding iterator in the map.
+* **`moveToFront(k, v)`:** Moves an existing key-value pair to the front of the list, updating its iterator in the map.
+* **`checkCapacity()`:** Removes the least recently used element (the back of the list) if the cache is full.
 
-6. **`get` Function:**
-   - Given a `key`, it checks if the key exists in `mymap`.
-   - If found:
-	 - Moves the corresponding element to the front of the `cache` (since it's recently used).
-	 - Returns the associated value.
-   - If not found, returns `-1`.
+**`get(k)`:**
+* Checks if the key exists in the `unordered_map`.
+* If found, moves the corresponding key-value pair to the front of the list and returns the value.
+* If not found, returns -1.
 
-7. **`put` Function:**
-   - Given a `key` and a `value`:
-	 - If the `key` exists in `mymap`, updates its value and moves it to the front.
-	 - If the `key` doesn't exist:
-	   - Adds a new key-value pair to the front of the `cache`.
-	   - Checks the capacity and evicts the least recently used element if needed.
+**`put(k, v)`:**
+* Checks if the key exists in the `unordered_map`.
+* If found, updates the value and moves the key-value pair to the front of the list.
+* If not found, adds the key-value pair to the front of the list and checks if the cache capacity is exceeded.
 
-8. **Complexity Analysis:**
-   - Time Complexity:
-	 - `put()` operation: O(1) (constant time for insertion or update).
-	 - `get()` operation: O(1) (constant time to retrieve a value).
-   - Auxiliary Space: O(N) (where N is the capacity of the cache).
+## Time and Space Complexity
+
+* **`get(k)`:** O(1) on average. The `unordered_map` lookup takes constant time, and moving an element in the list is also constant 
+time.
+* **`put(k, v)`:** O(1) on average. Similar to `get(k)`, operations on the `unordered_map` and list are constant time.
+* **Space Complexity:** O(capacity) due to the `unordered_map` and the `list` storing at most `capacity` elements.
 
 */
 namespace LRUCache
@@ -97,66 +85,66 @@ namespace LRUCache
 
     class LRUCache 
     {
-		int m_capacity{};
-        list< pair<int, int> > cache;
-        unordered_map<int, list< pair<int, int> >::iterator> mymap;
+        int cap{};
+        list< pair<int, int> > keyValList;
+        unordered_map<int, list< pair<int, int> >::iterator> keyItMap;
 
-        void moveToFront(int key, int value)
-        {
-            cache.erase(mymap[key]); // erase from its current position
-            pushFront(key, value);
-        }
-
-        void pushFront(int key, int value)
-        {
-            cache.push_front({ key, value }); // push it to the front
-            mymap[key] = cache.begin(); // update the map
-        }
-
-		void checkCapacity()
+		void pushFront(int k, int v)
 		{
-			if (mymap.size() > m_capacity)
-			{
-				// remove the last cache element in the map
-				mymap.erase(cache.back().first);
-				// ...then remove last element in the cache
-				cache.pop_back();
-			}
+			keyValList.push_front({ k, v });
+			keyItMap[k] = keyValList.begin();
 		}
+		
+        void moveToFront(int k, int v)
+        {
+            auto it = keyItMap[k];
+            keyValList.erase(it);
+            pushFront(k, v);
+        }
+ 
+        void checkCapacity()
+        {
+            if (keyItMap.size() > cap)
+            {
+                auto [k, it] = keyValList.back();
+                keyItMap.erase(k);
+                keyValList.pop_back();
+            }
+        }
 
     public:
-        LRUCache(int capacity) :m_capacity(capacity)
-        {
-        }
+        LRUCache(int capacity) : cap(capacity) {}
 
-        int get(int key) 
+        int get(int k)
         {
-            if (mymap.find(key) != mymap.end())
+            if (keyItMap.count(k) > 0)
             {
-                // if the element exists, move it to the front
-                moveToFront(key, mymap[key]->second);
-                return mymap[key]->second;
+                auto it = keyItMap[k];
+                auto [k, v] = *it;
+                moveToFront(k, v);
+                return v;
             }
             return -1;
         }
 
-        void put(int key, int value) 
+        void put(int k, int v)
         {
-            if (mymap.find(key) != mymap.end())
-            {
-                moveToFront(key, value);
-            }
+            if (keyItMap.count(k) > 0)
+                moveToFront(k, v);
             else
             {
-                // element does not exist
-				pushFront(key, value);
+                pushFront(k, v);
                 checkCapacity();
-
             }
         }
-
     };
 
+    /**
+     * Your LRUCache object will be instantiated and called as such:
+     * LRUCache* obj = new LRUCache(capacity);
+     * int param_1 = obj->get(key);
+     * obj->put(key,value);
+     */
     /**
      * Your LRUCache object will be instantiated and called as such:
      * LRUCache* obj = new LRUCache(capacity);

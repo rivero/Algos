@@ -37,38 +37,27 @@ namespace NumberOfIslands
 	1 <= m, n <= 300
 	grid[i][j] is '0' or '1'.
 
-	Time complexity: O(n^2) or O(r*c)
-	Space complexity: O(r * c) because the recursion ; if not couting recursion is O(1)
+	## Apologies for the oversight.
 
-1. **Algorithm Explanation:**
-   - The problem is to find the number of connected components (islands) in the binary matrix.
-   - We use DFS to explore each island:
-	 - For each cell with value '1', we perform a DFS to mark all connected land cells as part of the same island.
-	 - We increment the island count after each DFS traversal.
-	 - We also maintain an `island_id` to label different islands uniquely (using values greater than 1).
+**Algorithm Explanation:**
 
-2. **Implementation Details:**
-   - The given class `Solution` contains the following key methods:
-	 - `search_for_more_land(i, j)`:
-	   - Recursively explores the land cells connected to the cell at `(i, j)`.
-	   - If the cell is out of bounds or not part of an island ('1'), it returns.
-	   - Otherwise, it marks the cell with the current `island_id` and recursively explores its neighbors.
-	 - `numIslands(grid)`:
-	   - Initializes the matrix and other variables.
-	   - Iterates through each cell in the grid:
-		 - If the cell contains '1', it starts a new island exploration using `search_for_more_land`.
-		 - Increments the island count.
-		 - Updates the `island_id`.
-	   - Returns the total number of islands.
+This code implements a depth-first search (DFS) approach to count the number of islands in a given matrix.
 
-3. **Complexities:**
-   - **Time Complexity:**
-	 - The DFS traversal visits each cell at most once.
-	 - Therefore, the time complexity is O(rows × cols), where `rows` and `cols` are the dimensions of the matrix.
-   - **Space Complexity:**
-	 - The additional space used is for the recursive call stack during DFS (which is at most O(rows × cols)).
-	 - The space for the `m_matrix`, `m_rows`, `m_cols`, and `m_island_id` variables is negligible.
-	 - Thus, the overall space complexity is also O(rows × cols).
+1. **Initialization:** The `numIslands` function initializes the dimensions of the grid and a counter for the number of islands.
+2. **Iterate through the grid:** The outer loop iterates through each cell of the grid.
+3. **Identify land:** If a cell contains '1' (land), it calls the `searchLand` function.
+4. **DFS:** The `searchLand` function recursively explores adjacent land cells, marking them as visited ('*') and calling itself 
+recursively for unvisited neighbors.
+5. **Count islands:** For each connected land component (island), the `numIslands` function increments the `no_islands` counter.
+
+**Time Complexity:** O(M * N)
+* The outer loop iterates through each cell of the grid, which takes O(M * N) time.
+* The `searchLand` function visits each cell at most once, so its time complexity is also O(M * N) in the worst case.
+
+**Space Complexity:** O(1)
+* The algorithm modifies the input grid in-place to mark visited cells, eliminating the need for extra space.
+* The recursion stack in `searchLand` can go as deep as the maximum length of the grid, which is O(max(M, N)). However, this is 
+considered constant space in terms of input size.
 
 	*/
 #define PRINTV
@@ -77,39 +66,36 @@ namespace NumberOfIslands
 	class Solution
 	{
 		int m_rows{}, m_cols{};
-		vector<vector<char>> m_grid;
-		void searchLand(int row, int col)
+		void searchLand(vector<vector<char>>& grid, int row, int col)
 		{
-			if (row < 0 || row >= m_rows || col < 0 || col >= m_cols || m_grid[row][col] != '1')
+			if (row < 0 || row >= m_rows || col < 0 || col >= m_cols || grid[row][col] != '1')
 				return;
-			m_grid[row][col] = '*';
-			searchLand(row + 1, col);
-			searchLand(row - 1, col);
-			searchLand(row, col + 1);
-			searchLand(row, col - 1);
+			grid[row][col] = '*';
+			searchLand(grid, row - 1, col);
+			searchLand(grid, row + 1, col);
+			searchLand(grid, row, col - 1);
+			searchLand(grid, row, col + 1);
 		}
+
 	public:
 		int numIslands(vector<vector<char>>& grid)
 		{
-			if (grid.empty())
-				return 0;
-
-			m_grid = grid;
+			if (grid.empty()) return 0;
 			m_rows = grid.size();
 			m_cols = grid[0].size();
 			int no_islands{};
-			// iterate rows and cols looking for '1' (land)
 			for (int row = 0; row < m_rows; row++)
 			{
 				for (int col = 0; col < m_cols; col++)
 				{
-					if (m_grid[row][col] == '1')
+					if (grid[row][col] == '1')
 					{
-						searchLand(row, col);
+						searchLand(grid, row, col);
 						no_islands++;
 					}
 				}
 			}
+
 
 			return no_islands;
 		}
