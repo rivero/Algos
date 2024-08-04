@@ -23,8 +23,6 @@ Constraints:
 
 solution
 
-Certainly! Let's analyze the given `maximumSwap` function.
-
 1. **Function Description:**
    - The `maximumSwap` function takes an integer `num` as input and returns an integer.
    - If `num` is less than or equal to 11, it directly returns `num`.
@@ -48,34 +46,30 @@ Certainly! Let's analyze the given `maximumSwap` function.
 */
 namespace MaximumSwap
 {
-	class Solution 
+	class Solution
 	{
 	public:
-		string s;
-		int ans = 0;
-		int maximumSwap(int num) 
+		int maximumSwap(int num)
 		{
-			if (num <= 11)
-			{
+			// edge case
+			if (num < 11)
 				return num;
-			}
-			s = to_string(num);
 
-			for (int i = 0; i < s.size(); i++) 
+			auto s = to_string(num);
+			int ans{ INT_MIN };
+			for (int i = 0; i < s.size(); i++)
 			{
-				for (int j = 1; j < s.size(); j++) 
+				for (int j = 0; j < s.size(); j++)
 				{
 					swap(s[i], s[j]);
-
-					if (ans < stoi(s))
-						ans = stoi(s);
-
+					ans = max(ans, stoi(s));
 					swap(s[i], s[j]);
 				}
 			}
 			return ans;
 		}
-	};	
+	};
+
 	void process()
 	{
 		Solution sol;

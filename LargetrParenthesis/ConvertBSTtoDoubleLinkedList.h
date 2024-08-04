@@ -1,5 +1,5 @@
 #pragma once
-namespace BTreeToDLink
+namespace ConvertBSTtoDoubleLinkedList
 {
     /*
     * 
@@ -54,35 +54,100 @@ namespace BTreeToDLink
 
     Solution
 
-	### Algorithm Explanation:
-	The given algorithm converts a binary tree into a doubly linked list (DLL) 
-	while maintaining the same order as the in-order traversal of the tree. Here are the key steps:
+	## Algorithm Explanation
 
-	1. **In-Order Traversal with Set:**
-	   - The algorithm starts by performing an in-order traversal of the binary tree.
-	   - During traversal, it inserts each node into a set (m_set) as a pair (value, Node*).
-	   - The set ensures that the nodes are sorted based on their values.
+	**Problem:** Convert a binary tree to a doubly linked list in-place.
 
-	2. **Building the Doubly Linked List:**
-	   - After completing the traversal, the algorithm iterates through the set.
-	   - It connects adjacent nodes in the set to create the doubly linked list.
-	   - The left pointer of a node points to the previous node, and the right pointer points to the next node.
+	**Approach:**
 
-	3. **Adjusting the Head and Tail:**
-	   - Finally, the algorithm adjusts the head and tail of the doubly linked list.
-	   - The head is set to the first node in the set (which corresponds to the smallest value).
-	   - The tail is set to the last node in the set (which corresponds to the largest value).
+	1. **In-order traversal:** Perform a modified in-order traversal of the binary tree.
+	2. **Link nodes:** During the traversal, link the current node to the previous node.
+	3. **Update head and tail:** Maintain pointers to the head and tail of the doubly linked list.
+	4. **Circular link:** Connect the head and tail to form a circular doubly linked list.
 
-	### Time Complexity:
-	- The time complexity of the algorithm depends on the in-order traversal, which visits each node once.
-	- Therefore, the time complexity is **O(N)**, where **N** is the number of nodes in the binary tree.
+	**Code Breakdown:**
 
-	### Space Complexity:
-	- The space complexity is determined by the set (m_set) used to store the nodes.
-	- Since the set contains all nodes, the space complexity is also **O(N)**.
+	* **`prev` pointer:** Tracks the previously visited node during in-order traversal.
+	* **`head` pointer:** Points to the head of the doubly linked list.
+	* **`helper` function:**
+	  * Recursively traverses the left subtree.
+	  * Links the current node to the previous node if `prev` is not null.
+	  * Updates the `head` pointer if this is the first node.
+	  * Sets the current node as the `prev` for the next iteration.
+	  * Recursively traverses the right subtree.
+	* **`treeToDoublyList` function:**
+	  * Initializes `prev` and `head` pointers.
+	  * Calls the `helper` function to perform in-order traversal and linking.
+	  * Creates a circular doubly linked list by connecting the head and tail.
+	  * Returns the head of the doubly linked list.
 
-	In summary, this algorithm efficiently converts a binary tree to a doubly linked list 
-	while maintaining the order of in-order traversal. 
+	**Time Complexity:** O(N), where N is the number of nodes in the tree. This is because each node is visited exactly once during 
+	the in-order traversal.
+
+	**Space Complexity:** O(1), as the algorithm uses only constant extra space for the `prev` and `head` pointers.
+
+	**Key Points:**
+
+	* The in-order traversal ensures that nodes are linked in ascending order.
+	* The `prev` pointer efficiently maintains the link to the previous node.
+	* The `head` pointer keeps track of the starting node for the doubly linked list.
+
+	Time complexity: O(N), where N is the number of nodes in the tree. 
+	Space complexity: O(1) as it doesn't use any extra data structures apart from constant variables.
+
+	## Understanding the Algorithm Through an Example
+
+### Input Tree:
+
+```
+	 4
+	/ \
+   2   5
+  / \
+ 1   3
+```
+
+### Step-by-Step Breakdown:
+
+**1. Initial State:**
+* `prev` is null
+* `head` is null
+
+**2. Recursive calls:**
+* `helper(4)`:
+  * `helper(2)`:
+	* `helper(1)`:
+	  * `prev` is null, so `head` becomes 1
+	  * `prev` becomes 1
+	* `helper(3)`:
+	  * `prev` is 1, so link 1 -> 3 and 3 -> 1
+	  * `prev` becomes 3
+	* `prev` is 3, so link 2 -> 3 and 3 -> 2
+  * `prev` becomes 2
+  * `helper(5)`:
+	* `prev` is 2, so link 2 -> 5 and 5 -> 2
+  * `prev` becomes 5
+* `prev` is 5, so link 4 -> 5 and 5 -> 4
+
+**3. Circular Link:**
+* `head->left = prev`: Link the first node (head) to the last node (prev)
+* `prev->right = head`: Link the last node (prev) to the first node (head)
+
+### Final Doubly Linked List:
+```
+1 <-> 2 <-> 3 <-> 4 <-> 5
+```
+
+**Explanation:**
+* The `helper` function performs an in-order traversal of the tree.
+* During the traversal, it links each node to its previous node using the `prev` pointer.
+* The `head` pointer keeps track of the first node in the list.
+* After the traversal, the `head` and `prev` pointers are linked to form a circular doubly linked list.
+
+This step-by-step breakdown illustrates how the algorithm constructs the doubly linked list by traversing the binary tree and 
+linking nodes accordingly.
+
+**Would you like to explore other examples or modifications to the code?**
 
 */
 	class Node {
@@ -107,7 +172,7 @@ namespace BTreeToDLink
 	};
 
 
-	class Solution
+	class Solutionbefore
 	{
 		set< pair<int, Node*> > valueNode;
 		void buildSet(Node* node)
@@ -142,7 +207,39 @@ namespace BTreeToDLink
 		}
 	};
 
+	class Solution
+	{
+	public:
+		Node* prev = nullptr;
+		Node* head = nullptr;
 
+		void helper(Node* node)
+		{
+			if (!node) return;
+
+			helper(node->left);
+			if (prev)
+			{
+				prev->right = node;
+				node->left = prev;
+			}
+			else
+			{
+				head = node;
+			}
+			prev = node;
+			helper(node->right);
+		}
+
+		Node* treeToDoublyList(Node* root)
+		{
+			if (!root) return nullptr;
+			helper(root);
+			head->left = prev;
+			prev->right = head;
+			return head;
+		}
+	};
 
 
 	void process()

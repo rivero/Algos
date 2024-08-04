@@ -192,6 +192,7 @@ vector<string> strToVector(const string& str, char sep = ':')
 #include "FindFirstAndLastPositionOfelementInSortedArray.h"
 #include "ValidParenthesis.h"
 #include "PeekingIterator.h"
+#include "WordSearch.h"
 #pragma endregion INCLUDES
 struct tests
 {
@@ -206,7 +207,7 @@ struct tests
 
 int main()
 {
-	tests t("MoveZeroes");
+	tests t("WordSearch");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
@@ -391,9 +392,9 @@ int main()
 	{
 		SimplifyPath::process();
 	}
-	if (t.contains("BTreeToDLink"))
+	if (t.contains("ConvertBSTtoDoubleLinkedList"))
 	{
-		BTreeToDLink::process();
+		ConvertBSTtoDoubleLinkedList::process();
 	}
 	if (t.contains("NumberOfIslands"))
 	{
@@ -612,4 +613,6 @@ int main()
 		ValidParenthesis::process();
 	if (t.contains("FourSum"))
 		FourSum::process();
+	if (t.contains("WordSearch"))
+		WordSearch::process();
 }

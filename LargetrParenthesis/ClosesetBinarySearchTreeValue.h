@@ -70,36 +70,30 @@ namespace ClosesetBinarySearchTreeValue
 
 	};
 
-	class Solution : public timeit
+	class Solution
 	{
-		int m_val{-1};
-		double m_lastDifference{ std::numeric_limits<double>::max()};
-
-		void bst(TreeNode* root, double target)
+		int val{ -1 };
+		double lastdiff = numeric_limits<double>::max();
+		void searchValue(TreeNode* node, double target)
 		{
-			if (!root)
+			if (!node) return;
+			searchValue(node->left, target);
+			auto diff = abs(target - double(node->val));
+			if (diff < lastdiff)
 			{
-				return;
-			}
-			bst(root->left, target);
-			auto difference = abs(target - double(root->val));
-			if (difference < m_lastDifference)
-			{
-				m_lastDifference = difference;
-				m_val = root->val;
+				lastdiff = diff;
+				val = node->val;
 			}
 
-			bst(root->right, target);
-
+			searchValue(node->right, target);
 		}
 	public:
 		int closestValue(TreeNode* root, double target)
 		{
-			bst(root, target);
-			return m_val;
+			searchValue(root, target);
+			return val;
 		}
 	};
-
 
 	void process()
 	{

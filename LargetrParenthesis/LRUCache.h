@@ -78,6 +78,15 @@ in the list.
 time.
 * **`put(k, v)`:** O(1) on average. Similar to `get(k)`, operations on the `unordered_map` and list are constant time.
 * **Space Complexity:** O(capacity) due to the `unordered_map` and the `list` storing at most `capacity` elements.
+* 
+* LIST
+* 
+* Insertion/Deletion at the beginning or end: O(1)
+Insertion/Deletion at any position: O(n)
+Access to the front or back element: O(1)
+Access to an arbitrary element: O(n)
+Search for an element: O(n)
+Sorting: O(n log n) (using standard sorting algorithms)
 
 */
 namespace LRUCache

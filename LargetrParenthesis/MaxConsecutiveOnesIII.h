@@ -25,7 +25,14 @@ nums[i] is either 0 or 1.
 ## Understanding the Algorithm: Maximum Consecutive Ones III
 
 ### Problem Statement
-Given a binary array `nums` (containing only 0s and 1s) and an integer `k`, the algorithm finds the maximum number of consecutive 1s in the array if you can flip at most `k` 0s to 1s.
+
+"Find the longest subarray with at most k zeros.
+
+Solution
+
+The algorithm employs a sliding window technique. 
+It counts number of zeros flipped by decreasing k within the window. 
+If k becomes negative, the left boundary is shifted to the right until k becomes non-negative.
 
 ### Algorithm Breakdown
 This algorithm employs a sliding window technique to efficiently solve the problem.

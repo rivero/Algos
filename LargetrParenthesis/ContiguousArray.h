@@ -21,64 +21,38 @@ nums[i] is either 0 or 1.
 Solution
 
 ## Algorithm Explanation
+## Algorithm: Subarray with Equal Number of 0s and 1s
 
-**Problem:** Find the maximum length of a subarray with an equal number of 0s and 1s in a given binary array.
+**Core Idea:** using a map to track the cumulative sum of (1s - 0s) encountered so far and the index where this sum was first seen.
 
-**Approach:** Hashmap and Counting
+* **Maximizing Length:** By storing the index of the first occurrence of a particular sum, we can calculate the maximum length of 
+such a subarray.
 
-1. **Initialization:**
-   * `seen_at`: A hashmap to store the index of the first occurrence of a particular `count` value.
-   * `seen_at[0] = -1`: This initialization is a crucial optimization. It ensures that if we encounter a `count` of 0, the maximum 
-   length subarray starting from the beginning is considered.
-   * `ans`: Stores the maximum length of the subarray found so far.
-   * `count`: Tracks the difference between the number of 1s and 0s encountered so far.
+**Process:**
 
-2. **Iterate through the array:**
-   * For each element `nums[i]`:
-	 * Update `count`: Increment `count` if the element is 1, otherwise decrement it.
-	 * If `count` exists in `seen_at`, it means we have encountered a subarray with an equal number of 0s and 1s. Calculate the 
-	 length of this subarray (`i - seen_at[count]`) and update `ans` if it's larger than the current maximum.
-	 * If `count` doesn't exist in `seen_at`, store its current index in the hashmap.
+1. Initialize a HashMap to store cumulative sum and its first index.
+2. Iterate through the array, incrementing the count for 1 and decrementing for 0.
+3. If the current count exists in the HashMap, calculate the length of the subarray and update the maximum length if needed.
+4. Otherwise, store the current count and its index in the HashMap.
 
-3. **Return `ans`:** The final value of `ans` represents the maximum length of the subarray with equal numbers of 0s and 1s.
+* Why Finding the Same Count Indicates Equal Numbers
+If we encounter the same count value again, it means that the number of times we've incremented count (due to 1s) is equal to the 
+number of times we've decremented count (due to 0s) between the two occurrences of this count.
+This implies that the subarray between the two indices where count had this value contains an equal number of 0s and 1s.
 
-## Complexity Analysis
-
-* **Time complexity:** O(n), where n is the length of the input array. The algorithm iterates through the array once.
-* **Space complexity:** O(n) in the worst case, as the hashmap can potentially store all unique `count` values. However, in practice,
-the space used is often less than O(n).
-
-## Key Idea
-## Why Seeing a Count Before Indicates a Potential Answer
-
-**Understanding the Problem:**
-We're looking for the longest continuous subarray where the number of 0s and 1s are equal. We're using a hash map to store the 
-cumulative sum (count) of the array elements where 1 is represented as 1 and 0 as -1.
-
-**Key Insight:**
-
-* If we encounter a count that has been seen before, it implies that the subarray between the previous occurrence of that count 
-and the current index has an equal number of 0s and 1s.
-
-**Reasoning:**
-
-* The cumulative sum represents the difference between the number of 1s and 0s encountered so far.
-* If we encounter the same cumulative sum again, it means that the number of additional 1s and 0s since the last occurrence of 
-that sum is equal.
-* Therefore, the subarray between the two occurrences of the same count has an equal number of 0s and 1s.
-
-**Example:**
-
-Consider the array `[0, 1, 0]`.
-* The cumulative sums are: `-1, 0, -1`.
-* When we encounter the second `-1`, we know that there's a subarray from index 0 to index 2 with equal numbers of 0s and 1s.
-
-**In conclusion,** by keeping track of the indices where specific cumulative sums occur, we can efficiently find the longest subarray with an equal number of 0s and 1s.
-
-**Would you like to explore other approaches to solving this problem?**
+**Time Complexity:** O(n) due to single pass through the array.
+**Space Complexity:** O(n) in worst case for the HashMap.
 
 Example:
-## Example: Finding Maximum Length Subarray with Equal 0s and 1s
+
+Consider the array [0, 1, 0].
+
+Initially, count is 0.
+We encounter 0, so count becomes -1.
+We encounter 1, so count becomes 0 again.
+Since we've seen count = 0 before, we know that the subarray from index 0 to index 2 has an equal number of 0s and 1s.
+
+**Example:**
 
 **Input:** nums = [0, 1, 0]
 
@@ -103,14 +77,6 @@ Example:
 
 3. **Return `ans`:** The maximum length found is 2.
 
-**Explanation:**
-
-* The algorithm effectively finds the longest subarray with an equal number of 0s and 1s by keeping track of the first occurrence of 
-each `count` value.
-* The initialization `seen_at[0] = -1` is crucial for handling subarrays starting from the beginning.
-* By calculating the difference between the current index and the previously seen index of the same `count`, we efficiently determine
-the length of the subarray.
-
 In this example, the subarray [0, 1] has an equal number of 0s and 1s, and its length is 2, which is the maximum length found.
 
 
@@ -120,22 +86,22 @@ namespace ContiguousArray
 	class Solution 
 	{
 	public:
-		int findMaxLength(vector<int>& nums) 
+		int findMaxLength(vector<int>& nums)
 		{
-			map<int, int> seen_at; // store tha last index where our counter was seen
-			seen_at[0] = -1; // when we rest our index from our counter we need to inlcude the first element at 0
-			int ans{}, count{};
+			unordered_map<int, int> countIndexMap;
+			countIndexMap[0] = -1; // fake index to include element 0 in calculation
+			int ans = 0, count = 0;
 			for (int i = 0; i < nums.size(); i++)
 			{
-				count += nums[i] != 0 ? 1 : -1; // increase for 1 decrease for 0
-				if (seen_at.count(count) > 0)
-					ans = max(ans, i - seen_at[count]);
+				count += nums[i] == 1 ? 1 : -1;// increment for 1s decrement for 0s
+				if (countIndexMap.count(count) > 0)
+					ans = max(ans, i - countIndexMap[count]); // calculating dist bet indexes
 				else
-					seen_at[count] = i;
-
+					countIndexMap[count] = i;
 			}
 			return ans;
 		}
 	};
-	void process(){}
+
+	void process() {}
 }

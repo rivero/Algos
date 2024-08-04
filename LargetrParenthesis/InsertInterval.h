@@ -41,36 +41,62 @@ insert at start push
 insert at end : push-back
 insert in the middle
 
-Certainly! Let's dive into the algorithm and discuss its complexities:
+## Understanding the Algorithm: Merging Overlapping Intervals
 
-1. **Algorithm Explanation**:
-	- The given algorithm inserts a new interval (`newInterval`) into a sorted vector of intervals (`intervals`).
-	- It handles both overlapping and non-overlapping intervals.
-	- The algorithm iterates through the existing intervals and merges overlapping intervals with `newInterval`.
-	- The result is a vector of intervals that covers the combined range.
+**Problem:** Insert a new interval into a list of non-overlapping intervals, merging if necessary.
 
-2. **Step-by-Step Explanation**:
-	- **Non-Overlapping Intervals**:
-		- The algorithm starts by adding non-overlapping intervals (those before `newInterval`) directly to the result vector.
-		- It compares the end of each existing interval with the start of `newInterval`.
-		- If the end of an interval is less than the start of `newInterval`, they don't overlap, so we add that interval to 
-		the result.
-	- **Merging Overlapping Intervals**:
-		- While iterating through the existing intervals, if an interval overlaps with `newInterval`, we update `newInterval` 
-		to cover both intervals.
-		- We adjust the start and end of `newInterval` to include the maximum range.
-	- **Remaining Intervals**:
-		- After merging, we add the updated `newInterval` to the result.
-		- Finally, we add any remaining intervals (those after `newInterval`) to the result.
+**Algorithm Breakdown:**
 
-3. **Time Complexity**:
-	- The time complexity of this algorithm is O(N), where N is the number of existing intervals.
-	- We iterate through the existing intervals once to find the correct position for `newInterval`.
-	- The merging step also takes linear time.
+1. **Initialization:**
+   * `result` vector to store the merged intervals.
+   * `i` as an index to iterate through the `intervals` vector.
 
-4. **Space Complexity**:
-	- The space complexity is O(N) because the result vector stores the merged intervals.
-	- The algorithm modifies the input vector in-place, so no additional space is used.
+2. **Add non-overlapping intervals before newInterval:**
+   * Iterate through `intervals` until an interval overlaps with `newInterval`.
+   * Add non-overlapping intervals to `result`.
+
+3. **Merge overlapping intervals:**
+   * While the current interval overlaps with `newInterval`:
+	 * Update `newInterval`'s start and end to encompass the current interval.
+	 * Increment `i` to move to the next interval.
+   * Add the merged `newInterval` to the `result`.
+
+4. **Add remaining intervals:**
+   * Add the remaining intervals (if any) to the `result`.
+
+**Key points:**
+
+* The condition `intervals[i][1] < newInterval[0]` checks if the current interval ends before the new interval starts, indicating 
+no overlap.
+* The condition `intervals[i][0] <= newInterval[1]` checks if the current interval starts before the new interval ends, indicating
+a potential overlap.
+* By updating `newInterval[0]` and `newInterval[1]` with the minimum and maximum start and end times of overlapping intervals, we 
+effectively merge them into a single interval.
+
+**Time Complexity:** O(n), where n is the number of intervals.
+**Space Complexity:** O(n) for the `result` vector.
+
+**Example:**
+
+```
+intervals = [[1,3],[6,9]], newInterval = [2,5]
+```
+
+* The first interval [1, 3] is added to `result`.
+* The second interval [6, 9] is added to `result`.
+* The new interval [2, 5] overlaps with the previous intervals, so they are merged into [1, 5].
+
+**Result:** [[1, 5], [6, 9]]
+
+## Complexity Analysis
+
+### Time Complexity: O(n)
+* The algorithm iterates through the `intervals` array at most twice: once to find the insertion point for the `newInterval` and once to copy the remaining intervals.
+* Each iteration involves constant time operations (comparisons, array access, vector push_back).
+* Therefore, the overall time complexity is linear with respect to the number of intervals (n).
+
+### Space Complexity: O(n)
+* The `result` vector can potentially store all intervals, leading to a space complexity of O(n) in the worst case.
 
 */
 namespace InsertInterval

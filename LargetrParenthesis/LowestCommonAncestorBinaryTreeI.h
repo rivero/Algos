@@ -76,12 +76,12 @@ once we find other node, we return it, Because the other node is either under th
 
 My explanation
 
-We use a DFS approach were we search for the values in both trees.
+We use a DFS approach were we recursively search for the values in the tree.
 If both left and right subtrees return non-null values, it means p and q are in different subtrees, 
-	so the current node is the LCA.
+	so the current root node is the LCA.
 
-If only one subtree returns a non-null value, return that subtree's root as the LCA. 
-	This is because if the other three doesnt contain the value, then the not found value will be a descendant of the found node.
+If only one subtree returns a non-null node, return that node as the LCA. 
+	This is because if the other three doesn't contain the other node, it will be a descendant of the found node.
 .	Because of the constraint "p and q will exist in the three"
 
 */
@@ -94,23 +94,25 @@ namespace LowestCommonAncestorBinaryTreeI
 		TreeNode* right{ nullptr };
 	    TreeNode(int x) : val(x) {}
 	};
-	class Solution {
+	class Solution
+	{
 	public:
-		TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+		TreeNode* lowestCommonAncestor(TreeNode* node, TreeNode* p, TreeNode* q)
 		{
-			if (!root)
-				return root;
-			
-			if (root == p || root == q)
-				return root;
-			
-			// value not found yet. Explore leafs
-			auto l = lowestCommonAncestor(root->left, p, q); // left leaf
-			auto r = lowestCommonAncestor(root->right, p, q); // right leaf
-			
-			if (l && r) // if both leafs are valid -> root is the LCA
-				return root;
-			
+			// 2 base cases
+			// 1. null node
+			if (!node) return node;
+			// 2. we found either p or q
+			if (node == p || node == q)
+				return node;
+
+			// value not found yet. Keep exploring leafs
+			auto l = lowestCommonAncestor(node->left, p, q);
+			auto r = lowestCommonAncestor(node->right, p, q);
+
+			// found both -> root is the current node
+			if (l && r) return node;
+			// found one: return the valid one
 			return l ? l : r;
 		}
 	};

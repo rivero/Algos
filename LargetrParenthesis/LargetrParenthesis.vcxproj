@@ -167,7 +167,7 @@
     <ClInclude Include="CopyListwWithRandomPointer.h" />
     <ClInclude Include="CustomSortString.h" />
     <ClInclude Include="ExclusiveTimeOfFunctions.h" />
-    <ClInclude Include="FindFirstAndLastPositionOfelementInSortedArray.h" />
+    <ClInclude Include="FindFirstAndLastPositionOfElementInSortedArray.h" />
     <ClInclude Include="findinter.h" />
     <ClInclude Include="FindKClosestElements.h" />
     <ClInclude Include="FindMaxLenValidSubsequenceII.h" />
@@ -241,6 +241,7 @@
     <ClInclude Include="ValidPalindromeII.h" />
     <ClInclude Include="ValidParenthesis.h" />
     <ClInclude Include="ValidWordAbbreviation.h" />
+    <ClInclude Include="WordSearch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

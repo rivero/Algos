@@ -100,30 +100,23 @@ namespace RotateImage
 			}
 		}
 	};
-	class Solution 
+
+	class Solution
 	{
 	public:
-		void rotate(vector<vector<int>>& matrix) 
+		void rotate(vector<vector<int>>& matrix)
 		{
-
 			int n = matrix.size();
-
-			// Take a transpose of the matrix (rotates counterclockwise)
-			for (int i = 0; i < n - 1; i++) 
-			{
-				for (int j = i + 1; j < n; j++) 
-				{
-					swap(matrix[i][j], matrix[j][i]);
-				}
-			}
-
-			// Reverse each row of the matrix to get the output
-			for (int i = 0; i < n; i++) {
-				reverse(matrix[i].begin(), end(matrix[i]));
-			}
+			// transpose
+			for (int row = 0; row < n; row++)
+				for (int col = row + 1; col < n; col++)
+					swap(matrix[row][col], matrix[col][row]);
+			// reverse trows
+			for (int row = 0; row < n; row++)
+				reverse(matrix[row].begin(), matrix[row].end());
 		}
-
 	};
+
 	void process()
 	{
 		cout << "RotateImage\n";
@@ -175,3 +168,41 @@ namespace RotateImage
 		}
 	}
 }
+
+/*
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void rotateCounterclockwise(vector<vector<int>>& matrix) {
+	int n = matrix.size();
+	// Transpose matrix
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+			swap(matrix[i][j], matrix[j][i]);
+		}
+	}
+	// Reverse each row
+	for (int i = 0; i < n; i++) {
+		reverse(matrix[i].begin(), matrix[i].end());
+	}
+}
+
+void rotateClockwise(vector<vector<int>>& matrix) {
+	int n = matrix.size();
+	// Transpose matrix
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+			swap(matrix[i][j], matrix[j][i]);
+		}
+	}
+	// Reverse each column
+	for (int i = 0; i < n; i++) {
+		reverse(matrix[i].begin(), matrix[i].end());
+	}
+}
+
+*/

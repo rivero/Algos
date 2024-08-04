@@ -57,7 +57,7 @@ This algorithm uses a hash map to efficiently solve the two-sum problem.
 
 complement = 9 - 2 = 7
 stores {2, 0}
-complement = 9 - 2 = 2
+complement = 9 - 7 = 2
 2 exists, index is 0
 
 return index of 7 and index of 2. {1, 0}

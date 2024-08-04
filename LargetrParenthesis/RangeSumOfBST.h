@@ -65,13 +65,11 @@ It accumulates the sum by FIRST checking each node's value against the range and
 * In the worst case, the tree is skewed, and the height can be equal to the number of nodes (N), resulting in O(N) space complexity.
 * However, in balanced trees, the height is typically logarithmic to the number of nodes (log N), leading to O(log N) space complexity.
 
-**Note:** The extra space used for the `sum` variable is considered constant and doesn't affect the overall space complexity analysis.
+**In summary,** the algorithm has a 
+time complexity of O(N) and a 
+space complexity of O(H), where H is the height of the tree.
 
-**In summary,** the algorithm has a time complexity of O(N) and a space complexity of O(H), where H is the height of the tree.
-
-**Would you like to explore any potential optimizations or alternative approaches to this problem?**
-
-   */
+*/
 namespace RangeSumOfBST
 {
 	struct TreeNode

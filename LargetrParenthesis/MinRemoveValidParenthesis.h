@@ -62,10 +62,10 @@ s[i] is either '(' , ')', or lowercase English letter.
 */
 namespace MinRemoveValidParenthesis
 {
-	class Solution : protected timeit
+	class Solution
 	{
 	public:
-		string minRemoveToMakeValid(string s) 
+		string minRemoveToMakeValid(string s)
 		{
 			stack<int> op;
 			for (int i = 0; i < s.size(); i++)
@@ -77,10 +77,8 @@ namespace MinRemoveValidParenthesis
 					else
 						s[i] = '*';
 				}
-				else if (s[i] == '(')
-				{
+				if (s[i] == '(')
 					op.push(i);
-				}
 			}
 			while (!op.empty())
 			{
@@ -88,15 +86,16 @@ namespace MinRemoveValidParenthesis
 				op.pop();
 			}
 			string ans;
-			for (int i = 0; i < s.size(); i++)
+			for (auto c : s)
 			{
-				if (s[i] != '*')
-					ans += s[i];
+				if (c != '*')
+					ans += c;
 			}
 			return ans;
 		}
-	};	
-	
+	};
+
+
 	void process()
 	{
 		{

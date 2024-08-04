@@ -102,7 +102,7 @@ namespace FindPeakElement
 	class Solution
 	{
 	public:
-		int findPeakElement(vector<int>& nums)
+		int findPeakElement(vector<int> nums)
 		{
 			int n = nums.size();
 			if (n <= 1) return 0;
@@ -112,7 +112,7 @@ namespace FindPeakElement
 			if (nums[n - 1] > nums[n - 2]) // last element is a peak
 				return n - 1;
 
-			size_t l = 0, r = n - 1;
+			size_t l = 1, r = n - 2; // no need to test first and last elements
 			while (l <= r)
 			{
 				auto m = l + (r - l) / 2;
@@ -129,7 +129,6 @@ namespace FindPeakElement
 			return {};
 		}
 	};
-
 	void process()
 	{
 		{
@@ -143,7 +142,7 @@ namespace FindPeakElement
 		}
 		{
 			cout << "CF\n";
-			SolutionCF sol;
+			SolutionBruteForce sol;
 			cout << sol.findPeakElement({ 1,2,3,1 }) << "\n";
 			cout << sol.findPeakElement({ 1,2,1,3,5,6,4 }) << "\n";
 			cout << sol.findPeakElement({ 3,2,1 }) << "\n";

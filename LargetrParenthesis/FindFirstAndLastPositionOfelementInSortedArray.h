@@ -46,53 +46,54 @@ Return result: Return the leftIndex and rightIndex as the result.
 Time and Space Complexity
 Time complexity: O(log n) due to the two binary searches.
 Space complexity: O(1) as constant extra space is used.
-This solution efficiently finds the first and last positions of a target element in a sorted array while meeting the O(log n) 
-time complexity requirement.
+
 */
 namespace FindFirstAndLastPositionOfelementInSortedArray
 {
 
 	class Solution {
 	public:
-		vector<int> searchRange(vector<int>& nums, int target) {
+		vector<int> searchRange(vector<int>& nums, int target)
+		{
+			// edge case
 			int n = nums.size();
-			if (n == 0) {
-				return { -1, -1 };
-			}
+			if (n == 0) return { -1,-1 };
 
-			// Find the leftmost occurrence
-			int left = 0, right = n - 1;
-			int leftIndex = -1;
-			while (left <= right) {
-				int mid = left + (right - left) / 2;
-				if (nums[mid] >= target)
+			//find left
+			int l = 0, r = n - 1;
+			int li = -1;
+			while (l <= r)
+			{
+				int m = l + (r - l) / 2;
+				if (nums[m] >= target)
 				{
-					if (nums[mid] == target)
-						leftIndex = mid;
-					right = mid - 1; // Look for the leftmost occurrence
+					if (nums[m] == target)
+						li = m;
+					r = m - 1;
 				}
 				else
-					left = mid + 1;
+					l = m + 1;
 			}
-
-			// Find the rightmost occurrence
-			left = 0, right = n - 1;
-			int rightIndex = -1;
-			while (left <= right) {
-				int mid = left + (right - left) / 2;
-				if (nums[mid] <= target)
+			// find right
+			l = 0, r = n - 1;
+			int ri = -1;
+			while (l <= r)
+			{
+				int m = l + (r - l) / 2;
+				if (nums[m] <= target)
 				{
-					if (nums[mid] == target)
-						rightIndex = mid;
-					left = mid + 1; // Look for the rightmost occurrence
+					if (nums[m] == target)
+						ri = m;
+					l = m + 1;
 				}
 				else
-					right = mid - 1;
+					r = m - 1;
 			}
+			return { li,ri };
 
-			return { leftIndex, rightIndex };
 		}
 	};
+
 
 	void process() {}
 }

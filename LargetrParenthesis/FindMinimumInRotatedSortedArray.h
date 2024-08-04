@@ -52,8 +52,26 @@ Certainly! Let's break down the algorithm and discuss its complexities:
 	- Otherwise, the minimum element lies in the left half (excluding `m`).
 	- The algorithm adjusts the pointers accordingly and continues the search until `l` and `r` converge.
 
+My explanation
+	We're looking for the minumum element in a sorted rotated array.
+	take the middle element and compare it.
+		it it is larger than the last element, shrink window from the left
+
+		a b c d e
+		c > e
+		=> d e
+		otherwise
+		=> a b
+
 2. **Time Complexity**:
 	- The time complexity of this algorithm is O(log N), where N is the size of the input array.
+
+	Why O(log n):
+	The search space is divided by approximately half in each iteration.
+	This halving of the search space is the characteristic of a logarithmic operation.
+	The number of times we can divide a number by 2 before reaching 1 is approximately its logarithm (base 2).
+	Therefore, the time complexity of this algorithm is O(log n), where n is the size of the input arra
+
 3. **Space Complexity**:
 	- The space complexity is O(1) because the algorithm uses only a few variables (`l`, `r`, and `m`) without any additional 
 	data structures.
@@ -66,18 +84,19 @@ namespace FindMinimumInRotatedSortedArray
 	public:
 		int findMin(vector<int>& nums)
 		{
-			size_t l{ 0 }, r{ nums.size() - 1 };
+			size_t l{}, r{ nums.size() - 1 };
 			while (l < r)
 			{
-				int m = (l + r) / 2;
+				int m = l + (r - l) / 2;
 				if (nums[m] > nums[r])
 					l = m + 1;
 				else
 					r = m;
 			}
-			return nums[l];
+			return nums[r];
 		}
 	};
+
 	void process() {}
 
 }
