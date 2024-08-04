@@ -75,12 +75,6 @@ word = "ABE"
 The algorithm would iterate through each cell of the board. When it reaches the cell containing 'A', it starts a DFS. It explores 
 the paths 'AB' and 'AD'. Since 'AB' matches the beginning of the word, it continues exploring in that direction until it finds 'E', returning true.
 
-**In essence:**
-The algorithm efficiently searches for a word in a grid by exploring all possible paths using backtracking. The pruning technique 
-helps to optimize the search by avoiding unnecessary exploration.
-
-
-
 */
 namespace WordSearch
 {

@@ -74,7 +74,7 @@ a potential overlap.
 effectively merge them into a single interval.
 
 **Time Complexity:** O(n), where n is the number of intervals.
-**Space Complexity:** O(n) for the `result` vector.
+**Space Complexity:** O(n + 1) for the `result` vector.
 
 **Example:**
 
@@ -87,16 +87,6 @@ intervals = [[1,3],[6,9]], newInterval = [2,5]
 * The new interval [2, 5] overlaps with the previous intervals, so they are merged into [1, 5].
 
 **Result:** [[1, 5], [6, 9]]
-
-## Complexity Analysis
-
-### Time Complexity: O(n)
-* The algorithm iterates through the `intervals` array at most twice: once to find the insertion point for the `newInterval` and once to copy the remaining intervals.
-* Each iteration involves constant time operations (comparisons, array access, vector push_back).
-* Therefore, the overall time complexity is linear with respect to the number of intervals (n).
-
-### Space Complexity: O(n)
-* The `result` vector can potentially store all intervals, leading to a space complexity of O(n) in the worst case.
 
 */
 namespace InsertInterval

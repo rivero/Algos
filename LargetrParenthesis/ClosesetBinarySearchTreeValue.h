@@ -58,6 +58,7 @@ namespace ClosesetBinarySearchTreeValue
 	- However, if the BST is skewed (e.g., a linked list), the height can be **O(n)**.
 	- Therefore, the space complexity of the `closestValue` method is **O(n)** in the worst case¹.
 
+	We need inorder to traverse the node in ascending order to start the differences from the smallest value.
 	*/
 
 	struct TreeNode {

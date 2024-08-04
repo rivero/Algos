@@ -73,10 +73,10 @@ Certainly! Let's break down the algorithm and discuss its complexities:
 */
 namespace SearchInRotatedSortedArray
 {
-	class Solution 
+	class Solution
 	{
 	public:
-		int search(vector<int> nums, int target) 
+		int search(vector<int> nums, int target)
 		{
 			int n = nums.size();
 			int l{ 0 }, r{ n - 1 };
@@ -88,7 +88,7 @@ namespace SearchInRotatedSortedArray
 				else
 					r = m;
 			}
-			auto min_i = l;
+			auto min_i = r; // l or r will do, they overlap
 
 			// test boundaries
 			if (min_i == 0) // sorted array
@@ -100,7 +100,7 @@ namespace SearchInRotatedSortedArray
 
 			while (l <= r && r > -1)
 			{
-				int m = (l + r) / 2;
+				int m = l + (r - l) / 2;
 				if (nums[m] == target)
 					return m;
 				else if (nums[m] < target)

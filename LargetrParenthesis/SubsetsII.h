@@ -52,8 +52,6 @@ for each subset, we need to copy its elements into a new vector.
 * **Space complexity:** O(n * 2^n) for the `Subsets` vector, which can store up to 2^n subsets, each of size n in the worst case. 
 The recursion stack also takes O(n) space.
 
-**Overall:** The algorithm efficiently generates all possible subsets, including duplicates, by using backtracking and pruning.
-
 */
 namespace SubSetsII
 {

@@ -71,6 +71,33 @@ Solution O(log n)
 6. **Space Complexity**:
    - The algorithm uses only a few variables, so the space complexity is O(1).
 
+   ## Why `l <= r` in Binary Search
+
+**The condition `l <= r` ensures that the binary search loop terminates correctly.**
+
+### Understanding the Logic:
+
+* **Binary search** works by repeatedly dividing a sorted array into two halves.
+* The `l` and `r` pointers represent the left and right boundaries of the search space, respectively.
+* The condition `l <= r` guarantees that there is at least one element in the search space to consider.
+
+### Consequences of using `l < r`:
+
+* If you use `l < r`, the loop might terminate prematurely when there's only one element left in the search space.
+* This can lead to incorrect results in certain cases, especially when the target element is the last element in the array.
+
+### Example:
+Consider an array `[1, 2, 3]` and you're searching for the element `3`.
+
+* If you use `l < r`, the loop might terminate when `l` becomes equal to `r`, and you might miss the target element.
+
+By using `l <= r`, you ensure that the loop continues until `l` becomes greater than `r`, guaranteeing that all elements in the array are considered.
+
+**In conclusion:**
+The `l <= r` condition is essential for the correct functioning of the binary search algorithm, preventing premature termination and ensuring that all possible elements are considered.
+
+
+
 */
 namespace FindPeakElement
 {

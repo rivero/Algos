@@ -50,7 +50,7 @@ Consider the array [0, 1, 0].
 Initially, count is 0.
 We encounter 0, so count becomes -1.
 We encounter 1, so count becomes 0 again.
-Since we've seen count = 0 before, we know that the subarray from index 0 to index 2 has an equal number of 0s and 1s.
+Since we've seen count = 0 before, we know that the subarray from index 0 to index 1 has an equal number of 0s and 1s.
 
 **Example:**
 
