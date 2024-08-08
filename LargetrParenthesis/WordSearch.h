@@ -72,7 +72,7 @@ board = [
 word = "ABE"
 ```
 
-The algorithm would iterate through each cell of the board. When it reaches the cell containing 'A', it starts a DFS. It explores 
+The algorithm would iterate through each cell of the board. It starts a DFS at 'A'. It explores 
 the paths 'AB' and 'AD'. Since 'AB' matches the beginning of the word, it continues exploring in that direction until it finds 'E', returning true.
 
 */

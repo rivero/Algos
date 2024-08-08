@@ -48,8 +48,7 @@ The provided C++ code efficiently merges overlapping intervals using the followi
 */
 namespace MergeIntervals
 {
-	class Solution 
-	{
+	class Solution {
 	public:
 		vector<vector<int>> merge(vector<vector<int>>& intervals)
 		{
@@ -59,19 +58,17 @@ namespace MergeIntervals
 			ans.push_back(intervals[0]);
 			for (int i = 1; i < n; i++)
 			{
-				auto curFirst = intervals[i][0];
-				auto prevSec = ans.back()[1];
-				if (curFirst > prevSec)
+				if (ans.back()[1] < intervals[i][0])
+					// no overlapping
 					ans.push_back(intervals[i]);
 				else
-				{
-					auto curSec = intervals[i][1];
-					ans.back()[1] = max(prevSec, curSec);
-				}
+					ans.back()[1] = max(ans.back()[1], intervals[i][1]);
 			}
 			return ans;
 		}
-	};	void process()
+	};
+	
+	void process()
 	{
 		Solution sol;
 		vector<vector<int>> vec =

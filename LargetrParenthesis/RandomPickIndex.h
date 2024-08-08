@@ -1,5 +1,7 @@
 #pragma once
 /*
+* https://leetcode.com/problems/random-pick-index/description/
+* 
 398. Random Pick Index
 Medium
 Topics
@@ -83,41 +85,9 @@ namespace RandomPickIndex
 {
 	class Solution
 	{
-		vector<int> m_nums;
-	public:
-		Solution(vector<int> nums)
-		{
-			m_nums = nums;
-		}
-
-		int pick(int target) 
-		{
-			int count = 0; // Number of occurrences of target
-			int result = -1; // Index to return
-			for (int i = 0; i < m_nums.size(); ++i) 
-			{
-				if (m_nums[i] == target) 
-				{
-					// Randomly select an index with equal probability
-					if (rand() % (++count) == 0) 
-					{
-						result = i;
-					}
-				}
-			}
-			return result;
-		}
-	};
-
-
-	/*
-	Cool solution with recursion
-
-		class Solution
-	{
 		const vector<int>& nums;
 	public:
-		Solution(vector<int>& nums) : nums{ nums }
+		Solution(vector<int> nums) : nums{ nums }
 		{
 		}
 
@@ -129,8 +99,39 @@ namespace RandomPickIndex
 		}
 	};
 
-	Not good for large samples
-	
+
+	/*
+
+	BAD solution
+		class Solution
+	{
+		vector<int> m_nums;
+	public:
+		Solution(vector<int> nums)
+		{
+			m_nums = nums;
+		}
+
+		int pick(int target)
+		{
+			int count = 0; // Number of occurrences of target
+			int result = -1; // Index to return
+			for (int i = 0; i < m_nums.size(); ++i)
+			{
+				if (m_nums[i] == target)
+				{
+					// Randomly select an index with equal probability
+					if (rand() % (++count) == 0)
+					{
+						result = i;
+					}
+				}
+			}
+			return result;
+		}
+	};
+
+
 	*/
     /**
      * Your Solution object will be instantiated and called as such:

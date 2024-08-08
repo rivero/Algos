@@ -92,54 +92,45 @@ namespace ConvertBSTtoDoubleLinkedList
 	* The `prev` pointer efficiently maintains the link to the previous node.
 	* The `head` pointer keeps track of the starting node for the doubly linked list.
 
-	## Understanding the Algorithm Through an Example
+	## Understanding the Algorithm through Iteration
 
-	### Input Tree:
+**Given Tree:**
 
-	```
-		 4
-		/ \
-	   2   5
-	  / \
-	 1   3
-	```
+```
+	 4
+	/ \
+   2   5
+  / \
+ 1   3
+```
 
-	### Step-by-Step Breakdown:
+**Table of Iterations:**
 
-	**1. Initial State:**
-	* `prev` is null
-	* `head` is null
+| Iteration   | Function Call         | Action                                  | prev  | head |
+|----|--------|-----------------------|-----------------------------------------|-------|------|
+| 1  |           `helper(4)`          | Initial call                            | null  | null |
+| 2  |           `helper(2)`          | Recursive call                          | null  | null |
+| 3  |           `helper(1)`          | Recursive call                          | null  | null |
+| 4  |           `helper(1)` returns  | `prev = 1`, `head = 1`                  | 1     |   1  |  
+| 5  |           `helper(3)`          | Recursive call                          | 1     |   1  |
+| 6  |           `helper(3)` returns  | `1.right = 3`, `3.left = 1`,`prev = 3`  | 3     |   1  |
+| 7  |           `helper(2)` returns  | `2.right = 3`, `3.left = 2`,`prev = 2`  | 2     |   1  |
+| 8  |           `helper(5)`          | Recursive call							| 2     |   1  |
+| 9  |           `helper(5)` returns  | `2.right = 5`, `5.left = 2`, `prev = 5` | 5     |   1  |
+| 10 |           `helper(4)` returns  | `4.right = 5`, `5.left = 4`, `prev = 4` | 4     |   1  |
+| 11 |           `treeToDoublyList`   | `head.left = prev`, `prev.right = head` | 4     |   1  |
 
-	**2. Recursive calls:**
-	* `helper(4)`:
-	  * `helper(2)`:
-		* `helper(1)`:
-		  * `prev` is null, so `head` becomes 1
-		  * `prev` becomes 1
-		* `helper(3)`:
-		  * `prev` is 1, so link 1 -> 3 and 3 -> 1
-		  * `prev` becomes 3
-		* `prev` is 3, so link 2 -> 3 and 3 -> 2
-	  * `prev` becomes 2
-	  * `helper(5)`:
-		* `prev` is 2, so link 2 -> 5 and 5 -> 2
-	  * `prev` becomes 5
-	* `prev` is 5, so link 4 -> 5 and 5 -> 4
+**Explanation:**
 
-	**3. Circular Link:**
-	* `head->left = prev`: Link the first node (head) to the last node (prev)
-	* `prev->right = head`: Link the last node (prev) to the first node (head)
+* The `helper` function performs an in-order traversal of the tree.
+* Each recursive call processes a node, linking it to its predecessor using the `prev` pointer.
+* The `head` pointer is initialized to the first node encountered.
+* After the traversal, the `head` and `prev` pointers are connected to form a circular doubly linked list.
 
-	### Final Doubly Linked List:
-	```
-	1 <-> 2 <-> 3 <-> 4 <-> 5
-	```
+This table illustrates the step-by-step process of converting the binary tree into a doubly linked list.
 
-	**Explanation:**
-	* The `helper` function performs an in-order traversal of the tree.
-	* During the traversal, it links each node to its previous node using the `prev` pointer.
-	* The `head` pointer keeps track of the first node in the list.
-	* After the traversal, the `head` and `prev` pointers are linked to form a circular doubly linked list.
+**Would you like to explore other examples or modifications to the code?**
+
 
 */
 	class Node {

@@ -31,11 +31,10 @@ In this implementation:
 - Finally, we extract the elements from the heap and sort them to get the result in ascending order.
 
 1. **Time Complexity**:
-   - The loop that iterates through the entire `arr` has a time complexity of *O(n)*, where *n* is the size of the array.
-   - Inside the loop, we perform the following operations:
-	 - Pushing an element onto the max heap (priority queue) takes *O(log k)* time.
-	 - If the heap size exceeds *k*, we pop the largest element, which also takes *O(log k)* time.
-   - Since we perform these operations for each element in the array, the overall time complexity is *O(n log k)*.
+In this implementation:
+- We use a max heap to store pairs of the absolute difference between each element and *x*, along with the actual element value.
+- We maintain the heap size to be *k* by popping the largest element whenever the size exceeds *k*.
+- Finally, we extract the elements from the heap and sort them to get the result in ascending order.
 
 2. **Space Complexity**:
    - We use a max heap (priority queue) to store at most *k* elements; we also utilize a vector for the k elements.

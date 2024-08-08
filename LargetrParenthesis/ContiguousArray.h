@@ -69,7 +69,6 @@ Since we've seen count = 0 before, we know that the subarray from index 0 to ind
    * **i = 1:**
 	 * `nums[1] = 1`, so `count` becomes `0`.
 	 * `count` is in `seen_at`, so calculate the length: `ans = max(ans, i - seen_at[count]) = max(0, 1 - (-1)) = 2`.
-	 * Update `seen_at` if necessary (no need in this case).
    * **i = 2:**
 	 * `nums[2] = 0`, so `count` becomes `-1`.
 	 * `count` is in `seen_at`, so calculate the length: `ans = max(ans, i - seen_at[count]) = max(2, 2 - 0) = 2`.

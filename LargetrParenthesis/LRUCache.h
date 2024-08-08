@@ -92,45 +92,42 @@ Sorting: O(n log n) (using standard sorting algorithms)
 namespace LRUCache
 {
 
-    class LRUCache 
+    class LRUCache
     {
         int cap{};
-        list< pair<int, int> > keyValList;
-        unordered_map<int, list< pair<int, int> >::iterator> keyItMap;
-
-		void pushFront(int k, int v)
-		{
-			keyValList.push_front({ k, v });
-			keyItMap[k] = keyValList.begin();
-		}
-		
-        void moveToFront(int k, int v)
+        list< pair<int, int> > kvList;
+        unordered_map<int, list< pair<int, int> >::iterator > kvMap;
+        void pushFront(int k, int v)
         {
-            auto it = keyItMap[k];
-            keyValList.erase(it);
+            kvList.push_front({ k,v });
+            kvMap[k] = kvList.begin();
+            checkCapacity();
+        }
+        void moveFront(int k, int v)
+        {
+            auto it = kvMap[k];
+            kvList.erase(it);
             pushFront(k, v);
         }
- 
         void checkCapacity()
         {
-            if (keyItMap.size() > cap)
+            if (kvMap.size() > cap)
             {
-                auto [k, it] = keyValList.back();
-                keyItMap.erase(k);
-                keyValList.pop_back();
+                auto [k, v] = kvList.back();
+                kvMap.erase(k);
+                kvList.pop_back();
             }
         }
-
     public:
         LRUCache(int capacity) : cap(capacity) {}
 
         int get(int k)
         {
-            if (keyItMap.count(k) > 0)
+            if (kvMap.count(k) > 0)
             {
-                auto it = keyItMap[k];
+                auto it = kvMap[k];
                 auto [k, v] = *it;
-                moveToFront(k, v);
+                moveFront(k, v);
                 return v;
             }
             return -1;
@@ -138,16 +135,19 @@ namespace LRUCache
 
         void put(int k, int v)
         {
-            if (keyItMap.count(k) > 0)
-                moveToFront(k, v);
+            if (kvMap.count(k) > 0)
+                moveFront(k, v);
             else
-            {
                 pushFront(k, v);
-                checkCapacity();
-            }
         }
     };
 
+    /**
+     * Your LRUCache object will be instantiated and called as such:
+     * LRUCache* obj = new LRUCache(capacity);
+     * int param_1 = obj->get(key);
+     * obj->put(key,value);
+     */
     /**
      * Your LRUCache object will be instantiated and called as such:
      * LRUCache* obj = new LRUCache(capacity);

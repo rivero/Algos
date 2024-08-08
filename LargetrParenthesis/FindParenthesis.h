@@ -104,7 +104,7 @@ namespace FindParenthesis
 		return maxLen;
 	}
 
-	void test()
+	void process()
 	{
 		cout << "FindParenthesis\n";
 		FindParenthesis("");

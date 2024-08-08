@@ -211,7 +211,7 @@ int main()
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
-		FindParenthesis::test();
+		FindParenthesis::process();
 	}
 	if (t.contains("MoveZeroes"))
 	{
@@ -247,19 +247,9 @@ int main()
 		auto res = findinter::findIntersectionValues(v1, v2);
 		printv(res);
 	}
-	if (false)
+	if (t.contains("ReverseLinkedList"))
 	{
-		auto head = new ReverseLinkedList::ListNode(1);
-		head->next = new ReverseLinkedList::ListNode(2);
-		head->next->next = new ReverseLinkedList::ListNode(3);
-		head->next->next->next = new ReverseLinkedList::ListNode(4);
-		head->next->next->next->next = new ReverseLinkedList::ListNode(5);
-		ReverseLinkedList r;
-		r.printList(head);
-		cout << "\n";
-		auto newHead = r.reverseList(head);
-		r.printList(newHead);
-		cout << "\n";
+		ReverseLinkedList::process();
 	}
 	if (false)
 	{
