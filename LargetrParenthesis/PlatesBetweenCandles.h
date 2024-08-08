@@ -2,6 +2,7 @@
 namespace PlatesBetweenCandles
 {
 	/*
+	* https://leetcode.com/problems/plates-between-candles/description/
 	* 2055. Plates Between Candles
 Medium
 Topics
@@ -17,7 +18,14 @@ For each query, you need to find the number of plates between candles that are i
 A plate is considered between candles if there is at least one candle to its left and at least 
 one candle to its right in the substring.
 
-For example, s = "||**||**|*", and a query [3, 8] denotes the substring "*||**|". 
+For example, s = "||**||**|*", and a query [3, 8] denotes the substring "*||**|".
+query [3, 8]
+
+||**||**|* <- len = 10 [0,9]
+   ^     ^         
+| | * * | | * * | *
+0 1 2 3 4 5 6 7 8 9
+      ^         ^ <- query 3, 8
 The number of plates between candles in this substring is 2, as each of the two plates has at 
 least one candle in the substring to its left and right.
 
@@ -51,68 +59,52 @@ queries[i].length == 2
 0 <= lefti <= righti < s.length
 	*/
 
-	class Solution 
+	struct Solution 
 	{
-		int result(const string& s)
+		// return the number of plates in the substring
+		int numPlates(const string& subStr)
 		{
-			// edge case
-			int res{};
-			if (s.empty() || s.size() < 3)
+			int count = 0;
+			// find first '|'
+			int li{};
+			for (int i = 0; i < subStr.size(); i++)
 			{
-				return res;
+				if (subStr[i] == '|')
+				{
+					li = i;
+					break;
+				}
+			}
+			// find last '|'
+			int ri{};
+			for (int i = subStr.size() - 1; i >= 0; i--)
+			{
+				if (subStr[i] == '|')
+				{
+					ri = i;
+					break;
+				}
+			}
+			if (ri > li)
+			{
+				for (int i = li; i <= ri; i++)
+				{
+					if (subStr[i] == '*')
+						count++;
+				}
 			}
 
-			int mid = s.size() / 2;
-			int size = s.size();
-			int left{mid-1}, right{mid};
-			int indexLeft{INT_MAX}, indexRight{-INT_MAX};
-			do
-			{
-				if (s[left] == '|' && indexLeft == INT_MAX)
-				{
-					indexLeft = left;
-				}
-				else if (left > 0)
-					left--;
-				
-				if (s[right] == '|' && indexRight == -INT_MAX)
-				{
-					indexRight = right;
-				}
-				else if (right < size -1)
-					right++;
-				
-				
-				if (left < 0)
-				{
-					break;
-				}
-				if (right >= size)
-				{
-					break;
-				}
-				if (indexLeft < indexRight)
-					break;
-			} while (true);
-
-			if (indexLeft < indexRight - 1)
-			{
-				string str = s.substr(indexLeft+1, indexRight-1);
-				res = str.size();
-			}
-			return res;
-
+			return count;
 		}
-	public:
-		vector<int> platesBetweenCandles(string s, vector<vector<int>>& queries) 
+		vector<int> platesBetweenCandles(string s, vector<vector<int>>& queries)
 		{
 			vector<int> res;
-			for (auto& query:queries)
+			for (auto& query : queries)
 			{
-				auto begin = query[0];
-				auto end = query[1] - begin;
-				string str  = s.substr(begin, end + 1);
-				res.push_back(result(str));
+				auto len = query[1] - query[0] + 1;
+				auto subStr = s.substr(query[0], len);
+				auto n = numPlates(subStr);
+				res.push_back(n);
 			}
 			return res;
 		}
@@ -121,6 +113,17 @@ queries[i].length == 2
 	void process()
 	{
 		Solution sol;
+		{
+			string s = "||**||**|*";
+			vector<vector<int>> queries
+			{
+				{3, 8}
+			};
+			// expected {2, 3}
+			auto res = sol.platesBetweenCandles(s, queries);
+			printv(res);
+
+		}
 		{
 			string s = "**|**|***|";
 			vector<vector<int>> queries
