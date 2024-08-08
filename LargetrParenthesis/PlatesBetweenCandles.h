@@ -59,7 +59,7 @@ queries[i].length == 2
 0 <= lefti <= righti < s.length
 	*/
 
-	struct Solution 
+	struct SolutionJR 
 	{
 		// return the number of plates in the substring
 		int numPlates(const string& subStr)
@@ -110,6 +110,49 @@ queries[i].length == 2
 		}
 	};
 
+	class Solution 
+	{
+	public:
+		vector<int> platesBetweenCandles(string s, vector<vector<int>>& queries)
+		{
+			vector<int> res;
+			for (auto& query : queries)
+			{
+				auto init = query[0], end = query[1];
+				int count = 0;
+				// find first '|' between init and end
+				int li{ 0 }, ri{ 0 };
+				for (int i = init; i <= end; i++)
+					if (s[i] == '|')
+					{
+						li = i;
+						break;
+					}
+				// find last '|' between init and end
+				for (int i = end; i >= init; i--)
+					if (s[i] == '|')
+					{
+						ri = i;
+						break;
+					}
+				// now count
+				if (ri > li)
+				{
+					for (int i = li + 1; i <= ri - 1; i++)
+					{
+						if (s[i] == '*')
+						{
+							count++;
+
+						}
+					}
+				}
+				res.push_back(count);
+
+			}
+			return res;
+		}
+	};
 	void process()
 	{
 		Solution sol;
@@ -119,7 +162,7 @@ queries[i].length == 2
 			{
 				{3, 8}
 			};
-			// expected {2, 3}
+			// expected {2}
 			auto res = sol.platesBetweenCandles(s, queries);
 			printv(res);
 
