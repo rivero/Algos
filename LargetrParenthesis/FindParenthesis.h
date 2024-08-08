@@ -29,27 +29,33 @@
 namespace FindParenthesis
 {
 	// find the longest valid parenthesis
-	void FindParenthesis(const string& s)
+	size_t FindParenthesis(const string& s)
 	{
-		cout << "\"" << s << "\"\n";
-		int initialSquare{ INT_MAX }
-			, initialCurly{ INT_MAX }
-			, initialRound{ INT_MAX }
-		, lastSquare{ INT_MIN }, lastCurly{ INT_MIN }, lastround{ INT_MIN };
+		cout << "FindParenthesis: \"" << s << "\"\n";
+		size_t initialSquare{ numeric_limits<unsigned>::max() }
+			, initialCurly{ numeric_limits<unsigned>::max() }
+			, initialRound{ numeric_limits<unsigned>::max() }
+		,   lastSquare{ 0 }, 
+			lastCurly { 0 }, 
+			lastRound { 0 };
+
+		int longestSquare = 0;
+		int longestRound =  0;
+		int longestCurly =  0;
 
 		for (size_t i = 0; i < s.size(); i++)
 		{
-			if (initialSquare == INT_MAX && s[i] == '[')
+			if (initialSquare == numeric_limits<unsigned>::max() && s[i] == '[')
 			{
 				initialSquare = i;
 				continue;
 			}
-			if (initialRound == INT_MAX && s[i] == '(')
+			if (initialRound == numeric_limits<unsigned>::max() && s[i] == '(')
 			{
 				initialRound = i;
 				continue;
 			}
-			if (initialCurly == INT_MAX && s[i] == '{')
+			if (initialCurly == numeric_limits<unsigned>::max() && s[i] == '{')
 			{
 				initialCurly = i;
 				continue;
@@ -61,7 +67,7 @@ namespace FindParenthesis
 			}
 			if (s[i] == ')')
 			{
-				lastround = i;
+				lastRound = i;
 				continue;
 			}
 			if (s[i] == ']')
@@ -70,45 +76,52 @@ namespace FindParenthesis
 				continue;
 			}
 		}
+		if(lastSquare > 0 && initialSquare != numeric_limits<unsigned>::max())
+			longestSquare = lastSquare - initialSquare;
+		if(lastRound > 0 && initialRound != numeric_limits<unsigned>::max())
+			longestRound = lastRound - initialRound;
+		if(lastCurly > 0 && initialCurly != numeric_limits<unsigned>::max())
+			longestCurly = lastCurly - initialCurly;
 
-		int longestSquare = lastSquare - initialSquare;
-		int longestRound = lastround - initialRound;
-		int longestCurly = lastCurly - initialCurly;
+		size_t maxLen = max(longestSquare, max(longestRound, longestCurly));
 
-		int masimum = max(longestSquare, max(longestRound, longestCurly));
-
-		cout << "Max length: " << masimum << "\n\n";
+		cout << "Max length: " << maxLen << "\n\n";
+		return maxLen;
 	}
 	// move all zeroes to the right side
 
-	int findLongestValidParenthesis(const string& s) 
+	size_t findLongestValidParenthesis(const string& s) 
 	{
-		int maxLen = 0;
-		int lastIndex[3] = { INT_MIN, INT_MIN, INT_MIN }; // last index for [, (, {
+		cout << "findLongestValidParenthesis: \"" << s << "\"\n";
+		size_t maxLen = 0;
+		// first index for [, (, {
+		size_t firstIndex[3] = { numeric_limits<unsigned>::max(), numeric_limits<unsigned>::max(), numeric_limits<unsigned>::max() };
 
 		for (int i = 0; i < s.size(); ++i) 
 		{
 			if (s[i] == '[' || s[i] == '(' || s[i] == '{') 
 			{
-				lastIndex[s[i] - '('] = i; // Efficiently map character to index
+				auto x = s[i] - '(';
+				auto y = firstIndex[x];
+				firstIndex[s[i] - '('] = i; // Efficiently map character to index
 			}
 			else 
 			{
-				int openIndex = lastIndex[s[i] - ']']; // Efficiently map closing to opening
-				if (openIndex != INT_MIN) {
+				auto openIndex = firstIndex[s[i] - ']']; // Efficiently map closing to opening
+				if (openIndex != numeric_limits<unsigned>::max()) {
 					maxLen = max(maxLen, i - openIndex + 1);
 				}
 			}
 		}
-
+		cout << "Max length: " << maxLen << "\n\n";
 		return maxLen;
 	}
 
 	void process()
 	{
-		cout << "FindParenthesis\n";
 		FindParenthesis("");
-		FindParenthesis("(){}[]");
+		auto res1 = FindParenthesis("(){}[]");
+		//auto res2 = findLongestValidParenthesis("(){}[]");
 		FindParenthesis("(}");
 		FindParenthesis("(((((((}");
 		FindParenthesis("([]]){{}((}}");

@@ -67,7 +67,7 @@ namespace IntervalListIntersections
 	Well spotted! 😊👍
 
 	*/
-//#define PRINTV
+#define PRINTV
 	class Solution 
 	{
 	public:
@@ -84,18 +84,30 @@ namespace IntervalListIntersections
 				auto bhigh = B[j][1];
 				int maxStart = max(alow, blow), 
 					minEnd = min(ahigh, bhigh);
+				cout << "\ni (" << i << ") j (" << j << ")\n";
+				cout << "alow: " << alow << " blow: " << blow << " max(alow, blow) maxStart: " << maxStart << "\n";
+				cout << "ahigh: " << ahigh << " bhigh: " << bhigh << " min(ahigh, bhigh) minEnd: " << minEnd << "\n";
 
 				if (maxStart <= minEnd)
 				{
+					cout << "maxStart (" << maxStart << ") <= minEnd ("<< minEnd << ") => push\n";
 					res.push_back({ maxStart, minEnd });
 				}
 				// Move the pointer that has the smaller end point (i.e., increment i or j).
-				if (minEnd == ahigh) 
-								 // if hi == ahigh (see they are compared in the min() ) then hi is the smallest pointer
-								 // because if the ahigh is the hi (which is the min) the next element in A might also fall within B
+				if (minEnd == ahigh)
+				{
+					cout << "minEnd ( " << minEnd << ") == ahigh (" << ahigh <<  "), increasing i: " << i << "\n";
+					// if hi == ahigh (see they are compared in the min() ) then hi is the smallest pointer
+					// because if the ahigh is the hi (which is the min) the next element in A might also fall within B
 					i++;
-				else 
+
+				}
+				else
+				{
+					cout << "minEnd ( " << minEnd << ") != ahigh (" << ahigh << "), increasing j: " << j << "\n";
 					j++;
+
+				}
 			}
 			return res;
 		}
@@ -148,13 +160,16 @@ namespace IntervalListIntersections
 	{
 		for (auto& eleme: v)
 		{
-			printv(eleme);
+			cout << "[";
+			printv(eleme, false);
+			cout << "]\t";
 		}
 
 	}
 	void process()
 	{
 		cout << "IntervalListIntersections\n";
+		Solution sol;
 		/*
 		firstList = [[0,2],[5,10],[13,23],[24,25]], secondList = [[1,5],[8,12],[15,24],[25,26]]
 		*/
@@ -170,41 +185,35 @@ namespace IntervalListIntersections
 		};
 		cout << "\nVector B is\n";
 		printVs(B);
-
-		cout << "\n\n";
-		vector<vector<int>> C
+		cout << "Closed intersection\n";
+		auto res = sol.intervalIntersection(A, B); // Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+		cout << "\nClosed (inclusive) Intersection A B\n";
+		for (auto& elem : res)
 		{
-			{1,3} ,{5,9}
-		};
-		cout << "Vector C is\n";
-		printVs(C);
-		vector<vector<int>> D
-		{
+			printv(elem);
+		}
 
-		};
-		cout << "\nVector D is\n";
-		printVs(D);
-		cout << "-------------------------------------------------------------------------\n";
-
-		Solution sol;
-		if(true)
+		if (false)
 		{
-			cout << "Closed intersection\n";
-			auto res = sol.intervalIntersection(A, B); // Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
-			cout << "\nClosed (inclusive) Intersection A B\n";
-			for (auto& elem : res)
+			cout << "\n\n";
+			vector<vector<int>> C
 			{
-				printv(elem);
-			}
+				{1,3} ,{5,9}
+			};
+			cout << "Vector C is\n";
+			printVs(C);
+			vector<vector<int>> D
+			{
+
+			};
+			cout << "\nVector D is\n";
+			printVs(D);
 			res = sol.intervalIntersection(C, D); // Output: []
 			cout << "\nClosed (inclusive) Intersection C D\n";
 			for (auto& elem : res)
 			{
 				printv(elem);
 			}
-		}
-		if(false)
-		{
 			cout << "Open intersection\n";
 			auto res = sol.intervalIntersectionOpen(A, B);
 			cout << "\nOpen Intersection A B\n";
@@ -218,8 +227,8 @@ namespace IntervalListIntersections
 			{
 				printv(elem);
 			}
-		}
 
-		
+		}
+		cout << "-------------------------------------------------------------------------\n";
 	}
 }

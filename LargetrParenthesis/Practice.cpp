@@ -1,6 +1,7 @@
 // LargetrParenthesis.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#pragma region basic headers
 #include <iostream>
 #include <iostream>
 #include <string>
@@ -22,6 +23,7 @@
 #include <cctype>
 #include <cmath>
 #include <limits>
+#pragma endregion
 using namespace std;
 
 #pragma region print_helpers
@@ -207,7 +209,7 @@ struct tests
 
 int main()
 {
-	tests t("WordSearch");
+	tests t("FindParenthesis");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
