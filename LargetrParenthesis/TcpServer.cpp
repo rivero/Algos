@@ -10,9 +10,6 @@
 
 namespace TCP
 {
-	Certainly!Below is an example of a TCP server implemented using `select()` in C.This server can handle multiple connections concurrently :
-
-
 #define PORT 5000
 
 		int server() {
@@ -81,8 +78,6 @@ namespace TCP
 
 		return 0;
 	}
-
-			constexpr int PORT = 5000;
 
 		int server2() {
 			int listen_fd, conn_fd;

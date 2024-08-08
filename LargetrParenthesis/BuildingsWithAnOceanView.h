@@ -76,10 +76,10 @@ Certainly! Let's break down the provided `findBuildings` algorithm and discuss i
 	 - Add the index of the last building (index 5) to `res`.
 	 - Initialize `lastHeight = 6`.
 	 - Iterate from right to left:
-	   - Building at index 4 (height 1) is shorter than `lastHeight`, so skip.
-	   - Building at index 3 (height 9) is taller than `lastHeight`, so add its index (3) to `res` and update `lastHeight` to 9.
-	   - Building at index 2 (height 2) is shorter than `lastHeight`, so skip.
-	   - Building at index 1 (height 5) is taller than `lastHeight`, so add its index (1) to `res` and update `lastHeight` to 5.
+	   - Building at index 4 (height 1) is shorter than `lastHeight : 6`, so skip.
+	   - Building at index 3 (height 9) is taller than `lastHeight : 6`, so add its index (3) to `res` and update `lastHeight` to 9.
+	   - Building at index 2 (height 2) is shorter than `lastHeight : 9 `, so skip.
+	   - Building at index 1 (height 5) is shorter than `lastHeight : 9`, so skip.
 	 - Reverse `res` to get `[1, 3, 5]`.
 
 	*/
@@ -126,6 +126,12 @@ namespace BuildingsWithAnOceanView
 		}
 		{
 			vector<int> vec{ 1, 2, 3, 4 };
+			auto res = sol.findBuildings(vec);
+			printv(res);
+
+		}
+		{
+			vector<int> vec{ 4, 5, 2, 9, 1, 6 };
 			auto res = sol.findBuildings(vec);
 			printv(res);
 

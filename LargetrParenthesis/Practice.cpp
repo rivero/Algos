@@ -209,7 +209,7 @@ struct tests
 
 int main()
 {
-	tests t("PlatesBetweenCandles");
+	tests t("BuildingsWithAnOceanView");
 #pragma region Tests
 	if (t.contains("FindParenthesis"))
 	{
